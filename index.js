@@ -475,6 +475,28 @@ app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates/loadInitialD
     res.sendStatus(200);
 });
 
+
+app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates", (req, res) => {
+    console.log(Date() + " - GET /medical-attention-according-to-type-rates");
+    //     db.find({},(err,MedicalAttentionAccordingtoTypeRates)=>{
+    //      if(err){
+    //          console.error(" Error accesing DB");
+    //          res.sendStatus(500);
+    //          return;
+    //     }
+    //     res.send(MedicalAttentionAccordingtoTypeRates);
+    // });
+    res.send(initialMedicalAttentionAccordingtoTypeRates);
+});
+
+app.post(BASE_API_PATH + "/medical-attention-according-to-type-rates", (req, res) => {
+    console.log(Date() + " - POST /medical-attention-according-to-type-rates");
+    var data = req.body;
+   initialMedicalAttentionAccordingtoTypeRates.push(data);
+    res.sendStatus(201);
+});
+
+
 //################### Fin API REST de Carlos:
 
 
