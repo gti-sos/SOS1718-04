@@ -294,28 +294,9 @@ var initialGraduationRates = [{
 
 // });
 
-<<<<<<< HEAD
-app.get(BASE_API_PATH+"/graduation-rates/loadInitialData",(req,res)=>{
+//<<<<<<< HEAD
+app.get(BASE_API_PATH + "/graduation-rates/loadInitialData", (req, res) => {
     console.log(Date() + " - GET /graduation-rates/loadInitialData");
-    if(initialGraduationRates.length == 0){
-        initialGraduationRates = [
-        { 
-            "province" :"huelva", 
-            "year" : 2015, 
-            "public school" :79.4 , 
-            "private school" : 100.0 , 
-            "charter school" :83.9 
-        },
-        { 
-           "province": "seville", 
-           "year": 2015, 
-           "public school" :80.9 , 
-           "private school":98.2 ,
-           "charter school" :89.5
-        }
-=======
-app.get(BASE_API_PATH + "/graduationRates-rates/loadInitialData", (req, res) => {
-    console.log(Date() + " - GET /graduationRates-rates/loadInitialData");
     if (initialGraduationRates.length == 0) {
         initialGraduationRates = [{
                 "province": "huelva",
@@ -331,7 +312,7 @@ app.get(BASE_API_PATH + "/graduationRates-rates/loadInitialData", (req, res) => 
                 "private school": 98.2,
                 "charter school": 89.5
             }
->>>>>>> d18221579d150327fb6721e7810979e4d2f9c582
+
         ];
     }
     //Inicializamos los datos en caso de necesitarlo
@@ -513,7 +494,7 @@ app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates", (req, res)
 app.post(BASE_API_PATH + "/medical-attention-according-to-type-rates", (req, res) => {
     console.log(Date() + " - POST /medical-attention-according-to-type-rates");
     var data = req.body;
-   initialMedicalAttentionAccordingtoTypeRates.push(data);
+    initialMedicalAttentionAccordingtoTypeRates.push(data);
     res.sendStatus(201);
 });
 
