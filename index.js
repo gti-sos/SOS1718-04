@@ -302,14 +302,14 @@ app.get(BASE_API_PATH+"/graduationRates-rates/loadInitialData",(req,res)=>{
     if(initialGraduationRates.length == 0){
         initialGraduationRates = [
         { 
-            "town" :"huelva", 
+            "province" :"huelva", 
             "year" : 2015, 
             "public school" :79.4 , 
             "private school" : 100.0 , 
             "charter school" :83.9 
         },
         { 
-           "town": "seville", 
+           "province": "seville", 
            "year": 2015, 
            "public school" :80.9 , 
            "private school":98.2 ,
