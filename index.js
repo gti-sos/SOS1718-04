@@ -534,16 +534,16 @@ app.delete(BASE_API_PATH + "/medical-attention-according-to-type-rates/:province
     res.sendStatus(200);
 });
 
-app.post(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
+app.post(BASE_API_PATH + "/medical-attention-according-to-type-rates/:province", (req, res) => {
     var province = req.params.province;
     console.log(Date() + " - POST /graduation-rates/" + province);
     res.sendStatus(405);
 });
 
-app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
+app.put(BASE_API_PATH + "/medical-attention-according-to-type-rates/:province", (req, res) => {
     var province = req.params.province;
     var data = req.body;
-    console.log(Date() + " - PUT /graduation-rates/" + province);
+    console.log(Date() + " - PUT /medical-attention-according-to-type-rates/" + province);
 
     //db.update({"name":contact.name},contact,(err,numUpdate)=>{
     //    console.log("Update: "+numUpdate);
@@ -554,7 +554,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         return;
     }
 
-    initialGraduationRates = initialGraduationRates.map((c) => {
+    initialMedicalAttentionAccordingtoTypeRates = initialMedicalAttentionAccordingtoTypeRates.map((c) => {
         console.log("entra");
         if (c.province == data.province) {
             res.sendStatus(200);
