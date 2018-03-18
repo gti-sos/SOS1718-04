@@ -255,7 +255,6 @@ app.put(BASE_API_PATH + "/unemployment-rates/:province", (req, res) => {
 
 
 //################### Fin API REST de Cristian:
-
 //################### Inicio API REST de Andrés:
 
 var initialGraduationRates = [{
@@ -441,6 +440,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
 
 
 //################### Fin API REST de Andrés:
+
 
 //################### Inicio API REST de Carlos:
 var initialMedicalAttentionAccordingtoTypeRates = [{
