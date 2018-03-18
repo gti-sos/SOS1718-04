@@ -271,8 +271,8 @@ var initialGraduationRates = [
     
 // });
 
-app.get(BASE_API_PATH+"/graduationRates-rates/loadInitialData",(req,res)=>{
-    console.log(Date() + " - GET /graduationRates-rates/loadInitialData");
+app.get(BASE_API_PATH+"/graduation-rates/loadInitialData",(req,res)=>{
+    console.log(Date() + " - GET /graduation-rates/loadInitialData");
     if(initialGraduationRates.length == 0){
         initialGraduationRates = [
         { 
@@ -289,8 +289,8 @@ app.get(BASE_API_PATH+"/graduationRates-rates/loadInitialData",(req,res)=>{
            "private school":98.2 ,
            "charter school" :89.5
         }
-        ];
-    }
+    ];
+}
     //Inicializamos los datos en caso de necesitarlo
     // db.find({},(err,gruaduationRates)=>{
     //     if(err){
@@ -335,7 +335,7 @@ app.put(BASE_API_PATH+"/graduation-rates",(req,res)=>{
     res.sendStatus(405);
 });
 
-app.delete(BASE_API_PATH+"/graduationR-rates",(req,res)=>{
+app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
     console.log(Date() + " - DELETE /graduation-rates");
     initialGraduationRates = [];
     
