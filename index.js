@@ -294,37 +294,10 @@ var initialGraduationRates = [{
 
 // });
 
-<<<<<<< HEAD
 
-app.get(BASE_API_PATH+"/graduation-rates/loadInitialData",(req,res)=>{
-    console.log(Date() + " - GET /graduation-rates/loadInitialData");
-    if(initialGraduationRates.length == 0){
-        initialGraduationRates = [
-        { 
-            "province" :"huelva", 
-            "year" : 2015, 
-            "public school" :79.4 , 
-            "private school" : 100.0 , 
-            "charter school" :83.9 
-        },
-        { 
-           "province": "seville", 
-           "year": 2015, 
-           "public school" :80.9 , 
-           "private school":98.2 ,
-           "charter school" :89.5
-        }
-    ];
-}
-        
-app.get(BASE_API_PATH + "/graduationRates-rates/loadInitialData", (req, res) => {
-    console.log(Date() + " - GET /graduationRates-rates/loadInitialData");
-=======
-//<<<<<<< HEAD
 app.get(BASE_API_PATH + "/graduation-rates/loadInitialData", (req, res) => {
     console.log(Date() + " - GET /graduation-rates/loadInitialData");
->>>>>>> b1351c7e6e4acaa28fea5bfdc71848d7c06bdd5b
-    if (initialGraduationRates.length == 0) {
+ if (initialGraduationRates.length == 0) {
         initialGraduationRates = [
             {
                 "province": "huelva",
