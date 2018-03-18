@@ -361,7 +361,7 @@ app.put(BASE_API_PATH+"/graduation-rates",(req,res)=>{
     res.sendStatus(405);
 });
 
-app.delete(BASE_API_PATH+"/graduationR-rates",(req,res)=>{
+app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
     console.log(Date() + " - DELETE /graduation-rates");
     initialGraduationRates = [];
     
