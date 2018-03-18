@@ -1,12 +1,12 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-//var DataStore = require("nedb");
+var DataStore = require("nedb");
 var path = require("path");
 
 var port = (process.env.PORT || 1607);
 var BASE_API_PATH = "/api/v1";
-// Descomentar en caso de hacer persistencia
-//var dbFileName = __dirname+"/contacts.db";
+
+// var dbFileName = __dirname+"/unemployment-rates.db";
 
 var app = express();
 
@@ -21,7 +21,7 @@ app.get(BASE_API_PATH+"/unemployment-rates/help",(res,req)=>{
 
 //################### Inicio API REST de Cristian:
 
-var unemploymentRates = [
+var initialUnemploymentRates = [
         { 
             "province" : "sevilla",
             "year" : 1981,
@@ -80,16 +80,25 @@ var unemploymentRates = [
 //     autoload: true
 // });
 
+// db.find({},(err,unemploymentRates)=>{
+//     if(err){
+//         console.error(" Error accesing DB");
+//         process.exit(1);
+//     }
+    
+//     if(unemploymentRates.length == 0){
+//         console.log("Empty DB");
+//         db.insert(initialUnemploymentRates);
+//     }else{
+//         console.log("DB initialized with "+unemploymentRates.length+" unemployment-rates");
+//     }
+    
+// });
+
 app.get(BASE_API_PATH+"/unemployment-rates/loadInitialData",(req,res)=>{
     console.log(Date() + " - GET /unemployment-rates/loadInitialData");
-    // db.find({},(err,contacts)=>{
-    // if(err){
-    //     console.error(" Error accesing DB");
-    //     res.sendStatus(500);
-    //     return;
-    // }
-    if(unemploymentRates.length == 0){
-        unemploymentRates = [
+    if(initialUnemploymentRates.length == 0){
+        initialUnemploymentRates = [
         { 
             "province" : "sevilla",
             "year" : 1981,
@@ -142,24 +151,41 @@ app.get(BASE_API_PATH+"/unemployment-rates/loadInitialData",(req,res)=>{
         },
         ];
     }
+    //Inicializamos los datos en caso de necesitarlo
+    // db.find({},(err,unemploymentRates)=>{
+    //     if(err){
+    //         console.error(" Error accesing DB");
+    //         process.exit(1);
+    //     }
+        
+    //     if(unemploymentRates.length == 0){
+    //         console.log("Empty DB");
+    //         db.insert(initialUnemploymentRates);
+    //     }else{
+    //         console.log("DB initialized with "+unemploymentRates.length+" unemployment-rates");
+    //     }
+        
+    // });
     res.sendStatus(200);
 });
 
 app.get(BASE_API_PATH+"/unemployment-rates",(req,res)=>{
     console.log(Date() + " - GET /unemployment-rates");
-    // db.find({},(err,contacts)=>{
-    // if(err){
-    //     console.error(" Error accesing DB");
-    //     res.sendStatus(500);
-    //     return;
-    // }
-    res.send(unemploymentRates);
+//     db.find({},(err,unemploymentRates)=>{
+//      if(err){
+//          console.error(" Error accesing DB");
+//          res.sendStatus(500);
+//          return;
+//     }
+//     res.send(unemploymentRates);
+// });
+    res.send(initialUnemploymentRates);
 });
 
 app.post(BASE_API_PATH+"/unemployment-rates",(req,res)=>{
     console.log(Date() + " - POST /unemployment-rates");
     var data = req.body;
-    unemploymentRates.push(data);
+    initialUnemploymentRates.push(data);
     res.sendStatus(201);
 });
 
@@ -171,7 +197,7 @@ app.put(BASE_API_PATH+"/unemployment-rates",(req,res)=>{
 
 app.delete(BASE_API_PATH+"/unemployment-rates",(req,res)=>{
     console.log(Date() + " - DELETE /unemployment-rates");
-    unemploymentRates = [];
+    initialUnemploymentRates = [];
     
     //db.remove({});
     
@@ -182,7 +208,7 @@ app.delete(BASE_API_PATH+"/unemployment-rates",(req,res)=>{
 app.get(BASE_API_PATH+"/unemployment-rates/:province",(req,res)=>{
     var province = req.params.province;
     console.log(Date() + " - GET /unemployment-rates/"+province);
-    res.send(unemploymentRates.filter((c)=>{
+    res.send(initialUnemploymentRates.filter((c)=>{
         return (c.province == province);
     })[0]);
 });
@@ -190,7 +216,7 @@ app.get(BASE_API_PATH+"/unemployment-rates/:province",(req,res)=>{
 app.delete(BASE_API_PATH+"/unemployment-rates/:province",(req,res)=>{
     var province = req.params.province;
     console.log(Date() + " - DELETE /unemployment-rates/"+province);
-    unemploymentRates = unemploymentRates.filter((c)=>{
+    initialUnemploymentRates = initialUnemploymentRates.filter((c)=>{
         return (c.province != province);
     });
     res.sendStatus(200);
@@ -216,7 +242,7 @@ app.put(BASE_API_PATH+"/unemployment-rates/:province",(req,res)=>{
         return;
     }
     
-    unemploymentRates = unemploymentRates.map((c)=>{
+    initialUnemploymentRates = initialUnemploymentRates.map((c)=>{
         console.log("entra");
         if(c.province == data.province){
             res.sendStatus(200);
