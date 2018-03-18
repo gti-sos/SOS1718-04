@@ -297,8 +297,8 @@ var initialGraduationRates = [
     
 // });
 
-app.get(BASE_API_PATH+"/graduationRates-rates/loadInitialData",(req,res)=>{
-    console.log(Date() + " - GET /graduationRates-rates/loadInitialData");
+app.get(BASE_API_PATH+"/graduation-rates/loadInitialData",(req,res)=>{
+    console.log(Date() + " - GET /graduation-rates/loadInitialData");
     if(initialGraduationRates.length == 0){
         initialGraduationRates = [
         { 
