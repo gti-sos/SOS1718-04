@@ -394,32 +394,34 @@ app.post(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
     res.sendStatus(405);
 });
 
-app.put(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
-    var province = req.params.town;
-    var graduation_rate = req.body;
-    
-    console.log(Date() + " - PUT /graduation.rates/"+province);
-    
-    if(province != graduation_rate.province){
+app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
+    var province = req.params.province;
+    var data = req.body;
+    console.log(Date() + " - PUT /graduation-rates/" + province);
+
+    //db.update({"name":contact.name},contact,(err,numUpdate)=>{
+    //    console.log("Update: "+numUpdate);
+    //});
+    //Comprobamos si hay incongruencias en los datos antes de actuar
+    if (province != data.province) {
         res.sendStatus(409);
-        console.warn(Date()+" - Hacking attempt!");
         return;
-    
-    
     }
 
     initialGraduationRates = initialGraduationRates.map((c) => {
         console.log("entra");
         if (c.province == data.province) {
-            res.sendStatus(200);
+            //res.sendStatus(200);
             return data;
         }
         else {
-            res.sendStatus(200);
+            //res.sendStatus(200);
             return c;
         }
     });
+    res.sendStatus(200);
 });
+
 
 
 //################### Fin API REST de Andrés:
