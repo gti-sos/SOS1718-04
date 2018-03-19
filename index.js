@@ -243,14 +243,15 @@ app.put(BASE_API_PATH + "/unemployment-rates/:province", (req, res) => {
     initialUnemploymentRates = initialUnemploymentRates.map((c) => {
         console.log("entra");
         if (c.province == data.province) {
-            res.sendStatus(200);
+            //res.sendStatus(200);
             return data;
         }
         else {
-            res.sendStatus(200);
+            //res.sendStatus(200);
             return c;
         }
     });
+    res.sendStatus(200);
 });
 
 
@@ -410,15 +411,17 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
     initialGraduationRates = initialGraduationRates.map((c) => {
         console.log("entra");
         if (c.province == data.province) {
-            res.sendStatus(200);
+            //res.sendStatus(200);
             return data;
         }
         else {
-            res.sendStatus(200);
+            //res.sendStatus(200);
             return c;
         }
     });
+    res.sendStatus(200);
 });
+
 
 
 //################### Fin API REST de Andrés:
