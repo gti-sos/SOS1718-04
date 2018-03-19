@@ -452,7 +452,7 @@ app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates/loadInitialD
                 "social-work": 6.78
             },
             {
-                "province": "seville",
+                "province": "madrid",
                 "year": 2015,
                 "general medicine": 35.45,
                 "nursing": 20.76,
