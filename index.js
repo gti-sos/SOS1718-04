@@ -393,18 +393,18 @@ app.post(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
     res.sendStatus(405);
 });
 
-app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
-    var province = req.params.province;
-    var data = req.body;
-    console.log(Date() + " - PUT /graduation-rates/" + province);
-
-    //db.update({"name":contact.name},contact,(err,numUpdate)=>{
-    //    console.log("Update: "+numUpdate);
-    //});
-    //Comprobamos si hay incongruencias en los datos antes de actuar
-    if (province != data.province) {
+app.put(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
+    var province = req.params.town;
+    var graduation_rate = req.body;
+    
+    console.log(Date() + " - PUT /graduation.rates/"+province);
+    
+    if(province != graduation_rate.province){
         res.sendStatus(409);
+        console.warn(Date()+" - Hacking attempt!");
         return;
+    
+    
     }
 
     initialGraduationRates = initialGraduationRates.map((c) => {
