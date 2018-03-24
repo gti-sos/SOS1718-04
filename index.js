@@ -439,6 +439,57 @@ MongoClient.connect(mdbURLUnemploymentRates, { native_parser: true }, (err, mlab
             }
             if (unemploymentRatesAux.length == 0) {
                 console.log(Date() + " - GET /unemployment-rates/loadInitialData - Empty DB");
+                var initialUnemploymentRates = [{
+        "province": "sevilla",
+        "year": 1981,
+        "illiterate": 3.7,
+        "first-grade": 5.1,
+        "second-grade": 24.9,
+        "third-degree": 0.1,
+        "min-age": 16,
+        "max-age": 19
+    },
+    {
+        "province": "malaga",
+        "year": 1981,
+        "illiterate": 2.5,
+        "first-grade": 3.0,
+        "second-grade": 16.9,
+        "third-degree": 0.1,
+        "min-age": 16,
+        "max-age": 19
+    },
+    {
+        "province": "cadiz",
+        "year": 1981,
+        "illiterate": 2.7,
+        "first-grade": 4.3,
+        "second-grade": 13.4,
+        "third-degree": 0.0,
+        "min-age": 16,
+        "max-age": 19
+    },
+    {
+        "province": "almeria",
+        "year": 1981,
+        "illiterate": 0.5,
+        "first-grade": 0.8,
+        "second-grade": 3.3,
+        "third-degree": 0,
+        "min-age": 16,
+        "max-age": 19
+    },
+    {
+        "province": "cordoba",
+        "year": 1981,
+        "illiterate": 1.7,
+        "first-grade": 2.7,
+        "second-grade": 11.9,
+        "third-degree": 0,
+        "min-age": 16,
+        "max-age": 19
+    },
+];
                 db.insert(initialUnemploymentRates);
                 console.log(Date() + " - GET /unemployment-rates/loadInitialData - Created " + unemploymentRatesAux.length + " unemployment rates");
             }
