@@ -74,7 +74,7 @@ unemploymentRates.register = function(app, db) {
             res.send(datas.map((c)=>{
                 delete c._id; //Quitamos el campo id
                 return c;
-            })[0]);
+            }));
         });
     });
 
