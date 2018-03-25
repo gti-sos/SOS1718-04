@@ -30,8 +30,15 @@ unemploymentRates.register = function(app, db) {
     app.post(BASE_API_PATH + "/unemployment-rates", (req, res) => {
         console.log(Date() + " - POST /unemployment-rates");
         var data = req.body;
-        db.update({}, data, (err, numUpdated) => {
-            console.log("Udapted: " + numUpdated);
+        //Comprobamos si hay incongruencias en los datos antes de actuar
+        if (data.length > 8 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year") || !data.hasOwnProperty("illiterate") 
+        || !data.hasOwnProperty("first-grade") || !data.hasOwnProperty("second-grade") || !data.hasOwnProperty("third-degree") 
+        || !data.hasOwnProperty("min-age") || !data.hasOwnProperty("max-age") ) {
+            res.sendStatus(400);
+            return;
+        }
+        db.insertOne(data, (err, numUpdated) => {
+            console.log("Insert: " + numUpdated);
         });
         res.sendStatus(201);
     });
