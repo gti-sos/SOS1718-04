@@ -60,7 +60,10 @@ unemploymentRates.register = function(app, db) {
                 res.sendStatus(500);
                 return;
             }
-
+            if(datas.length == 0){
+                res.sendStatus(404);
+                return;
+            }
             res.send(datas.map((c)=>{
                 delete c._id; //Quitamos el campo id
                 return c;
@@ -90,11 +93,12 @@ unemploymentRates.register = function(app, db) {
         console.log(Date() + " - PUT /unemployment-rates/" + province);
 
         //Comprobamos si hay incongruencias en los datos antes de actuar
-        if (province != data.province) {
-            res.sendStatus(409);
+        if (province != data.province || data.length > 8 || !data.hasOwnProperty("year") || !data.hasOwnProperty("illiterate") 
+        || !data.hasOwnProperty("first-grade") || !data.hasOwnProperty("second-grade") || !data.hasOwnProperty("third-degree") 
+        || !data.hasOwnProperty("min-age") || !data.hasOwnProperty("max-age") ) {
+            res.sendStatus(400);
             return;
         }
-    
         db.update({ "province": data.province }, data, (err, numUpdated) => {
             console.log("Udapted: " + numUpdated);
         });
