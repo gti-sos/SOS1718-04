@@ -37,17 +37,17 @@ unemploymentRates.register = function(app, db) {
             res.sendStatus(400);
             return;
         }
-        db.find({},{province: data.province}).toArray((err, unemploymentRatesAuxiliar) => {
-            if (err) {
-                console.error(" Error accesing DB");
-                res.sendStatus(500);
-                return;
-            }
-            if(unemploymentRatesAuxiliar.length > 0){
-                res.sendStatus(409);
-                return;
-            }
-        });
+        // db.find({},{province: data.province}).toArray((err, unemploymentRatesAuxiliar) => {
+        //     if (err) {
+        //         console.error(" Error accesing DB");
+        //         res.sendStatus(500);
+        //         return;
+        //     }
+        //     if(unemploymentRatesAuxiliar.length > 0){
+        //         res.sendStatus(409);
+        //         return;
+        //     }
+        // });
         db.insertOne(data, (err, numUpdated) => {
             console.log("Insert: " + numUpdated);
         });
