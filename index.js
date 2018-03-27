@@ -5,13 +5,15 @@ var path = require("path");
 
 //Importamos nuestras APIs:
 var unemploymentRates = require("./unemployment-rates");
+var graduationRates = require("./graduation-rates");
+
 
 var port = (process.env.PORT || 1607);
 var BASE_API_PATH = "/api/v1";
 
 //URL de las bases de datos:
 var mdbURLUnemploymentRates = "mongodb://crirompov:crirompov-password-10@ds221339.mlab.com:21339/crirompov-unemployment-rates";
-
+var mdbURLGraduationRates = "mongodb://<andresrgf>:<dcDBsosBA>@ds251435.mlab.com:51435/andresrgf-graduation-rates";
 
 // var dbFileName = __dirname+"/unemployment-rates.db";
 
@@ -73,6 +75,46 @@ var initialUnemploymentRates = [{
         "max-age": 19
     },
 ];
+
+var initialGraduationRates = [
+        { 
+            "province" :"huelva", 
+            "year" : 2015, 
+            "public school" :79.4 , 
+            "private school" : 100.0 , 
+            "charter school" :83.9 
+        },
+        { 
+           "province": "seville", 
+           "year": 2015, 
+           "public school" :80.9 , 
+           "private school":98.2 ,
+           "charter school" :89.5
+        },
+          { 
+            "province" :"malaga", 
+            "year" : 2015, 
+            "public school" :78.1 , 
+            "private school" : 96.4 , 
+            "charter school" :87.7 
+        },
+        { 
+           "province": "huelva", 
+           "year": 2016, 
+           "public school" :83.24 , 
+           "private school":94.12 ,
+           "charter school" :86.31
+        },
+        { 
+           "province": "seville", 
+           "year": 2016, 
+           "public school" :83.77 , 
+           "private school":92.74 ,
+           "charter school" :91.04
+        }
+
+    ];
+
 /*
 app.get(BASE_API_PATH + "/unemployment-rates/help", (res, req) => {
     return res.redirect('https://documenter.getpostman.com/view/3896692/sos1718-04-unemployment-rates-v1/RVnZgdXZ');
@@ -395,25 +437,9 @@ app.put(BASE_API_PATH + "/medical-attention-according-to-type-rates/:province", 
 
 */
 
-
+/*
 //################### Inicio API REST de Andrés:
 
-var initialGraduationRates = [
-        { 
-            "province" :"huelva", 
-            "year" : 2015, 
-            "public school" :79.4 , 
-            "private school" : 100.0 , 
-            "charter school" :83.9 
-        },
-        { 
-           "province": "seville", 
-           "year": 2015, 
-           "public school" :80.9 , 
-           "private school":98.2 ,
-           "charter school" :89.5
-        }
-    ];
 
 // Descomentar en caso de hacer persistencia
 // var db = new DataStore({
@@ -579,7 +605,7 @@ app.put(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
             return c;
         }
     });
-});
+});*/
 
 
 //################### Fin API REST de Andrés:
@@ -839,3 +865,111 @@ MongoClient.connect(mdbURLUnemploymentRates, { native_parser: true }, (err, mlab
         console.log("Server NOT READY:" + e);
     });
 });
+
+
+
+
+
+MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs) => {
+    if (err) {
+        console.error("Error accesing DB: " + err);
+        process.exit(1);
+    }
+    console.log("Connected to db in mlabs");
+
+    var database = mlabs.db("rgfandres-graduation-rates");
+    var db = database.collection("graduation-rates");
+
+    db.find({}).toArray((errs, graduationRatesAux) => {
+        if (errs) {
+            console.error("Error accesing to datas: " + errs);
+            //process.exit(1);
+        }
+        if (graduationRatesAux.length == 0) {
+            console.log("Empty DB");
+            db.insert(initialGraduationRates);
+        }
+        else {
+            console.log("DB has " + graduationRatesAux.length + " graduation rates");
+        }
+    });
+
+    //Métodos loadInitialData:
+    app.get(BASE_API_PATH + "/graduation-rates/loadInitialData", (req, res) => {
+        console.log(Date() + " - GET /graduation-rates/loadInitialData");
+        db.find({}).toArray((errs, graduationRatesAux) => {
+            if (errs) {
+                console.error("Error accesing to datas: " + errs);
+                //process.exit(1);
+            }
+            if (graduationRatesAux.length == 0) {
+                console.log(Date() + " - GET /graduation-rates/loadInitialData - Empty DB");
+                var initialgraduationRates = [{
+        "province": "sevilla",
+        "year": 1981,
+        "illiterate": 3.7,
+        "first-grade": 5.1,
+        "second-grade": 24.9,
+        "third-degree": 0.1,
+        "min-age": 16,
+        "max-age": 19
+    },
+    {
+        "province": "malaga",
+        "year": 1981,
+        "illiterate": 2.5,
+        "first-grade": 3.0,
+        "second-grade": 16.9,
+        "third-degree": 0.1,
+        "min-age": 16,
+        "max-age": 19
+    },
+    {
+        "province": "cadiz",
+        "year": 1981,
+        "illiterate": 2.7,
+        "first-grade": 4.3,
+        "second-grade": 13.4,
+        "third-degree": 0.0,
+        "min-age": 16,
+        "max-age": 19
+    },
+    {
+        "province": "almeria",
+        "year": 1981,
+        "illiterate": 0.5,
+        "first-grade": 0.8,
+        "second-grade": 3.3,
+        "third-degree": 0,
+        "min-age": 16,
+        "max-age": 19
+    },
+    {
+        "province": "cordoba",
+        "year": 1981,
+        "illiterate": 1.7,
+        "first-grade": 2.7,
+        "second-grade": 11.9,
+        "third-degree": 0,
+        "min-age": 16,
+        "max-age": 19
+    },
+];
+                db.insert(initialgraduationRates);
+                console.log(Date() + " - GET /graduation-rates/loadInitialData - Created " + graduationRatesAux.length + " graduation rates");
+            }
+            else {
+                console.log(Date() + " - GET /graduation-rates/loadInitialData - DB has " + graduationRatesAux.length + " graduation rates");
+            }
+        });
+        res.sendStatus(200);
+    });
+
+   graduationRates.register(app, db);
+    app.listen(port, () => {
+        console.log("Server ready on port " + port + "!");
+    }).on("error", (e) => {
+        console.log("Server NOT READY:" + e);
+    });
+});
+
