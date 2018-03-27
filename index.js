@@ -860,7 +860,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
     }
     console.log("Connected to dbGraduation in mlabs");
 
-    var database = mlabs.dbGraduation("andresrgf-graduation-rates");
+    var database = mlabs.db("andresrgf-graduation-rates");
     var dbGraduation = database.collection("graduation-rates");
 
     dbGraduation.find({}).toArray((errs, graduationRatesAux) => {
