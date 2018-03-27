@@ -453,7 +453,29 @@ app.get(BASE_API_PATH+"/graduation-rates/loadInitialData",(req,res)=>{
            "public school" :80.9 , 
            "private school":98.2 ,
            "charter school" :89.5
+        },
+          { 
+            "province" :"malaga", 
+            "year" : 2015, 
+            "public school" :78.1 , 
+            "private school" : 96.4 , 
+            "charter school" :87.7 
+        },
+        { 
+           "province": "huelva", 
+           "year": 2016, 
+           "public school" :83.24 , 
+           "private school":94.12 ,
+           "charter school" :86.31
+        },
+        { 
+           "province": "seville", 
+           "year": 2016, 
+           "public school" :83.77 , 
+           "private school":92.74 ,
+           "charter school" :91.04
         }
+
     ];
 }
     //Inicializamos los datos en caso de necesitarlo
