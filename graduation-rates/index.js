@@ -127,7 +127,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
         //Comprobamos si hay incongruencias en los datos antes de actuar
-        if (data.length > 5 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year") || !data.hasOwnProperty("public-school") ||
+        if (data.length > 5 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year")  ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
             {
             res.sendStatus(400);
@@ -207,7 +207,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         console.log(Date() + " - PUT /graduation-rates/" + province);
 
         //Comprobamos si hay incongruencias en los datos antes de actuar
-        if (province != data.province || data.length > 5 ||  !data.hasOwnProperty("province") || !data.hasOwnProperty("year") || !data.hasOwnProperty("public-school") ||
+        if (province != data.province || data.length > 5 ||  !data.hasOwnProperty("province") || !data.hasOwnProperty("year")  ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
              {
             res.sendStatus(400);
