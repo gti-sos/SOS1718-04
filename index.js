@@ -29,7 +29,6 @@ var unemploymentRates = [
             "first-grade" : 5.1,
             "second-grade" : 24.9,
             "third-degree" : 0.1,
-            "min-age" : 16,
             "max-age" : 19
         }, 
         { 
