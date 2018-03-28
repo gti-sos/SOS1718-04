@@ -34,7 +34,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
             res.sendStatus(400);
             return;
         }
-        db.insertOne(data, (err, numUpdated) => {
+        db.insert(data, (err, numUpdated) => {
             console.log("Insert: " + numUpdated);
         });
         
