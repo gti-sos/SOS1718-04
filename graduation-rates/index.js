@@ -28,12 +28,12 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
         
-       /* if (data.length > 6 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year") ||
+        if (data.length > 5 || !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
             {
             res.sendStatus(400);
             return;
-        }*/
+        }
         
         // db.find({},{province: data.province}).toArray((err, unemploymentRatesAuxiliar) => {
         //     if (err) {
@@ -111,13 +111,13 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
 
         //Comprobamos si hay incongruencias en los datos antes de actuar
         
-        if (province != data.province || data.length > 6 ||  !data.hasOwnProperty("province") || !data.hasOwnProperty("year")  ||
+        if (province != data.province || data.length > 5 || !data.hasOwnProperty("year")  ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
              {
             res.sendStatus(400);
             return;
         }
-        db.updateOne({ "province": data.province }, data, (numUpdated) => {
+        db.update({ "province": data.province }, data, (numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
