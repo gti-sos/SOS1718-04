@@ -34,19 +34,19 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         var charters = req.params.charterSchool
         
         
-        if (data.params.province==db.find({"province":province})||
-            data.params.year==db.find({"year":year})||
-            data.params.publicSchool==db.find({"public-school":publics})||
-            data.params.privateSchool==db.find({"private-school":privates})||
-            data.params.charterSchool==db.find({"charter-school":charters})){
+        if (data.params.province==db.findOne({"province":province})||
+            data.params.year==db.findOne({"year":year})||
+            data.params.publicSchool==db.findOne({"public-school":publics})||
+            data.params.privateSchool==db.findOne({"private-school":privates})||
+            data.params.charterSchool==db.findOne({"charter-school":charters})){
             res.sendStatus(409);
             return;
         }
-        if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
+       /* if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
             return;
-        }
+        }*/
         
         db.insertOne(data, (err, numUpdated) => {
             console.log("Insert: " + numUpdated);
