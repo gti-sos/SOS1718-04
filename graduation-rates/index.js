@@ -34,11 +34,11 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         var charters = req.params.charterSchool;
         
         
-        if (req.params.province==db.findOne({"province":province})&&
-            req.params.year==db.findOne({"year":year})&&
-            req.params.publicSchool==db.findOne({"public-school":publics})&&
-            req.params.privateSchool==db.findOne({"private-school":privates})&&
-            req.params.charterSchool==db.findOne({"charter-school":charters})){
+        if (req.params.province==db.findOne({"province":province}).toJson()&&
+            req.params.year==db.findOne({"year":year}).toJson()&&
+            req.params.publicSchool==db.findOne({"public-school":publics}).toJson()&&
+            req.params.privateSchool==db.findOne({"private-school":privates}).toJson()&&
+            req.params.charterSchool==db.findOne({"charter-school":charters}).toJson()){
             res.sendStatus(409);
             return;
         }
