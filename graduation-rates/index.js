@@ -28,7 +28,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
         
-        if (data.length != 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
+        if (data.length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
             {
             res.sendStatus(400);
@@ -46,8 +46,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         //         return;
         //     }
         // });
-        
-        db.insertOne(data, ( err,numUpdated) => {
+        db.insertOne(data, (err, numUpdated) => {
             console.log("Insert: " + numUpdated);
         });
         
@@ -71,7 +70,21 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
 //Recursos concretos
   app.get(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         var province = req.params.province;
-        console.log(Date() + " - GET /unemployment-rates/" + province);
+        var year = req.query["year"];
+        var publicSchool = req.query["public-school"];
+        var privateSchool = req.query["private-school"];
+        var charterSchool = req.query["charter-school"];
+        
+        console.log(Date() + " - GET /graduation-rates/" + province + " {");
+        console.log("year: "+year);
+        console.log("public-school: "+publicSchool);
+        console.log("private-school: "+privateSchool);
+        console.log("charter-school: "+charterSchool);
+        console.log("}");
+        
+        var queryDB = searchDB(year,publicSchool,privateSchool,charterSchool);
+        console.log("query:" +queryDB);
+        
         db.find({ "province": province}).toArray((err, datas) => {
             if (err) {
                 console.error("Error accesing DB");
@@ -137,6 +150,29 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
     });
     
     
+}
+function searchDB(yearAux,publicSchoolAux,privateSchoolAux,charterSchoolAux){
+    var ret = "";
+    if(yearAux !== undefined){
+        ret = ret + '"year": '+yearAux+",";
+    }
+    if(publicSchoolAux !== undefined){
+        ret = ret + ' "illiterate": '+publicSchoolAux+",";
+    }
+    if(privateSchoolAux !== undefined){
+        ret = ret + ' "first-grade": '+privateSchoolAux+",";
+    }
+    if(charterSchoolAux !== undefined){
+        ret = ret + ' "second-grade": '+charterSchoolAux+",";
+    }
+    
+    console.log("ret: "+ret)
+    if(ret.substr(ret.length-1,ret.length-1) == ","){
+        console.log("entr");
+        ret = ret.substr(0,ret.length-1);
+    }
+    console.log("ret: "+ret);
+    return ret;
 }
 
 
