@@ -101,16 +101,16 @@ var initialGraduationRates = [
         { 
            "province": "huelva", 
            "year": 2016, 
-           "public-school" :83.24 , 
-           "private-school":94.12 ,
-           "charter-school" :86.31
+           "public-school" :83.2 , 
+           "private-school":94.1 ,
+           "charter-school" :86.3
         },
         { 
            "province": "seville", 
            "year": 2016, 
-           "public-school" :83.77 , 
-           "private-school":92.74 ,
-           "charter-school" :91.04
+           "public-school" :83.8 , 
+           "private-school":92.7 ,
+           "charter-school" :91.0
         }
 
 
@@ -929,16 +929,16 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
         { 
            "province": "huelva", 
            "year": 2016, 
-           "public-school" :83.24 , 
-           "private-school":94.12 ,
-           "charter-school" :86.31
+           "public-school" :83.2 , 
+           "private-school":94.1 ,
+           "charter-school" :86.3
         },
         { 
            "province": "seville", 
            "year": 2016, 
-           "public-school" :83.77 , 
-           "private-school":92.74 ,
-           "charter-school" :91.04
+           "public-school" :83.8 , 
+           "private-school":92.7 ,
+           "charter-school" :91.0
         }
 
 ];

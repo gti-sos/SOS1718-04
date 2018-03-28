@@ -28,7 +28,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
         
-        if (data.length != 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
+        if (data.length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
             return;
@@ -111,7 +111,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         var data = req.body;
         console.log(Date() + " - PUT /graduation-rates/" + province);
         
-        if (province != data.province || data.length != 5 || !data.hasOwnProperty("year")  ||
+        if (province != data.province || data.length > 5 || !data.hasOwnProperty("year")  ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
              {
             res.sendStatus(400);
