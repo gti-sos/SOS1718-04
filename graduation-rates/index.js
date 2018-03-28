@@ -27,11 +27,14 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
  app.post(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
-        
-       
-        
-       
-        db.insertOne(data, ( numUpdated) => {
+         var province = req.params.province;
+         if (province != data.province || data.length > 5 || !data.hasOwnProperty("year")  ||
+            !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
+             {
+            res.sendStatus(400);
+            return;
+        }
+        db.insertOne(data, (err, numUpdated) => {
             console.log("Insert: " + numUpdated);
         });
         
