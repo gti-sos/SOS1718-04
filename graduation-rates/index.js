@@ -112,7 +112,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         var data = req.body;
         console.log(Date() + " - PUT /graduation-rates/" + province);
         
-        if (province != data.province ||!data.hasOwnProperty("year") != data.year|| data.length > 5 ||
+        if (province != data.province ||Object.keys(data).length > 5 != data.year|| !data.hasOwnProperty("year")||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
              {
             res.sendStatus(400);
