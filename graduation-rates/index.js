@@ -27,13 +27,27 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
  app.post(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
+        var province = req.params.province;
+        var year = req.params.year;
+        var publics = req.params.publicSchool;
+        var privates = req.params.privateSchool;
+        var charters = req.params.charterSchool;
         
         
-        if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
+        if (req.params.province==db.findOne({"province":province})&&
+            req.params.year==db.findOne({"year":year})&&
+            req.params.publicSchool==db.findOne({"public-school":publics})&&
+            req.params.privateSchool==db.findOne({"private-school":privates})&&
+            req.params.charterSchool==db.findOne({"charter-school":charters})){
+            res.sendStatus(409);
+            return;
+        }
+       if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
             return;
         }
+        
         db.insertOne(data, (err, numUpdated) => {
             console.log("Insert: " + numUpdated);
         });
