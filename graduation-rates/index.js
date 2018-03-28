@@ -34,7 +34,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         var charters = req.params.charterSchool;
         
         
-        if (data == db.findOne({ 
+        /*if (data== db.findOne({ 
             $or:
                 [{"province":province},{"year":year},{"public-school":publics},
                 {"private-school":privates},{"charter-school":charters}]
@@ -43,7 +43,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         ){
             res.sendStatus(409);
             return;
-        }
+        }*/
        if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
