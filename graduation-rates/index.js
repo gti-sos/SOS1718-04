@@ -32,11 +32,11 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
             return;
-        }else{
+        }
         db.insertOne(data, (err, numUpdated) => {
             console.log("Insert: " + numUpdated);
         });
-        }
+        
         
         res.sendStatus(201);
     });
@@ -116,12 +116,12 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
              {
             res.sendStatus(400);
             return;
-        }else{
+        }
         db.update({ "province": data.province }, data, (err,numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
-        }
+        
         res.sendStatus(200);
     });
     
