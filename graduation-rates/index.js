@@ -27,18 +27,18 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
  app.post(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
-        var province = req.params.province
-        var year = req.params.year
-        var publics = req.params.publicSchool
-        var privates = req.params.privateSchool
-        var charters = req.params.charterSchool
+        var province = req.params.province;
+        var year = req.params.year;
+        var publics = req.params.publicSchool;
+        var privates = req.params.privateSchool;
+        var charters = req.params.charterSchool;
         
         
-        if (data.params.province==db.findOne({"province":province})||
-            data.params.year==db.findOne({"year":year})||
-            data.params.publicSchool==db.findOne({"public-school":publics})||
-            data.params.privateSchool==db.findOne({"private-school":privates})||
-            data.params.charterSchool==db.findOne({"charter-school":charters})){
+        if (req.params.province==db.findOne({"province":province})||
+            req.params.year==db.findOne({"year":year})||
+            req.params.publicSchool==db.findOne({"public-school":publics})||
+            req.params.privateSchool==db.findOne({"private-school":privates})||
+            req.params.charterSchool==db.findOne({"charter-school":charters})){
             res.sendStatus(409);
             return;
         }
