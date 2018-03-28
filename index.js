@@ -887,7 +887,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
             }
             if (graduationRatesAux.length == 0) {
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Empty DB");
-                var initialgraduationRates = [
+                var initialGraduationRates = [
         { 
             "province" :"huelva", 
             "year" : 2015, 
@@ -924,7 +924,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
            "charter-school" :91.04
         }
 ];
-                dbGraduation.insert(initialgraduationRates);
+                dbGraduation.insert(initialGraduationRates);
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Created " + graduationRatesAux.length + " graduation rates");
             }
             else {
