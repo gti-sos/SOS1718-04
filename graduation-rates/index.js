@@ -27,16 +27,17 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
  app.post(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
-         var province = req.params.province;
-         if (province != data.province || data.length > 5 || !data.hasOwnProperty("year")  ||
-            !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
-             {
+        
+        
+        if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
+            !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
             return;
         }
-        db.insert(data, (err, numUpdated) => {
+        db.insertOne(data, (err, numUpdated) => {
             console.log("Insert: " + numUpdated);
         });
+        
         
         res.sendStatus(201);
     });
@@ -73,7 +74,7 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
         var queryDB = searchDB(year,publicSchool,privateSchool,charterSchool);
         console.log("query:" +queryDB);
         
-        db.find({ "province": province}).toArray((err, datas) => {
+        db.find({ "province": province }).toArray((err, datas) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -111,7 +112,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         var data = req.body;
         console.log(Date() + " - PUT /graduation-rates/" + province);
         
-        if (province != data.province || data.length > 5 || !data.hasOwnProperty("year")  ||
+        if (province != data.province ||Object.keys(data).length > 5 || !data.hasOwnProperty("year")||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
              {
             res.sendStatus(400);
@@ -122,18 +123,6 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         
         });
         
-
-        // initialUnemploymentRates = initialUnemploymentRates.map((c) => {
-        //     console.log("entra");
-        //     if (c.province == data.province) {
-        //         //res.sendStatus(200);
-        //         return data;
-        //     }
-        //     else {
-        //         //res.sendStatus(200);
-        //         return c;
-        //     }
-        // });
         res.sendStatus(200);
     });
     
@@ -145,13 +134,13 @@ function searchDB(yearAux,publicSchoolAux,privateSchoolAux,charterSchoolAux){
         ret = ret + '"year": '+yearAux+",";
     }
     if(publicSchoolAux !== undefined){
-        ret = ret + ' "illiterate": '+publicSchoolAux+",";
+        ret = ret + ' "public-school": '+publicSchoolAux+",";
     }
     if(privateSchoolAux !== undefined){
-        ret = ret + ' "first-grade": '+privateSchoolAux+",";
+        ret = ret + ' "private-school": '+privateSchoolAux+",";
     }
     if(charterSchoolAux !== undefined){
-        ret = ret + ' "second-grade": '+charterSchoolAux+",";
+        ret = ret + ' "charter-school": '+charterSchoolAux+",";
     }
     
     console.log("ret: "+ret)
