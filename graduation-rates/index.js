@@ -29,7 +29,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         var data = req.body;
         
         
-        if (data.length() > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
+        if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
             return;
