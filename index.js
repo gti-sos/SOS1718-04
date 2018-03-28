@@ -859,10 +859,10 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
         process.exit(1);
     }
     console.log("Connected to dbGraduation in mlabs");
-
+    
     var database = mlabs.db("andresrgf-graduation-rates");
     var dbGraduation = database.collection("graduation-rates");
-
+    
     dbGraduation.find({}).toArray((errs, graduationRatesAux) => {
         if (errs) {
             console.error("Error accesing to datas: " + errs);
