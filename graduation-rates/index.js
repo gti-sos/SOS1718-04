@@ -46,7 +46,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         //         return;
         //     }
         // });
-        db.insertOne(data, ( numUpdated) => {
+        db.insertOne(data, (err, numUpdated) => {
             console.log("Insert: " + numUpdated);
         });
         
@@ -129,7 +129,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
             res.sendStatus(400);
             return;
         }
-        db.update({ "province": data.province }, data, (numUpdated) => {
+        db.update({ "province": data.province }, data, (err,numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
