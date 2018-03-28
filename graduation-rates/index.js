@@ -28,7 +28,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
         
-        if (data.length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
+        if (data.length != 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
             {
             res.sendStatus(400);
@@ -46,7 +46,8 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         //         return;
         //     }
         // });
-        db.insertOne(data, ( numUpdated) => {
+        
+        db.insertOne(data, ( err,numUpdated) => {
             console.log("Insert: " + numUpdated);
         });
         
@@ -129,7 +130,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
             res.sendStatus(400);
             return;
         }
-        db.update({ "province": data.province }, data, (numUpdated) => {
+        db.update({ "province": data.province }, data, (err, numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
