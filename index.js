@@ -900,7 +900,6 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
         dbGraduation.find({}).toArray((errs, graduationRatesAux) => {
             if (errs) {
                 console.error("Error accesing to datas: " + errs);
-                //process.exit(1);
             }
             if (graduationRatesAux.length == 0) {
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Empty DB");
@@ -952,8 +951,8 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
     });
 
    graduationRates.register(app, dbGraduation);
-    app.listen(port1, () => {
-        console.log("Server ready on port " + port1 + "!");
+    app.listen(port, () => {
+        console.log("Server ready on port " + port + "!");
     }).on("error", (e) => {
         console.log("Server NOT READY:" + e);
     });
