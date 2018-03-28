@@ -130,7 +130,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
             res.sendStatus(400);
             return;
         }
-        db.updateOne({ "province": data.province }, data, (err, numUpdated) => {
+        db.update({ "province": data.province }, data, (err, numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
