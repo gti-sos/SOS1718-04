@@ -875,19 +875,19 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
         console.error("Error accesing DB: " + err);
         process.exit(1);
     }
-    console.log("Connected to db in mlabs");
-
+    console.log("Connected to dbGraduation in mlabs");
+    
     var database = mlabs.db("andresrgf-graduation-rates");
-    var db = database.collection("graduation-rates");
-
-    db.find({}).toArray((errs, graduationRatesAux) => {
+    var dbGraduation = database.collection("graduation-rates");
+    
+    dbGraduation.find({}).toArray((errs, graduationRatesAux) => {
         if (errs) {
             console.error("Error accesing to datas: " + errs);
             //process.exit(1);
         }
         if (graduationRatesAux.length == 0) {
             console.log("Empty DB");
-            db.insert(initialGraduationRates);
+            dbGraduation.insert(initialGraduationRates);
         }
         else {
             console.log("DB has " + graduationRatesAux.length + " graduation rates");
@@ -897,7 +897,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
     //Métodos loadInitialData:
     app.get(BASE_API_PATH + "/graduation-rates/loadInitialData", (req, res) => {
         console.log(Date() + " - GET /graduation-rates/loadInitialData");
-        db.find({}).toArray((errs, graduationRatesAux) => {
+        dbGraduation.find({}).toArray((errs, graduationRatesAux) => {
             if (errs) {
                 console.error("Error accesing to datas: " + errs);
                 //process.exit(1);
@@ -941,7 +941,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
            "charter school" :91.04
         }
 ];
-                db.insert(initialgraduationRates);
+                dbGraduation.insert(initialgraduationRates);
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Created " + graduationRatesAux.length + " graduation rates");
             }
             else {
@@ -951,11 +951,12 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
         res.sendStatus(200);
     });
 
-   graduationRates.register(app, db);
-    app.listen(port, () => {
-        console.log("Server ready on port " + port + "!");
+   graduationRates.register(app, dbGraduation);
+    app.listen(port1, () => {
+        console.log("Server ready on port " + port1 + "!");
     }).on("error", (e) => {
         console.log("Server NOT READY:" + e);
     });
 });
+
 
