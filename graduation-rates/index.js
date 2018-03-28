@@ -56,7 +56,7 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
 });
 
 //Recursos concretos
-  app.get(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
+  app.get(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         var province = req.params.province;
         var year = req.query["year"];
         var publicSchool = req.query["public-school"];
@@ -73,7 +73,7 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
         var queryDB = searchDB(year,publicSchool,privateSchool,charterSchool);
         console.log("query:" +queryDB);
         
-        db.find({ "province": province}).toArray((err, datas) => {
+        db.find({ "province": province }).toArray((err, datas) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -106,13 +106,12 @@ app.post(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
     res.sendStatus(405);
 });
 
-app.put(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
+app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year
         var data = req.body;
         console.log(Date() + " - PUT /graduation-rates/" + province);
         
-        if (province != data.province ||year != data.year|| data.length > 5 ||
+        if (province != data.province ||!data.hasOwnProperty("year") != data.year|| data.length > 5 ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
              {
             res.sendStatus(400);
@@ -134,13 +133,13 @@ function searchDB(yearAux,publicSchoolAux,privateSchoolAux,charterSchoolAux){
         ret = ret + '"year": '+yearAux+",";
     }
     if(publicSchoolAux !== undefined){
-        ret = ret + ' "illiterate": '+publicSchoolAux+",";
+        ret = ret + ' "public-school": '+publicSchoolAux+",";
     }
     if(privateSchoolAux !== undefined){
-        ret = ret + ' "first-grade": '+privateSchoolAux+",";
+        ret = ret + ' "private-school": '+privateSchoolAux+",";
     }
     if(charterSchoolAux !== undefined){
-        ret = ret + ' "second-grade": '+charterSchoolAux+",";
+        ret = ret + ' "charter-school": '+charterSchoolAux+",";
     }
     
     console.log("ret: "+ret)
