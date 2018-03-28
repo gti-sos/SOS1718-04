@@ -29,23 +29,10 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         var data = req.body;
         
         if (data.length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
-            !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
-            {
+            !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
             return;
         }
-        
-        // db.find({},{province: data.province}).toArray((err, unemploymentRatesAuxiliar) => {
-        //     if (err) {
-        //         console.error(" Error accesing DB");
-        //         res.sendStatus(500);
-        //         return;
-        //     }
-        //     if(unemploymentRatesAuxiliar.length > 0){
-        //         res.sendStatus(409);
-        //         return;
-        //     }
-        // });
         db.insertOne(data, (err, numUpdated) => {
             console.log("Insert: " + numUpdated);
         });
