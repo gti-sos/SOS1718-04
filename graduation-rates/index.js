@@ -28,8 +28,8 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
         
-        var obj = JSON.parse(data);
-        var length = Object.keys(obj).length;
+        var obj = JSON.parse(req.body);
+        var length = obj.length;
         
         if (length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
