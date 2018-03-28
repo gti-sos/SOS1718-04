@@ -127,7 +127,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
         //Comprobamos si hay incongruencias en los datos antes de actuar
-        if (data.length > 5 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year")  ||
+        if (data.length > 8 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year")  ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
             {
             res.sendStatus(400);
@@ -213,7 +213,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
             res.sendStatus(400);
             return;
         }
-        db.update({ "province": data.province }, data, (err, numUpdated) => {
+        db.update({ "province": data.province },data, (err, numUpdated) => {
             console.log("Udapted: " + numUpdated);
         });
 
