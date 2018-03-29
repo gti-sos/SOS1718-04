@@ -95,7 +95,7 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
                 res.sendStatus(404);
                 return;
             }
-            if ( datas.length >1) {
+            if ( Object.keys(datas).length >1) {
                 res.sendStatus(400);
                 return;
             }
