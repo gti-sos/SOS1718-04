@@ -114,7 +114,7 @@ var initialGraduationRates = [
            "charter-school" :91.04
         },
         { 
-           "province": "seville", 
+           "province": "granada", 
            "year": 2016, 
            "public-school" :83.8 , 
            "private-school":92.7 ,
@@ -932,7 +932,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
            "charter-school" :91.04
         },
         { 
-           "province": "seville", 
+           "province": "granada", 
            "year": 2016, 
            "public-school" :83.8 , 
            "private-school":92.7 ,
