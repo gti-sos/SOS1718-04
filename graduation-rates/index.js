@@ -129,13 +129,13 @@ app.put(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
         var data = req.body;
         console.log(Date() + " - PUT /graduation-rates/" + province + "/"+ year );
         
-        if (province != data.province || year != data.year||Object.keys(data).length > 5 ||
+        if (province != data.province || !data.hasOwnProperty("year")||Object.keys(data).length > 5 ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
              {
             res.sendStatus(400);
             return;
         }
-        db.update({ "province": province},{ "year": year}, data, (err,numUpdated) => {
+        db.update({ "province": province}, data, (err,numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
