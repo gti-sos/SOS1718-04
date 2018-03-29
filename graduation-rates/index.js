@@ -6,9 +6,13 @@ var BASE_API_PATH = "/api/v1";
     graduationRates.register = function(app, db) {
 
     console.log("Registering routes for graduation-rates API...");
+    
+    
 
-
- 
+ app.get(BASE_API_PATH + "/graduation-rates/docs", (req, res) => {
+        console.log(Date() + " - GET /graduation-rates/docs");
+        res.send("/SOS1718-04/sos1718-04/graduation-rates/doc")
+    });
 app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - GET /graduation-rates");
         db.find({}).toArray((err, graduationRates) => {
@@ -158,6 +162,7 @@ function searchDB(yearAux,publicSchoolAux,privateSchoolAux,charterSchoolAux){
     console.log("ret: "+ret);
     return ret;
 }
+
 
 
 //################### Fin API REST de Andrés:
