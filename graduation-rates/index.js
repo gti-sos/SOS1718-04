@@ -133,9 +133,9 @@ app.put(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
              {
             res.sendStatus(400);
-            return;s
+            return;
         }
-        db.update({ "province": data.province },{ "year": data.year }, data, (err,numUpdated) => {
+        db.update({ "_id": data._id}, data, (err,numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
