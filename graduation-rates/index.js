@@ -100,7 +100,7 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
                 res.sendStatus(404);
                 return;
             }
-            if (datas.province != "province") {
+            if ( datas.length!=5 ) {
                 res.sendStatus(400);
                 return;
             }
