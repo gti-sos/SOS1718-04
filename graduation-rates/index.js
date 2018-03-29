@@ -100,6 +100,10 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
                 res.sendStatus(404);
                 return;
             }
+            if (datas.province != "province") {
+                res.sendStatus(400);
+                return;
+            }
             res.send(datas.map((c) => {
                 delete c._id; //Quitamos el campo id
                 return c;
@@ -125,7 +129,6 @@ app.post(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
 
 app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
         var data = req.body;
         console.log(Date() + " - PUT /graduation-rates/" + province  );
         
@@ -135,7 +138,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
             res.sendStatus(400);
             return;
         }
-        db.update({ "province": province},{ "year": year}, data, (err,numUpdated) => {
+        db.update({ "province": province}, data, (err,numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
