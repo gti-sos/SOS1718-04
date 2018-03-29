@@ -125,6 +125,7 @@ app.post(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
 
 app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         var province = req.params.province;
+        var year = req.params.year;
         var data = req.body;
         console.log(Date() + " - PUT /graduation-rates/" + province  );
         
@@ -134,7 +135,7 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
             res.sendStatus(400);
             return;
         }
-        db.update({ "province": province}, data, (err,numUpdated) => {
+        db.update({ "province": province,"year":year}, data, (err,numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
