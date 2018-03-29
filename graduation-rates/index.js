@@ -102,7 +102,7 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
             res.send(datas.map((c) => {
                 delete c._id; //Quitamos el campo id
                 return c;
-            }));
+            })[0]);
         });
     });
 
