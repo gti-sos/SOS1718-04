@@ -891,7 +891,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
                 var initialGraduationRates = [
         { 
             "province" :"huelva", 
-            "year" : 2015, 
+            "year": 2015, 
             "public-school" :79.4 , 
             "private-school" : 100.0 , 
             "charter-school" :83.9 
