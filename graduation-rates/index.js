@@ -6,9 +6,13 @@ var BASE_API_PATH = "/api/v1";
     graduationRates.register = function(app, db) {
 
     console.log("Registering routes for graduation-rates API...");
+    
+    
 
-
- 
+ app.get(BASE_API_PATH + "/graduation-rates/docs", (req, res) => {
+        console.log(Date() + " - GET /graduation-rates/docs");
+        res.redirect("https://documenter.getpostman.com/view/3880256/collection/RVtyorWp")
+    });
 app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - GET /graduation-rates");
         db.find({}).toArray((err, graduationRates) => {
@@ -34,16 +38,7 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         var charters = req.params.charterSchool;
         
         
-        /*if (data== db.findOne({ 
-            $or:
-                [{"province":province},{"year":year},{"public-school":publics},
-                {"private-school":privates},{"charter-school":charters}]
-                
-            })
-        ){
-            res.sendStatus(409);
-            return;
-        }*/
+        
        if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
@@ -100,14 +95,14 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
                 res.sendStatus(404);
                 return;
             }
-            if ( datas.length!=5 ) {
+            /*if ( datas[0].length>5) {
                 res.sendStatus(400);
                 return;
-            }
+            }*/
             res.send(datas.map((c) => {
                 delete c._id; //Quitamos el campo id
                 return c;
-            }));
+            })[0]);
         });
     });
 
@@ -130,15 +125,15 @@ app.post(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
 app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         var province = req.params.province;
         var data = req.body;
-        console.log(Date() + " - PUT /graduation-rates/" + province  );
+        console.log(Date() + " - PUT /graduation-rates/" + province);
         
-        if (province != data.province || !data.hasOwnProperty("year")||Object.keys(data).length > 5 ||
+        if (province != data.province ||Object.keys(data).length > 5 || !data.hasOwnProperty("year")||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
              {
             res.sendStatus(400);
             return;
         }
-        db.update({ "province": province}, data, (err,numUpdated) => {
+        db.update({ "province": data.province }, data, (err,numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
@@ -171,6 +166,7 @@ function searchDB(yearAux,publicSchoolAux,privateSchoolAux,charterSchoolAux){
     console.log("ret: "+ret);
     return ret;
 }
+
 
 
 //################### Fin API REST de Andrés:
