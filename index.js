@@ -948,6 +948,14 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
            "public-school" :83.8 , 
            "private-school":92.7 ,
            "charter-school" :91.0
+        },
+        { 
+           "province": "seville", 
+           "year": 2016, 
+           "public-school" :83.8 , 
+           "private-school":92.7 ,
+           "charter-school" :91.0,
+           "datoMalo": 23
         }
 
 ];
