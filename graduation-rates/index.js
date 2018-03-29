@@ -95,6 +95,10 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
                 res.sendStatus(404);
                 return;
             }
+            if ( datas.length!=5 ) {
+                res.sendStatus(400);
+                return;
+            }
             res.send(datas.map((c) => {
                 delete c._id; //Quitamos el campo id
                 return c;
