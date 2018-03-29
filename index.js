@@ -112,6 +112,14 @@ var initialGraduationRates = [
            "public-school" :83.77 , 
            "private-school":92.74 ,
            "charter-school" :91.04
+        },
+        { 
+           "province": "seville", 
+           "year": 2016, 
+           "public-school" :83.8 , 
+           "private-school":92.7 ,
+           "charter-school" :91.0,
+           "datoMalo": 23
         }
 
     ];
@@ -922,6 +930,14 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
            "public-school" :83.77 , 
            "private-school":92.74 ,
            "charter-school" :91.04
+        },
+        { 
+           "province": "seville", 
+           "year": 2016, 
+           "public-school" :83.8 , 
+           "private-school":92.7 ,
+           "charter-school" :91.0,
+           "datoMalo": 23
         }
 ];
                 dbGraduation.insert(initialGraduationRates);
