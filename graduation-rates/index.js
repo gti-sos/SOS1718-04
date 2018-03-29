@@ -11,7 +11,7 @@ var BASE_API_PATH = "/api/v1";
 
  app.get(BASE_API_PATH + "/graduation-rates/docs", (req, res) => {
         console.log(Date() + " - GET /graduation-rates/docs");
-        res.send("/SOS1718-04/sos1718-04/graduation-rates/doc")
+        res.send("https://docs.google.com/document/d/1KIov4Umlrr_Te9NAB-3XBlwNGLy-w5lwc051hIDpxns/edit?usp=sharing")
     });
 app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - GET /graduation-rates");
