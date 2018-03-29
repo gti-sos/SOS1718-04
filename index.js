@@ -911,13 +911,6 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
             "charter-school" :87.7 
         },
         { 
-           "province": "huelva", 
-           "year": 2016, 
-           "public-school" :83.24 , 
-           "private-school":94.12 ,
-           "charter-school" :86.31
-        },
-        { 
            "province": "seville", 
            "year": 2016, 
            "public-school" :83.77 , 
