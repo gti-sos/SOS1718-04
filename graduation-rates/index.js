@@ -69,6 +69,7 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
 
 //Recursos concretos
   app.get(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
+        var data = req.params
         var province = req.params.province;
         var year = req.query["year"];
         var publicSchool = req.query["public-school"];
@@ -95,7 +96,7 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
                 res.sendStatus(404);
                 return;
             }
-            if ( Object.keys(datas).length!=6 ) {
+            if ( Object.keys(datas).length == Object.keys(data).length) {
                 res.sendStatus(400);
                 return;
             }
