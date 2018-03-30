@@ -995,8 +995,8 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
     });
 
     graduationRates.register(app, dbGraduation);
-    app.listen(port, () => {
-        console.log("Server ready on port " + port + "!");
+    app.listen(port1, () => {
+        console.log("Server ready on port " + port1 + "!");
     }).on("error", (e) => {
         console.log("Server NOT READY:" + e);
     });
