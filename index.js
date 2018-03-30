@@ -10,6 +10,11 @@ var medicalAttentionAccordingToTypeRates = ("./attention-according-to-type-rates
 
 
 var port = (process.env.PORT || 1607);
+<<<<<<< HEAD
+var port1 =  1608;
+=======
+var port1 = 1608;
+>>>>>>> eb6b6f53f4534ce1bbb3001d134e8d296ddfefd1
 var BASE_API_PATH = "/api/v1";
 
 //URL de las bases de datos:
@@ -828,7 +833,7 @@ MongoClient.connect(mdbURLUnemploymentRates, { native_parser: true }, (err, mlab
             console.log("DB has " + unemploymentRatesAux.length + " unemployment rates");
         }
     });
-
+    
     //Métodos loadInitialData:
     app.get(BASE_API_PATH + "/unemployment-rates/loadInitialData", (req, res) => {
         console.log(Date() + " - GET /unemployment-rates/loadInitialData");
@@ -994,8 +999,8 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
     });
 
     graduationRates.register(app, dbGraduation);
-    app.listen(port, () => {
-        console.log("Server ready on port " + port + "!");
+    app.listen(port1, () => {
+        console.log("Server ready on port " + port1 + "!");
     }).on("error", (e) => {
         console.log("Server NOT READY:" + e);
     });

@@ -6,10 +6,9 @@ module.exports = unemploymentRates;
 unemploymentRates.register = function(app, db) {
 
     console.log("Registering routes for unemployment-rate API...");
-
-    //Debería ir pero no entiendo por que no funciona
-    app.get(BASE_API_PATH + "/unemployment-rates/help", (res, req) => {
-        return res.redirect('https://documenter.getpostman.com/view/3896692/sos1718-04-unemployment-rates-v1/RVnZgdXZ');
+    app.get(BASE_API_PATH + "/unemployment-rates/docs", (req, res) => {
+        console.log(Date() + " - GET /graduation-rates/docs");
+        res.redirect("https://documenter.getpostman.com/view/3880256/collection/RVtyorWp")
     });
 
     app.get(BASE_API_PATH + "/unemployment-rates", (req, res) => {
