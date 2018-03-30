@@ -10,6 +10,7 @@ var medicalAttentionAccordingToTypeRates = ("./attention-according-to-type-rates
 
 
 var port = (process.env.PORT || 1607);
+var port1 = 1608;
 var BASE_API_PATH = "/api/v1";
 
 //URL de las bases de datos:
