@@ -784,8 +784,8 @@ MongoClient.connect(mdbURLMedicalAttentionAccordingToTypeRates, { native_parser:
         }
     });
 
-    //medicalAttentionAccordingToTypeRates.register(app, db); descomentar mas adelante
-
+    //medicalAttentionAccordingToTypeRates.test();
+    
     app.listen(port, () => {
         console.log("Server ready on port " + port + "!");
     }).on("error", (e) => {
