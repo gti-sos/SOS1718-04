@@ -6,7 +6,7 @@ var path = require("path");
 //Importamos nuestras APIs:
 var unemploymentRates = require("./unemployment-rates");
 var graduationRates = require("./graduation-rates");
-var initialMedicalAttentionAccordingtoTypeRates = ("./initial-attention-according-to-type-rates");
+var medicalAttentionAccordingToTypeRates = ("./attention-according-to-type-rates");
 
 
 var port = (process.env.PORT || 1607);
@@ -15,7 +15,7 @@ var BASE_API_PATH = "/api/v1";
 //URL de las bases de datos:
 var mdbURLUnemploymentRates = "mongodb://crirompov:crirompov-password-10@ds221339.mlab.com:21339/crirompov-unemployment-rates";
 var mdbURLGraduationRates = "mongodb://rgfandres:dcDBsosBA@ds251435.mlab.com:51435/andresrgf-graduation-rates";
-
+var mdbURLMedicalAttentionAccordingToTypeRates = "mongodb://carmontap:sos1718@ds129939.mlab.com:29939/attention-according-to-type-rates";
 // var dbFileName = __dirname+"/unemployment-rates.db";
 
 
@@ -757,6 +757,17 @@ app.put(BASE_API_PATH + "/medical-attention-according-to-type-rates/:province", 
     });
 });
 */
+
+MongoClient.connect(mdbURLMedicalAttentionAccordingToTypeRates,{native_parser:true},(err,mlabs) =>{
+    
+    if(err){
+        console.error("Error accesing DB"+err);
+        process.exit(1);
+    }else{
+        console.log("Connected to DB");
+    }
+});
+
 
 //################### Fin API REST de Carlos:
 
