@@ -1,14 +1,15 @@
-var medicalAttentionAccordingtoTypeRatesApi = {};
+var medicalAttentionAccordingToTypeRatesApi = {};
 var BASE_API_PATH = "/api/v1";
-module.exports = medicalAttentionAccordingtoTypeRatesApi;
+module.exports = medicalAttentionAccordingToTypeRatesApi;
 
-medicalAttentionAccordingtoTypeRatesApi.register = function(app, db) {
+medicalAttentionAccordingToTypeRatesApi.register = function(app, db) {
     console.log("Registering routes for contacts API...");
+    
     app.get(BASE_API_PATH + "/help", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/359472/collection/RVnWhyva");//hay que cambiar esto a mi link
     });
 
-
+    /*
     app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates", (req, res) => {
         console.log(Date() + " - GET /medical-attention-according-to-type-rates");
         //     db.find({},(err,MedicalAttentionAccordingtoTypeRates)=>{
@@ -20,7 +21,26 @@ medicalAttentionAccordingtoTypeRatesApi.register = function(app, db) {
         //     res.send(MedicalAttentionAccordingtoTypeRates);
         // });
         res.send(initialMedicalAttentionAccordingtoTypeRates);
+    });*/
+    
+    app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates", (req, res) => {
+        console.log(Date() + " - GET /medical-attention-according-to-type-rates");
+
+        db.find({}).toArray((err, medicalAttentionAccordingToTypeRates) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            res.send(medicalAttentionAccordingToTypeRates.map((c) =>{
+                delete c._id;
+                return c;
+            }));
+        });
+
     });
+    
+    
 
     app.post(BASE_API_PATH + "/medical-attention-according-to-type-rates", (req, res) => {
         console.log(Date() + " - POST /medical-attention-according-to-type-rates");

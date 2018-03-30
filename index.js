@@ -77,47 +77,46 @@ var initialUnemploymentRates = [{
     },
 ];
 
-var initialGraduationRates = [
-       { 
-            "province" :"huelva", 
-            "year" : 2015, 
-            "public-school" :79.4 , 
-            "private-school" : 100.0 , 
-            "charter-school" :83.9 
-        },
-        { 
-           "province": "seville", 
-           "year": 2015, 
-           "public-school" :80.9 , 
-           "private-school":98.2 ,
-           "charter-school" :89.5
-        },
-          { 
-            "province" :"malaga", 
-            "year" : 2015, 
-            "public-school" :78.1 , 
-            "private-school" : 96.4 , 
-            "charter-school" :87.7 
-        },
-        { 
-           "province": "seville", 
-           "year": 2016, 
-           "public-school" :83.77 , 
-           "private-school":92.74 ,
-           "charter-school" :91.04
-        },
-        { 
-           "province": "granada", 
-           "year": 2016, 
-           "public-school" :83.8 , 
-           "private-school":92.7 ,
-           "charter-school" :91.0,
-           "datoMalo": 23
-        }
+var initialGraduationRates = [{
+        "province": "huelva",
+        "year": 2015,
+        "public-school": 79.4,
+        "private-school": 100.0,
+        "charter-school": 83.9
+    },
+    {
+        "province": "seville",
+        "year": 2015,
+        "public-school": 80.9,
+        "private-school": 98.2,
+        "charter-school": 89.5
+    },
+    {
+        "province": "malaga",
+        "year": 2015,
+        "public-school": 78.1,
+        "private-school": 96.4,
+        "charter-school": 87.7
+    },
+    {
+        "province": "seville",
+        "year": 2016,
+        "public-school": 83.77,
+        "private-school": 92.74,
+        "charter-school": 91.04
+    },
+    {
+        "province": "granada",
+        "year": 2016,
+        "public-school": 83.8,
+        "private-school": 92.7,
+        "charter-school": 91.0,
+        "datoMalo": 23
+    }
 
 
 
-    ];
+];
 
 /*
 app.get(BASE_API_PATH + "/unemployment-rates/help", (res, req) => {
@@ -615,7 +614,7 @@ app.put(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
 //################### Fin API REST de Andrés:
 
 //################### Inicio API REST de Carlos:
-var initialMedicalAttentionAccordingtoTypeRates = [{
+var initialMedicalAttentionAccordingToTypeRates = [{
         "province": "huelva",
         "year": 2015,
         "general medicine": 33.14,
@@ -633,8 +632,8 @@ var initialMedicalAttentionAccordingtoTypeRates = [{
 
 app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates/loadInitialData", (req, res) => {
     console.log(Date() + " - GET /graduationRates-rates/loadInitialData");
-    if (initialMedicalAttentionAccordingtoTypeRates.length == 0) {
-        initialMedicalAttentionAccordingtoTypeRates = [{
+    if (initialMedicalAttentionAccordingToTypeRates.length == 0) {
+        initialMedicalAttentionAccordingToTypeRates = [{
                 "province": "huelva",
                 "year": 2015,
                 "general medicine": 33.14,
@@ -758,14 +757,41 @@ app.put(BASE_API_PATH + "/medical-attention-according-to-type-rates/:province", 
 });
 */
 
-MongoClient.connect(mdbURLMedicalAttentionAccordingToTypeRates,{native_parser:true},(err,mlabs) =>{
-    
-    if(err){
-        console.error("Error accesing DB"+err);
+MongoClient.connect(mdbURLMedicalAttentionAccordingToTypeRates, { native_parser: true }, (err, mlabs) => {
+
+    if (err) {
+        console.error("Error accesing DB(carmontap)" + err);
         process.exit(1);
-    }else{
-        console.log("Connected to DB");
     }
+    console.log("Connected to DB(carmontap)");
+
+    var database = mlabs.db("attention-according-to-type-rates");
+    var db = database.collection("MedicalAttentionAccordingToTypeRates"); //nombre de la colección en mongodb
+
+    db.find({}).toArray((err, medicalAttentionAccordingToTypeRates) => { //Esto devuelve el query como un array de objetos
+
+        if (err) {
+            console.error("Error accesing DB(carmontap)");
+            process.exit(1);
+        }
+
+        if (medicalAttentionAccordingToTypeRates.length == 0) {
+            console.log("Empty DB");
+            db.insert(initialMedicalAttentionAccordingToTypeRates);
+        }
+        else {
+            console.log("DB has " + medicalAttentionAccordingToTypeRates.length + " medical Attention According To Type Rates (carmontap)");
+        }
+    });
+
+    //medicalAttentionAccordingToTypeRates.register(app, db); descomentar mas adelante
+
+    app.listen(port, () => {
+        console.log("Server ready on port " + port + "!");
+    }).on("error", (e) => {
+        console.log("Server NOT READY:" + e);
+    });
+
 });
 
 
@@ -814,56 +840,56 @@ MongoClient.connect(mdbURLUnemploymentRates, { native_parser: true }, (err, mlab
             if (unemploymentRatesAux.length == 0) {
                 console.log(Date() + " - GET /unemployment-rates/loadInitialData - Empty DB");
                 var initialUnemploymentRates = [{
-        "province": "sevilla",
-        "year": 1981,
-        "illiterate": 3.7,
-        "first-grade": 5.1,
-        "second-grade": 24.9,
-        "third-degree": 0.1,
-        "min-age": 16,
-        "max-age": 19
-    },
-    {
-        "province": "malaga",
-        "year": 1981,
-        "illiterate": 2.5,
-        "first-grade": 3.0,
-        "second-grade": 16.9,
-        "third-degree": 0.1,
-        "min-age": 16,
-        "max-age": 19
-    },
-    {
-        "province": "cadiz",
-        "year": 1981,
-        "illiterate": 2.7,
-        "first-grade": 4.3,
-        "second-grade": 13.4,
-        "third-degree": 0.0,
-        "min-age": 16,
-        "max-age": 19
-    },
-    {
-        "province": "almeria",
-        "year": 1981,
-        "illiterate": 0.5,
-        "first-grade": 0.8,
-        "second-grade": 3.3,
-        "third-degree": 0,
-        "min-age": 16,
-        "max-age": 19
-    },
-    {
-        "province": "cordoba",
-        "year": 1981,
-        "illiterate": 1.7,
-        "first-grade": 2.7,
-        "second-grade": 11.9,
-        "third-degree": 0,
-        "min-age": 16,
-        "max-age": 19
-    },
-];
+                        "province": "sevilla",
+                        "year": 1981,
+                        "illiterate": 3.7,
+                        "first-grade": 5.1,
+                        "second-grade": 24.9,
+                        "third-degree": 0.1,
+                        "min-age": 16,
+                        "max-age": 19
+                    },
+                    {
+                        "province": "malaga",
+                        "year": 1981,
+                        "illiterate": 2.5,
+                        "first-grade": 3.0,
+                        "second-grade": 16.9,
+                        "third-degree": 0.1,
+                        "min-age": 16,
+                        "max-age": 19
+                    },
+                    {
+                        "province": "cadiz",
+                        "year": 1981,
+                        "illiterate": 2.7,
+                        "first-grade": 4.3,
+                        "second-grade": 13.4,
+                        "third-degree": 0.0,
+                        "min-age": 16,
+                        "max-age": 19
+                    },
+                    {
+                        "province": "almeria",
+                        "year": 1981,
+                        "illiterate": 0.5,
+                        "first-grade": 0.8,
+                        "second-grade": 3.3,
+                        "third-degree": 0,
+                        "min-age": 16,
+                        "max-age": 19
+                    },
+                    {
+                        "province": "cordoba",
+                        "year": 1981,
+                        "illiterate": 1.7,
+                        "first-grade": 2.7,
+                        "second-grade": 11.9,
+                        "third-degree": 0,
+                        "min-age": 16,
+                        "max-age": 19
+                    },
+                ];
                 db.insert(initialUnemploymentRates);
                 console.log(Date() + " - GET /unemployment-rates/loadInitialData - Created " + unemploymentRatesAux.length + " unemployment rates");
             }
@@ -892,10 +918,10 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
         process.exit(1);
     }
     console.log("Connected to dbGraduation in mlabs");
-    
+
     var database = mlabs.db("andresrgf-graduation-rates");
     var dbGraduation = database.collection("graduation-rates");
-    
+
     dbGraduation.find({}).toArray((errs, graduationRatesAux) => {
         if (errs) {
             console.error("Error accesing to datas: " + errs);
@@ -919,45 +945,44 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
             }
             if (graduationRatesAux.length == 0) {
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Empty DB");
-                var initialGraduationRates = [
-         { 
-            "province" :"huelva", 
-            "year" : 2015, 
-            "public-school" :79.4 , 
-            "private-school" : 100.0 , 
-            "charter-school" :83.9 
-        },
-        { 
-           "province": "seville", 
-           "year": 2015, 
-           "public-school" :80.9 , 
-           "private-school":98.2 ,
-           "charter-school" :89.5
-        },
-          { 
-            "province" :"malaga", 
-            "year" : 2015, 
-            "public-school" :78.1 , 
-            "private-school" : 96.4 , 
-            "charter-school" :87.7 
-        },
-        { 
-           "province": "seville", 
-           "year": 2016, 
-           "public-school" :83.77 , 
-           "private-school":92.74 ,
-           "charter-school" :91.04
-        },
-        { 
-           "province": "granada", 
-           "year": 2016, 
-           "public-school" :83.8 , 
-           "private-school":92.7 ,
-           "charter-school" :91.0,
-           "datoMalo": 23
-        }
+                var initialGraduationRates = [{
+                        "province": "huelva",
+                        "year": 2015,
+                        "public-school": 79.4,
+                        "private-school": 100.0,
+                        "charter-school": 83.9
+                    },
+                    {
+                        "province": "seville",
+                        "year": 2015,
+                        "public-school": 80.9,
+                        "private-school": 98.2,
+                        "charter-school": 89.5
+                    },
+                    {
+                        "province": "malaga",
+                        "year": 2015,
+                        "public-school": 78.1,
+                        "private-school": 96.4,
+                        "charter-school": 87.7
+                    },
+                    {
+                        "province": "seville",
+                        "year": 2016,
+                        "public-school": 83.77,
+                        "private-school": 92.74,
+                        "charter-school": 91.04
+                    },
+                    {
+                        "province": "granada",
+                        "year": 2016,
+                        "public-school": 83.8,
+                        "private-school": 92.7,
+                        "charter-school": 91.0,
+                        "datoMalo": 23
+                    }
 
-];
+                ];
                 dbGraduation.insert(initialGraduationRates);
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Created " + graduationRatesAux.length + " graduation rates");
             }
@@ -968,12 +993,10 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
         res.sendStatus(200);
     });
 
-   graduationRates.register(app, dbGraduation);
+    graduationRates.register(app, dbGraduation);
     app.listen(port, () => {
         console.log("Server ready on port " + port + "!");
     }).on("error", (e) => {
         console.log("Server NOT READY:" + e);
     });
 });
-
-
