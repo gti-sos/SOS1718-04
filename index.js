@@ -6,24 +6,16 @@ var path = require("path");
 //Importamos nuestras APIs:
 var unemploymentRates = require("./unemployment-rates");
 var graduationRates = require("./graduation-rates");
-<<<<<<< HEAD
 var medicalAttentionAccordingToTypeRates = ("./attention-according-to-type-rates");
-=======
->>>>>>> 87152e8a40466651e4677a6f41486e3e8e534a29
 
 
 var port = (process.env.PORT || 1607);
-var port1 = ( 1608);
 var BASE_API_PATH = "/api/v1";
 
 //URL de las bases de datos:
 var mdbURLUnemploymentRates = "mongodb://crirompov:crirompov-password-10@ds221339.mlab.com:21339/crirompov-unemployment-rates";
 var mdbURLGraduationRates = "mongodb://rgfandres:dcDBsosBA@ds251435.mlab.com:51435/andresrgf-graduation-rates";
-<<<<<<< HEAD
 var mdbURLMedicalAttentionAccordingToTypeRates = "mongodb://carmontap:sos1718@ds129939.mlab.com:29939/attention-according-to-type-rates";
-=======
-
->>>>>>> 87152e8a40466651e4677a6f41486e3e8e534a29
 // var dbFileName = __dirname+"/unemployment-rates.db";
 
 
@@ -85,7 +77,6 @@ var initialUnemploymentRates = [{
     },
 ];
 
-<<<<<<< HEAD
 var initialGraduationRates = [{
         "province": "huelva",
         "year": 2015,
@@ -126,47 +117,6 @@ var initialGraduationRates = [{
 
 
 ];
-=======
-var initialGraduationRates = [
-        { 
-            "province" :"huelva", 
-            "year" : 2015, 
-            "public-school" :79.4 , 
-            "private-school" : 100.0 , 
-            "charter-school" :83.9 
-        },
-        { 
-           "province": "seville", 
-           "year": 2015, 
-           "public-school" :80.9 , 
-           "private-school":98.2 ,
-           "charter-school" :89.5
-        },
-          { 
-            "province" :"malaga", 
-            "year" : 2015, 
-            "public-school" :78.1 , 
-            "private-school" : 96.4 , 
-            "charter-school" :87.7 
-        },
-        { 
-           "province": "seville", 
-           "year": 2016, 
-           "public-school" :83.77 , 
-           "private-school":92.74 ,
-           "charter-school" :91.04
-        },
-        { 
-           "province": "granada", 
-           "year": 2016, 
-           "public-school" :83.8 , 
-           "private-school":92.7 ,
-           "charter-school" :91.0,
-           "datoMalo": 23
-        }
-
-    ];
->>>>>>> 87152e8a40466651e4677a6f41486e3e8e534a29
 
 /*
 app.get(BASE_API_PATH + "/unemployment-rates/help", (res, req) => {
@@ -174,6 +124,21 @@ app.get(BASE_API_PATH + "/unemployment-rates/help", (res, req) => {
 });
 //################### Inicio API REST de Andrés:
 
+var initialGraduationRates = [{
+        "province": "huelva",
+        "year": 2015,
+        "public school": 79.4,
+        "private school": 100.0,
+        "charter school": 83.9
+    },
+    {
+        "province": "seville",
+        "year": 2015,
+        "public school": 80.9,
+        "private school": 98.2,
+        "charter school": 89.5
+    }
+];
 
 // Descomentar en caso de hacer persistencia
 // var db = new DataStore({
@@ -944,29 +909,19 @@ MongoClient.connect(mdbURLUnemploymentRates, { native_parser: true }, (err, mlab
 });
 
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 87152e8a40466651e4677a6f41486e3e8e534a29
 MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs) => {
     if (err) {
         console.error("Error accesing DB: " + err);
         process.exit(1);
     }
     console.log("Connected to dbGraduation in mlabs");
-<<<<<<< HEAD
 
     var database = mlabs.db("andresrgf-graduation-rates");
     var dbGraduation = database.collection("graduation-rates");
 
-=======
-    
-    var database = mlabs.db("andresrgf-graduation-rates");
-    var dbGraduation = database.collection("graduation-rates");
-    
->>>>>>> 87152e8a40466651e4677a6f41486e3e8e534a29
     dbGraduation.find({}).toArray((errs, graduationRatesAux) => {
         if (errs) {
             console.error("Error accesing to datas: " + errs);
@@ -987,7 +942,6 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
         dbGraduation.find({}).toArray((errs, graduationRatesAux) => {
             if (errs) {
                 console.error("Error accesing to datas: " + errs);
-<<<<<<< HEAD
             }
             if (graduationRatesAux.length == 0) {
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Empty DB");
@@ -1029,50 +983,6 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
                     }
 
                 ];
-=======
-                //process.exit(1);
-            }
-            if (graduationRatesAux.length == 0) {
-                console.log(Date() + " - GET /graduation-rates/loadInitialData - Empty DB");
-                var initialGraduationRates = [
-        { 
-            "province" :"huelva", 
-            "year": 2015, 
-            "public-school" :79.4 , 
-            "private-school" : 100.0 , 
-            "charter-school" :83.9 
-        },
-        { 
-           "province": "seville", 
-           "year": 2015, 
-           "public-school" :80.9 , 
-           "private-school":98.2 ,
-           "charter-school" :89.5
-        },
-          { 
-            "province" :"malaga", 
-            "year" : 2015, 
-            "public-school" :78.1 , 
-            "private-school" : 96.4 , 
-            "charter-school" :87.7 
-        },
-        { 
-           "province": "seville", 
-           "year": 2016, 
-           "public-school" :83.77 , 
-           "private-school":92.74 ,
-           "charter-school" :91.04
-        },
-        { 
-           "province": "granada", 
-           "year": 2016, 
-           "public-school" :83.8 , 
-           "private-school":92.7 ,
-           "charter-school" :91.0,
-           "datoMalo": 23
-        }
-];
->>>>>>> 87152e8a40466651e4677a6f41486e3e8e534a29
                 dbGraduation.insert(initialGraduationRates);
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Created " + graduationRatesAux.length + " graduation rates");
             }
@@ -1083,21 +993,10 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
         res.sendStatus(200);
     });
 
-<<<<<<< HEAD
     graduationRates.register(app, dbGraduation);
     app.listen(port, () => {
         console.log("Server ready on port " + port + "!");
-=======
-   graduationRates.register(app, dbGraduation);
-    app.listen(port1, () => {
-        console.log("Server ready on port " + port1 + "!");
->>>>>>> 87152e8a40466651e4677a6f41486e3e8e534a29
     }).on("error", (e) => {
         console.log("Server NOT READY:" + e);
     });
 });
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 87152e8a40466651e4677a6f41486e3e8e534a29
