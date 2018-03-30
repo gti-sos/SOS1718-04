@@ -64,13 +64,13 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
 
 //Recursos concretos
   app.get(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
-        var province = req.params.province;
+        var provinceAux = req.params.province;
         var year = req.query["year"];
         var publicSchool = req.query["public-school"];
         var privateSchool = req.query["private-school"];
         var charterSchool = req.query["charter-school"];
         
-        console.log(Date() + " - GET /graduation-rates/" + province + " {");
+        console.log(Date() + " - GET /graduation-rates/" + provinceAux + " {");
         console.log("year: "+year);
         console.log("public-school: "+publicSchool);
         console.log("private-school: "+privateSchool);
@@ -80,7 +80,7 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
         var queryDB = searchDB(year,publicSchool,privateSchool,charterSchool);
         console.log("query:" +queryDB);
         
-        db.find({ "province": province }).toArray((err, datas) => {
+        db.find({ province: provinceAux }).toArray((err, datas) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
