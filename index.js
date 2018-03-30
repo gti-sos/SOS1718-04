@@ -828,7 +828,7 @@ MongoClient.connect(mdbURLUnemploymentRates, { native_parser: true }, (err, mlab
             console.log("DB has " + unemploymentRatesAux.length + " unemployment rates");
         }
     });
-
+    
     //Métodos loadInitialData:
     app.get(BASE_API_PATH + "/unemployment-rates/loadInitialData", (req, res) => {
         console.log(Date() + " - GET /unemployment-rates/loadInitialData");
