@@ -6,6 +6,7 @@ var path = require("path");
 //Importamos nuestras APIs:
 var unemploymentRates = require("./unemployment-rates");
 var graduationRates = require("./graduation-rates");
+var initialMedicalAttentionAccordingtoTypeRates = ("./initial-attention-according-to-type-rates");
 
 
 var port = (process.env.PORT || 1607);
@@ -667,7 +668,7 @@ app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates/loadInitialD
     res.sendStatus(200);
 });
 
-
+/*
 app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates", (req, res) => {
     console.log(Date() + " - GET /medical-attention-according-to-type-rates");
     //     db.find({},(err,MedicalAttentionAccordingtoTypeRates)=>{
@@ -755,6 +756,7 @@ app.put(BASE_API_PATH + "/medical-attention-according-to-type-rates/:province", 
         }
     });
 });
+*/
 
 //################### Fin API REST de Carlos:
 
