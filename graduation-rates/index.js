@@ -31,11 +31,6 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
  app.post(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
-        var province = req.params.province;
-        var year = req.params.year;
-        var publics = req.params.publicSchool;
-        var privates = req.params.privateSchool;
-        var charters = req.params.charterSchool;
         
         
         
