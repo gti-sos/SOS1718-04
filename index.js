@@ -10,6 +10,10 @@ var medicalAttentionRates = require("./medical-attention-rates");
 
 
 var port = (process.env.PORT || 1607);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6613405d1bb3a8ebe1dbe857bb2efedcf8ef7288
 var port1 = 1608;
 var BASE_API_PATH = "/api/v1";
 
