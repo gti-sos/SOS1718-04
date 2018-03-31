@@ -773,7 +773,7 @@ MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, 
     });
 
 
-    //medicalAttentionRates.register();
+    medicalAttentionRates.register(app,db);
 
     app.listen(port, () => {
         console.log("Server ready on port " + port + "!");
