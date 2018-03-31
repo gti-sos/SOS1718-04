@@ -31,22 +31,39 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
  app.post(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
-        
-        
+        var auxiliar = false;
         
        if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
             return;
-        }
-        
-        db.insertOne(data, (err, numUpdated) => {
-            console.log("Insert: " + numUpdated);
+            }
+       db.find({ "province": data["province"] }).toArray((err, datas) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            if (datas.length > 0) {
+                auxiliar = true;
+                res.sendStatus(409);
+                return;
+            }
+            if (datas.length == 0) {
+                db.insertOne(data, (err, numUpdated) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    console.log("Insert: " + numUpdated);
+                    res.sendStatus(201);
+                });
+            }
         });
-        
-        
-        res.sendStatus(201);
+
     });
+
 
 //Al hacer un put a un recurso no concreto envía un código de error
 app.put(BASE_API_PATH+"/graduation-rates",(req,res)=>{
