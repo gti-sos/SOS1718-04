@@ -5,26 +5,100 @@ module.exports = medicalAttentionRates;
 
 medicalAttentionRates.register = function(app, db) {
     console.log("Registering routes for contacts API...");
-    
-    app.get(BASE_API_PATH + "/help",(req, res) =>{
-        res.redirect("url")});
-        
-    app.get(BASE_API_PATH + "/medical-attention-rates", (req,res) => {
+
+    app.get(BASE_API_PATH + "/help", (req, res) => {
+        res.redirect("url");
+    });
+
+    app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
         console.log(Date() + " - GET /medical-attention-rates");
-        
+
         db.find({}).toArray((err, medicalAttentionRates) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
             }
-            res.send(medicalAttentionRates.map((c)=>{
+            res.send(medicalAttentionRates.map((c) => {
                 delete c._id;
                 return c;
             }));
         });
     });
+
+    //POST a recurso general
+    //POST to a general collection
+    app.post(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
+        console.log(Date() + " - POST /medical-attention-rates");
+        var data = req.body;
+
+        //comprobamos si el dato que se va a introducir contiene algún error, tamañi y nombre de las propiedades
+        //we have to validate the data that we insert in the database, if exist some error we send a error message.
+        if (Object.keys(data).length > 5 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year") ||
+            !data.hasOwnProperty("general-medicine") || !data.hasOwnProperty("nursing") || !data.hasOwnProperty("social-work")) {
+            res.sendStatus(400);
+            return;
+        }
+
+        //en caso de que no haya errores , insertamos el dato a la base de datos
+        //if there is not any error, the data will be inserted in the database
+        db.insertOne(data, (err, numUpdated) => {
+            console.log("Insert: " + numUpdated);
+        });
+        res.sendStatus(201);
+    });
+
+
+
+    //PUT a un recurso general, no debe ser posible
+    //PUT to a general collection, it must not be possible
+    app.put(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
+        console.log(Date() + " - PUT /medical-attention-rates");
+        res.sendStatus(405);
+    });
+
+
+    //DELETE a un recurso general, borra todo el contenido
+    //DELETE to a general collection, it must delete the collection's objects
+    app.delete(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
+        console.log(Date() + " - DELETE /medical-attention-rates");
+        medicalAttentionRates = [];
+
+        db.remove({});
+
+        res.sendStatus(200);
+    });
+
+    //GET a tun recurso concreto
+    //ESte no me funciona
+    app.get(BASE_API_PATH + "/medical-attention-rates/:province", (req, res) => {
+        var province = req.params.province;
+        console.log(province + "testeando");
+        console.log(Date() + " - GET /medical-attention-rates/" + province);
+
+
+
+        db.find({}).toArray((err, medicalAttentionRates) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            res.send(medicalAttentionRates).filter((c)=> {
+                return(c.province == province);
+            });
+            
+        });
+    });
     
+    //DELETE a un recurso concreto
+     app.delete(BASE_API_PATH + "/medical-attention-rates/:province", (req, res) => {
+        var province = req.params.province;
+        console.log(Date() + " - DELETE /medical-attention-rates/" + province);
+        db.remove({ "province": province });
+        res.sendStatus(200);
+    });
+
 };
 
 
