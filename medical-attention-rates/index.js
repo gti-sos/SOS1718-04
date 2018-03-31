@@ -1,13 +1,9 @@
-var medicalAttentionAccordingToTypeRates = {};
+var medicalAttentionRates = {};
 
 var BASE_API_PATH = "/api/v1";
-module.exports = medicalAttentionAccordingToTypeRates;
+module.exports = medicalAttentionRates;
 
-medicalAttentionAccordingToTypeRates.test= function(){
-  console.log("funciona!!!!");  
-};
-
-medicalAttentionAccordingToTypeRatess.register = function(app, db) {
+medicalAttentionRates.register = function(app, db) {
     console.log("Registering routes for contacts API...");
 
 
@@ -18,19 +14,20 @@ medicalAttentionAccordingToTypeRatess.register = function(app, db) {
     app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates", (req, res) => {
         console.log(Date() + " - GET /medical-attention-according-to-type-rates");
 
-        db.find({}).toArray((err, medicalAttentionAccordingToTypeRates) => {
+        db.find({}).toArray((err, medicalAttentionRates) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
             }
-            res.send(medicalAttentionAccordingToTypeRates.map((c) => {
+            res.send(medicalAttentionRates.map((c) => {
                 delete c._id;
                 return c;
             }));
         });
 
     });
+    /*
     app.post(BASE_API_PATH + "/contacts", (req, res) => {
         console.log(Date() + " - POST /contacts");
         var contact = req.body;
@@ -99,10 +96,11 @@ medicalAttentionAccordingToTypeRatess.register = function(app, db) {
 
         res.sendStatus(200);
     });
+    */
 
 
 
-}
+};
 
 
 

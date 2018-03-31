@@ -6,7 +6,7 @@ var path = require("path");
 //Importamos nuestras APIs:
 var unemploymentRates = require("./unemployment-rates");
 var graduationRates = require("./graduation-rates");
-var medicalAttentionAccordingToTypeRates = ("./medical-attention-rates");
+var medicalAttentionRates = require("./medical-attention-rates");
 
 
 var port = (process.env.PORT || 1607);
@@ -16,7 +16,7 @@ var BASE_API_PATH = "/api/v1";
 //URL de las bases de datos:
 var mdbURLUnemploymentRates = "mongodb://crirompov:crirompov-password-10@ds221339.mlab.com:21339/crirompov-unemployment-rates";
 var mdbURLGraduationRates = "mongodb://rgfandres:dcDBsosBA@ds251435.mlab.com:51435/andresrgf-graduation-rates";
-var mdbURLMedicalAttentionRates = "mongodb://carmontap:sos1718@ds129939.mlab.com:29939/attention-according-to-type-rates";
+var mdbURLMedicalAttentionRates = "mongodb://carmontap:sos1718@ds129939.mlab.com:29939/carmontap-medical-attention-rates";
 // var dbFileName = __dirname+"/unemployment-rates.db";
 
 
@@ -758,7 +758,7 @@ app.put(BASE_API_PATH + "/medical-attention-according-to-type-rates/:province", 
 });
 */
 
-MongoClient.connect(mdbURLMedicalAttentionAccordingToTypeRates, { native_parser: true }, (err, mlabs) => {
+MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, mlabs) => {
 
     if (err) {
         console.error("Error accesing DB(carmontap)" + err);
@@ -785,8 +785,9 @@ MongoClient.connect(mdbURLMedicalAttentionAccordingToTypeRates, { native_parser:
         }
     });
 
-    //medicalAttentionAccordingToTypeRates.test();
-    
+
+    medicalAttentionRates.register();
+
     app.listen(port, () => {
         console.log("Server ready on port " + port + "!");
     }).on("error", (e) => {
