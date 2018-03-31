@@ -111,7 +111,7 @@ var initialGraduationRates = [{
         "year": 2016,
         "public-school": 83.8,
         "private-school": 92.7,
-        "charter-school": 91.0,
+        "charter-school": 91.0
       
     }
 
@@ -332,7 +332,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
                         "year": 2016,
                         "public-school": 83.8,
                         "private-school": 92.7,
-                        "charter-school": 91.0,
+                        "charter-school": 91.0
                        
                     }
 
