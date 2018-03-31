@@ -615,7 +615,7 @@ app.put(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
 //################### Fin API REST de Andrés:
 
 //################### Inicio API REST de Carlos:
-var initialMedicalAttentionAccordingToTypeRates = [{
+var initialMedicalAttentionRates = [{
         "province": "huelva",
         "year": 2015,
         "general medicine": 33.14,
@@ -631,42 +631,6 @@ var initialMedicalAttentionAccordingToTypeRates = [{
     }
 ];
 
-app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates/loadInitialData", (req, res) => {
-    console.log(Date() + " - GET /graduationRates-rates/loadInitialData");
-    if (initialMedicalAttentionAccordingToTypeRates.length == 0) {
-        initialMedicalAttentionAccordingToTypeRates = [{
-                "province": "huelva",
-                "year": 2015,
-                "general medicine": 33.14,
-                "nursing": 20.0,
-                "social-work": 6.78
-            },
-            {
-                "province": "madrid",
-                "year": 2015,
-                "general medicine": 35.45,
-                "nursing": 20.76,
-                "social-work": 5.14
-            }
-        ];
-    }
-    //Inicializamos los datos en caso de necesitarlo
-    // db.find({},(err,medicalAttentionAccordingtoTypeRates)=>{
-    //     if(err){
-    //         console.error(" Error accesing DB");
-    //         process.exit(1);
-    //     }
-
-    //     if(initialMedicalAttentionAccordingtoTypeRates.length == 0){
-    //         console.log("Empty DB");
-    //         db.insert(initialMedicalAttentionAccordingtoTypeRates);
-    //     }else{
-    //         console.log("DB initialized with "+medicalAttentionAccordingtoTypeRates.length+" medical-attention-according-to-type-rates ");
-    //     }
-
-    // });
-    res.sendStatus(200);
-});
 
 /*
 app.get(BASE_API_PATH + "/medical-attention-according-to-type-rates", (req, res) => {
@@ -766,27 +730,50 @@ MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, 
     }
     console.log("Connected to DB(carmontap)");
 
-    var database = mlabs.db("attention-according-to-type-rates");
-    var db = database.collection("MedicalAttentionAccordingToTypeRates"); //nombre de la colección en mongodb
+    var database = mlabs.db("carmontap-medical-attention-rates");
+    var db = database.collection("medicalAttentionRates"); //nombre de la colección en mongodb
 
-    db.find({}).toArray((err, medicalAttentionAccordingToTypeRates) => { //Esto devuelve el query como un array de objetos
+    db.find({}).toArray((err, medicalAttentionRates) => { //Esto devuelve el query como un array de objetos
 
         if (err) {
             console.error("Error accesing DB(carmontap)");
             process.exit(1);
         }
 
-        if (medicalAttentionAccordingToTypeRates.length == 0) {
+        if (medicalAttentionRates.length == 0) {
             console.log("Empty DB");
-            db.insert(initialMedicalAttentionAccordingToTypeRates);
+            db.insert(initialMedicalAttentionRates);
         }
         else {
-            console.log("DB has " + medicalAttentionAccordingToTypeRates.length + " medical Attention According To Type Rates (carmontap)");
+            console.log("DB has " + medicalAttentionRates.length + " medical Attention According To Type Rates (carmontap)");
         }
     });
 
 
-    medicalAttentionRates.register();
+    app.get(BASE_API_PATH + "/medical-attention-rates/loadInitialData", (req, res) => {
+        console.log(Date() + " - GET /graduationRates-rates/loadInitialData");
+        if (initialMedicalAttentionRates.length == 0) {
+            initialMedicalAttentionRates = [{
+                    "province": "huelva",
+                    "year": 2015,
+                    "general medicine": 33.14,
+                    "nursing": 20.0,
+                    "social-work": 6.78
+                },
+                {
+                    "province": "sevilla",
+                    "year": 2015,
+                    "general medicine": 35.45,
+                    "nursing": 20.76,
+                    "social-work": 5.14
+                }
+            ];
+        }
+        res.sendStatus(200);
+    });
+
+
+    //medicalAttentionRates.register();
 
     app.listen(port, () => {
         console.log("Server ready on port " + port + "!");
@@ -830,7 +817,7 @@ MongoClient.connect(mdbURLUnemploymentRates, { native_parser: true }, (err, mlab
             console.log("DB has " + unemploymentRatesAux.length + " unemployment rates");
         }
     });
-    
+
     //Métodos loadInitialData:
     app.get(BASE_API_PATH + "/unemployment-rates/loadInitialData", (req, res) => {
         console.log(Date() + " - GET /unemployment-rates/loadInitialData");
