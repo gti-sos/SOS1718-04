@@ -29,6 +29,7 @@ unemploymentRates.register = function(app, db) {
     app.post(BASE_API_PATH + "/unemployment-rates", (req, res) => {
         console.log(Date() + " - POST /unemployment-rates");
         var data = req.body;
+        var auxiliar = false;
         //Comprobamos si hay incongruencias en los datos antes de actuar
         if (data.length > 8 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year") || !data.hasOwnProperty("illiterate") ||
             !data.hasOwnProperty("first-grade") || !data.hasOwnProperty("second-grade") || !data.hasOwnProperty("third-degree") ||
@@ -36,21 +37,30 @@ unemploymentRates.register = function(app, db) {
             res.sendStatus(400);
             return;
         }
-        // db.find({},{province: data.province}).toArray((err, unemploymentRatesAuxiliar) => {
-        //     if (err) {
-        //         console.error(" Error accesing DB");
-        //         res.sendStatus(500);
-        //         return;
-        //     }
-        //     if(unemploymentRatesAuxiliar.length > 0){
-        //         res.sendStatus(409);
-        //         return;
-        //     }
-        // });
-        db.insertOne(data, (err, numUpdated) => {
-            console.log("Insert: " + numUpdated);
+        db.find({ "province": data["province"] }).toArray((err, datas) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            if (datas.length > 0) {
+                auxiliar = true;
+                res.sendStatus(409);
+                return;
+            }
+            if (datas.length == 0) {
+                db.insertOne(data, (err, numUpdated) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    console.log("Insert: " + numUpdated);
+                    res.sendStatus(201);
+                });
+            }
         });
-        res.sendStatus(201);
+
     });
 
     //Al hacer un put a un recurso no concreto envía un código de error
@@ -80,21 +90,21 @@ unemploymentRates.register = function(app, db) {
         var thirdDegre = req.query["third-degre"];
         var minAge = req.query["min-age"];
         var maxAge = req.query["max-age"];
-        
+
         console.log(Date() + " - GET /unemployment-rates/" + provinceAux + " {");
-        console.log("year: "+year);
-        console.log("illiterate: "+illiterate);
-        console.log("first-grade: "+firstGrade);
-        console.log("second-grade: "+secondGrade);
-        console.log("third-degre: "+thirdDegre);
-        console.log("min-age: "+minAge);
-        console.log("max-age: "+maxAge);
+        console.log("year: " + year);
+        console.log("illiterate: " + illiterate);
+        console.log("first-grade: " + firstGrade);
+        console.log("second-grade: " + secondGrade);
+        console.log("third-degre: " + thirdDegre);
+        console.log("min-age: " + minAge);
+        console.log("max-age: " + maxAge);
         console.log("}");
-        
-        var queryDB = searchDB(year,illiterate,firstGrade,secondGrade,thirdDegre,minAge,maxAge);
-        console.log("query:" +queryDB);
+
+        var queryDB = searchDB(year, illiterate, firstGrade, secondGrade, thirdDegre, minAge, maxAge);
+        console.log("query:" + queryDB);
         //El error esta aquí:
-        db.find({ province: provinceAux}).toArray((err, datas) => {
+        db.find({ province: provinceAux }).toArray((err, datas) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -159,35 +169,35 @@ unemploymentRates.register = function(app, db) {
 
 }
 
-function searchDB(yearAux,illiterateAux,firstGradeAux,secondGradeAux,thirdDegreAux,minAgeAux,maxAgeAux){
+function searchDB(yearAux, illiterateAux, firstGradeAux, secondGradeAux, thirdDegreAux, minAgeAux, maxAgeAux) {
     var ret = "";
-    if(yearAux !== undefined){
-        ret = ret + ', year: '+yearAux+",";
+    if (yearAux !== undefined) {
+        ret = ret + ', year: ' + yearAux + ",";
     }
-    if(illiterateAux !== undefined){
-        ret = ret + ' illiterate: '+illiterateAux+",";
+    if (illiterateAux !== undefined) {
+        ret = ret + ' illiterate: ' + illiterateAux + ",";
     }
-    if(firstGradeAux !== undefined){
-        ret = ret + ' first-grade: '+firstGradeAux+",";
+    if (firstGradeAux !== undefined) {
+        ret = ret + ' first-grade: ' + firstGradeAux + ",";
     }
-    if(secondGradeAux !== undefined){
-        ret = ret + ' second-grade: '+secondGradeAux+",";
+    if (secondGradeAux !== undefined) {
+        ret = ret + ' second-grade: ' + secondGradeAux + ",";
     }
-    if(thirdDegreAux !== undefined){
-        ret = ret + ' third-degre: '+thirdDegreAux+",";
+    if (thirdDegreAux !== undefined) {
+        ret = ret + ' third-degre: ' + thirdDegreAux + ",";
     }
-    if(minAgeAux !== undefined){
-        ret = ret + ' min-age: '+minAgeAux+",";
+    if (minAgeAux !== undefined) {
+        ret = ret + ' min-age: ' + minAgeAux + ",";
     }
-    if(maxAgeAux !== undefined){
-        ret = ret + ' max-age: '+maxAgeAux;
+    if (maxAgeAux !== undefined) {
+        ret = ret + ' max-age: ' + maxAgeAux;
     }
-    console.log("ret: "+ret)
-    if(ret.substr(ret.length-1,ret.length-1) == ","){
+    console.log("ret: " + ret)
+    if (ret.substr(ret.length - 1, ret.length - 1) == ",") {
         console.log("entr");
-        ret = ret.substr(0,ret.length-1);
+        ret = ret.substr(0, ret.length - 1);
     }
-    console.log("ret: "+ret);
+    console.log("ret: " + ret);
     return ret;
 }
 //################### Fin API REST de Cristian:
