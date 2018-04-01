@@ -7,7 +7,7 @@ medicalAttentionRates.register = function(app, db) {
     console.log("Registering routes for contacts API...");
 
     app.get(BASE_API_PATH + "/help", (req, res) => {
-        res.redirect("url");
+        res.redirect("https://documenter.getpostman.com/view/3897910/so1718-test-heroku/RVu1HAqJ");
     });
 
     app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
