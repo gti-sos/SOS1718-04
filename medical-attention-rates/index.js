@@ -6,7 +6,7 @@ module.exports = medicalAttentionRates;
 medicalAttentionRates.register = function(app, db) {
     console.log("Registering routes for contacts API...");
 
-    app.get(BASE_API_PATH + "/help", (req, res) => {
+    app.get(BASE_API_PATH + "/docs", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3897910/so1718-test-heroku/RVu1HAqJ");
     });
 
