@@ -7,7 +7,7 @@ medicalAttentionRates.register = function(app, db) {
     console.log("Registering routes for contacts API...");
 
     app.get(BASE_API_PATH + "/help", (req, res) => {
-        res.redirect("url");
+        res.redirect("https://documenter.getpostman.com/view/3897910/so1718-test-heroku/RVu1HAqJ");
     });
 
     app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
@@ -20,6 +20,7 @@ medicalAttentionRates.register = function(app, db) {
                 return;
             }
             res.send(medicalAttentionRates.map((c) => {
+                
                 delete c._id;
                 return c;
             }));
@@ -107,7 +108,7 @@ medicalAttentionRates.register = function(app, db) {
                 return;
             }
             //console.log(medicalAttentionRates);
-            res.send(medicalAttentionRates.filter(c => c.province == province & c.year == year));
+            res.send(medicalAttentionRates.filter(c => c.province == province & c.year == year)[0]); //[0] para que no devuelva un array
         });
     });
 
@@ -165,6 +166,22 @@ medicalAttentionRates.register = function(app, db) {
         var province = req.params.province;
         var year = req.params.year;
         var medicalAttentionRate = req.body;
+        var idAux = "";
+        
+        db.find({}).toArray((err, medicalAttentionRates) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            //console.log(medicalAttentionRates);
+            //console.log("_id ="+medicalAttentionRates.filter(c => c.province == province & c.year == year)[0]["_id"]); //[0] para que no devuelva un array
+            idAux = medicalAttentionRates.filter(c => c.province == province & c.year == year)[0]["_id"];
+            
+        });
+        
+        
+        //console.log("el id" + medicalAttentionRate._id);
 
         console.log(Date() + " - PUT /medical-attention-rates/" + province);
 
@@ -173,13 +190,19 @@ medicalAttentionRates.register = function(app, db) {
             console.warn(Date() + "Hacking attempt!");
             return;
         }
-
-
+        /*console.log("idAux   "+idAux);
+        if(idAux === medicalAttentionRate._id){
+            console.log("Error el id del elemento a modificar es diferente al enviado" + 
+            
+            idAux +"!=" + medicalAttentionRate._id);
+             res.sendStatus(400);
+        }
+        */else{
         db.update({ "province": medicalAttentionRate.province, "year": medicalAttentionRate.year }, medicalAttentionRate, (err, numUpdated) => {
             console.log("Updated: " + numUpdated);
+            res.sendStatus(200);
         });
-
-        res.sendStatus(200);
+        }
     });
 
 };
