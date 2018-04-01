@@ -54,15 +54,16 @@ medicalAttentionRates.register = function(app, db) {
 
 
 
-            if (medicalAttentionRates.length == 0) { //esta condicion es si ya esta creado un objeto con esos datos
+            else if (medicalAttentionRates.length == 0) { //esta condicion es si ya esta creado un objeto con esos datos
                 db.insertOne(data, (err, numUpdated) => {
                     console.log("Insert: " + numUpdated);
                 });
                 res.sendStatus(201);
             }
-            console.log("Error the object was created before.");
-            res.sendStatus(409);
-
+            else {
+                console.log("Error the object was created before.");
+                res.sendStatus(409);
+            }
         });
 
 
@@ -95,7 +96,7 @@ medicalAttentionRates.register = function(app, db) {
         var province = req.params.province;
         var year = req.params.year;
         // console.log(province + "testeando");
-        console.log(Date() + " - GET /medical-attention-rates/" + province + "/"+year);
+        console.log(Date() + " - GET /medical-attention-rates/" + province + "/" + year);
 
 
 
@@ -119,14 +120,32 @@ medicalAttentionRates.register = function(app, db) {
 
 
         db.find({}).toArray((err, medicalAttentionRates) => {
-            if (err) {
+
+            //console.log(medicalAttentionRates);
+            if (medicalAttentionRates.filter(c => c.province == province).length == 0) {
+                res.sendStatus(404); //Not found
+            }
+            else if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
+
             }
-            //console.log(medicalAttentionRates);
-            res.send(medicalAttentionRates.filter(c => c.province == province));
+            else
+                res.send(medicalAttentionRates.filter(c => c.province == province));
+
         });
+
+    });
+
+
+    //POST a un recurso concreto
+    app.post(BASE_API_PATH + "/medical-attention-rates/:province", (req, res) => {
+        var province = req.params.province;
+
+        console.log(Date() + " - POST /medical-attention-rates/" + province);
+        res.sendStatus(405); //método no permitido según la tabla azul
+
     });
 
 
