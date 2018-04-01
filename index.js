@@ -10,7 +10,7 @@ var medicalAttentionRates = require("./medical-attention-rates");
 
 
 var port = (process.env.PORT || 1607);
-var port1 =  1608;
+var port1 = 1608;
 var BASE_API_PATH = "/api/v1";
 
 //URL de las bases de datos:
@@ -136,7 +136,7 @@ var initialMedicalAttentionRates = [{
     {
         "province": "granada",
         "year": 2016,
-        "general-medicine":3.4,
+        "general-medicine": 3.4,
         "nursing": 2.3,
         "social-work": 2.8,
     },
@@ -156,40 +156,99 @@ var initialMedicalAttentionRates = [{
     },
 ];
 
- MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, mlabs) => {
+MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, mlabs) => {
 
-     if (err) {
-         console.error("Error accesing DB(carmontap)" + err);
-         process.exit(1);
-     }
-     console.log("Connected to DB(carmontap)");
+    if (err) {
+        console.error("Error accesing DB(carmontap)" + err);
+        process.exit(1);
+    }
+    console.log("Connected to DB(carmontap)");
 
-     var database = mlabs.db("carmontap-medical-attention-rates");
-     var db = database.collection("medicalAttentionRates"); //nombre de la colección en mongodb
+    var database = mlabs.db("carmontap-medical-attention-rates");
+    var db = database.collection("medicalAttentionRates"); //nombre de la colección en mongodb
 
-     db.find({}).toArray((err, medicalAttentionRates) => { //Esto devuelve el query como un array de objetos
 
-         if (err) {
-             console.error("Error accesing DB(carmontap)");
+    //Métodos loadInitialData:
+    app.get(BASE_API_PATH + "/medical-attention-rates/loadInitialData", (req, res) => {
+        console.log(Date() + " - GET /medical-attention-rates/loadInitialData");
+        db.find({}).toArray((errs, medicalAttentionRates) => {
+            if (errs) {
+                console.error("Error accesing to datas: " + errs);
+            }
+            if (medicalAttentionRates.length == 0) {
+                console.log(Date() + " - GET /medical-attention-rates/loadInitialData - Empty DB");
+                var initialMedicalAttentionRates = [{
+                        "province": "sevilla",
+                        "year": 2016,
+                        "general-medicine": 35.23,
+                        "nursing": 19.7,
+                        "social-work": 5.07,
+                    },
+                    {
+                        "province": "malaga",
+                        "year": 2016,
+                        "general-medicine": 34.2,
+                        "nursing": 1.2,
+                        "social-work": 2.1,
+                    },
+                    {
+                        "province": "granada",
+                        "year": 2016,
+                        "general-medicine": 3.4,
+                        "nursing": 2.3,
+                        "social-work": 2.8,
+                    },
+                    {
+                        "province": "cordoba",
+                        "year": 2016,
+                        "general-medicine": 1.2,
+                        "nursing": 1.7,
+                        "social-work": 3.9,
+                    },
+                    {
+                        "province": "jaen",
+                        "year": 2016,
+                        "general-medicine": 2.6,
+                        "nursing": 2.8,
+                        "social-work": 1.9,
+                    },
+                ];
+                db.insert(initialMedicalAttentionRates);
+                console.log(Date() + " - GET /medical-attention-rates/loadInitialData - Created " + medicalAttentionRates.length + " medical attention rates");
+            }
+            else {
+                console.log(Date() + " - GET /medical-attention-rates/loadInitialData - DB has " + medicalAttentionRates.length + " medical attention rates");
+            }
+        });
+        res.sendStatus(200);
+    });
+
+
+
+    db.find({}).toArray((err, medicalAttentionRates) => { //Esto devuelve el query como un array de objetos
+
+        if (err) {
+            console.error("Error accesing DB(carmontap)");
             process.exit(1);
-         }
-         if (medicalAttentionRates.length == 0) {
-             console.log("Empty DB");
-             db.insert(initialMedicalAttentionRates);
-         }
-         else {
-             console.log("DB has " + medicalAttentionRates.length + " medical Attention According To Type Rates (carmontap)");
-         }
-     });
+        }
+        if (medicalAttentionRates.length == 0) {
+            console.log("Empty DB");
+            db.insert(initialMedicalAttentionRates);
+        }
+        else {
+            console.log("DB has " + medicalAttentionRates.length + " medical Attention According To Type Rates (carmontap)");
+        }
+    });
 
-     medicalAttentionRates.register(app, db); 
+    medicalAttentionRates.register(app, db);
 
-     app.listen(port, () => {
-         console.log("Server ready on port " + port + "!");     }).on("error", (e) => {
-         console.log("Server NOT READY:" + e);
-     });
+    app.listen(port, () => {
+        console.log("Server ready on port " + port + "!");
+    }).on("error", (e) => {
+        console.log("Server NOT READY:" + e);
+    });
 
- });
+});
 
 
 
@@ -217,7 +276,7 @@ MongoClient.connect(mdbURLUnemploymentRates, { native_parser: true }, (err, mlab
             console.log("DB has " + unemploymentRatesAux.length + " unemployment rates");
         }
     });
-    
+
     //Métodos loadInitialData:
     app.get(BASE_API_PATH + "/unemployment-rates/loadInitialData", (req, res) => {
         console.log(Date() + " - GET /unemployment-rates/loadInitialData");
@@ -368,7 +427,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
                         "public-school": 83.8,
                         "private-school": 92.7,
                         "charter-school": 91.0
-                       
+
                     }
 
                 ];
