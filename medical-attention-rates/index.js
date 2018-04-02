@@ -54,12 +54,16 @@ medicalAttentionRates.register = function(app, db) {
             //if there is not any error, the data will be inserted in the database
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 =======
 
 
 >>>>>>> c006c5b5d8559ded5eb3859e25da1e1937a91b24
+=======
+
+>>>>>>> 4cc0f82fe589bb89ebda840a076e3b2f710ef0d4
             else if (medicalAttentionRates.length == 0) { //esta condicion es si ya esta creado un objeto con esos datos
                 db.insertOne(data, (err, numUpdated) => {
                     console.log("Insert: " + numUpdated);
@@ -212,6 +216,7 @@ medicalAttentionRates.register = function(app, db) {
 
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
@@ -219,3 +224,5 @@ medicalAttentionRates.register = function(app, db) {
 
 
 >>>>>>> c006c5b5d8559ded5eb3859e25da1e1937a91b24
+=======
+>>>>>>> 4cc0f82fe589bb89ebda840a076e3b2f710ef0d4
