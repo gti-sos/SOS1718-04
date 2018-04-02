@@ -204,5 +204,16 @@ medicalAttentionRates.register = function(app, db) {
         });
         }
     });
+    
+    //get por intervalos de años
+
+    
+    app.get(BASE_API_PATH + "/medical-attention-rates?from=:initialYear", (req, res) => {
+        var initialYear = req.param.from;
+        console.log("AÑO INICIAL:");
+        console.log("AÑO INICIAL:" + initialYear);
+        console.log(Date() + " - GET /medical-attention-rates");
+
+    });
 
 };
