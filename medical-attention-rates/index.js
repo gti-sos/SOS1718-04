@@ -215,14 +215,3 @@ medicalAttentionRates.register = function(app, db) {
     });
 
 };
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-
-
-
-
->>>>>>> c006c5b5d8559ded5eb3859e25da1e1937a91b24
-=======
->>>>>>> 4cc0f82fe589bb89ebda840a076e3b2f710ef0d4
