@@ -53,6 +53,7 @@ medicalAttentionRates.register = function(app, db) {
             //en caso de que no haya errores , insertamos el dato a la base de datos
             //if there is not any error, the data will be inserted in the database
 
+
             else if (medicalAttentionRates.length == 0) { //esta condicion es si ya esta creado un objeto con esos datos
                 db.insertOne(data, (err, numUpdated) => {
                     console.log("Insert: " + numUpdated);
@@ -184,7 +185,7 @@ medicalAttentionRates.register = function(app, db) {
         console.log(Date() + " - PUT /medical-attention-rates/" + province);
 
         if (province != medicalAttentionRate.province || year != medicalAttentionRate.year) {
-            res.sendStatus(409);
+            res.sendStatus(400);
             console.warn(Date() + "Hacking attempt!");
             return;
         }
@@ -201,17 +202,6 @@ medicalAttentionRates.register = function(app, db) {
             res.sendStatus(200);
         });
         }
-    });
-    
-    //get por intervalos de años
-
-    
-    app.get(BASE_API_PATH + "/medical-attention-rates?from=:initialYear", (req, res) => {
-        var initialYear = req.param.from;
-        console.log("AÑO INICIAL:");
-        console.log("AÑO INICIAL:" + initialYear);
-        console.log(Date() + " - GET /medical-attention-rates");
-
     });
 
 };
