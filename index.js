@@ -112,14 +112,6 @@ var initialGraduationRates = [{
         "public-school": 83.8,
         "private-school": 92.7,
         "charter-school": 91.0
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> c006c5b5d8559ded5eb3859e25da1e1937a91b24
-=======
-
->>>>>>> 4cc0f82fe589bb89ebda840a076e3b2f710ef0d4
     }
 ];
 
@@ -171,11 +163,6 @@ MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, 
     var database = mlabs.db("carmontap-medical-attention-rates");
     var db = database.collection("medicalAttentionRates"); //nombre de la colección en mongodb
 
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4cc0f82fe589bb89ebda840a076e3b2f710ef0d4
 
 var initialMedicalAttentionRates = [{
         "province": "sevilla",
@@ -307,10 +294,7 @@ MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, 
     });
 
 });
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 4cc0f82fe589bb89ebda840a076e3b2f710ef0d4
+
     //Métodos loadInitialData:
     app.get(BASE_API_PATH + "/medical-attention-rates/loadInitialData", (req, res) => {
         console.log(Date() + " - GET /medical-attention-rates/loadInitialData");
@@ -392,13 +376,6 @@ MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, 
     });
 
 });
-
-<<<<<<< HEAD
->>>>>>> c006c5b5d8559ded5eb3859e25da1e1937a91b24
-
-
-=======
->>>>>>> 4cc0f82fe589bb89ebda840a076e3b2f710ef0d4
 
 
 MongoClient.connect(mdbURLUnemploymentRates, { native_parser: true }, (err, mlabs) => {
