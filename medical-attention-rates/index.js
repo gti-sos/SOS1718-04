@@ -184,7 +184,7 @@ medicalAttentionRates.register = function(app, db) {
         console.log(Date() + " - PUT /medical-attention-rates/" + province);
 
         if (province != medicalAttentionRate.province || year != medicalAttentionRate.year) {
-            res.sendStatus(409);
+            res.sendStatus(400);
             console.warn(Date() + "Hacking attempt!");
             return;
         }
