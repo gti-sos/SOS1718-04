@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var MongoClient = require("mongodb").MongoClient;
 var path = require("path");
-
+//comentario
 //Importamos nuestras APIs:
 var unemploymentRates = require("./unemployment-rates");
 var graduationRates = require("./graduation-rates");
@@ -112,10 +112,7 @@ var initialGraduationRates = [{
         "public-school": 83.8,
         "private-school": 92.7,
         "charter-school": 91.0
-<<<<<<< HEAD
-=======
 
->>>>>>> c006c5b5d8559ded5eb3859e25da1e1937a91b24
     }
 ];
 
@@ -168,7 +165,6 @@ MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, 
     var db = database.collection("medicalAttentionRates"); //nombre de la colección en mongodb
 
 
-<<<<<<< HEAD
 
 var initialMedicalAttentionRates = [{
         "province": "sevilla",
@@ -300,7 +296,6 @@ MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, 
     });
 
 });
-=======
     //Métodos loadInitialData:
     app.get(BASE_API_PATH + "/medical-attention-rates/loadInitialData", (req, res) => {
         console.log(Date() + " - GET /medical-attention-rates/loadInitialData");
@@ -382,9 +377,6 @@ MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, 
     });
 
 });
-
->>>>>>> c006c5b5d8559ded5eb3859e25da1e1937a91b24
-
 
 
 
