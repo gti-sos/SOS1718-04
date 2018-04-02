@@ -54,7 +54,6 @@ medicalAttentionRates.register = function(app, db) {
             //if there is not any error, the data will be inserted in the database
 
 
-
             else if (medicalAttentionRates.length == 0) { //esta condicion es si ya esta creado un objeto con esos datos
                 db.insertOne(data, (err, numUpdated) => {
                     console.log("Insert: " + numUpdated);
