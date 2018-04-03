@@ -73,6 +73,10 @@ app.put(BASE_API_PATH+"/graduation-rates",(req,res)=>{
     console.log(Date() + " - PUT /graduation-rates");
     res.sendStatus(405);
 });
+app.put(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
+    console.log(Date() + " - PUT /graduation-rates");
+    res.sendStatus(405);
+});
 
 app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
     console.log(Date() + " - DELETE /graduation-rates");
