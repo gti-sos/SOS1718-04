@@ -177,7 +177,7 @@ medicalAttentionRates.register = function(app, db) {
             idAux = medicalAttentionRates.filter(c => c.province == province & c.year == year)[0]["_id"];
             
         });
-        
+        //añadiendo prueba codigo
         
         //console.log("el id" + medicalAttentionRate._id);
 
