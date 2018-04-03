@@ -11,7 +11,7 @@ medicalAttentionRates.register = function(app, db) {
     });
 
     app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
-        console.log(Date() + " - GET /medical-attention-rates");
+        console.log(Date() + " - GET /medical-attention-ratesprueba");
 
         db.find({}).toArray((err, medicalAttentionRates) => {
             if (err) {
