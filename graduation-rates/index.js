@@ -13,8 +13,11 @@ var BASE_API_PATH = "/api/v1";
         console.log(Date() + " - GET /graduation-rates/docs");
         res.redirect("https://documenter.getpostman.com/view/3880256/collection/RVtyorWp")
     });
+   
 app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         console.log(Date() + " - GET /graduation-rates");
+       
+        
         db.find({}).toArray((err, graduationRates) => {
             if (err) {
                 console.error(" Error accesing DB");
@@ -80,40 +83,54 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
 });
 
 //Recursos concretos
-  app.get(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
-        var provinceAux = req.params.province;
-        var year = req.query["year"];
-        var publicSchool = req.query["public-school"];
-        var privateSchool = req.query["private-school"];
-        var charterSchool = req.query["charter-school"];
-        
-        console.log(Date() + " - GET /graduation-rates/" + provinceAux + " {");
-        console.log("year: "+year);
-        console.log("public-school: "+publicSchool);
-        console.log("private-school: "+privateSchool);
-        console.log("charter-school: "+charterSchool);
-        console.log("}");
-        
-        var queryDB = searchDB(year,publicSchool,privateSchool,charterSchool);
-        console.log("query:" +queryDB);
-        
-        db.find({ province: provinceAux }).toArray((err, datas) => {
+
+//GETS
+ app.get(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
+        var province = req.params.province;
+        console.log(Date() + " - GET /graduation-rates/" + province);
+        db.find({"province": province }).toArray((err, doc) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
             }
-            if (datas.length == 0) {
+            if (doc.length == 0) {
                 res.sendStatus(404);
                 return;
             }
-            res.send(datas.map((c) => {
-                delete c._id; //Quitamos el campo id
-                return c;
+            res.send(doc.map
+            ((c)=>{
+               delete c._id;
+               return c;
+            }));
+        });
+    });
+    
+    app.get(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
+        var province = req.params.province;
+        var year = parseInt(req.params.year);
+        console.log(Date() + " - GET /graduation-rates/" + province + "/"+ year);
+        db.find({"province": province, "year": year}).toArray((err, doc) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            } if (doc.length == 0) {
+                res.sendStatus(404);
+                return;
+            }
+            res.send(doc.map
+            ((c)=>{
+               delete c._id;
+               return c;
             })[0]);
         });
     });
-
+    
+    
+    
+//DELETES
+    
 app.delete(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
     var province = req.params.province;
     console.log(Date() + " - DELETE /graduation-rates/"+province);
@@ -123,25 +140,51 @@ app.delete(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
     db.remove({ "province": province });
     res.sendStatus(200);
 });
+app.delete(BASE_API_PATH+"/graduation-rates/:province/:year",(req,res)=>{
+    var province = req.params.province;
+    var year = parseInt(req.params.year);
+    console.log(Date() + " - DELETE /graduation-rates/"+province+ "/"+ year);
+    //initialGraduationRates = initialGraduationRates.filter((c)=>{
+      //  return (c.province != province);
+    //});
+    db.remove({ "province": province, "year":year });
+    res.sendStatus(200);
+});
+
+
+
+//POST
 
 app.post(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
     var province = req.params.province;
     console.log(Date() + " - POST /graduation-rates/"+province);
     res.sendStatus(405);
 });
+app.post(BASE_API_PATH+"/graduation-rates/:province/:year",(req,res)=>{
+    var province = req.params.province;
+    var year = req.params.year;
+    console.log(Date() + " - POST /graduation-rates/"+province+"/"+year);
+    res.sendStatus(405);
+});
 
-app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
+
+
+//PUT
+
+app.put(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
         var province = req.params.province;
+        var year = parseInt(req.params.year);
         var data = req.body;
         console.log(Date() + " - PUT /graduation-rates/" + province);
         
-        if (province != data.province ||Object.keys(data).length > 5 || !data.hasOwnProperty("year")||
+        if (province != data.province ||Object.keys(data).length > 5 || year != data.year||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
              {
             res.sendStatus(400);
             return;
         }
-        db.update({ "province": data.province }, data, (err,numUpdated) => {
+        var yearAux = parseInt(data.year);
+        db.update({ "province": data.province, "year": yearAux }, data, (err,numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
@@ -149,31 +192,9 @@ app.put(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         res.sendStatus(200);
     });
     
-    
+
 }
-function searchDB(yearAux,publicSchoolAux,privateSchoolAux,charterSchoolAux){
-    var ret = "";
-    if(yearAux !== undefined){
-        ret = ret + '"year": '+yearAux+",";
-    }
-    if(publicSchoolAux !== undefined){
-        ret = ret + ' "public-school": '+publicSchoolAux+",";
-    }
-    if(privateSchoolAux !== undefined){
-        ret = ret + ' "private-school": '+privateSchoolAux+",";
-    }
-    if(charterSchoolAux !== undefined){
-        ret = ret + ' "charter-school": '+charterSchoolAux+",";
-    }
-    
-    console.log("ret: "+ret)
-    if(ret.substr(ret.length-1,ret.length-1) == ","){
-        console.log("entr");
-        ret = ret.substr(0,ret.length-1);
-    }
-    console.log("ret: "+ret);
-    return ret;
-}
+
 
 
 
