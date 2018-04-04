@@ -295,7 +295,7 @@ app.get(BASE_API_PATH + "/graduation-rates/province=:province1&:province2/limit=
         var province2 = req.params.province2;
         var limit = parseInt(req.params.limit);
         var offset = parseInt(req.params.offset);
-        console.log(Date() + " - GET /graduation-rates/province=" + province1+"-"+province2+"/limit="+limit+"&offset="offset);
+        console.log(Date() + " - GET /graduation-rates/province=" + province1+"-"+province2+"/limit="+limit+"&offset="+offset);
         db.find({"province": {$in:[province1, province2]} }).skip(offset).limit(limit).toArray((err, doc) => {
             if (err) {
                 console.error("Error accesing DB");
@@ -344,7 +344,7 @@ app.get(BASE_API_PATH + "/graduation-rates/year=:year1&:year2/limit=:limit&offse
         var year2 = parseInt(req.params.year2);
         var limit = parseInt(req.params.limit);
         var offset = parseInt(req.params.offset);
-        console.log(Date() + " - GET /graduation-rates/year=" + year1+"-"+year2+"/limit="+limit+"&offset="offset);
+        console.log(Date() + " - GET /graduation-rates/year=" + year1+"-"+year2+"/limit="+limit+"&offset="+offset);
         db.find({"year": {$gte:year1 , $lte:year2}}).skip(offset).limit(limit).toArray((err, doc) => {
             if (err) {
                 console.error("Error accesing DB");
