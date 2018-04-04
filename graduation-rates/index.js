@@ -21,9 +21,8 @@ var BASE_API_PATH = "/api/v1";
     
 //OPERACIONES GENERALES
 //GETS
-    //GET CON PAGINACION
-    
-    app.get(BASE_API_PATH + "/graduation-rates/limit=:limit&offset=:offset", (req, res) => {
+//GET CON PAGINACION
+app.get(BASE_API_PATH + "/graduation-rates/limit=:limit&offset=:offset", (req, res) => {
         var limit = parseInt(req.params.limit);
         var offset = parseInt(req.params.offset);
         console.log(Date() + " - GET /graduation-rates"+"/limit="+limit +"&offset="+offset);
@@ -93,8 +92,6 @@ app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
         });
 
     });
-
-
 //PUT PUT NO CONCRETO
 app.put(BASE_API_PATH+"/graduation-rates",(req,res)=>{
     console.log(Date() + " - PUT /graduation-rates");
@@ -103,9 +100,7 @@ app.put(BASE_API_PATH+"/graduation-rates",(req,res)=>{
 //DELETE RECURSO BASE
 app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
     console.log(Date() + " - DELETE /graduation-rates");
-    
     db.remove({});
-    
     res.sendStatus(200);
 });
 
@@ -119,8 +114,30 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
 */
 
 //Recursos concretos
-//GETS
- app.get(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
+//GET AÑO
+app.get(BASE_API_PATH + "/graduation-rates/year=:year", (req, res) => {
+        var year = parseInt(req.params.year);
+        console.log(Date() + " - GET /graduation-rates/" + year);
+        db.find({"year": year}).toArray((err, doc) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            if (doc.length == 0) {
+                res.sendStatus(404);
+                return;
+            }
+            res.send(doc.map
+            ((c)=>{
+               delete c._id;
+               return c;
+            }));
+        });
+    });
+
+//GET PROVINCE
+app.get(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
         var province = req.params.province;
         console.log(Date() + " - GET /graduation-rates/" + province);
         db.find({"province": province }).toArray((err, doc) => {
@@ -140,8 +157,32 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
             }));
         });
     });
+    
 
-//GET PAGINACION CASI CONCRETO(PROVINCIA)
+//GET PAGINACION CASI CONCRETO(YEAR)
+app.get(BASE_API_PATH + "/graduation-rates/year=:year/limit=:limit&offset=:offset", (req, res) => {
+        var year = parseInt(req.params.year);
+        var limit = parseInt(req.params.limit);
+        var offset = parseInt(req.params.offset);
+        console.log(Date() + " - GET /graduation-rates/" + year+"limit="+limit +"&offset="+offset);
+        db.find({"year": year}).skip(offset).limit(limit).toArray((err, doc) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            if (doc.length == 0) {
+                res.sendStatus(404);
+                return;
+            }
+            res.send(doc.map
+            ((c)=>{
+               delete c._id;
+               return c;
+            }));
+        });
+    });
+//GET PAGINACION CASI CONCRETO(PROVINCE)   
 app.get(BASE_API_PATH + "/graduation-rates/:province/limit=:limit&offset=:offset", (req, res) => {
     var province = req.params.province;
     var limit = parseInt(req.params.limit);
@@ -164,7 +205,7 @@ app.get(BASE_API_PATH + "/graduation-rates/:province/limit=:limit&offset=:offset
             }));
         });
     });
-//GET CONCRETO (PROVINCIA Y AÑO)
+//GET CONCRETO (PROVINCIA Y AÑO) No tiene sentido paginacion ?¿
 app.get(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
     var province = req.params.province;
     var year = parseInt(req.params.year);
@@ -186,14 +227,15 @@ app.get(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
         });
     });
     
-//DELETES
+//DELETES 
 app.delete(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
     var province = req.params.province;
     console.log(Date() + " - DELETE /graduation-rates/"+province);
     
-    db.remove({ "province": province });
+    db.remove({"province": province });
     res.sendStatus(200);
 });
+//hacer el delete del año
 app.delete(BASE_API_PATH+"/graduation-rates/:province/:year",(req,res)=>{
     var province = req.params.province;
     var year = parseInt(req.params.year);
@@ -208,6 +250,12 @@ app.delete(BASE_API_PATH+"/graduation-rates/:province/:year",(req,res)=>{
 app.post(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
     var province = req.params.province;
     console.log(Date() + " - POST /graduation-rates/"+province);
+    res
+    .sendStatus(405);
+});
+app.post(BASE_API_PATH+"/graduation-rates/year=:year",(req,res)=>{
+    var year= req.params.year;
+    console.log(Date() + " - POST /graduation-rates/"+year);
     res.sendStatus(405);
 });
 app.post(BASE_API_PATH+"/graduation-rates/:province/:year",(req,res)=>{
