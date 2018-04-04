@@ -388,11 +388,10 @@ app.get(BASE_API_PATH + "/graduation-rates/year=:year/limit=:limit&offset=:offse
     
     
     
-    
-    
+////////SUPERCONCRETO////////////
     
 //GET CONCRETO (PROVINCIA Y AÑO) No tiene sentido paginacion 
-app.get(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
+app.get(BASE_API_PATH + "/graduation-rates/province=:province/year=:year", (req, res) => {
     var province = req.params.province;
     var year = parseInt(req.params.year);
     console.log(Date() + " - GET /graduation-rates/" + province + "/"+ year);
