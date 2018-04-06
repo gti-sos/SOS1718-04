@@ -12,18 +12,51 @@ unemploymentRates.register = function(app, db) {
     });
 
     app.get(BASE_API_PATH + "/unemployment-rates", (req, res) => {
-        console.log(Date() + " - GET /unemployment-rates");
-        db.find({}).toArray((err, unemploymentRates) => {
-            if (err) {
-                console.error(" Error accesing DB");
-                res.sendStatus(500);
-                return;
-            }
-            res.send(unemploymentRates.map((c) => {
-                delete c._id; //Quitamos el campo id
-                return c;
-            }));
-        });
+        var yearAux = parseInt(req.query.year);
+        var startYear = parseInt(req.query.from);
+        var endYear = parseInt(req.query.to);
+        
+        if(Number.isInteger(yearAux)){
+            console.log(Date() + " - GET /unemployment-rates?year="+yearAux);
+            db.find({"year": yearAux}).toArray((err, unemploymentRates) => {
+                if (err) {
+                    console.error(" Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                res.send(unemploymentRates.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+            });
+        }else if(Number.isInteger(startYear)){
+            console.log(Date() + " - GET /unemployment-rates?from="+startYear+"&to="+endYear);
+            db.find({"year": {$gte: endYear, $lt: startYear}}).toArray((err, unemploymentRates) => {
+                if (err) {
+                    console.error(" Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                res.send(unemploymentRates.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+            });
+        }
+        else{
+            console.log(Date() + " - GET /unemployment-rates");
+            db.find({}).toArray((err, unemploymentRates) => {
+                if (err) {
+                    console.error(" Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                res.send(unemploymentRates.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+            });
+        }
     });
 
     app.post(BASE_API_PATH + "/unemployment-rates", (req, res) => {
@@ -37,7 +70,7 @@ unemploymentRates.register = function(app, db) {
             res.sendStatus(400);
             return;
         }
-        db.find({ "province": data["province"] }).toArray((err, datas) => {
+        db.find({ "province": data["province"], "year": parseInt(data["year"]) }).toArray((err, datas) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -80,45 +113,108 @@ unemploymentRates.register = function(app, db) {
     //Recursos concretos
     app.get(BASE_API_PATH + "/unemployment-rates/:province", (req, res) => {
         var provinceAux = req.params.province;
-        /*
-        [{"province":"sevilla","year":1981,"illiterate":3.7,"first-grade":5.1,"second-grade":24.9,
-        "third-degree":0.1,"min-age":16,"max-age":19}]*/
-        var year = req.query["year"];
-        var illiterate = req.query["illiterate"];
-        var firstGrade = req.query["first-grade"];
-        var secondGrade = req.query["second-grade"];
-        var thirdDegre = req.query["third-degre"];
-        var minAge = req.query["min-age"];
-        var maxAge = req.query["max-age"];
-
-        console.log(Date() + " - GET /unemployment-rates/" + provinceAux + " {");
-        console.log("year: " + year);
-        console.log("illiterate: " + illiterate);
-        console.log("first-grade: " + firstGrade);
-        console.log("second-grade: " + secondGrade);
-        console.log("third-degre: " + thirdDegre);
-        console.log("min-age: " + minAge);
-        console.log("max-age: " + maxAge);
-        console.log("}");
-
-        var queryDB = searchDB(year, illiterate, firstGrade, secondGrade, thirdDegre, minAge, maxAge);
-        console.log("query:" + queryDB);
-        //El error esta aquí:
-        db.find({ province: provinceAux }).toArray((err, datas) => {
-            if (err) {
-                console.error("Error accesing DB");
-                res.sendStatus(500);
-                return;
+        var aux = parseInt(provinceAux);
+        //Si se introducen en la url pues se cogen si no pues aparecerán como undefined
+        var startYear = parseInt(req.query.from);
+        var endYear = parseInt(req.query.to);
+        
+       if(Number.isInteger(aux)){
+            console.log(Date() + " - GET /unemployment-rates/" + aux);
+            db.find({ "year": aux }).toArray((err, datas) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (datas.length == 0) {
+                    res.sendStatus(404);
+                    return;
+                }
+                res.send(datas.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+            });
+       }else{
+            if(Number.isInteger(startYear)){
+                console.log(Date() + " - GET /unemployment-rates/" + provinceAux+"?from="+startYear+"&to="+endYear);
+                db.find({"year": {$gte:endYear, $lte:startYear}, "province": provinceAux}).toArray((err, datas) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (datas.length == 0) {
+                        res.sendStatus(404);
+                        return;
+                    }
+                    res.send(datas.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }else{
+                console.log(Date() + " - GET /unemployment-rates/" + provinceAux);
+                db.find({ "province": provinceAux }).toArray((err, datas) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (datas.length == 0) {
+                        res.sendStatus(404);
+                        return;
+                    }
+                    res.send(datas.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
             }
-            if (datas.length == 0) {
-                res.sendStatus(404);
-                return;
-            }
-            res.send(datas.map((c) => {
-                delete c._id; //Quitamos el campo id
-                return c;
-            }));
-        });
+       }
+    });
+    
+    app.get(BASE_API_PATH + "/unemployment-rates/:province/:year", (req, res) => {
+        var provinceAux = req.params.province;
+        var yearStringToProvince = req.params.year; //Esta variable se usa en caso de que el orden esté invertido de manera que reflejará la provincia
+        var yearAux = parseInt(req.params.year)
+        var aux = parseInt(provinceAux);
+        
+        if(Number.isInteger(aux)){
+            console.log(Date() + " - GET /unemployment-rates/" + aux+"/"+yearStringToProvince);
+            db.find({ "year": aux, "province": yearStringToProvince }).toArray((err, datas) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (datas.length == 0) {
+                    res.sendStatus(404);
+                    return;
+                }
+                res.send(datas.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+            });
+        }else{
+            console.log(Date() + " - GET /unemployment-rates/" + provinceAux+"/"+yearAux);
+            db.find({ "province": provinceAux, "year": yearAux }).toArray((err, datas) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (datas.length == 0) {
+                    res.sendStatus(404);
+                    return;
+                }
+                res.send(datas.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+            });
+        }
     });
 
     app.delete(BASE_API_PATH + "/unemployment-rates/:province", (req, res) => {
@@ -137,67 +233,25 @@ unemploymentRates.register = function(app, db) {
         res.sendStatus(405);
     });
 
-    app.put(BASE_API_PATH + "/unemployment-rates/:province", (req, res) => {
+    app.put(BASE_API_PATH + "/unemployment-rates/:province/:year", (req, res) => {
         var province = req.params.province;
+        var yearAux = parseInt(req.params.year);
         var data = req.body;
         console.log(Date() + " - PUT /unemployment-rates/" + province);
 
         //Comprobamos si hay incongruencias en los datos antes de actuar
         if (province != data.province || data.length > 8 || !data.hasOwnProperty("year") || !data.hasOwnProperty("illiterate") ||
             !data.hasOwnProperty("first-grade") || !data.hasOwnProperty("second-grade") || !data.hasOwnProperty("third-degree") ||
-            !data.hasOwnProperty("min-age") || !data.hasOwnProperty("max-age")) {
+            !data.hasOwnProperty("min-age") || !data.hasOwnProperty("max-age") || yearAux != data.year) {
             res.sendStatus(400);
             return;
         }
-        db.update({ "province": data.province }, data, (err, numUpdated) => {
+        db.update({ "province": data.province, "year": yearAux }, data, (err, numUpdated) => {
             console.log("Udapted: " + numUpdated);
         });
 
-        // initialUnemploymentRates = initialUnemploymentRates.map((c) => {
-        //     console.log("entra");
-        //     if (c.province == data.province) {
-        //         //res.sendStatus(200);
-        //         return data;
-        //     }
-        //     else {
-        //         //res.sendStatus(200);
-        //         return c;
-        //     }
-        // });
         res.sendStatus(200);
     });
 
 }
 
-function searchDB(yearAux, illiterateAux, firstGradeAux, secondGradeAux, thirdDegreAux, minAgeAux, maxAgeAux) {
-    var ret = "";
-    if (yearAux !== undefined) {
-        ret = ret + ', year: ' + yearAux + ",";
-    }
-    if (illiterateAux !== undefined) {
-        ret = ret + ' illiterate: ' + illiterateAux + ",";
-    }
-    if (firstGradeAux !== undefined) {
-        ret = ret + ' first-grade: ' + firstGradeAux + ",";
-    }
-    if (secondGradeAux !== undefined) {
-        ret = ret + ' second-grade: ' + secondGradeAux + ",";
-    }
-    if (thirdDegreAux !== undefined) {
-        ret = ret + ' third-degre: ' + thirdDegreAux + ",";
-    }
-    if (minAgeAux !== undefined) {
-        ret = ret + ' min-age: ' + minAgeAux + ",";
-    }
-    if (maxAgeAux !== undefined) {
-        ret = ret + ' max-age: ' + maxAgeAux;
-    }
-    console.log("ret: " + ret)
-    if (ret.substr(ret.length - 1, ret.length - 1) == ",") {
-        console.log("entr");
-        ret = ret.substr(0, ret.length - 1);
-    }
-    console.log("ret: " + ret);
-    return ret;
-}
-//################### Fin API REST de Cristian:
