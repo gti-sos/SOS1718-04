@@ -12,50 +12,108 @@ unemploymentRates.register = function(app, db) {
     });
 
     app.get(BASE_API_PATH + "/unemployment-rates", (req, res) => {
+        //Variable para el año
         var yearAux = parseInt(req.query.year);
+        //Variables para el intervalo de años
         var startYear = parseInt(req.query.from);
         var endYear = parseInt(req.query.to);
+        //Variables para la paginación
+        var limitAux = parseInt(req.query.limit);
+        var offSetAux = parseInt(req.query.offset);
         
         if(Number.isInteger(yearAux)){
-            console.log(Date() + " - GET /unemployment-rates?year="+yearAux);
-            db.find({"year": yearAux}).toArray((err, unemploymentRates) => {
-                if (err) {
-                    console.error(" Error accesing DB");
-                    res.sendStatus(500);
-                    return;
-                }
-                res.send(unemploymentRates.map((c) => {
-                    delete c._id; //Quitamos el campo id
-                    return c;
-                }));
-            });
-        }else if(Number.isInteger(startYear)){
-            console.log(Date() + " - GET /unemployment-rates?from="+startYear+"&to="+endYear);
-            db.find({"year": {$gte: endYear, $lt: startYear}}).toArray((err, unemploymentRates) => {
-                if (err) {
-                    console.error(" Error accesing DB");
-                    res.sendStatus(500);
-                    return;
-                }
-                res.send(unemploymentRates.map((c) => {
-                    delete c._id; //Quitamos el campo id
-                    return c;
-                }));
-            });
+            if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                console.log(Date() + " - GET /unemployment-rates?year="+yearAux+"&limit="+limitAux+"&offset="+offSetAux);
+                db.find({"year": yearAux}).skip(offSetAux).limit(limitAux).toArray((err, unemploymentRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    res.send(unemploymentRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }else{
+                console.log(Date() + " - GET /unemployment-rates?year="+yearAux);
+                db.find({"year": yearAux}).toArray((err, unemploymentRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    res.send(unemploymentRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }
+        }else if(Number.isInteger(startYear) && Number.isInteger(endYear)){
+            if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                console.log(Date() + " - GET /unemployment-rates?from="+startYear+"&to="+endYear+"&limit="+limitAux+"&offset="+offSetAux);
+                db.find({"year": {"$gte":endYear , "$lte":startYear}}).skip(offSetAux).limit(limitAux).toArray((err, doc) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (doc.length == 0) {
+                        res.sendStatus(404);
+                        return;
+                    }
+                    res.send(doc.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }else{
+                console.log(Date() + " - GET /unemployment-rates?from="+startYear+"&to="+endYear);
+                db.find({"year": {"$gte":endYear , "$lte":startYear}}).toArray((err, doc) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (doc.length == 0) {
+                        res.sendStatus(404);
+                        return;
+                    }
+                    res.send(doc.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }
         }
         else{
-            console.log(Date() + " - GET /unemployment-rates");
-            db.find({}).toArray((err, unemploymentRates) => {
-                if (err) {
-                    console.error(" Error accesing DB");
-                    res.sendStatus(500);
-                    return;
-                }
-                res.send(unemploymentRates.map((c) => {
-                    delete c._id; //Quitamos el campo id
-                    return c;
-                }));
-            });
+            if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                console.log(Date() + " - GET /unemployment-rates?limit="+limitAux+"&offset="+offSetAux);
+                db.find({}).skip(offSetAux).limit(limitAux).toArray((err, unemploymentRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    res.send(unemploymentRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }else{
+                console.log(Date() + " - GET /unemployment-rates");
+                db.find({}).toArray((err, unemploymentRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    res.send(unemploymentRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });    
+            }
         }
     });
 
@@ -112,33 +170,21 @@ unemploymentRates.register = function(app, db) {
 
     //Recursos concretos
     app.get(BASE_API_PATH + "/unemployment-rates/:province", (req, res) => {
+        //Variable que se pasa como parámetro en la URL
         var provinceAux = req.params.province;
+        //La transformamos en un int para luego comprobar si es un año o no
         var aux = parseInt(provinceAux);
-        //Si se introducen en la url pues se cogen si no pues aparecerán como undefined
+        //Variables para el intervalo de años
         var startYear = parseInt(req.query.from);
         var endYear = parseInt(req.query.to);
+        //Variables para la paginación
+        var limitAux = parseInt(req.query.limit);
+        var offSetAux = parseInt(req.query.offset);
         
        if(Number.isInteger(aux)){
-            console.log(Date() + " - GET /unemployment-rates/" + aux);
-            db.find({ "year": aux }).toArray((err, datas) => {
-                if (err) {
-                    console.error("Error accesing DB");
-                    res.sendStatus(500);
-                    return;
-                }
-                if (datas.length == 0) {
-                    res.sendStatus(404);
-                    return;
-                }
-                res.send(datas.map((c) => {
-                    delete c._id; //Quitamos el campo id
-                    return c;
-                }));
-            });
-       }else{
-            if(Number.isInteger(startYear)){
-                console.log(Date() + " - GET /unemployment-rates/" + provinceAux+"?from="+startYear+"&to="+endYear);
-                db.find({"year": {$gte:endYear, $lte:startYear}, "province": provinceAux}).toArray((err, datas) => {
+            if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                console.log(Date() + " - GET /unemployment-rates/" + aux+"?limit="+limitAux+"&offset="+offSetAux);
+                db.find({ "year": aux }).skip(offSetAux).limit(limitAux).toArray((err, datas) => {
                     if (err) {
                         console.error("Error accesing DB");
                         res.sendStatus(500);
@@ -154,8 +200,8 @@ unemploymentRates.register = function(app, db) {
                     }));
                 });
             }else{
-                console.log(Date() + " - GET /unemployment-rates/" + provinceAux);
-                db.find({ "province": provinceAux }).toArray((err, datas) => {
+                console.log(Date() + " - GET /unemployment-rates/" + aux);
+                db.find({ "year": aux }).toArray((err, datas) => {
                     if (err) {
                         console.error("Error accesing DB");
                         res.sendStatus(500);
@@ -170,6 +216,80 @@ unemploymentRates.register = function(app, db) {
                         return c;
                     }));
                 });
+            }
+       }else{
+            if(Number.isInteger(startYear) && Number.isInteger(endYear)){
+                if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                    console.log(Date() + " - GET /unemployment-rates/" + provinceAux+"?from="+startYear+"&to="+endYear+"&limit="+limitAux+"&offset="+offSetAux);
+                    db.find({"year": {$gte:endYear, $lte:startYear}, "province": provinceAux}).skip(offSetAux).limit(limitAux).toArray((err, datas) => {
+                        if (err) {
+                            console.error("Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        if (datas.length == 0) {
+                            res.sendStatus(404);
+                            return;
+                        }
+                        res.send(datas.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else{
+                    console.log(Date() + " - GET /unemployment-rates/" + provinceAux+"?from="+startYear+"&to="+endYear);
+                    db.find({"year": {$gte:endYear, $lte:startYear}, "province": provinceAux}).toArray((err, datas) => {
+                        if (err) {
+                            console.error("Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        if (datas.length == 0) {
+                            res.sendStatus(404);
+                            return;
+                        }
+                        res.send(datas.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }
+            }else{
+                if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                    console.log(Date() + " - GET /unemployment-rates/" + provinceAux+"?limit="+limitAux+"&offset="+offSetAux);
+                    db.find({ "province": provinceAux }).skip(offSetAux).limit(limitAux).toArray((err, datas) => {
+                        if (err) {
+                            console.error("Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        if (datas.length == 0) {
+                            res.sendStatus(404);
+                            return;
+                        }
+                        res.send(datas.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else{
+                    console.log(Date() + " - GET /unemployment-rates/" + provinceAux);
+                    db.find({ "province": provinceAux }).toArray((err, datas) => {
+                        if (err) {
+                            console.error("Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        if (datas.length == 0) {
+                            res.sendStatus(404);
+                            return;
+                        }
+                        res.send(datas.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }
             }
        }
     });
