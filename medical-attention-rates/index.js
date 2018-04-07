@@ -69,7 +69,7 @@ medicalAttentionRates.register = function(app, db) {
                 });
             }else{
                 console.log(Date() + " - GET /medical-attention-rates?from="+startYear+"&to="+endYear);
-                db.find({"year": {"$gte":endYear , "$lte":startYear}}).toArray((err, doc) => {
+                db.find({"year": {"$gte":startYear , "$lte":endYear}}).toArray((err, doc) => {
                     if (err) {
                         console.error(" Error accesing DB");
                         res.sendStatus(500);
