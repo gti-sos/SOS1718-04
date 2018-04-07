@@ -1,4 +1,5 @@
 var medicalAttentionRates = {};
+//SUBETE A GITHUB
 
 var BASE_API_PATH = "/api/v1";
 module.exports = medicalAttentionRates;
