@@ -11,21 +11,45 @@ medicalAttentionRates.register = function(app, db) {
     });
 
     app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
-        console.log(Date() + " - GET /medical-attention-rates");
+        //el segundo valor del parseInt es un parámetro que indica que tino de int es, en este caso Decimal.
+        var startYear = parseInt(req.query.from,10);
+        var endYear = parseInt(req.query.to,10);
 
-        db.find({}).toArray((err, medicalAttentionRates) => {
-            if (err) {
-                console.error("Error accesing DB");
-                res.sendStatus(500);
-                return;
-            }
-            res.send(medicalAttentionRates.map((c) => {
-                
-                delete c._id;
-                return c;
-            }));
-        });
+        //En caso de que los valores from y to estén en la url se realizará la búsqueda
+        if (null != startYear && null != endYear) {
+            console.log(Date() + " - GET /medical-attention-rates" + "?from=" + startYear + "&to=" + endYear);
+            //búsqueda entre dos valores en un campo em mondoDB {field: {$gt:valorInferior,$lt:cotaMayor}}
+            db.find({ year: { $gt: startYear, $lt: endYear } }).toArray((err, medicalAttentionRates) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                res.send(medicalAttentionRates.map((c) => {
+
+                    delete c._id;
+                    return c;
+                }));
+            });
+        }
+        else {
+
+
+            db.find({}).toArray((err, medicalAttentionRates) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                res.send(medicalAttentionRates.map((c) => {
+
+                    delete c._id;
+                    return c;
+                }));
+            });
+        }
     });
+
 
     //POST a recurso general (HECHO)
     //POST to a general collection
@@ -37,7 +61,7 @@ medicalAttentionRates.register = function(app, db) {
         console.log("provincia input : " + province + ", year input : " + year);
 
 
-        //comprobamos si el dato que se va a introducir contiene algún error, tamañi y nombre de las propiedades
+        //comprobamos si el dato que se va a introducir contiene algún error, tamaño y nombre de las propiedades
         //we have to validate the data that we insert in the database, if exist some error we send a error message.
         if (Object.keys(data).length > 5 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("general-medicine") || !data.hasOwnProperty("nursing") || !data.hasOwnProperty("social-work")) {
@@ -149,24 +173,23 @@ medicalAttentionRates.register = function(app, db) {
     });
 
 
-    //DELETE a un recurso concreto
-    //no funciona bien 
+    //DELETE a un recurso concreto(HECHO)
     app.delete(BASE_API_PATH + "/medical-attention-rates/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = parseInt(req.params.year);
+
         console.log(Date() + " - DELETE /medical-attention-rates/" + province + "/" + year);
         db.remove({ "province": province, "year": year });
-        //No borra ninguno , si coloco solo provincia funciona pero borra todos , y no es el objetivo en mi opinion
         res.sendStatus(200);
     });
 
     //PUT a un recurso concreto (HECHO)
     app.put(BASE_API_PATH + "/medical-attention-rates/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = parseInt(req.params.year);
         var medicalAttentionRate = req.body;
         var idAux = "";
-        
+
         db.find({}).toArray((err, medicalAttentionRates) => {
             if (err) {
                 console.error("Error accesing DB");
@@ -176,10 +199,10 @@ medicalAttentionRates.register = function(app, db) {
             //console.log(medicalAttentionRates);
             //console.log("_id ="+medicalAttentionRates.filter(c => c.province == province & c.year == year)[0]["_id"]); //[0] para que no devuelva un array
             idAux = medicalAttentionRates.filter(c => c.province == province & c.year == year)[0]["_id"];
-            
+
         });
         //añadiendo prueba codigo
-        
+
         //console.log("el id" + medicalAttentionRate._id);
 
         console.log(Date() + " - PUT /medical-attention-rates/" + province);
@@ -196,12 +219,40 @@ medicalAttentionRates.register = function(app, db) {
             idAux +"!=" + medicalAttentionRate._id);
              res.sendStatus(400);
         }
-        */else{
-        db.update({ "province": medicalAttentionRate.province, "year": medicalAttentionRate.year }, medicalAttentionRate, (err, numUpdated) => {
-            console.log("Updated: " + numUpdated);
-            res.sendStatus(200);
-        });
+        */
+        else {
+            db.update({ "province": medicalAttentionRate.province, "year": medicalAttentionRate.year }, medicalAttentionRate, (err, numUpdated) => {
+                console.log("Updated: " + numUpdated);
+                res.sendStatus(200);
+            });
         }
     });
+
+
+
+    //Búsquedas
+    //Searches(No coge bien los datos de la url , ni con req.query ni nada)
+    app.get(BASE_API_PATH + "/medical-attention-rates?from=initialYear", (req, res) => {
+        var initialYear = req.parse(req.url, true).query; //el parametro segundo es para decirle que es Decimal
+        // var finalYear = req.query.to;
+        console.log("intento");
+        // var otro = req.body;
+        //console.log("initialYear: " +initialYear + "finalYear :"+finalYear+"  "+otro);
+
+        res.send(initialYear);
+        db.find({}).toArray((err, medicalAttentionRates) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            res.send(medicalAttentionRates.map((c) => {
+
+                delete c._id;
+                return c;
+            }));
+        });
+    });
+
 
 };
