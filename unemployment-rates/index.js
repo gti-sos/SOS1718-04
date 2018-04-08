@@ -52,7 +52,7 @@ unemploymentRates.register = function(app, db) {
         }else if(Number.isInteger(startYear) && Number.isInteger(endYear)){
             if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
                 console.log(Date() + " - GET /unemployment-rates?from="+startYear+"&to="+endYear+"&limit="+limitAux+"&offset="+offSetAux);
-                db.find({"year": {"$gte":endYear , "$lte":startYear}}).skip(offSetAux).limit(limitAux).toArray((err, doc) => {
+                db.find({"year": { $gte: startYear, $lte: endYear }}).skip(offSetAux).limit(limitAux).toArray((err, doc) => {
                     if (err) {
                         console.error(" Error accesing DB");
                         res.sendStatus(500);
@@ -69,7 +69,7 @@ unemploymentRates.register = function(app, db) {
                 });
             }else{
                 console.log(Date() + " - GET /unemployment-rates?from="+startYear+"&to="+endYear);
-                db.find({"year": {"$gte":endYear , "$lte":startYear}}).toArray((err, doc) => {
+                db.find({"year": {$gte:startYear , $lte:endYear}}).toArray((err, doc) => {
                     if (err) {
                         console.error(" Error accesing DB");
                         res.sendStatus(500);
@@ -221,7 +221,7 @@ unemploymentRates.register = function(app, db) {
             if(Number.isInteger(startYear) && Number.isInteger(endYear)){
                 if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
                     console.log(Date() + " - GET /unemployment-rates/" + provinceAux+"?from="+startYear+"&to="+endYear+"&limit="+limitAux+"&offset="+offSetAux);
-                    db.find({"year": {$gte:endYear, $lte:startYear}, "province": provinceAux}).skip(offSetAux).limit(limitAux).toArray((err, datas) => {
+                    db.find({"year": {$gte:startYear, $lte:endYear}, "province": provinceAux}).skip(offSetAux).limit(limitAux).toArray((err, datas) => {
                         if (err) {
                             console.error("Error accesing DB");
                             res.sendStatus(500);
@@ -238,7 +238,7 @@ unemploymentRates.register = function(app, db) {
                     });
                 }else{
                     console.log(Date() + " - GET /unemployment-rates/" + provinceAux+"?from="+startYear+"&to="+endYear);
-                    db.find({"year": {$gte:endYear, $lte:startYear}, "province": provinceAux}).toArray((err, datas) => {
+                    db.find({"year": {$gte:startYear, $lte:endYear}, "province": provinceAux}).toArray((err, datas) => {
                         if (err) {
                             console.error("Error accesing DB");
                             res.sendStatus(500);
