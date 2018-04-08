@@ -196,7 +196,7 @@ medicalAttentionRates.register = function(app, db) {
             if(Number.isInteger(startYear) && Number.isInteger(endYear)){
                 if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
                     console.log(Date() + " - GET /medical-attention-rates/" + provinceAux+"?from="+startYear+"&to="+endYear+"&limit="+limitAux+"&offset="+offSetAux);
-                    db.find({"year": {$gte:endYear, $lte:startYear}, "province": provinceAux}).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
+                    db.find({"year": {$gte:startYear, $lte:endYear}, "province": provinceAux}).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
                         if (err) {
                             console.error("Error accesing DB");
                             res.sendStatus(500);
