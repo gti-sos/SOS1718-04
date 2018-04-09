@@ -12,7 +12,7 @@ medicalAttentionRates.register = function(app, db) {
     app.get(BASE_API_PATH + "/medical-attention-rates/docs", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3897910/collection/RVu1HAqJ");
     });
-
+    
     //GET Recurso general
     app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
         //Variable para el año
@@ -20,6 +20,9 @@ medicalAttentionRates.register = function(app, db) {
         //Variables para el intervalo de años
         var startYear = parseInt(req.query.from, 10);
         var endYear = parseInt(req.query.to, 10);
+        //Variables para intervalos propiedad general-medicine
+        var startGeneralMedicine = parseFloat(req.query["general-medicine"]);
+        var endGeneralMedicine = parseFloat(req.query["general-medicine"]);
         //Variables para la paginación
         var limitAux = parseInt(req.query.limit);
         var offSetAux = parseInt(req.query.offset);
@@ -92,6 +95,50 @@ medicalAttentionRates.register = function(app, db) {
                 });
             }
         }
+            //propiedad
+                else if (Number.isInteger(startGeneralMedicine) && Number.isInteger(endGeneralMedicine)) {
+            if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
+                console.log(Date() + " - GET /medical-attention-rates?from=" + startGeneralMedicine + "&to=" + endGeneralMedicine + "&limit=" + limitAux + "&offset=" + offSetAux);
+                db.find({ "general-medicine": { "$gte": startGeneralMedicine, "$lte": endGeneralMedicine } }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (medicalAttentionRates.length == 0) {
+                        res.sendStatus(404);
+                        return;
+                    }
+                    res.send(medicalAttentionRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }
+            else {
+                console.log(Date() + " - GET /medical-attention-rates?from=" + startYear + "&to=" + endYear);
+                db.find({ "year": { "$gte": startYear, "$lte": endYear } }).toArray((err, medicalAttentionRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (medicalAttentionRates.length == 0) {
+                        res.sendStatus(404);
+                        return;
+                    }
+                    res.send(medicalAttentionRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }
+        }
+        
+        
+        
+        
+        
         else {
             if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
                 console.log(Date() + " - GET /medical-attention-rates?limit=" + limitAux + "&offset=" + offSetAux);
@@ -123,7 +170,7 @@ medicalAttentionRates.register = function(app, db) {
             }
         }
     });
-
+    /*
 
 
 
@@ -441,4 +488,56 @@ medicalAttentionRates.register = function(app, db) {
             });
         }
     });
+    
+    /*
+    app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
+
+        //Variable para el año
+        var yearAux = parseInt(req.query.year, 10);
+        //Variables para el intervalo de años
+        var startYear = parseInt(req.query.from, 10);
+        var endYear = parseInt(req.query.to, 10);
+        var yearActived = !isNaN(startYear) & !isNaN(endYear);
+        //Variables para intervalos propiedad general-medicine
+        var startGeneralMedicine = parseFloat(req.query["general-medicine"]);
+        var endGeneralMedicine = parseFloat(req.query["general-medicine"]);
+        var generalMedicineActived = !isNaN(startGeneralMedicine) & !isNaN(endGeneralMedicine);
+        //Variables para intervalos propiedad nursing
+        var startNursing = parseFloat(req.query["nursing"]);
+        var endNursing = parseFloat(req.query["nursing"]);
+        var nursingActived = !isNaN(startNursing) & !isNaN(endNursing);
+        //Variables para intervalos propiedad social-work
+        var startSocialWork = parseFloat(req.query["social-work"]);
+        var endSocialWork = parseFloat(req.query["social-work"]);
+        var SocialWorkActived = !isNaN(startSocialWork) & !isNaN(endSocialWork);
+        //Variables para la paginación
+        var limitAux = parseInt(req.query.limit);
+        var offSetAux = parseInt(req.query.offset);
+        var paginacion = !isNaN(limitAux) & !isNaN(offSetAux);
+
+        
+        /*
+        var query = "db.find({}).toArray((err, medicalAttentionRates) => {if (err) {console.error(\"Error accesing DB\")" +
+            ";res.sendStatus(500);return;}res.send(medicalAttentionRates.map((c) => {" +
+            "delete c._id;"+ //Quitamos el campo id
+        " return c;"+
+        "}));"+
+        "});";
+        eval(query)
+        
+
+
+
+
+
+
+    });
+
+*/
+
+
+
+
+
+
 };
