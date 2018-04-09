@@ -20,6 +20,14 @@ unemploymentRates.register = function(app, db) {
         //Variables para la paginación
         var limitAux = parseInt(req.query.limit);
         var offSetAux = parseInt(req.query.offset);
+        //Variables del recurso:
+        var illiterateAux = parseFloat(req.query.illiterate);
+        console.log(illiterateAux);
+        var firstGradeAux = parseFloat(req.query["first-grade"]);
+        var secondtGradeAux = parseFloat(req.query["second-grade"]);
+        var thirdGradeAux = parseFloat(req.query["third-grade"]);
+        var minAgeAux = parseInt(req.query["min-age"]);
+        var maxAgeAux = parseInt(req.query["max-age"]);
         
         if(Number.isInteger(yearAux)){
             if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
@@ -101,18 +109,99 @@ unemploymentRates.register = function(app, db) {
                     }));
                 });
             }else{
-                console.log(Date() + " - GET /unemployment-rates");
-                db.find({}).toArray((err, unemploymentRates) => {
-                    if (err) {
-                        console.error(" Error accesing DB");
-                        res.sendStatus(500);
-                        return;
-                    }
-                    res.send(unemploymentRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });    
+                console.log(!illiterateAux.isNaN);
+                if(!illiterateAux.isNaN){
+                    console.log(Date() + " - GET /unemployment-rates?illerate="+illiterateAux);
+                    db.find({illiterate: {$gte: illiterateAux}}).toArray((err, unemploymentRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(unemploymentRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else if(!firstGradeAux.isNaN){
+                    console.log(Date() + " - GET /unemployment-rates?first-grade="+firstGradeAux);
+                    db.find({"first-grade": {$gte: firstGradeAux}}).toArray((err, unemploymentRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(unemploymentRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else if(!secondtGradeAux.isNaN){
+                    console.log(Date() + " - GET /unemployment-rates?second-grade="+secondtGradeAux);
+                    db.find({"second-grade": {$gte: secondtGradeAux}}).toArray((err, unemploymentRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(unemploymentRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else if(!thirdGradeAux.isNaN){
+                    console.log(Date() + " - GET /unemployment-rates?third-grade="+thirdGradeAux);
+                    db.find({"third-grade": {$gte: thirdGradeAux}}).toArray((err, unemploymentRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(unemploymentRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else if(!minAgeAux.isNaN){
+                    console.log(Date() + " - GET /unemployment-rates?min-age="+minAgeAux);
+                    db.find({"min-age": {$gte: minAgeAux}}).toArray((err, unemploymentRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(unemploymentRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else if(!maxAgeAux.isNaN){
+                    console.log(Date() + " - GET /unemployment-rates?max-age="+maxAgeAux);
+                    db.find({"max-age": {$gte: maxAgeAux}}).toArray((err, unemploymentRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(unemploymentRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else{
+                    console.log(Date() + " - GET /unemployment-rates");
+                    db.find({}).toArray((err, unemploymentRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(unemploymentRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }
             }
         }
     });
@@ -353,7 +442,7 @@ unemploymentRates.register = function(app, db) {
         res.sendStatus(405);
     });
 
-    app.put(BASE_API_PATH + "/unemployment-rates/:province/:year", (req, res) => {
+    app.put(BASE_API_PATH + "/unemployment-rates/:province", (req, res) => {
         var province = req.params.province;
         var yearAux = parseInt(req.params.year);
         var data = req.body;
@@ -362,7 +451,7 @@ unemploymentRates.register = function(app, db) {
         //Comprobamos si hay incongruencias en los datos antes de actuar
         if (province != data.province || data.length > 8 || !data.hasOwnProperty("year") || !data.hasOwnProperty("illiterate") ||
             !data.hasOwnProperty("first-grade") || !data.hasOwnProperty("second-grade") || !data.hasOwnProperty("third-degree") ||
-            !data.hasOwnProperty("min-age") || !data.hasOwnProperty("max-age") || yearAux != data.year) {
+            !data.hasOwnProperty("min-age") || !data.hasOwnProperty("max-age")) {
             res.sendStatus(400);
             return;
         }
