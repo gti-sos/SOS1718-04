@@ -491,26 +491,27 @@ medicalAttentionRates.register = function(app, db) {
 
     app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
         var object = {
-            "year": req.query.year,
+            "year": parseInt(req.query.year),
+            "general-medicine" : parseFloat(req.query["general-medicine"]),
             // "general-medicine" :req.query,
-            // "nursing" : 21.12,
+             "nursing" :  parseFloat(req.query["nursing"])
         };
 
         console.log(Object.keys(req.query).includes("year")); // includes es como contains en java
-        var mdbq = [];
+        var mdbq = {};
 
         Object.keys(req.query).forEach((prop) => {
             if (Object.keys(object).includes(prop)) {
                 var value = getTypeValue(object[prop], typeOfImproved(object[prop]));
                 console.log("prop : " + prop);
-                console.log("object prop :" +  Number.isInteger(object[prop]));
-                console.log("value :" + value);
+                console.log("object prop :" +  Number.isInteger(prop));
+                console.log("value :" + value + " es entero : " +typeOfImproved(value));
                 mdbq[prop] = value;
                 console.log("mdbq : " + mdbq["year"]);
-                var prueba = [];
-                prueba["year"]=21;
-                console.log("prueba de array"+prueba);
-                console.log("array :"+ mdbq.toString());
+               // var prueba = [];
+               // prueba["year"]=21;
+               // console.log("prueba de array"+prueba);
+               // console.log("array :"+ mdbq.toString());
             }
         });
         db.find(mdbq).toArray((err, medicalAttentionRates) => {
@@ -533,13 +534,12 @@ medicalAttentionRates.register = function(app, db) {
     function getTypeValue(value, type) {
 
         switch (type) {
-            case "string":
-                return value;
-            case "number":
+            case "year":
                 return parseInt(value);
-
-        };
-    };
+            default:
+                return parseFloat(value);
+        }
+    }
 
     //función auxiliar que al introducir cualquier valor, te devuelve el tipo que es , es una versión mejorada del operando
     // type of, la he obtenido de : https://javascriptweblog.wordpress.com/2011/08/08/fixing-the-javascript-typeof-operator/
