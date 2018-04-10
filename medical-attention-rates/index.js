@@ -12,7 +12,7 @@ medicalAttentionRates.register = function(app, db) {
     app.get(BASE_API_PATH + "/medical-attention-rates/docs", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3897910/collection/RVu1HAqJ");
     });
-    
+    /*
     //GET Recurso general
     app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
         //Variable para el año
@@ -170,7 +170,7 @@ medicalAttentionRates.register = function(app, db) {
             }
         }
     });
-    /*
+    */
 
 
 
@@ -488,53 +488,70 @@ medicalAttentionRates.register = function(app, db) {
             });
         }
     });
-    
-    /*
+
     app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
+        var object = {
+            "year": req.query.year,
+            // "general-medicine" :req.query,
+            // "nursing" : 21.12,
+        };
 
-        //Variable para el año
-        var yearAux = parseInt(req.query.year, 10);
-        //Variables para el intervalo de años
-        var startYear = parseInt(req.query.from, 10);
-        var endYear = parseInt(req.query.to, 10);
-        var yearActived = !isNaN(startYear) & !isNaN(endYear);
-        //Variables para intervalos propiedad general-medicine
-        var startGeneralMedicine = parseFloat(req.query["general-medicine"]);
-        var endGeneralMedicine = parseFloat(req.query["general-medicine"]);
-        var generalMedicineActived = !isNaN(startGeneralMedicine) & !isNaN(endGeneralMedicine);
-        //Variables para intervalos propiedad nursing
-        var startNursing = parseFloat(req.query["nursing"]);
-        var endNursing = parseFloat(req.query["nursing"]);
-        var nursingActived = !isNaN(startNursing) & !isNaN(endNursing);
-        //Variables para intervalos propiedad social-work
-        var startSocialWork = parseFloat(req.query["social-work"]);
-        var endSocialWork = parseFloat(req.query["social-work"]);
-        var SocialWorkActived = !isNaN(startSocialWork) & !isNaN(endSocialWork);
-        //Variables para la paginación
-        var limitAux = parseInt(req.query.limit);
-        var offSetAux = parseInt(req.query.offset);
-        var paginacion = !isNaN(limitAux) & !isNaN(offSetAux);
+        console.log(Object.keys(req.query).includes("year")); // includes es como contains en java
+        var mdbq = [];
 
-        
-        /*
-        var query = "db.find({}).toArray((err, medicalAttentionRates) => {if (err) {console.error(\"Error accesing DB\")" +
-            ";res.sendStatus(500);return;}res.send(medicalAttentionRates.map((c) => {" +
-            "delete c._id;"+ //Quitamos el campo id
-        " return c;"+
-        "}));"+
-        "});";
-        eval(query)
-        
+        Object.keys(req.query).forEach((prop) => {
+            if (Object.keys(object).includes(prop)) {
+                var value = getTypeValue(object[prop], typeOfImproved(object[prop]));
+                console.log("prop : " + prop);
+                console.log("object prop :" +  Number.isInteger(object[prop]));
+                console.log("value :" + value);
+                mdbq[prop] = value;
+                console.log("mdbq : " + mdbq["year"]);
+                var prueba = [];
+                prueba["year"]=21;
+                console.log("prueba de array"+prueba);
+                console.log("array :"+ mdbq.toString());
+            }
+        });
+        db.find(mdbq).toArray((err, medicalAttentionRates) => {
 
+            if (err) {
+                console.error(" Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            res.send(medicalAttentionRates.map((c) => {
+                delete c._id; //Quitamos el campo id
+                return c;
+            }));
 
-
-
+        });
 
 
     });
 
-*/
+    function getTypeValue(value, type) {
 
+        switch (type) {
+            case "string":
+                return value;
+            case "number":
+                return parseInt(value);
+
+        };
+    };
+
+    //función auxiliar que al introducir cualquier valor, te devuelve el tipo que es , es una versión mejorada del operando
+    // type of, la he obtenido de : https://javascriptweblog.wordpress.com/2011/08/08/fixing-the-javascript-typeof-operator/
+    //desarrollado por Angus Croll
+    function typeOfImproved(obj) {
+        return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+    }
+
+    // console.log(getTypeValue(90,"int"));
+    // console.log(getType(34.2));
+    //console.log(typeOfImproved("hola"));
+    //console.log(typeOfImproved(34));
 
 
 
