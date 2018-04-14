@@ -67,7 +67,7 @@ medicalAttentionRates.register = function(app, db) {
         }
         else {
             db.find(mdbq).toArray((err, medicalAttentionRates) => {
-            console.log(consoleText);
+                console.log(consoleText);
                 if (err) {
                     console.error(" Error accesing DB");
                     res.sendStatus(500);
@@ -134,14 +134,13 @@ medicalAttentionRates.register = function(app, db) {
         });
     });
     */
-   
-   
-   
-   //GET , busquedas, paginacion con provincia
-    app.get(BASE_API_PATH + "/medical-attention-rates/:province", (req, res) => {
 
+
+
+    //GET , busquedas, paginacion con provincia
+    app.get(BASE_API_PATH + "/medical-attention-rates/:province", (req, res) => {
+        var province = req.params.province;
         var object = {
-            "province": req.params.province,
             "year": parseInt(req.query.year),
             "general-medicine": parseFloat(req.query["general-medicine"]),
             "social-work": parseFloat(req.query["social-work"]),
@@ -156,25 +155,26 @@ medicalAttentionRates.register = function(app, db) {
         var isFirstVar = true;
 
         var mdbq = {};
-        var consoleText = Date() + " - GET /medical-attention-rates/" + object.province;
+        var consoleText = Date() + " - GET /medical-attention-rates/" + province;
         Object.keys(req.query).forEach((prop) => {
             if (Object.keys(object).includes(prop)) {
                 var value = getTypeValue(object[prop], prop);
                 mdbq[prop] = value;
-                if (prop != "province") {
-                    if (isFirstVar === true) {
-                        var text = "?" + prop + "=" + value;
-                        isFirstVar = false;
-                        console.log(prop);
-                    }
-                    else {
-                        var text = "&" + prop + "=" + value;
-                    }
+
+                if (isFirstVar === true) {
+                    var text = "?" + prop + "=" + value;
+                    isFirstVar = false;
+                    console.log(prop);
                 }
+                else {
+                    var text = "&" + prop + "=" + value;
+                }
+
 
                 consoleText = consoleText + text;
             }
         });
+        mdbq["province"] = req.params.province;
         //paginación
         if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
             var text = "limitAux=" + limitAux + "&offset=" + offSetAux;
