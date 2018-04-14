@@ -12,165 +12,75 @@ medicalAttentionRates.register = function(app, db) {
     app.get(BASE_API_PATH + "/medical-attention-rates/docs", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3897910/collection/RVu1HAqJ");
     });
-    /*
-    //GET Recurso general
+
+
     app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
-        //Variable para el año
-        var yearAux = parseInt(req.query.year, 10);
-        //Variables para el intervalo de años
-        var startYear = parseInt(req.query.from, 10);
-        var endYear = parseInt(req.query.to, 10);
-        //Variables para intervalos propiedad general-medicine
-        var startGeneralMedicine = parseFloat(req.query["general-medicine"]);
-        var endGeneralMedicine = parseFloat(req.query["general-medicine"]);
+        var object = {
+            "year": parseInt(req.query.year),
+            "general-medicine": parseFloat(req.query["general-medicine"]),
+            "social-work": parseFloat(req.query["social-work"]),
+            "nursing": parseFloat(req.query["nursing"])
+        };
         //Variables para la paginación
         var limitAux = parseInt(req.query.limit);
         var offSetAux = parseInt(req.query.offset);
 
-        if (Number.isInteger(yearAux)) {
-            if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
-                console.log(Date() + " - GET /medical-attention-rates?year=" + yearAux + "&limit=" + limitAux + "&offset=" + offSetAux);
-                db.find({ "year": yearAux }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
-                    if (err) {
-                        console.error(" Error accesing DB");
-                        res.sendStatus(500);
-                        return;
-                    }
-                    res.send(medicalAttentionRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });
+        console.log(Object.keys(req.query).includes("year")); // includes es como contains en java
+
+        var isFirstVar = true;
+
+        var mdbq = {};
+        var consoleText = Date() + " - GET /medical-attention-rates";
+        Object.keys(req.query).forEach((prop) => {
+            if (Object.keys(object).includes(prop)) {
+                var value = getTypeValue(object[prop], prop);
+                mdbq[prop] = value;
+
+                if (isFirstVar === true) {
+                    var text = "?" + prop + "=" + value;
+                    isFirstVar = false;
+                }
+                else {
+                    var text = "&" + prop + "=" + value;
+                }
+
+                consoleText = consoleText + text;
             }
-            else {
-                console.log(Date() + " - GET /medical-attention-rates?year=" + yearAux);
-                db.find({ "year": yearAux }).toArray((err, medicalAttentionRates) => {
-                    if (err) {
-                        console.error(" Error accesing DB");
-                        res.sendStatus(500);
-                        return;
-                    }
-                    res.send(medicalAttentionRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });
-            }
+        });
+        //paginación
+        if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
+            var text = "limitAux=" + limitAux + "&offset=" + offSetAux;
+            consoleText = consoleText + text;
+            console.log(consoleText);
+            db.find(mdbq).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
+                if (err) {
+                    console.error(" Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                res.send(medicalAttentionRates.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+
+            });
         }
-        else if (Number.isInteger(startYear) && Number.isInteger(endYear)) {
-            if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
-                console.log(Date() + " - GET /medical-attention-rates?from=" + startYear + "&to=" + endYear + "&limit=" + limitAux + "&offset=" + offSetAux);
-                db.find({ "year": { "$gte": startYear, "$lte": endYear } }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
-                    if (err) {
-                        console.error(" Error accesing DB");
-                        res.sendStatus(500);
-                        return;
-                    }
-                    if (medicalAttentionRates.length == 0) {
-                        res.sendStatus(404);
-                        return;
-                    }
-                    res.send(medicalAttentionRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });
-            }
-            else {
-                console.log(Date() + " - GET /medical-attention-rates?from=" + startYear + "&to=" + endYear);
-                db.find({ "year": { "$gte": startYear, "$lte": endYear } }).toArray((err, medicalAttentionRates) => {
-                    if (err) {
-                        console.error(" Error accesing DB");
-                        res.sendStatus(500);
-                        return;
-                    }
-                    if (medicalAttentionRates.length == 0) {
-                        res.sendStatus(404);
-                        return;
-                    }
-                    res.send(medicalAttentionRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });
-            }
-        }
-            //propiedad
-                else if (Number.isInteger(startGeneralMedicine) && Number.isInteger(endGeneralMedicine)) {
-            if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
-                console.log(Date() + " - GET /medical-attention-rates?from=" + startGeneralMedicine + "&to=" + endGeneralMedicine + "&limit=" + limitAux + "&offset=" + offSetAux);
-                db.find({ "general-medicine": { "$gte": startGeneralMedicine, "$lte": endGeneralMedicine } }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
-                    if (err) {
-                        console.error(" Error accesing DB");
-                        res.sendStatus(500);
-                        return;
-                    }
-                    if (medicalAttentionRates.length == 0) {
-                        res.sendStatus(404);
-                        return;
-                    }
-                    res.send(medicalAttentionRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });
-            }
-            else {
-                console.log(Date() + " - GET /medical-attention-rates?from=" + startYear + "&to=" + endYear);
-                db.find({ "year": { "$gte": startYear, "$lte": endYear } }).toArray((err, medicalAttentionRates) => {
-                    if (err) {
-                        console.error(" Error accesing DB");
-                        res.sendStatus(500);
-                        return;
-                    }
-                    if (medicalAttentionRates.length == 0) {
-                        res.sendStatus(404);
-                        return;
-                    }
-                    res.send(medicalAttentionRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });
-            }
-        }
-        
-        
-        
-        
-        
         else {
-            if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
-                console.log(Date() + " - GET /medical-attention-rates?limit=" + limitAux + "&offset=" + offSetAux);
-                db.find({}).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
-                    if (err) {
-                        console.error(" Error accesing DB");
-                        res.sendStatus(500);
-                        return;
-                    }
-                    res.send(medicalAttentionRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });
-            }
-            else {
-                console.log(Date() + " - GET /medical-attention-rates");
-                db.find({}).toArray((err, medicalAttentionRates) => {
-                    if (err) {
-                        console.error(" Error accesing DB");
-                        res.sendStatus(500);
-                        return;
-                    }
-                    res.send(medicalAttentionRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });
-            }
+            db.find(mdbq).toArray((err, medicalAttentionRates) => {
+
+                if (err) {
+                    console.error(" Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                res.send(medicalAttentionRates.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+
+            });
         }
     });
-    */
 
 
 
@@ -489,47 +399,8 @@ medicalAttentionRates.register = function(app, db) {
         }
     });
 
-    app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
-        var object = {
-            "year": parseInt(req.query.year),
-            "general-medicine" : parseFloat(req.query["general-medicine"]),
-            // "general-medicine" :req.query,
-             "nursing" :  parseFloat(req.query["nursing"])
-        };
+//Funciones Auxiliares
 
-        console.log(Object.keys(req.query).includes("year")); // includes es como contains en java
-        var mdbq = {};
-
-        Object.keys(req.query).forEach((prop) => {
-            if (Object.keys(object).includes(prop)) {
-                var value = getTypeValue(object[prop], typeOfImproved(object[prop]));
-                console.log("prop : " + prop);
-                console.log("object prop :" +  Number.isInteger(prop));
-                console.log("value :" + value + " es entero : " +typeOfImproved(value));
-                mdbq[prop] = value;
-                console.log("mdbq : " + mdbq["year"]);
-               // var prueba = [];
-               // prueba["year"]=21;
-               // console.log("prueba de array"+prueba);
-               // console.log("array :"+ mdbq.toString());
-            }
-        });
-        db.find(mdbq).toArray((err, medicalAttentionRates) => {
-
-            if (err) {
-                console.error(" Error accesing DB");
-                res.sendStatus(500);
-                return;
-            }
-            res.send(medicalAttentionRates.map((c) => {
-                delete c._id; //Quitamos el campo id
-                return c;
-            }));
-
-        });
-
-
-    });
 
     function getTypeValue(value, type) {
 
@@ -540,21 +411,4 @@ medicalAttentionRates.register = function(app, db) {
                 return parseFloat(value);
         }
     }
-
-    //función auxiliar que al introducir cualquier valor, te devuelve el tipo que es , es una versión mejorada del operando
-    // type of, la he obtenido de : https://javascriptweblog.wordpress.com/2011/08/08/fixing-the-javascript-typeof-operator/
-    //desarrollado por Angus Croll
-    function typeOfImproved(obj) {
-        return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
-    }
-
-    // console.log(getTypeValue(90,"int"));
-    // console.log(getType(34.2));
-    //console.log(typeOfImproved("hola"));
-    //console.log(typeOfImproved(34));
-
-
-
-
-
 };
