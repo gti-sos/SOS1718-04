@@ -67,7 +67,7 @@ medicalAttentionRates.register = function(app, db) {
         }
         else {
             db.find(mdbq).toArray((err, medicalAttentionRates) => {
-
+            console.log(consoleText);
                 if (err) {
                     console.error(" Error accesing DB");
                     res.sendStatus(500);
@@ -134,138 +134,81 @@ medicalAttentionRates.register = function(app, db) {
         });
     });
     */
-
+   
+   
+   
+   //GET , busquedas, paginacion con provincia
     app.get(BASE_API_PATH + "/medical-attention-rates/:province", (req, res) => {
-        //Variable que se pasa como parámetro en la URL
-        var provinceAux = req.params.province;
-        //La transformamos en un int para luego comprobar si es un año o no
-        var aux = parseInt(provinceAux);
-        //Variables para el intervalo de años
-        var startYear = parseInt(req.query.from, 10);
-        var endYear = parseInt(req.query.to, 10);
-        //Variables para la paginación
-        var limitAux = parseInt(req.query.limit, 10);
-        var offSetAux = parseInt(req.query.offset, 10);
 
-        if (Number.isInteger(aux)) {
-            if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
-                console.log(Date() + " - GET /medical-attention-rates/" + aux + "?limit=" + limitAux + "&offset=" + offSetAux);
-                db.find({ "year": aux }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
-                    if (err) {
-                        console.error("Error accesing DB");
-                        res.sendStatus(500);
-                        return;
+        var object = {
+            "province": req.params.province,
+            "year": parseInt(req.query.year),
+            "general-medicine": parseFloat(req.query["general-medicine"]),
+            "social-work": parseFloat(req.query["social-work"]),
+            "nursing": parseFloat(req.query["nursing"])
+        };
+        //Variables para la paginación
+        var limitAux = parseInt(req.query.limit);
+        var offSetAux = parseInt(req.query.offset);
+
+        console.log(Object.keys(object).includes("province")); // includes es como contains en java
+
+        var isFirstVar = true;
+
+        var mdbq = {};
+        var consoleText = Date() + " - GET /medical-attention-rates/" + object.province;
+        Object.keys(req.query).forEach((prop) => {
+            if (Object.keys(object).includes(prop)) {
+                var value = getTypeValue(object[prop], prop);
+                mdbq[prop] = value;
+                if (prop != "province") {
+                    if (isFirstVar === true) {
+                        var text = "?" + prop + "=" + value;
+                        isFirstVar = false;
+                        console.log(prop);
                     }
-                    if (medicalAttentionRates.length == 0) {
-                        res.sendStatus(404);
-                        return;
+                    else {
+                        var text = "&" + prop + "=" + value;
                     }
-                    res.send(medicalAttentionRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });
+                }
+
+                consoleText = consoleText + text;
             }
-            else {
-                console.log(Date() + " - GET /medical-attention-rates/" + aux);
-                db.find({ "year": aux }).toArray((err, medicalAttentionRates) => {
-                    if (err) {
-                        console.error("Error accesing DB");
-                        res.sendStatus(500);
-                        return;
-                    }
-                    if (medicalAttentionRates.length == 0) {
-                        res.sendStatus(404);
-                        return;
-                    }
-                    res.send(medicalAttentionRates.map((c) => {
-                        delete c._id; //Quitamos el campo id
-                        return c;
-                    }));
-                });
-            }
+        });
+        //paginación
+        if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
+            var text = "limitAux=" + limitAux + "&offset=" + offSetAux;
+            consoleText = consoleText + text;
+            console.log(consoleText);
+            db.find(mdbq).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
+                if (err) {
+                    console.error(" Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                res.send(medicalAttentionRates.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+
+            });
         }
         else {
-            if (Number.isInteger(startYear) && Number.isInteger(endYear)) {
-                if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
-                    console.log(Date() + " - GET /medical-attention-rates/" + provinceAux + "?from=" + startYear + "&to=" + endYear + "&limit=" + limitAux + "&offset=" + offSetAux);
-                    db.find({ "year": { $gte: startYear, $lte: endYear }, "province": provinceAux }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
-                        if (err) {
-                            console.error("Error accesing DB");
-                            res.sendStatus(500);
-                            return;
-                        }
-                        if (medicalAttentionRates.length == 0) {
-                            res.sendStatus(404);
-                            return;
-                        }
-                        res.send(medicalAttentionRates.map((c) => {
-                            delete c._id; //Quitamos el campo id
-                            return c;
-                        }));
-                    });
+            db.find(mdbq).toArray((err, medicalAttentionRates) => {
+                console.log(consoleText);
+                if (err) {
+                    console.error(" Error accesing DB");
+                    res.sendStatus(500);
+                    return;
                 }
-                else {
-                    console.log(Date() + " - GET /medical-attention-rates/" + provinceAux + "?from=" + startYear + "&to=" + endYear);
-                    db.find({ "year": { $gte: startYear, $lte: endYear }, "province": provinceAux }).toArray((err, medicalAttentionRates) => {
-                        if (err) {
-                            console.error("Error accesing DB");
-                            res.sendStatus(500);
-                            return;
-                        }
-                        if (medicalAttentionRates.length == 0) {
-                            res.sendStatus(404);
-                            return;
-                        }
-                        res.send(medicalAttentionRates.map((c) => {
-                            delete c._id; //Quitamos el campo id
-                            return c;
-                        }));
-                    });
-                }
-            }
-            else {
-                if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
-                    console.log(Date() + " - GET /medical-attention-rates/" + provinceAux + "?limit=" + limitAux + "&offset=" + offSetAux);
-                    db.find({ "province": provinceAux }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
-                        if (err) {
-                            console.error("Error accesing DB");
-                            res.sendStatus(500);
-                            return;
-                        }
-                        if (medicalAttentionRates.length == 0) {
-                            res.sendStatus(404);
-                            return;
-                        }
-                        res.send(medicalAttentionRates.map((c) => {
-                            delete c._id; //Quitamos el campo id
-                            return c;
-                        }));
-                    });
-                }
-                else {
-                    console.log(Date() + " - GET /medical-attention-rates/" + provinceAux);
-                    db.find({ "province": provinceAux }).toArray((err, medicalAttentionRates) => {
-                        if (err) {
-                            console.error("Error accesing DB");
-                            res.sendStatus(500);
-                            return;
-                        }
-                        if (medicalAttentionRates.length == 0) {
-                            res.sendStatus(404);
-                            return;
-                        }
-                        res.send(medicalAttentionRates.map((c) => {
-                            delete c._id; //Quitamos el campo id
-                            return c;
-                        }));
-                    });
-                }
-            }
+                res.send(medicalAttentionRates.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+
+            });
         }
     });
-
-
 
 
     //POST a recurso general (HECHO)
@@ -399,7 +342,28 @@ medicalAttentionRates.register = function(app, db) {
         }
     });
 
-//Funciones Auxiliares
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Funciones Auxiliares
 
 
     function getTypeValue(value, type) {
