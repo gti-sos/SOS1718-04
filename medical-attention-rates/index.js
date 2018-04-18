@@ -363,7 +363,7 @@ medicalAttentionRates.register = function(app, db) {
 
 
 
-    //Funciones Auxiliares
+    //Funciones Auxiliares para el get
 
 
     function getTypeValue(value, type) {
