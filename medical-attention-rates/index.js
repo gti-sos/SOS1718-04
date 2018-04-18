@@ -25,7 +25,7 @@ medicalAttentionRates.register = function(app, db) {
         var limitAux = parseInt(req.query.limit);
         var offSetAux = parseInt(req.query.offset);
 
-        console.log(Object.keys(req.query).includes("year")); // includes es como contains en java
+        //console.log(Object.keys(req.query).includes("year")); // includes es como contains en java
 
         var isFirstVar = true;
 
@@ -150,7 +150,7 @@ medicalAttentionRates.register = function(app, db) {
         var limitAux = parseInt(req.query.limit);
         var offSetAux = parseInt(req.query.offset);
 
-        console.log(Object.keys(object).includes("province")); // includes es como contains en java
+        //console.log(Object.keys(object).includes("province")); // includes es como contains en java
 
         var isFirstVar = true;
 
