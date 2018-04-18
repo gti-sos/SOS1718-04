@@ -24,7 +24,7 @@ angular.module("GraduationRatesApp")
                 });
                  getStadistics();
             }
-            $scope.deleteStadistic= function(){
+            $scope.deleteStadistics= function(){
                 console.log("all stadistic will be delete" );
                 $http.delete(api+"/").then(function (response){
                     $scope.status= "Status: "+ response.status;
