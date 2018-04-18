@@ -1,0 +1,28 @@
+<h1>Edit Stadistic</h1>
+<table class = "table">
+    <thead>
+        <tr>
+            <th>Province</th>
+            <th>Year</th>
+            <th>Public school</th>
+            <th>Private school</th>
+            <th>Charter school</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr>
+            <td>{{updatedStadistic.province}}</td>
+            <td>{{updatedStadistic.year}}</td>
+            <td><input type="number" class="form-control" ng-model="updatedStadistic['public-school']"/></td>
+            <td><input type="number" class="form-control" ng-model="updatedStadistic['private-school']"/></td>
+            <td><input type="number" class="form-control" ng-model="updatedStadistic['charter-school']"/></td>
+            <td><button class="button btn-primary" ng-click="updateStadistic()">
+                Update
+            </button></td>
+        </tr>
+     </tbody>
+</table>
+<hr/>
+<h8><i>{{status}}</i></h8>

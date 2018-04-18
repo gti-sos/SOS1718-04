@@ -1,5 +1,6 @@
 var graduationRates = {};
-var BASE_API_PATH = "/api/v1";
+var BASE_API_PATH = "/api/v2";
+var BASE_API_PATH1 = "/api/v1";
 
     module.exports = graduationRates;
     graduationRates.register = function(app, db) {
@@ -19,6 +20,550 @@ var BASE_API_PATH = "/api/v1";
 -------------------
 */ 
     
+//OPERACIONES GENERALES
+//GETS
+   app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
+        //Variable para el año
+        var yearAux = parseInt(req.query.year);
+        //Variables para el intervalo de años
+        var startYear = parseInt(req.query.from);
+        var endYear = parseInt(req.query.to);
+        //Variables para la paginación
+        var limitAux = parseInt(req.query.limit);
+        var offSetAux = parseInt(req.query.offset);
+        //Variables del recurso:
+        var publicAux = req.query["public-school"]
+        var privateAux = req.query["private-school"];
+        var charterAux = req.query["charter-school"];
+        if(Number.isInteger(yearAux)){
+            if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                console.log(Date() + " - GET /graduation-rates?year="+yearAux+"&limit="+limitAux+"&offset="+offSetAux);
+                db.find({"year": yearAux}).skip(offSetAux).limit(limitAux).toArray((err, graduationRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    res.send(graduationRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }else{
+                console.log(Date() + " - GET /graduation-rates?year="+yearAux);
+                db.find({"year": yearAux}).toArray((err, graduationRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    res.send(graduationRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }
+        }else if(Number.isInteger(startYear) && Number.isInteger(endYear)){
+            if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                console.log(Date() + " - GET /graduation-rates?from="+startYear+"&to="+endYear+"&limit="+limitAux+"&offset="+offSetAux);
+                db.find({"year": { $gte: startYear, $lte: endYear }}).skip(offSetAux).limit(limitAux).toArray((err, doc) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (doc.length == 0) {
+                        res.sendStatus(404);
+                         console.error(" Error 404");
+                        return;
+                    }
+                    res.send(doc.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }else{
+                console.log(Date() + " - GET /graduation-rates?from="+startYear+"&to="+endYear);
+                db.find({"year": {$gte:startYear , $lte:endYear}}).toArray((err, doc) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (doc.length == 0) {
+                        res.sendStatus(404);
+                         console.error(" Error 404");
+                        return;
+                    }
+                    res.send(doc.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }
+        }else{
+            if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                console.log(Date() + " - GET /graduation-rates?limit="+limitAux+"&offset="+offSetAux);
+                db.find({}).skip(offSetAux).limit(limitAux).toArray((err, graduationRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    res.send(graduationRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }else{
+                if(!(publicAux === undefined)){
+                    publicAux = parseFloat(publicAux);
+                    console.log(Date() + " - GET /graduation-rates?publicS="+publicAux);
+                    db.find({"public-shool": {$gte: publicAux}}).toArray((err, graduationRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(graduationRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else if(!(privateAux === undefined)){
+                    privateAux = parseFloat(privateAux);
+                    console.log(Date() + " - GET /graduation-rates?privateS="+privateAux);
+                    db.find({"private-school": {$gte: privateAux}}).toArray((err, graduationRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(graduationRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else if(!(charterAux === undefined)){
+                    charterAux = parseFloat(charterAux);
+                    console.log(Date() + " - GET /graduation-rates?charterS="+charterAux);
+                    db.find({"charter-school": {$gte: charterAux}}).toArray((err, graduationRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(graduationRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                
+                }else{
+                    console.log(Date() + " - GET /graduation-rates");
+                    db.find({}).toArray((err, graduationRates) => {
+                        if (err) {
+                            console.error(" Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        res.send(graduationRates.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }
+            }
+        }
+    });
+
+   app.post(BASE_API_PATH + "/graduation-rates", (req, res) => {
+        console.log(Date() + " - POST /graduation-rates");
+        var data = req.body;
+        var auxiliar = false;
+        
+       if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
+            !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
+            res.sendStatus(400);
+            return;
+            }
+       db.find({ "province": data["province"] ,  "year": data["year"] }).toArray((err, datas) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            if (datas.length > 0) {
+                auxiliar = true;
+                res.sendStatus(409);
+                 console.error(" Error 409");
+                return;
+            }
+            if (datas.length == 0) {
+                db.insertOne(data, (err, numUpdated) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    console.log("Insert: " + numUpdated);
+                    res.sendStatus(201);
+                     console.error(" 201");
+                });
+            }
+        });
+
+    });
+
+    //Al hacer un put a un recurso no concreto envía un código de error
+    app.put(BASE_API_PATH+"/graduation-rates",(req,res)=>{
+    console.log(Date() + " - PUT /graduation-rates");
+    res.sendStatus(405);
+     console.error(" Error 405");
+});
+
+    app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
+    console.log(Date() + " - DELETE /graduation-rates");
+    db.remove({});
+    res.sendStatus(200);
+     console.error(" 200");
+});
+
+    //Recursos concretos
+    app.get(BASE_API_PATH + "/graduation-rates/:province", (req, res) => {
+        //Variable que se pasa como parámetro en la URL
+        var provinceAux = req.params.province;
+        //La transformamos en un int para luego comprobar si es un año o no
+        var aux = parseInt(provinceAux);
+        //Variables para el intervalo de años
+        var startYear = parseInt(req.query.from);
+        var endYear = parseInt(req.query.to);
+        //Variables para la paginación
+        var limitAux = parseInt(req.query.limit);
+        var offSetAux = parseInt(req.query.offset);
+        //Variables del recurso:
+        var publicAux = req.query["public-school"]
+        var privateAux = req.query["private-school"];
+        var charterAux = req.query["charter-school"];
+        
+        
+       if(Number.isInteger(aux)){
+            if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                console.log(Date() + " - GET /graduation-rates/" + aux+"?limit="+limitAux+"&offset="+offSetAux);
+                db.find({ "year": aux }).skip(offSetAux).limit(limitAux).toArray((err, datas) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (datas.length == 0) {
+                        res.sendStatus(404);
+                         console.error(" Error 404");
+                        return;
+                    }
+                    res.send(datas.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }else{
+                console.log(Date() + " - GET /graduation-rates/" + aux);
+                db.find({ "year": aux }).toArray((err, datas) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (datas.length == 0) {
+                        res.sendStatus(404);
+                         console.error(" Error 404");
+                        return;
+                    }
+                    res.send(datas.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+            }
+       }else{
+            if(Number.isInteger(startYear) && Number.isInteger(endYear)){
+                if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                    console.log(Date() + " - GET /graduation-rates/" + provinceAux+"?from="+startYear+"&to="+endYear+"&limit="+limitAux+"&offset="+offSetAux);
+                    db.find({"year": {$gte:startYear, $lte:endYear}, "province": provinceAux}).skip(offSetAux).limit(limitAux).toArray((err, datas) => {
+                        if (err) {
+                            console.error("Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        if (datas.length == 0) {
+                            res.sendStatus(404);
+                             console.error(" Error 404");
+                            return;
+                        }
+                        res.send(datas.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else{
+                    console.log(Date() + " - GET /graduation-rates/" + provinceAux+"?from="+startYear+"&to="+endYear);
+                    db.find({"year": {$gte:startYear, $lte:endYear}, "province": provinceAux}).toArray((err, datas) => {
+                        if (err) {
+                            console.error("Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        if (datas.length == 0) {
+                            res.sendStatus(404);
+                             console.error(" Error 404");
+                            return;
+                        }
+                        res.send(datas.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }
+            }else{
+                if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
+                    console.log(Date() + " - GET /graduation-rates/" + provinceAux+"?limit="+limitAux+"&offset="+offSetAux);
+                    db.find({ "province": provinceAux }).skip(offSetAux).limit(limitAux).toArray((err, datas) => {
+                        if (err) {
+                            console.error("Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        if (datas.length == 0) {
+                            res.sendStatus(404);
+                             console.error(" Error 404");
+                            return;
+                        }
+                        res.send(datas.map((c) => {
+                            delete c._id; //Quitamos el campo id
+                            return c;
+                        }));
+                    });
+                }else{
+                     if(!(publicAux === undefined)){
+                        publicAux = parseFloat(publicAux);
+                        console.log(Date() + " - GET /graduation-rates/" + provinceAux + "?public-school=" + publicAux);
+                        db.find({ "province": provinceAux, "public-school": {$gte: publicAux}}).toArray((err, datas) => {
+                            if (err) {
+                                console.error("Error accesing DB");
+                                res.sendStatus(500);
+                                return;
+                            }
+                            if (datas.length == 0) {
+                                res.sendStatus(404);
+                                 console.error(" Error 404");
+                                return;
+                            }
+                            res.send(datas.map((c) => {
+                                delete c._id; //Quitamos el campo id
+                                return c;
+                            }));
+                        });
+                    }else if(!(privateAux === undefined)){
+                        privateAux = parseFloat(privateAux);
+                        console.log(Date() + " - GET /graduation-rates/" + provinceAux + "?private-school="+privateAux);
+                        db.find({ "province": provinceAux, "private-school": {$gte: privateAux}}).toArray((err, datas) => {
+                            if (err) {
+                                console.error("Error accesing DB");
+                                res.sendStatus(500);
+                                return;
+                            }
+                            if (datas.length == 0) {
+                                res.sendStatus(404);
+                                 console.error(" Error 404");
+                                return;
+                            }
+                            res.send(datas.map((c) => {
+                                delete c._id; //Quitamos el campo id
+                                return c;
+                            }));
+                        });
+                    }else if(!(charterAux === undefined)){
+                        charterAux = parseFloat(charterAux);
+                        console.log(Date() + " - GET /graduation-rates/" + provinceAux + "?charter-school="+charterAux);
+                        db.find({ "province": provinceAux, "charter-school": {$gte: charterAux}}).toArray((err, datas) => {
+                            if (err) {
+                                console.error("Error accesing DB");
+                                res.sendStatus(500);
+                                return;
+                            }
+                            if (datas.length == 0) {
+                                res.sendStatus(404);
+                                 console.error(" Error 404");
+                                return;
+                            }
+                            res.send(datas.map((c) => {
+                                delete c._id; //Quitamos el campo id
+                                return c;
+                            }));
+                        });
+                    
+                    }else{
+                        console.log(Date() + " - GET /graduation-rates/" + provinceAux);
+                        db.find({ "province": provinceAux }).toArray((err, datas) => {
+                            if (err) {
+                                console.error("Error accesing DB");
+                                res.sendStatus(500);
+                                return;
+                            }
+                            if (datas.length == 0) {
+                                res.sendStatus(404);
+                                 console.error(" Error 404");
+                                return;
+                            }
+                            res.send(datas.map((c) => {
+                                delete c._id; //Quitamos el campo id
+                                return c;
+                            }));
+                        });
+                    }
+                }
+            }
+       }
+    });
+    
+    app.get(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
+        var provinceAux = req.params.province;
+        var yearStringToProvince = req.params.year;
+        var aux = parseInt(provinceAux);
+        var yearAux = parseInt(req.params.year)
+        if(Number.isInteger(aux)){
+            console.log(Date() + " - GET /graduation-rates/" + aux+"/"+yearStringToProvince);
+            db.find({ "year": aux, "province": yearStringToProvince }).toArray((err, datas) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (datas.length == 0) {
+                    res.sendStatus(404);
+                     console.error(" Error 404");
+                    return;
+                }
+                res.send(datas.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+            });
+        }else{
+            console.log(Date() + " - GET /graduation-rates/" + provinceAux+"/"+yearAux);
+            db.find({ "province": provinceAux, "year": yearAux }).toArray((err, datas) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (datas.length == 0) {
+                    res.sendStatus(404);
+                     console.error(" Error 404");
+                    return;
+                }
+                res.send(datas.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                })[0]);
+            });
+        }
+    });
+
+//DELETES 
+app.delete(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
+    var province = req.params.province;
+    console.log(Date() + " - DELETE /graduation-rates/"+province);
+    
+    db.remove({"province": province });
+    res.sendStatus(200);
+});
+
+app.delete(BASE_API_PATH+"/graduation-rates/:year",(req,res)=>{
+    var year = parseInt(req.params.year);
+    console.log(Date() + " - DELETE /graduation-rates/"+year);
+    db.remove({"year": year });
+    res.sendStatus(200);
+});
+
+app.delete(BASE_API_PATH+"/graduation-rates/:province/:year",(req,res)=>{
+    var province = req.params.province;
+    var year = parseInt(req.params.year);
+    console.log(Date() + " - DELETE /graduation-rates/"+province+ "/"+ year);
+ 
+    db.remove({ "province": province, "year":year });
+    res.sendStatus(200);
+});
+
+//POST FALLO EN CONCRETO
+app.post(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
+    var province = req.params.province;
+    console.log(Date() + " - POST /graduation-rates/"+province);
+    res
+    .sendStatus(405);
+     console.error(" Error 405");
+});
+app.post(BASE_API_PATH+"/graduation-rates/:year",(req,res)=>{
+    var year= req.params.year;
+    console.log(Date() + " - POST /graduation-rates/"+year);
+    res.sendStatus(405);
+     console.error(" Error 405");
+});
+app.post(BASE_API_PATH+"/graduation-rates/:province/:year",(req,res)=>{
+    var province = req.params.province;
+    var year = req.params.year;
+    console.log(Date() + " - POST /graduation-rates/"+province+"/"+year);
+    res.sendStatus(405);
+     console.error(" Error 405");
+});
+   app.put(BASE_API_PATH + "/graduation-rates/:province/:year", (req, res) => {
+        var province = req.params.province;
+        var year = parseInt(req.params.year);
+        var data = req.body;
+        console.log(Date() + " - PUT /graduation-rates/" + province);
+        
+        if (province != data.province ||Object.keys(data).length > 5 || year != parseInt(data.year)||
+            !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school"))
+             {
+            res.sendStatus(400);
+             console.error(" Error 400");
+            return;
+        }
+        var i;
+        for(i=0;i<Object.keys(data).length;i++){
+            if(data[i]==null){
+             res.sendStatus(400);
+             console.error(" Error 400");
+            return;
+            }
+        }
+        var yearAux = parseInt(data.year);
+        db.update({ "province": data.province, "year": yearAux }, data, (err,numUpdated) => {
+            console.log("Updated: " + numUpdated);
+        
+        });
+        res.sendStatus(200);
+    });
+    //PUT NO CONCRETO
+app.put(BASE_API_PATH+"/graduation-rates/:province",(req,res)=>{
+    console.log(Date() + " - PUT /graduation-rates");
+    res.sendStatus(405);
+     console.error(" Error 405");
+    });
+app.put(BASE_API_PATH+"/graduation-rates/:year",(req,res)=>{
+    console.log(Date() + " - PUT /graduation-rates");
+    res.sendStatus(405);
+     console.error(" Error 405");
+    });
+}
+
+
+
+
+
+//v1
+
+/*
 //OPERACIONES GENERALES
 //GETS
 //GET CON PAGINACION
@@ -129,7 +674,7 @@ app.delete(BASE_API_PATH+"/graduation-rates",(req,res)=>{
 -------------------
 -------------------
 -------------------
-*/
+
 
 //Recursos SEMI concretos
 
@@ -566,6 +1111,7 @@ app.put(BASE_API_PATH+"/graduation-rates/:year",(req,res)=>{
     res.sendStatus(405);
     });
 }
-
+*/
 
 //################### Fin API REST de Andrés:
+

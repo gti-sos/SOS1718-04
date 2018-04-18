@@ -12,6 +12,7 @@ var medicalAttentionRates = require("./medical-attention-rates");
 var port = (process.env.PORT || 1607);
 var port1 = 1608;
 var BASE_API_PATH = "/api/v1";
+var BASE_API_PATH2 = "/api/v2";
 
 //URL de las bases de datos:
 var mdbURLUnemploymentRates = "mongodb://crirompov:crirompov-password-10@ds221339.mlab.com:21339/crirompov-unemployment-rates";
@@ -510,7 +511,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
     });
 
     //Métodos loadInitialData:
-    app.get(BASE_API_PATH + "/graduation-rates/loadInitialData", (req, res) => {
+    app.get(BASE_API_PATH2 + "/graduation-rates/loadInitialData", (req, res) => {
         console.log(Date() + " - GET /graduation-rates/loadInitialData");
         dbGraduation.find({}).toArray((errs, graduationRatesAux) => {
             if (errs) {
