@@ -12,24 +12,26 @@
     <tbody>
         <tr>
             <td><input class="form-control" ng-model="newMedicalAttentionRate.province" /></td>
-            <td><input class="form-control" ng-model="newMedicalAttentionRate.year" /></td>
-            <td><input class="form-control" ng-model="newMedicalAttentionRate['general-medicine']" /></td>
-            <td><input class="form-control" ng-model="newMedicalAttentionRate['nursing']" /></td>
-            <td><input class="form-control" ng-model="newMedicalAttentionRate['social-work']" /></td>
+            <td><input class="form-control" type=number ng-model="newMedicalAttentionRate.year" /></td>
+            <td><input class="form-control" type=number ng-model="newMedicalAttentionRate['general-medicine']" /></td>
+            <td><input class="form-control" type=number ng-model="newMedicalAttentionRate['nursing']" /></td>
+            <td><input class="form-control" type=number ng-model="newMedicalAttentionRate['social-work']" /></td>
             <td><button class="button btn-primary" ng-click="addMedicalAttentionRate()">
                 Add
             </button></td>
         </tr>
         <tr ng-repeat="medicalAttentionRate in medicalAttentionRates">
-            <td>{{medicalAttentionRate}}</td>
             <td>{{medicalAttentionRate.province}}</td>
             <td>{{medicalAttentionRate.year}}</td>
             <td>{{medicalAttentionRate["general-medicine"]}}</td>
             <td>{{medicalAttentionRate["nursing"]}}</td>
             <td>{{medicalAttentionRate["social-work"]}}</td>
+            <td><button class="button btn-danger" ng-click="deleteMedicalAttentionRate(medicalAttentionRate.province,medicalAttentionRate.year)">
+                Delete
+            </button></td>
         </tr>
 
     </tbody>
 </table>
 Status:
-<h8><i>{{medicalAttentionRates}}</i></h8>
+<h8><i>{{status}}</i></h8>

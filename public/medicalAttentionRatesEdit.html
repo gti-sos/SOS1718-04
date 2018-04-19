@@ -1,0 +1,30 @@
+<h1>Edit Medical Attention Rates</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Province</th>
+            <th>Year</th>
+            <th>Nursing</th>
+            <th>General Medicine</th>
+            <th>Social Work</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{updatedMedicalAttentionRate.province}}</td>
+            <td><input class="form-control" type=number ng-model="updatedMedicalAttentionRate.year" /></td>
+            <td><input class="form-control" type=number ng-model="updatedMedicalAttentionRate['general-medicine']" /></td>
+            <td><input class="form-control" type=number ng-model="updatedMedicalAttentionRate['nursing']" /></td>
+            <td><input class="form-control" type=number ng-model="updatedMedicalAttentionRate['social-work']" /></td>
+            <td><button class="button btn-primary" ng-click="updateMedicalAttentionRate()">
+                Update
+            </button></td>
+        </tr>
+    </tbody>
+</table>
+<h8><i>
+    {{updatedMedicalAttentionRate}}
+</i></h8>
+Status:
+<h8><i>{{status}}</i></h8>

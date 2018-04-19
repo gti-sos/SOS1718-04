@@ -305,21 +305,7 @@ medicalAttentionRates.register = function(app, db) {
         var medicalAttentionRate = req.body;
         var idAux = "";
 
-        db.find({}).toArray((err, medicalAttentionRates) => {
-            if (err) {
-                console.error("Error accesing DB");
-                res.sendStatus(500);
-                return;
-            }
-            //console.log(medicalAttentionRates);
-            //console.log("_id ="+medicalAttentionRates.filter(c => c.province == province & c.year == year)[0]["_id"]); //[0] para que no devuelva un array
-            idAux = medicalAttentionRates.filter(c => c.province == province & c.year == year)[0]["_id"];
-
-        });
-        //añadiendo prueba codigo
-
-        //console.log("el id" + medicalAttentionRate._id);
-
+        console.log(req.body);
         console.log(Date() + " - PUT /medical-attention-rates/" + province);
 
         if (province != medicalAttentionRate.province || year != medicalAttentionRate.year) {
