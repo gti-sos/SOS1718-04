@@ -303,7 +303,7 @@ medicalAttentionRates.register = function(app, db) {
         var province = req.params.province;
         var year = parseInt(req.params.year);
         var medicalAttentionRate = req.body;
-        var idAux = "";
+       // var idAux = "";
 
         console.log(req.body);
         console.log(Date() + " - PUT /medical-attention-rates/" + province);

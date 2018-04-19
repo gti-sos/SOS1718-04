@@ -2,7 +2,7 @@
 angular
     .module("MedicalAttentionRatesApp")
     .controller("medicalAttentionRatesEditCtrl", ["$scope", "$http","$routeParams", function($scope, $http, $routeParams) {
-        console.log("ListCtrl initialized!");
+        console.log("EditCtrl initialized!");
         var URL = "/api/v1/medical-attention-rates/"+$routeParams.province+"/"+$routeParams.year;
         
         $http.get(URL).then(function (response){
@@ -10,7 +10,7 @@ angular
         });
         
         $scope.updateMedicalAttentionRate = function (){
-            $http.put(URL,$scope.updateMedicalAttentionRate).then(function (response){
+            $http.put(URL,$scope.updatedMedicalAttentionRate).then(function (response){
                 $scope.status = "Status: " + response.status;
             });
         };
