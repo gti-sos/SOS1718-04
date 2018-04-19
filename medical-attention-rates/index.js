@@ -2,6 +2,7 @@ var medicalAttentionRates = {};
 //SUBETE A GITHUB
 
 var BASE_API_PATH = "/api/v1";
+var BASE_API_PATH2 = "/api/v2";
 module.exports = medicalAttentionRates;
 
 medicalAttentionRates.register = function(app, db) {
