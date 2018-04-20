@@ -8,6 +8,11 @@ angular
         $scope.addMedicalAttentionRate = function(){
             $http.post(api,$scope.newMedicalAttentionRate).then(function (response){ //newMedicalAttentionRate mete en scope este objeto
                 $scope.status = response.status;
+                if($scope.status===201){
+                        window.alert("El dato se ha introducido correctamente");
+                }else{
+                        window.alert("El dato no se ha introducido correctamente");
+                }
                 console.log(JSON.stringify(response,null,2));
                 getMedicalAttentionRates();
             });
@@ -16,6 +21,14 @@ angular
         $scope.deleteMedicalAttentionRate = function(province,year){
             console.log("Medical Attention Rate to be deleted: "+province + year);
             $http.delete(api+"/"+province+"/"+year).then(function(response){
+                $scope.status = "Status: " + response.status;
+                getMedicalAttentionRates();
+            });
+        }
+        
+        $scope.deleteAllMedicalAttentionRate = function(){
+            console.log("Medical Attention Rate to be deleted: ");
+            $http.delete(api).then(function(response){
                 $scope.status = "Status: " + response.status;
                 getMedicalAttentionRates();
             });

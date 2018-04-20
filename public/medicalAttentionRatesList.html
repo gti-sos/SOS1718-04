@@ -1,4 +1,4 @@
-<table class="table">
+<table class=" table table-hover table-condensed table-bordered">
     <thead>
         <tr>
             <th>Province</th>
@@ -16,12 +16,12 @@
             <td><input class="form-control" type=number ng-model="newMedicalAttentionRate['general-medicine']" /></td>
             <td><input class="form-control" type=number ng-model="newMedicalAttentionRate['nursing']" /></td>
             <td><input class="form-control" type=number ng-model="newMedicalAttentionRate['social-work']" /></td>
-            <td><button class="button btn-primary" ng-click="addMedicalAttentionRate()">
+            <td><button class="button btn-primary btn-block" ng-click="addMedicalAttentionRate()">
                 Add
             </button></td>
         </tr>
         <tr ng-repeat="medicalAttentionRate in medicalAttentionRates">
-            <td>{{medicalAttentionRate.province}}</td>
+            <td><a href="medicalAttentionRatesApp.html#!/medicalAttentionRate/{{medicalAttentionRate.province}}/{{medicalAttentionRate.year}}">{{medicalAttentionRate.province}}</td>
             <td>{{medicalAttentionRate.year}}</td>
             <td>{{medicalAttentionRate["general-medicine"]}}</td>
             <td>{{medicalAttentionRate["nursing"]}}</td>
@@ -29,9 +29,10 @@
             <td><button class="button btn-danger" ng-click="deleteMedicalAttentionRate(medicalAttentionRate.province,medicalAttentionRate.year)">
                 Delete
             </button></td>
-        </tr>
-
-    </tbody>
-</table>
-Status:
-<h8><i>{{status}}</i></h8>
+            </tr>
+        </tbody>
+    </table>
+    <div class="col text-center">
+       <button class="btn btn-danger" ng-click="deleteAllMedicalAttentionRate()"> Delete All</button>
+    </div> 
+    <h8><i>{{status}}</i></h8>
