@@ -1,0 +1,49 @@
+<h1>Unemployment rates List</h1>
+<table class = "table">
+    <thead>
+        <tr>
+            <th>Province</th>
+            <th>Year</th>
+            <th>Illiterate</th>
+            <th>First grade</th>
+            <th>Second grade</th>
+            <th>Third degree</th>
+            <th>Min age</th>
+            <th>Max age</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr>
+            <td><input class="form-control" ng-model="newUnemploymentRate.province"/></td>
+            <td><input type="number" class="form-control" ng-model="newUnemploymentRate.year"/></td>
+            <td><input type="number" class="form-control" ng-model="newUnemploymentRate['illiterate']"/></td>
+            <td><input type="number" class="form-control" ng-model="newUnemploymentRate['first-grade']"/></td>
+            <td><input type="number" class="form-control" ng-model="newUnemploymentRate['second-grade']"/></td>
+            <td><input type="number" class="form-control" ng-model="newUnemploymentRate['third-degree']"/></td>
+            <td><input type="number" class="form-control" ng-model="newUnemploymentRate['min-age']"/></td>
+            <td><input type="number" class="form-control" ng-model="newUnemploymentRate['max-age']"/></td>
+            <td><button class="button btn-primary" ng-click="addUnemploymentRate()">
+                Add
+            </button></td>
+        </tr>
+        <tr ng-repeat="unemploymentRate in unemploymentRates">
+            <td><a href="/unemploymentRatesApp.html#!/unemploymentRates/{{unemploymentRate.province}}/{{unemploymentRate.year}}">{{unemploymentRate.province}}</a></td>
+            <td>{{unemploymentRate.year}}</td>
+            <td>{{unemploymentRate["illiterate"]}}</td>
+            <td>{{unemploymentRate["first-grade"]}}</td>
+            <td>{{unemploymentRate["second-grade"]}}</td>
+            <td>{{unemploymentRate["third-degree"]}}</td>
+            <td>{{unemploymentRate["min-age"]}}</td>
+            <td>{{unemploymentRate["max-age"]}}</td>
+            <td><button class="button btn-danger" ng-click="deleteUnemploymentRate(unemploymentRate.province, unemploymentRate.year)">Delete</button></td>
+        </tr>
+        <tr>
+            <td><button class="button btn-danger" ng-click="deleteUnemploymentRates()">Delete All</button></td>
+        </tr>
+    </tbody>
+    
+</table>
+<hr/>
+<h8><i>{{status}}</i></h8>
