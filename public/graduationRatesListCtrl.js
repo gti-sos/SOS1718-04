@@ -9,13 +9,16 @@ angular.module("GraduationRatesApp")
                     $scope.status= "Status: "+ response.status;
                     getStadistics();
                 },function(){
-                    if($scope.length!=5){
+                    if(Object.keys($scope.newStadistic).length!=5){
+                        console.log(Object.keys($scope).length)
                     $scope.status="Error 400: debe completar todos los campos"
                     }else{
                     $scope.status="Error 409: la estadistica ya existe"
                     }
+                   
             });
-            }
+               getStadistics();
+        }
              $scope.deleteStadistic= function(province, year){
                 console.log("Stadistic to be delete :" + province,year);
                 $http.delete(api+"/"+province+"/"+year).then(function (response){
@@ -24,7 +27,7 @@ angular.module("GraduationRatesApp")
                 });
                  getStadistics();
             }
-            $scope.deleteStadistics= function(){
+             $scope.deleteStadistics= function(){
                 console.log("all stadistic will be delete" );
                 $http.delete(api+"/").then(function (response){
                     $scope.status= "Status: "+ response.status;
@@ -32,14 +35,14 @@ angular.module("GraduationRatesApp")
                 });
                  getStadistics();
             }
-      
             function getStadistics(){
                 $http.get(api).then(function (response){
                     $scope.stadistics = response.data;
                 });
+                 
             }
-           
             
-            getStadistics();
+             getStadistics();
+           
             
         }]);
