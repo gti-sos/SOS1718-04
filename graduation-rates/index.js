@@ -185,6 +185,7 @@ var BASE_API_PATH1 = "/api/v1";
        if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
+            console.error("Error 400");
             return;
             }
        db.find({ "province": data["province"] ,  "year": data["year"] }).toArray((err, datas) => {
@@ -196,7 +197,7 @@ var BASE_API_PATH1 = "/api/v1";
             if (datas.length > 0) {
                 auxiliar = true;
                 res.sendStatus(409);
-                 console.error(" Error 409");
+                console.error(" Error 409");
                 return;
             }
             if (datas.length == 0) {
@@ -529,19 +530,20 @@ app.post(BASE_API_PATH+"/graduation-rates/:province/:year",(req,res)=>{
              console.error(" Error 400");
             return;
         }
-        var i;
-        for(i=0;i<Object.keys(data).length;i++){
-            if(data[i]==null){
-             res.sendStatus(400);
-             console.error(" Error 400");
+          
+        if(data["province"]==null||data["year"]==null||data["public-school"]==null||
+            data["private-school"]==null||data["charter-school"]==null){
+            res.sendStatus(400);
+            console.error("Error 400");
             return;
-            }
         }
+            
         var yearAux = parseInt(data.year);
         db.update({ "province": data.province, "year": yearAux }, data, (err,numUpdated) => {
             console.log("Updated: " + numUpdated);
         
         });
+       
         res.sendStatus(200);
     });
     //PUT NO CONCRETO
