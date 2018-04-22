@@ -15,7 +15,16 @@ angular
             $http.put(unemploymentRatesURL,$scope.updatedUnemploymentRate).then(function (response){
                 $scope.status = "Status: " + response.status;
                 $location.path("/");
-            });
+            },function(){
+                    if($scope.unemploymentRatesURL["illiterate"]==null||
+                    $scope.unemploymentRatesURL["first-grade"]==null||
+                    $scope.unemploymentRatesURL["second-grade"]==null||
+                    $scope.unemploymentRatesURL["third-degree"]==null||
+                    $scope.unemploymentRatesURL["min-age"]==null||
+                    $scope.unemploymentRatesURL["max-age"]==null){
+                    $scope.status="Error 400: debe completar todos los campos"
+                    }
+                    });
         };
 
 
