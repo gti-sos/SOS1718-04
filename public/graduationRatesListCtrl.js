@@ -12,8 +12,8 @@ angular.module("GraduationRatesApp")
                     if($scope.newStadistic["public-school"]==null||
                     $scope.newStadistic["private-school"]==null||
                     $scope.newStadistic["charter-school"]==null||
-                    $scope.newStadistic["province"]==null||
-                    $scope.newStadistic["year"]==null){
+                    $scope.newStadistic.province==null||
+                    $scope.newStadistic.year==null){
                     $scope.status="Error 400: debe completar todos los campos"
                     }else{
                     $scope.status="Error 409: la estadistica ya existe"
