@@ -181,8 +181,9 @@ var BASE_API_PATH1 = "/api/v1";
         console.log(Date() + " - POST /graduation-rates");
         var data = req.body;
         var auxiliar = false;
-        
-       if (Object.keys(data).length > 5 ||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
+        console.log(data.province)
+       if (Object.keys(data).length >5 ||data["province"]==null||data["year"]==null||
+       data["public-school"]==null||data["private-school"]==null||data["charter-school"]==null||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
             console.error("Error 400");
