@@ -9,12 +9,16 @@ angular.module("GraduationRatesApp")
                 $scope.updateStadistic= function(){
                 $http.put(stadisticUrl,$scope.updatedStadistic).then(function (response){
                     $scope.status= "Status: "+ response.status;
+                    console.log(Object.keys($scope.updatedStadistic).length)
                     $location.path("/");
                 },function(){
-                    if(Object.keys($scope.updatedStadistic).length!=5){
+                    if($scope.updatedStadistic["public-school"]==null||
+                    $scope.updatedStadistic["private-school"]==null||
+                    $scope.updatedStadistic["charter-school"]==null){
                     $scope.status="Error 400: debe completar todos los campos"
                     }
                     });
             }
+            
             
         }]);

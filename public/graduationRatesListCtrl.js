@@ -1,4 +1,4 @@
-/*global angular*/
+ /*global angular*/
 angular.module("GraduationRatesApp")
   .controller("graduationRatesListCtrl", ["$scope","$http", function($scope,$http) {
             console.log("List Ctrl initialized!");
@@ -9,8 +9,11 @@ angular.module("GraduationRatesApp")
                     $scope.status= "Status: "+ response.status;
                     getStadistics();
                 },function(){
-                    if(Object.keys($scope.newStadistic).length!=5){
-                        console.log(Object.keys($scope).length)
+                    if($scope.newStadistic["public-school"]==null||
+                    $scope.newStadistic["private-school"]==null||
+                    $scope.newStadistic["charter-school"]==null||
+                    $scope.newStadistic["province"]==null||
+                    $scope.newStadistic["year"]==null){
                     $scope.status="Error 400: debe completar todos los campos"
                     }else{
                     $scope.status="Error 409: la estadistica ya existe"
