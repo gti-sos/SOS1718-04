@@ -1,4 +1,4 @@
- /*global angular*/
+/*global angular*/
 angular.module("GraduationRatesApp")
   .controller("graduationRatesListCtrl", ["$scope","$http", function($scope,$http) {
             console.log("List Ctrl initialized!");
