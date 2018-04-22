@@ -16,7 +16,7 @@ angular.module("UnemploymentRatesApp")
                     }
             });
             }
-             $scope.deleteUnemploymentRate= function(province, year){
+             $scope.deleteUnemploymentRate = function(province, year){
                 console.log("Unemployment rate to be delete :" + province,year);
                 $http.delete(api+"/"+province+"/"+year).then(function (response){
                     $scope.status= "Status: "+ response.status;
@@ -24,7 +24,7 @@ angular.module("UnemploymentRatesApp")
                 });
                  getUnemploymentRates();
             }
-            $scope.deleteStadistics= function(){
+            $scope.deleteUnemploymentRates = function(){
                 console.log("all unemployment rates will be delete" );
                 $http.delete(api+"/").then(function (response){
                     $scope.status= "Status: "+ response.status;
