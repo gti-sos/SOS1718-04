@@ -6,7 +6,7 @@ angular.module("GraduationRatesApp")
              
              $scope.addStadistic= function(){
                 $http.post(api,$scope.newStadistic).then(function (response){
-                    $scope.status= "Status: "+ response.status + "Estadistica añadida";
+                    $scope.status= "Status: "+ response.status + ", Estadistica añadida";
                     getStadistics();
                 },function(){
                     if($scope.newStadistic["public-school"]==null||
