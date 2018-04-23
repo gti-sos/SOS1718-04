@@ -29,6 +29,7 @@ angular
                 console.log(response.status);
                 if(response.status ===400){
                     $scope.status = "Status : " + response.status + "fallo al introducir datos";
+                    window.alert("El dato no se ha introducido correctamente.");
                 }
             });
             getMedicalAttentionRates()
