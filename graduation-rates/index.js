@@ -182,7 +182,7 @@ var BASE_API_PATH1 = "/api/v1";
         var data = req.body;
         var auxiliar = false;
         console.log(data.province)
-       if (Object.keys(data).length >5 ||data["province"]==null||data["year"]==null||
+       if (Object.keys(data).length >5 ||data["province"]==""||data["year"]==null||
        data["public-school"]==null||data["private-school"]==null||data["charter-school"]==null||!data.hasOwnProperty("province")|| !data.hasOwnProperty("year") ||
             !data.hasOwnProperty("public-school") || !data.hasOwnProperty("private-school") || !data.hasOwnProperty("charter-school")){
             res.sendStatus(400);
