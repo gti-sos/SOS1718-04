@@ -10,7 +10,7 @@ angular.module("GraduationRatesApp")
             $http.put(stadisticUrl, $scope.updatedStadistic).then(function(response) {
                 $scope.status = "Status: " + response.status;
                 console.log(Object.keys($scope.updatedStadistic).length)
-                window.alert("OK");
+                window.alert("OK: estadistica actualizada");
                 $location.path("/");
             }, function() {
                 if ($scope.updatedStadistic["public-school"] == null ||
