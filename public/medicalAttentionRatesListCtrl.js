@@ -22,7 +22,7 @@ angular
         */
         
         $scope.addMedicalAttentionRate = function() {
-            $htpp.post(api, $scope.newMedicalAttentionRate).then(function successCallback(response){
+            $http.post(api, $scope.newMedicalAttentionRate).then(function successCallback(response){
                 $scope.status = "Status : " + response.status + "Dato añadido correctamente";
                 getMedicalAttentionRates();
             }, function errorCallback(response) {
