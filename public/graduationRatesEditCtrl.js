@@ -12,12 +12,16 @@ angular.module("GraduationRatesApp")
                     console.log(Object.keys($scope.updatedStadistic).length)
                     $location.path("/");
                 },function(){
-                    if($scope.updatedStadistic["public-school"]==null||
-                    $scope.updatedStadistic["private-school"]==null||
-                    $scope.updatedStadistic["charter-school"]==null){
+                    if($scope.updatedStadistic["illiterate"]==null||
+                    $scope.updatedStadistic["first-grade"]==null||
+                    $scope.updatedStadistic["second-grade"]==null||
+                    $scope.updatedStadistic["third-degree"]==null||
+                    $scope.updatedStadistic["min-age"]==null||
+                    $scope.updatedStadistic["max-age"]==null){
                     $scope.status="Error 400: debe completar todos los campos"
                     }
                     });
+                    $location.path("/");
             }
             
             
