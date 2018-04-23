@@ -9,15 +9,20 @@ angular
             $scope.updatedUnemploymentRate = response.data;
         });
         
-        $scope.updateUnemploymentRate = function() {
-            $http.put(unemploymentRatesURL, $scope.updatedUnemploymentRate).then(function doneFilter(response) {
+        $scope.updateUnemploymentRate = function (){
+            $http.put(unemploymentRatesURL,$scope.updatedUnemploymentRate).then(function (response){
                 $scope.status = "Status: " + response.status;
+                 window.alert($scope.status +" El recurso se ha editado con exito, gracias!");
                 $location.path("/");
-                window.alert("El recurso se ha editado con exito, gracias!");
-            }, function failFilter(response) {
-                if (response.status == 400) {
-                    window.alert("Debes respetar los campos obligatorios gracias!");
-                }
+            },function(){
+                    if($scope.updatedUnemploymentRate["illiterate"]==null||
+                    $scope.updatedUnemploymentRate["first-grade"]==null||
+                    $scope.updatedUnemploymentRate["second-grade"]==null||
+                    $scope.updatedUnemploymentRate["third-degree"]==null||
+                    $scope.updatedUnemploymentRate["min-age"]==null||
+                    $scope.updatedUnemploymentRate["max-age"]==null){
+                    $scope.status="Error 400: debe completar todos los campos"
+                    }
             });
         };
 

@@ -4,11 +4,13 @@ angular
     .controller("medicalAttentionRatesListCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("ListCtrl initialized!");
         var api = "/api/v1/medical-attention-rates";
-
+        /*
         $scope.addMedicalAttentionRate = function(){
             $http.post(api,$scope.newMedicalAttentionRate).then(function (response){ //newMedicalAttentionRate mete en scope este objeto
                 $scope.status = response.status;
-                if($scope.status===201){
+        
+                
+                if($scope.MedicalAttentionRate===201){
                         window.alert("El dato se ha introducido correctamente");
                 }else{
                         window.alert("El dato no se ha introducido correctamente");
@@ -17,6 +19,23 @@ angular
                 getMedicalAttentionRates();
             });
         }
+        */
+        
+        $scope.addMedicalAttentionRate = function() {
+            $http.post(api, $scope.newMedicalAttentionRate).then(function successCallback(response){
+                $scope.status = "Status : " + response.status + "Dato añadido correctamente";
+                getMedicalAttentionRates();
+            }, function errorCallback(response) {
+                console.log(response.status);
+                if(response.status ===400){
+                    $scope.status = "Status : " + response.status + "fallo al introducir datos";
+                    window.alert("El dato no se ha introducido correctamente.");
+                }
+            });
+            getMedicalAttentionRates()
+        }
+        
+        
         
         $scope.deleteMedicalAttentionRate = function(province,year){
             console.log("Medical Attention Rate to be deleted: "+province + year);

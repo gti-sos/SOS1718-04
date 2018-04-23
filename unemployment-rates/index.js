@@ -571,9 +571,9 @@ unemploymentRates.register = function(app, db) {
         console.log(Date() + " - PUT /unemployment-rates/" + province + "/"+ yearAux);
         console.log(data);
         //Comprobamos si hay incongruencias en los datos antes de actuar
-        if (province != data.province || yearAux != data.province || !data.hasOwnProperty("year") || !data.hasOwnProperty("illiterate") ||
+        if (province != data.province || yearAux != parseInt(data.year) || !data.hasOwnProperty("year") || !data.hasOwnProperty("illiterate") ||
             !data.hasOwnProperty("first-grade") || !data.hasOwnProperty("second-grade") || !data.hasOwnProperty("third-degree") ||
-            !data.hasOwnProperty("min-age") || !data.hasOwnProperty("max-age") || yearAux != parseInt(data.year)
+            !data.hasOwnProperty("min-age") || !data.hasOwnProperty("max-age") 
             || data["province"]==null || data["year"]==null || data["illiterate"]==null || data["first-grade"]==null
              || data["second-grade"]==null || data["third-degree"]==null || data["min-age"]==null || data["max-age"]==null) {
             res.sendStatus(400);
