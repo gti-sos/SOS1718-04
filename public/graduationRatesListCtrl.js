@@ -26,16 +26,16 @@ angular.module("GraduationRatesApp")
                 console.log("Stadistic to be delete :" + province,year);
                 $http.delete(api+"/"+province+"/"+year).then(function (response){
                     $scope.status= " La estadistica ha sido eleminada";
-                    getStadistics()
                 });
-            
+             getStadistics()
             }
              $scope.deleteStadistics= function(){
                 console.log("all stadistic will be delete" );
                 $http.delete(api+"/").then(function (response){
                     $scope.status= "Todas las estadisticas han sido eliminadas";
-                    getStadistics()
+                   
                 });
+            getStadistics()
           
             }
              $scope.fromTo= function(){
