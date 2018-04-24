@@ -1,5 +1,5 @@
 /*global angular*/
-angular.module("GraduationRatesApp")
+angular.module("RoRoMonApp")
   .controller("graduationRatesListCtrl", ["$scope","$http", function($scope,$http) {
             console.log("List Ctrl initialized!");
             var api = "/api/v2/graduation-rates";

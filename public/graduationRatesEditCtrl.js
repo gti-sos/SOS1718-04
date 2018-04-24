@@ -1,5 +1,5 @@
 /*global angular*/
-angular.module("GraduationRatesApp")
+angular.module("RoRoMonApp")
     .controller("graduationRatesEditCtrl", ["$scope", "$http", "$routeParams", "$location", function($scope, $http, $routeParams, $location) {
         console.log("Edit Ctrl initialized!");
         var stadisticUrl = "/api/v2/graduation-rates/" + $routeParams.province + "/" + $routeParams.year;
@@ -11,7 +11,7 @@ angular.module("GraduationRatesApp")
                 $scope.status = "Status: " + response.status;
                 console.log(Object.keys($scope.updatedStadistic).length)
                 window.alert("OK: estadistica actualizada");
-                $location.path("/");
+                $location.path("/graduationRates");
             }, function() {
                 if ($scope.updatedStadistic["public-school"] == null ||
                     $scope.updatedStadistic["private-school"] == null ||

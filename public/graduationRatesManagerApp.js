@@ -1,13 +1,13 @@
 /*global angular*/
 angular
-    .module("GraduationRatesApp", ["ngRoute"])
+    .module("RoRoMonApp", ["ngRoute"])
         .config(function($routeProvider){
             $routeProvider
-                .when("/",{
+                .when("/graduationRates",{
                     templateUrl:"graduationRatesList.html",
                     controller: "graduationRatesListCtrl"
                 })
-                .when("/stadistic/:province/:year",{
+                .when("/graduationRates/stadistic/:province/:year",{
                     templateUrl:"graduationRatesEdit.html",
                     controller: "graduationRatesEditCtrl"
                 });
