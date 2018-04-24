@@ -6,7 +6,7 @@ angular.module("GraduationRatesApp")
              
              $scope.addStadistic= function(){
                 $http.post(api,$scope.newStadistic).then(function (response){
-                    $scope.status= "Status: "+ response.status + ", Estadistica añadida";
+                    $scope.status= " Estadistica añadida";
                   
                 },function(){
                     if($scope.newStadistic["public-school"]==null||
@@ -25,7 +25,7 @@ angular.module("GraduationRatesApp")
              $scope.deleteStadistic= function(province, year){
                 console.log("Stadistic to be delete :" + province,year);
                 $http.delete(api+"/"+province+"/"+year).then(function (response){
-                    $scope.status= "Status: "+ response.status +", La estadistica ha sido eleminada";
+                    $scope.status= " La estadistica ha sido eleminada";
                     getStadistics()
                 });
             
@@ -33,7 +33,7 @@ angular.module("GraduationRatesApp")
              $scope.deleteStadistics= function(){
                 console.log("all stadistic will be delete" );
                 $http.delete(api+"/").then(function (response){
-                    $scope.status= "Status: "+ response.status +", Todas las estadisticas han sido eliminadas";
+                    $scope.status= "Todas las estadisticas han sido eliminadas";
                     getStadistics()
                 });
           
