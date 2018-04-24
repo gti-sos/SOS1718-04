@@ -40,33 +40,50 @@ angular.module("GraduationRatesApp")
             }
              $scope.fromTo= function(){
                 console.log("from-to" );
-                $http.get(api+"?from="+$scope.fromToStadistic.year1+"&to="+$scope.fromToStadistic.year2)
+                /*$http.get(api+"?from="+$scope.fromToStadistic.year1+"&to="+$scope.fromToStadistic.year2)
                     .then(function (response){
                    
-                    getStadistics()
-                });
+                });*/
+                getStadistics()
           
             }
              var pag=0;
+             var numero;
              $scope.getStadisticsPagination=function(num){
-               
+                 numero=num;
+                  
                if(num==1){
                     pag=pag-10;
                     if(pag<0){
                             pag=0;
                             $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
                             $scope.stadistics = response.data;
-                            
+                            console.log("pagination1")
+                             numero=num;
+                             console.log(numero);
+                             getStadistics();
                             });
-                    }
-                $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
+                           
+                    }else{
+                        $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
                 $scope.stadistics = response.data;
+                  console.log("pagination2")
+                   numero=num;
+                    console.log(numero);
+                     getStadistics();
                 });
+                    }
                }else{
-                    pag=pag+10;
+                  
+                pag=pag+10;
                 $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
                 $scope.stadistics = response.data;
+                 console.log("pagination3")
+                  numero=num;
+                   console.log(numero);
+                    getStadistics();
                });
+               
                  
              }
             }
@@ -81,30 +98,44 @@ angular.module("GraduationRatesApp")
                     count =  count + 1
                 }
             }*/
-                  
-        getStadistics()
         
+       getStadistics()
+        
+         
             function getStadistics(){
-          
+               console.log(numero);
            if(($scope.fromToStadistic)!=null){
                 var year1= $scope.fromToStadistic.year1;
                 var year2= $scope.fromToStadistic.year2;
-               
-                $http.get(api+"?from="+year1
-                        +"&to="+year2+
+               console.log("1")
+               if($scope.fromToStadistic.year1===null && $scope.fromToStadistic.year2===null){
+                   console.log("1.1")
+                    $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
+                $scope.stadistics = response.data;
+                $scope.status= " ";
+                pag=0;
+                });
+               }else{
+                   console.log("1.2")
+                
+                $http.get(api+"?from="+year1+"&to="+year2+
                         "&limit="+10+"&offset="+pag).then(function (response){
                 $scope.stadistics = response.data;
-                 $scope.status= "Status: "+ response.status +", from "+$scope.fromToStadistic.year1
-                                                    + " to "+$scope.fromToStadistic.year2 ;
+                $scope.status= "from "+$scope.fromToStadistic.year1
+                        + " to "+$scope.fromToStadistic.year2 ;
                 });
-            
+               }
+             $scope.status= "";
            }else{
-               
-                $http.get(api+"?limit="+10+"&offset="+0).then(function (response){
+               if(numero == undefined){
+                    $http.get(api+"?from="+year1+"&to="+year2+
+                        "&limit="+10+"&offset="+pag).then(function (response){
                 $scope.stadistics = response.data;
-                });
-            
+            });
+               }
+              
            }
+          
         }
                         
     

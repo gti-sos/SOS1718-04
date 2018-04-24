@@ -72,11 +72,11 @@ var BASE_API_PATH1 = "/api/v1";
                         res.sendStatus(500);
                         return;
                     }
-                    if (doc.length == 0) {
+                    /*if (doc.length == 0) {
                         res.sendStatus(404);
-                         console.error(" Error 404");
+                         console.error(" holita crak ");
                         return;
-                    }
+                    }*/
                     res.send(doc.map((c) => {
                         delete c._id; //Quitamos el campo id
                         return c;
