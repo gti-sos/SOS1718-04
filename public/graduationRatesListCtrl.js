@@ -42,8 +42,7 @@ angular.module("GraduationRatesApp")
                 console.log("from-to" );
                 $http.get(api+"?from="+$scope.fromToStadistic.year1+"&to="+$scope.fromToStadistic.year2)
                     .then(function (response){
-                    $scope.status= "Status: "+ response.status +", from "+$scope.fromToStadistic.year1
-                                                    + " to "+$scope.fromToStadistic.year2 ;
+                   
                     getStadistics()
                 });
           
@@ -57,6 +56,7 @@ angular.module("GraduationRatesApp")
                             pag=0;
                             $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
                             $scope.stadistics = response.data;
+                            
                             });
                     }
                 $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
@@ -94,6 +94,8 @@ angular.module("GraduationRatesApp")
                         +"&to="+year2+
                         "&limit="+10+"&offset="+pag).then(function (response){
                 $scope.stadistics = response.data;
+                 $scope.status= "Status: "+ response.status +", from "+$scope.fromToStadistic.year1
+                                                    + " to "+$scope.fromToStadistic.year2 ;
                 });
             
            }else{
