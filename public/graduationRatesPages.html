@@ -33,17 +33,13 @@
         <tr>
             <td><button class="button btn-danger" ng-click="deleteStadistics()">Delete All</button></td>
         </tr>
-        <td><input class="button" type="number" placeholder = from class="form-control" ng-model="fromToStadistic.year1"/></td>
-        <td><input class="button" type="number" placeholder = to class="form-control" ng-model="fromToStadistic.year2"/></td>  
-        <td><button class="button btn-primary" ng-click="fromTo()">Submit</button></td>
+        
     </tbody>
 </table>
-    <!--<span ng-repeat="num in pag track by $index"> 
-        <td><a href="/GraduationRatesApp.html#!">{{num}}</a></li>*/
-    </span>-->
-    <span><button class="button" ng-click="getStadisticsPagination(1)"><<</button></span>
-    <span><button class="button" ng-click="getStadisticsPagination(2)">>></button></span>
-   
-   
+    <span ng-repeat="num in pag track by $index"> 
+        <td><a href="/GraduationRatesApp.html#!/page?{{num}}">{{num}}</a></li>
+    </span>
+     
+
 <hr/>
 <h8><i>{{status}}</i></h8>

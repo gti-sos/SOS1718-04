@@ -104,17 +104,35 @@ var BASE_API_PATH1 = "/api/v1";
         }else{
             if(Number.isInteger(limitAux) && Number.isInteger(offSetAux)){
                 console.log(Date() + " - GET /graduation-rates?limit="+limitAux+"&offset="+offSetAux);
-                db.find({}).skip(offSetAux).limit(limitAux).toArray((err, graduationRates) => {
+                
+                if(offSetAux>=0){
+                    db.find({}).skip(offSetAux).limit(limitAux).toArray((err, graduationRates) => {
                     if (err) {
                         console.error(" Error accesing DB");
                         res.sendStatus(500);
                         return;
                     }
+                    
                     res.send(graduationRates.map((c) => {
                         delete c._id; //Quitamos el campo id
                         return c;
                     }));
                 });
+                }else{
+                    db.find({}).skip(0).limit(limitAux).toArray((err, graduationRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    
+                    res.send(graduationRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                });
+                }
+                
             }else{
                 if(!(publicAux === undefined)){
                     publicAux = parseFloat(publicAux);
