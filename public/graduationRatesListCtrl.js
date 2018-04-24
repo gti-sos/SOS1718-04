@@ -7,7 +7,7 @@ angular.module("GraduationRatesApp")
              $scope.addStadistic= function(){
                 $http.post(api,$scope.newStadistic).then(function (response){
                     $scope.status= " Estadistica añadida";
-                  
+                  getStadistics() 
                 },function(){
                     if($scope.newStadistic["public-school"]==null||
                     $scope.newStadistic["private-school"]==null||
@@ -18,24 +18,25 @@ angular.module("GraduationRatesApp")
                     }else{
                     $scope.status="Error 409: la estadistica ya existe"
                     }
-                   
+                getStadistics() 
             });
-            getStadistics()
+            
         }
              $scope.deleteStadistic= function(province, year){
                 console.log("Stadistic to be delete :" + province,year);
                 $http.delete(api+"/"+province+"/"+year).then(function (response){
                     $scope.status= " La estadistica ha sido eleminada";
+                getStadistics()
                 });
-             getStadistics()
+            
             }
              $scope.deleteStadistics= function(){
                 console.log("all stadistic will be delete" );
                 $http.delete(api+"/").then(function (response){
                     $scope.status= "Todas las estadisticas han sido eliminadas";
-                   
-                });
             getStadistics()
+                });
+            
           
             }
              $scope.fromTo= function(){
@@ -99,7 +100,7 @@ angular.module("GraduationRatesApp")
                 }
             }*/
         
-       getStadistics()
+      
         
          
             function getStadistics(){
@@ -139,7 +140,7 @@ angular.module("GraduationRatesApp")
         }
                         
     
-         
+          getStadistics()
     
             
            
