@@ -1,3 +1,4 @@
+"use strict";
 var graduationRates = {};
 var BASE_API_PATH = "/api/v2";
 var BASE_API_PATH1 = "/api/v1";
@@ -19,7 +20,14 @@ var BASE_API_PATH1 = "/api/v1";
 -------------------
 -------------------
 */ 
+
+console.log("---BEGIN PROBAR LA API GraduationRates CON CURL---");
+console.log("curl -v -XGET -H 'Content-type: application/json' 'https://sos1718-04.herokuapp.com/api/v2/graduation-rates'");
+console.log("curl -v -XDELETE -H 'Content-type: application/json' 'https://sos1718-04.herokuapp.com/api/v2/graduation-rates'");
+//console.log("curl -XPOST -H 'Content-type: application/json' -d '{\"province\": \"seville\",\"year\": 2017,\"public-school\": 80.7,\"private-school\": 98.2,\"charter-school\": 89.5}' 'https://sos1718-04.herokuapp.com/api/v2/graduation-rates'")
+console.log("---END PROBAR LA API CON CURL---");
     
+
 //OPERACIONES GENERALES
 //GETS
    app.get(BASE_API_PATH + "/graduation-rates", (req, res) => {
