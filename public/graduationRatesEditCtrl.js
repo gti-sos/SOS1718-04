@@ -4,6 +4,7 @@ angular.module("RoRoMonApp")
         console.log("Edit Ctrl initialized!");
         var stadisticUrl = "/api/v2/graduation-rates/" + $routeParams.province + "/" + $routeParams.year;
         $http.get(stadisticUrl).then(function(response) {
+            
             $scope.updatedStadistic = response.data;
         });
         $scope.updateStadistic = function() {
