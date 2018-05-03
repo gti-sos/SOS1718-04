@@ -29,6 +29,7 @@ describe('Add Stadistic', function(){
                                     stream.write(new Buffer(png,'base64'));
                                     stream.end();
                     });
+                     browser.driver.sleep(2000)
                             expect(stadistics.length).toEqual(initialStadistics.length+1)
                         });
                     });
