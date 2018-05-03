@@ -22,6 +22,9 @@ describe('Add Stadistic', function(){
                     console.log("charter")
                     element(by.buttonText('Add')).click().then(function(){
                         element.all(by.repeater('stadistic in stadistics')).then(function(stadistics){
+                             browser.driver.sleep(2000)
+                              browser.driver.sleep(2000)
+                               browser.driver.sleep(2000)
                             browser.takeScreenshot()
                             .then(function(png){
                                 var stream = fs.createWriteStream
@@ -30,6 +33,8 @@ describe('Add Stadistic', function(){
                                     stream.end();
                     });
                      browser.driver.sleep(2000)
+                      browser.driver.sleep(2000)
+                       browser.driver.sleep(2000)
                             expect(stadistics.length).toEqual(initialStadistics.length+1)
                         });
                     });

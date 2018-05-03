@@ -9,6 +9,10 @@ describe('Data is Loaded', function(){
                 element
                 .all(by.repeater('stadistic in stadistics'))
                 .then(function(stadistics){
+                     browser.driver.sleep(2000)
+                      browser.driver.sleep(2000)
+                       browser.driver.sleep(2000)
+                        browser.driver.sleep(2000)
                     browser.takeScreenshot()
                     .then(function(png){
                         var stream = fs.createWriteStream
@@ -17,6 +21,9 @@ describe('Data is Loaded', function(){
                         stream.end();
                     });
                     browser.driver.sleep(2000)
+                     browser.driver.sleep(2000)
+                      browser.driver.sleep(2000)
+                       browser.driver.sleep(2000)
                     expect(stadistics.length).toBeGreaterThan(0);
                 });
             })
