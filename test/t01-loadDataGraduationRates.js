@@ -9,22 +9,16 @@ describe('Data is Loaded', function(){
                 element
                 .all(by.repeater('stadistic in stadistics'))
                 .then(function(stadistics){
-                     browser.driver.sleep(2000)
-                      browser.driver.sleep(2000)
-                       browser.driver.sleep(2000)
-                        browser.driver.sleep(2000)
+                     
                     browser.takeScreenshot()
                     .then(function(png){
                         var stream = fs.createWriteStream
                             (path.join(process.cwd(),'test/output','t01-graduationRates.png'));
                         stream.write(new Buffer(png,'base64'));
                         stream.end();
-                    });
-                    browser.driver.sleep(2000)
-                     browser.driver.sleep(2000)
-                      browser.driver.sleep(2000)
-                       browser.driver.sleep(2000)
-                    expect(stadistics.length).toBeGreaterThan(0);
+                    }).then(expect(stadistics.length).toBeGreaterThan(0));
+                    
+                    
                 });
             })
         
