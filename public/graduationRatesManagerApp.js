@@ -10,5 +10,8 @@ angular
                 .when("/graduationRates/stadistic/:province/:year",{
                     templateUrl:"graduationRatesEdit.html",
                     controller: "graduationRatesEditCtrl"
+                })
+                .when("/analytics",{
+                    templateUrl:"analytics.html",
                 });
     });
