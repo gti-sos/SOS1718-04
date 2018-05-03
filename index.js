@@ -80,6 +80,12 @@ var initialUnemploymentRates = [{
 ];
 
 var initialGraduationRates = [{
+        "province": "almeria",
+        "year": 2014,
+        "public-school": 60.8,
+        "private-school": 92.7,
+        "charter-school": 78.0
+    },{
         "province": "huelva",
         "year": 2015,
         "public-school": 79.4,
@@ -94,14 +100,14 @@ var initialGraduationRates = [{
         "charter-school": 89.5
     },
     {
-        "province": "malaga",
-        "year": 2015,
+        "province": "cadiz",
+        "year": 2016,
         "public-school": 78.1,
         "private-school": 96.4,
         "charter-school": 87.7
     },
     {
-        "province": "seville",
+        "province": "malaga",
         "year": 2016,
         "public-school": 83.77,
         "private-school": 92.74,
@@ -113,6 +119,19 @@ var initialGraduationRates = [{
         "public-school": 83.8,
         "private-school": 92.7,
         "charter-school": 91.0
+    },{
+        "province": "jaen",
+        "year": 2017,
+        "public-school": 70.8,
+        "private-school": 88.7,
+        "charter-school": 81.0
+    },
+    {
+        "province": "cordoba",
+        "year": 2017,
+        "public-school": 71.8,
+        "private-school": 90.7,
+        "charter-school": 83.0
     }
 ];
 
@@ -520,42 +539,59 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
             if (graduationRatesAux.length == 0) {
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Empty DB");
                 var initialGraduationRates = [{
-                        "province": "huelva",
-                        "year": 2015,
-                        "public-school": 79.4,
-                        "private-school": 100.0,
-                        "charter-school": 83.9
-                    },
-                    {
-                        "province": "seville",
-                        "year": 2015,
-                        "public-school": 80.9,
-                        "private-school": 98.2,
-                        "charter-school": 89.5
-                    },
-                    {
-                        "province": "malaga",
-                        "year": 2015,
-                        "public-school": 78.1,
-                        "private-school": 96.4,
-                        "charter-school": 87.7
-                    },
-                    {
-                        "province": "seville",
-                        "year": 2016,
-                        "public-school": 83.77,
-                        "private-school": 92.74,
-                        "charter-school": 91.04
-                    },
-                    {
-                        "province": "granada",
-                        "year": 2016,
-                        "public-school": 83.8,
-                        "private-school": 92.7,
-                        "charter-school": 91.0
-
-                    }
-
+        "province": "almeria",
+        "year": 2014,
+        "public-school": 60.8,
+        "private-school": 92.7,
+        "charter-school": 78.0
+    },{
+        "province": "huelva",
+        "year": 2015,
+        "public-school": 79.4,
+        "private-school": 100.0,
+        "charter-school": 83.9
+    },
+    {
+        "province": "seville",
+        "year": 2015,
+        "public-school": 80.9,
+        "private-school": 98.2,
+        "charter-school": 89.5
+    },
+    {
+        "province": "cadiz",
+        "year": 2016,
+        "public-school": 78.1,
+        "private-school": 96.4,
+        "charter-school": 87.7
+    },
+    {
+        "province": "malaga",
+        "year": 2016,
+        "public-school": 83.77,
+        "private-school": 92.74,
+        "charter-school": 91.04
+    },
+    {
+        "province": "granada",
+        "year": 2016,
+        "public-school": 83.8,
+        "private-school": 92.7,
+        "charter-school": 91.0
+    },{
+        "province": "jaen",
+        "year": 2017,
+        "public-school": 70.8,
+        "private-school": 88.7,
+        "charter-school": 81.0
+    },
+    {
+        "province": "cordoba",
+        "year": 2017,
+        "public-school": 71.8,
+        "private-school": 90.7,
+        "charter-school": 83.0
+    }
                 ];
                 dbGraduation.insert(initialGraduationRates);
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Created " + graduationRatesAux.length + " graduation rates");

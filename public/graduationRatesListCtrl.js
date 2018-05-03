@@ -1,6 +1,7 @@
 /*global angular*/
 /*global Highcharts*/
 /*global google*/
+/*global Morris*/
 angular.module("RoRoMonApp")
   .controller("graduationRatesListCtrl", ["$scope","$http", function($scope,$http) {
             console.log("List Ctrl initialized!");
@@ -74,6 +75,8 @@ angular.module("RoRoMonApp")
 
         var options = {
             region: 'ES',
+            colorAxis: {colors: ['#00853f', 'black', '#e31b23']},
+         
         displayMode: 'markers',
         colorAxis: {colors: ['red','yellow','green', 'blue']}
         };
@@ -83,6 +86,61 @@ angular.module("RoRoMonApp")
         chart.draw(data, options);
       }});
       
+    $http.get("/api/v2/graduation-rates").then(function(response){
+       
+           new Morris.Line({
+  // ID of the element in which to draw the chart.
+  
+  element: 'stadistics3',
+  // Chart data records -- each entry in this array corresponds to a point on
+  // the chart.
+  
+   
+  data:[{year:"2014",value: parseInt(response.data.filter(d=>d.year==2014)
+                                            .map(function(d){ 
+                                            return parseFloat(d["public-school"])+
+                                            parseFloat(d["private-school"])+
+                                            parseFloat(d["charter-school"])
+                                                /response.data.filter(d=>d.year==2014).length
+                                            }
+                                             
+                        ))},
+        {year :"2015",value: parseInt(response.data.filter(d=>d.year==2015)
+                                            .map(function(d){ 
+                                            return parseFloat(d["public-school"])+
+                                            parseFloat(d["private-school"])+
+                                            parseFloat(d["charter-school"])
+                                                /response.data.filter(d=>d.year==2015).length
+                                            }
+                                             
+                        ))},
+        {year:"2016",value: parseInt(response.data.filter(d=>d.year==2016)
+                                            .map(function(d){ 
+                                            return parseFloat(d["public-school"])+
+                                            parseFloat(d["private-school"])+
+                                            parseFloat(d["charter-school"])
+                                                /response.data.filter(d=>d.year==2016).length
+                                            }
+                                             
+                        ))},
+        {year:"2017",value: parseInt(response.data.filter(d=>d.year==2017)
+                                            .map(function(d){ 
+                                            return parseFloat(d["public-school"])+
+                                            parseFloat(d["private-school"])+
+                                            parseFloat(d["charter-school"])
+                                                /response.data.filter(d=>d.year==2017).length
+                                            }
+                                             
+                        ))}],
+  // The name of the data record attribute that contains x-values.
+  xkey: 'year',
+  // A list of names of data record attributes that contain y-values.
+  ykeys: ['value'],
+  // Labels for the ykeys -- will be displayed when you hover over the
+  // chart.
+  labels: ['Value']
+});
+      });
       
         $http.get("/api/v2/graduation-rates").then(function(response){
             
@@ -95,7 +153,7 @@ angular.module("RoRoMonApp")
         
             xAxis: {
                 
-                categories:  response.data.map(function(d){return parseInt(d.year)})
+                categories:  response.data.map(function(d){return (parseInt(d.year))})
                
             },
             yAxis: {
@@ -111,7 +169,6 @@ angular.module("RoRoMonApp")
         
             plotOptions: {
                 series: {
-                    
                     label: {
                         connectorAllowed: true
                     }
@@ -147,12 +204,6 @@ angular.module("RoRoMonApp")
             }
         
         });
-         var Huelva = response.data.filter(d=>d.province==="huelva").
-                        map(function(d){return (parseFloat(d["public-school"])+
-                                            parseFloat(d["private-school"])+
-                                            parseFloat(d["charter-school"]))
-                        })
-         
     });
             
          
