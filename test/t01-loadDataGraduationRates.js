@@ -11,7 +11,7 @@ describe('Data is Loaded', function(){
                     browser.takeScreenshot()
                     .then(function(png){
                         var stream = fs.createWriteStream
-                            (path.join(process.cwd(),'test/output','t01-graduationRates.png'));
+                            (path.join(process.cwd(),'test','t01-graduationRates.png'));
                         stream.write(new Buffer(png,'base64'));
                         stream.end();
                     });
