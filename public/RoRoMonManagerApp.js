@@ -6,11 +6,11 @@ angular
                 .when("/analytics",{
                     templateUrl:"analytics.html",
                 })
-                .when("/graduationRates",{
+                .when("/graduation-rates",{
                     templateUrl:"graduationRatesList.html",
                     controller: "graduationRatesListCtrl"
                 })
-                .when("/graduationRates/stadistic/:province/:year",{
+                .when("/graduation-rates/stadistic/:province/:year",{
                     templateUrl:"graduationRatesEdit.html",
                     controller: "graduationRatesEditCtrl"
                 })
