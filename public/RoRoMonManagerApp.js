@@ -3,6 +3,9 @@ angular
     .module("RoRoMonApp", ["ngRoute"])
         .config(function($routeProvider){
             $routeProvider
+                .when("/analytics",{
+                    templateUrl:"analytics.html",
+                })
                 .when("/graduationRates",{
                     templateUrl:"graduationRatesList.html",
                     controller: "graduationRatesListCtrl"
@@ -11,7 +14,5 @@ angular
                     templateUrl:"graduationRatesEdit.html",
                     controller: "graduationRatesEditCtrl"
                 })
-                .when("/analytics",{
-                    templateUrl:"analytics.html",
-                });
+                
     });
