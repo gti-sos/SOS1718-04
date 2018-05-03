@@ -14,5 +14,9 @@ angular
                     templateUrl:"graduationRatesEdit.html",
                     controller: "graduationRatesEditCtrl"
                 })
+                .when("/graduation-rates/analytics",{
+                    templateUrl:"vistasGraduationRates.html",
+                    controller: "vistasGraduationRatesCtrl"
+                });
                 
     });

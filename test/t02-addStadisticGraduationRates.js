@@ -6,7 +6,7 @@ describe('Add Stadistic', function(){
             .get('https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/graduation-rates')
             .then(function(){
                 element
-                .all(by.repeater('stadistic in stadistics'))
+                .all(by.repeater("stadistic in stadistics"))
                 .then(function(initialStadistics){
                     browser.driver.sleep(2000);
                     
@@ -22,10 +22,9 @@ describe('Add Stadistic', function(){
                     console.log("charter")
                     element(by.buttonText('Add')).click().then(function(){
                         element.all(by.repeater('stadistic in stadistics')).then(function(stadistics){
-                             expect(stadistics.length).toEqual(initialStadistics.length+1)
-                             browser.driver.sleep(2000)
-                              browser.driver.sleep(2000)
-                               browser.driver.sleep(2000)
+                            console.log(stadistics.length)
+                             
+
                             browser.takeScreenshot()
                             .then(function(png){
                                 var stream = fs.createWriteStream
@@ -33,8 +32,9 @@ describe('Add Stadistic', function(){
                                     stream.write(new Buffer(png,'base64'));
                                     stream.end();
                     });
-                           
+                            expect(stadistics.length).toEqual(initialStadistics.length+1);
                         });
+                       
                     });
 
                     
