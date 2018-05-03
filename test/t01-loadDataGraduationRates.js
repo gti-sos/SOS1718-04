@@ -9,6 +9,7 @@ describe('Data is Loaded', function(){
                 element
                 .all(by.repeater('stadistic in stadistics'))
                 .then(function(stadistics){
+                    expect(stadistics.length).toBeGreaterThan(0);
                     browser.takeScreenshot()
                     .then(function(png){
                         var stream = fs.createWriteStream
@@ -16,7 +17,7 @@ describe('Data is Loaded', function(){
                         stream.write(new Buffer(png,'base64'));
                         stream.end();
                     })
-                    expect(stadistics.length).toBeGreaterThan(0);
+                  
                     
                 });
             })

@@ -22,6 +22,7 @@ describe('Add Stadistic', function(){
                     console.log("charter")
                     element(by.buttonText('Add')).click().then(function(){
                         element.all(by.repeater('stadistic in stadistics')).then(function(stadistics){
+                             expect(stadistics.length).toEqual(initialStadistics.length+1)
                              browser.driver.sleep(2000)
                               browser.driver.sleep(2000)
                                browser.driver.sleep(2000)
@@ -32,7 +33,7 @@ describe('Add Stadistic', function(){
                                     stream.write(new Buffer(png,'base64'));
                                     stream.end();
                     });
-                            expect(stadistics.length).toEqual(initialStadistics.length+1)
+                           
                         });
                     });
 
