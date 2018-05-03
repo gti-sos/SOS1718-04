@@ -9,15 +9,14 @@ describe('Data is Loaded', function(){
                 element
                 .all(by.repeater('stadistic in stadistics'))
                 .then(function(stadistics){
-                     
                     browser.takeScreenshot()
                     .then(function(png){
                         var stream = fs.createWriteStream
                             (path.join(process.cwd(),'test/output','t01-graduationRates.png'));
                         stream.write(new Buffer(png,'base64'));
                         stream.end();
-                    }).then(expect(stadistics.length).toBeGreaterThan(0));
-                    
+                    })
+                    expect(stadistics.length).toBeGreaterThan(0);
                     
                 });
             })

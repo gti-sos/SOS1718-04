@@ -31,7 +31,8 @@ describe('Add Stadistic', function(){
                                     (path.join(process.cwd(),'test/output','t02-addStadisticGraduationRates.png'));
                                     stream.write(new Buffer(png,'base64'));
                                     stream.end();
-                    }).then(expect(stadistics.length).toEqual(initialStadistics.length+1));
+                    });
+                            expect(stadistics.length).toEqual(initialStadistics.length+1)
                         });
                     });
 
