@@ -3,7 +3,7 @@ var path = require("path")
 describe('Data is Loaded', function(){
     it('should show some conctacs',function(){
         browser
-            .get('https://sos171804arg-sandbox2-sos171804arg.c9users.io/RoRoMonApp.html#!/graduationRates')
+            .get('https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/graduation-rates')
             .then(function(){
                 element
                 .all(by.repeater('stadistic in stadistics'))
@@ -11,7 +11,7 @@ describe('Data is Loaded', function(){
                     browser.takeScreenshot()
                     .then(function(png){
                         var stream = fs.createWriteStream
-                            (path.join(process.cwd(),'test','t01-graduationRates.png'));
+                            (path.join(process.cwd(),'test/output','t01-graduationRates.png'));
                         stream.write(new Buffer(png,'base64'));
                         stream.end();
                     });
