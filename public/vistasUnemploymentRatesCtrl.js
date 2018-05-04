@@ -166,10 +166,63 @@ angular.module("RoRoMonApp")
 });
       });
 */      
+/*
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'spline'
+    },
+    title: {
+        text: 'Snow depth at Vikjafjellet, Norway'
+    },
+    subtitle: {
+        text: 'Irregular time data in Highcharts JS'
+    },
+    xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: { // don't display the dummy year
+            month: '%e. %b',
+            year: '%b'
+        },
+        title: {
+            text: 'Date'
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Snow depth (m)'
+        },
+        min: 0
+    },
+    tooltip: {
+        headerFormat: '<b>{series.name}</b><br>',
+        pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+    },
+
+    plotOptions: {
+        spline: {
+            marker: {
+                enabled: true
+            }
+        }
+    },
+
+    colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+
+    // Define the data points. All series have a dummy year
+    // of 1970/71 in order to be compared on the same x axis. Note
+    // that in JavaScript, months start at 0 for January, 1 for February etc.
+    series: []
+});
+
+*/
         $http.get("/api/v1/unemployment-rates").then(function(response){
             
             Highcharts.chart('stadistics1', {
-
+            chart: {
+                type: 'spline'
+            },
+    
             title: {
                 text: 'My data'
             },
@@ -192,21 +245,17 @@ angular.module("RoRoMonApp")
             },
         
             plotOptions: {
-                series: {
-                    label: {
-                        connectorAllowed: true
+                spline: {
+                    marker: {
+                        enabled: true
                     }
                 }
             },
-        /*
-        parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
-                                            parseFloat(d["third-degree"])+
-                                            parseInt(d["min-age"])+
-                                            parseInt(d["max-age"])
-        */
             series: [{
+                
+                name: 'ILLITERATE',
+                data: response.data.map(function(d){return d["illiterate"]})
+            },{
                 
                 name: 'FIRST GRADE',
                 data: response.data.map(function(d){return d["first-grade"]})
