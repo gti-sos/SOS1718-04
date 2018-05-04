@@ -17,6 +17,18 @@ angular
                 .when("/graduation-rates/analytics",{
                     templateUrl:"vistasGraduationRates.html",
                     controller: "vistasGraduationRatesCtrl"
+                })
+                .when("/unemployment-rates",{
+                    templateUrl:"unemploymentRatesList.html",
+                    controller: "unemploymentRatesListCtrl"
+                })
+                .when("/unemployment-rates/:province/:year",{
+                    templateUrl:"unemploymentRatesEdit.html",
+                    controller: "unemploymentRatesEditCtrl"
+                })
+                .when("/unemployment-rates/analytics",{
+                    templateUrl:"vistasUnemploymentRates.html",
+                    controller: "vistasUnemploymentRatesCtrl"
                 });
                 
     });
