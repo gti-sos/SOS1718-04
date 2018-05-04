@@ -9,7 +9,7 @@ angular.module("RoRoMonApp")
             console.log("Vistas Ctrl initialized!");
             var api = "/api/v1/unemployment-rates";
 
-
+/*
  $http.get("/api/v1/unemployment-rates").then(function(response){
    google.charts.load('current', {
         'packages':['geochart'],
@@ -109,7 +109,7 @@ angular.module("RoRoMonApp")
       };
  });
     
-/*      
+      
     $http.get("/api/v2/unemployment-rates").then(function(response){
        
            new Morris.Line({
@@ -165,8 +165,8 @@ angular.module("RoRoMonApp")
   labels: ['Value']
 });
       });
-      
-        $http.get("/api/v2/unemployment-rates").then(function(response){
+*/      
+        $http.get("/api/v1/unemployment-rates").then(function(response){
             
             Highcharts.chart('stadistics1', {
 
@@ -198,17 +198,24 @@ angular.module("RoRoMonApp")
                     }
                 }
             },
-        
+        /*
+        parseFloat(d["illiterate"])+
+                                            parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-grade"])+
+                                            parseFloat(d["third-degree"])+
+                                            parseInt(d["min-age"])+
+                                            parseInt(d["max-age"])
+        */
             series: [{
                 
-                name: 'PRIVATE SCHOOLS',
-                data: response.data.map(function(d){return d["private-school"]})
+                name: 'FIRST GRADE',
+                data: response.data.map(function(d){return d["first-grade"]})
             }, {
-                name: 'PUBLIC SCHOOLS',
-                data:  response.data.map(function(d){return d["public-school"]})
+                name: 'SECOND GRADE',
+                data:  response.data.map(function(d){return d["second-grade"]})
             }, {
-                name: 'CHARTER SCHOOLS',
-                data: response.data.map(function(d){return d["charter-school"]})
+                name: 'THIRD DEGREE',
+                data: response.data.map(function(d){return d["third-degree"]})
             }],
             
         
@@ -229,5 +236,5 @@ angular.module("RoRoMonApp")
         
         });
     });
-*/     
+     
 }]);
