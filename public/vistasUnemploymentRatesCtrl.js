@@ -101,10 +101,6 @@ angular.module("RoRoMonApp")
 
         var options = {
             region: 'ES',
-            colorAxis: {colors: ['#00853f', 'black', '#e31b23']},
-         
-        displayMode: 'markers',
-        colorAxis: {colors: ['red','yellow','green', 'blue']}
         };
 
         var chart = new google.visualization.GeoChart(document.getElementById('stadistics2'));
