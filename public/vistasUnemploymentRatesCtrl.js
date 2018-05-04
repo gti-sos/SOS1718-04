@@ -108,7 +108,7 @@ angular.module("RoRoMonApp")
         chart.draw(data, options);
       };
  });
- */  
+
       
     $http.get("/api/v1/unemployment-rates").then(function(response){
        
@@ -168,7 +168,7 @@ angular.module("RoRoMonApp")
   labels: ['Value']
 });
       });
-      
+   */     
         $http.get("/api/v1/unemployment-rates").then(function(response){
             
             Highcharts.chart('stadistics1', {
