@@ -5,12 +5,12 @@
 
 "use strict"
 angular.module("RoRoMonApp")
-  .controller("vistasGraduationRatesCtrl", ["$scope","$http", function($scope,$http) {
+  .controller("vistasUnemploymentRatesCtrl", ["$scope","$http", function($scope,$http) {
             console.log("Vistas Ctrl initialized!");
-            var api = "/api/v2/graduation-rates";
+            var api = "/api/v2/unemployment-rates";
 
 
- $http.get("/api/v2/graduation-rates").then(function(response){
+ $http.get("/api/v2/unemployment-rates").then(function(response){
    google.charts.load('current', {
         'packages':['geochart'],
         // Note: you will need to get a mapsApiKey for your project.
@@ -24,52 +24,76 @@ angular.module("RoRoMonApp")
            
           ['Province', 'PassRate'],
           ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva").
-                        map(function(d){return (parseFloat(d["public-school"])+
-                                            parseFloat(d["private-school"])+
-                                            parseFloat(d["charter-school"]))
+                        map(function(d){return (parseFloat(d["illiterate"])+
+                                            parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["third-degree"])+
+                                            parseInt(d["min-age"])+
+                                            parseInt(d["max-age"]))
                                              /response.data.filter(d=>d.province=="huelva").length
                         }))],
-          ['Sevilla', parseInt(response.data.filter(d=>d.province=="seville").
-                        map(function(d){return (parseFloat(d["public-school"])+
-                                            parseFloat(d["private-school"])+
-                                            parseFloat(d["charter-school"]))
+          ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
+                        map(function(d){return (parseFloat(d["illiterate"])+
+                                            parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["third-degree"])+
+                                            parseInt(d["min-age"])+
+                                            parseInt(d["max-age"]))
                                              /response.data.filter(d=>d.province=="seville").length
                         }))],
           ['Malaga', parseInt(response.data.filter(d=>d.province=="malaga").
-                        map(function(d){return (parseFloat(d["public-school"])+
-                                            parseFloat(d["private-school"])+
-                                            parseFloat(d["charter-school"]))
+                        map(function(d){return (parseFloat(d["illiterate"])+
+                                            parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["third-degree"])+
+                                            parseInt(d["min-age"])+
+                                            parseInt(d["max-age"]))
                                              /response.data.filter(d=>d.province=="malaga").length
                                             
                         }))],
           ['Granada', parseInt(response.data.filter(d=>d.province=="granada").
-                        map(function(d){return (parseFloat(d["public-school"])+
-                                            parseFloat(d["private-school"])+
-                                            parseFloat(d["charter-school"]))
+                        map(function(d){return (parseFloat(d["illiterate"])+
+                                            parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["third-degree"])+
+                                            parseInt(d["min-age"])+
+                                            parseInt(d["max-age"]))
                                              /response.data.filter(d=>d.province=="granada").length
                         }))],
           ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
-                        map(function(d){return (parseFloat(d["public-school"])+
-                                            parseFloat(d["private-school"])+
-                                            parseFloat(d["charter-school"]))
+                        map(function(d){return (parseFloat(d["illiterate"])+
+                                            parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["third-degree"])+
+                                            parseInt(d["min-age"])+
+                                            parseInt(d["max-age"]))
                                              /response.data.filter(d=>d.province=="almeria").length
                         }))],
           ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz").
-                        map(function(d){return (parseFloat(d["public-school"])+
-                                            parseFloat(d["private-school"])+
-                                            parseFloat(d["charter-school"]))
+                        map(function(d){return (parseFloat(d["illiterate"])+
+                                            parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["third-degree"])+
+                                            parseInt(d["min-age"])+
+                                            parseInt(d["max-age"]))
                                              /response.data.filter(d=>d.province=="cadiz").length
                         }))],
           ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen").
-                        map(function(d){return (parseFloat(d["public-school"])+
-                                            parseFloat(d["private-school"])+
-                                            parseFloat(d["charter-school"]))
+                        map(function(d){return (parseFloat(d["illiterate"])+
+                                            parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["third-degree"])+
+                                            parseInt(d["min-age"])+
+                                            parseInt(d["max-age"]))
                                              /response.data.filter(d=>d.province=="jaen").length
                         }))],
           ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba").
-                        map(function(d){return (parseFloat(d["public-school"])+
-                                            parseFloat(d["private-school"])+
-                                            parseFloat(d["charter-school"]))
+                        map(function(d){return (parseFloat(d["illiterate"])+
+                                            parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["third-degree"])+
+                                            parseInt(d["min-age"])+
+                                            parseInt(d["max-age"]))
                                              /response.data.filter(d=>d.province=="cordoba").length
                         }))],
         ]);
@@ -89,8 +113,8 @@ angular.module("RoRoMonApp")
       };
  });
     
-      
-    $http.get("/api/v2/graduation-rates").then(function(response){
+/*      
+    $http.get("/api/v2/unemployment-rates").then(function(response){
        
            new Morris.Line({
   // ID of the element in which to draw the chart.
@@ -146,7 +170,7 @@ angular.module("RoRoMonApp")
 });
       });
       
-        $http.get("/api/v2/graduation-rates").then(function(response){
+        $http.get("/api/v2/unemployment-rates").then(function(response){
             
             Highcharts.chart('stadistics1', {
 
@@ -209,5 +233,5 @@ angular.module("RoRoMonApp")
         
         });
     });
-            
+*/     
 }]);
