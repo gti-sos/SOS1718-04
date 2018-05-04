@@ -26,7 +26,7 @@ angular.module("RoRoMonApp")
           ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva").
                         map(function(d){return (parseFloat(d["illiterate"])+
                                             parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"])+
                                             parseInt(d["min-age"])+
                                             parseInt(d["max-age"]))
@@ -35,7 +35,7 @@ angular.module("RoRoMonApp")
           ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
                         map(function(d){return (parseFloat(d["illiterate"])+
                                             parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"])+
                                             parseInt(d["min-age"])+
                                             parseInt(d["max-age"]))
@@ -54,7 +54,7 @@ angular.module("RoRoMonApp")
           ['Granada', parseInt(response.data.filter(d=>d.province=="granada").
                         map(function(d){return (parseFloat(d["illiterate"])+
                                             parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"])+
                                             parseInt(d["min-age"])+
                                             parseInt(d["max-age"]))
@@ -63,7 +63,7 @@ angular.module("RoRoMonApp")
           ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
                         map(function(d){return (parseFloat(d["illiterate"])+
                                             parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"])+
                                             parseInt(d["min-age"])+
                                             parseInt(d["max-age"]))
@@ -72,7 +72,7 @@ angular.module("RoRoMonApp")
           ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz").
                         map(function(d){return (parseFloat(d["illiterate"])+
                                             parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"])+
                                             parseInt(d["min-age"])+
                                             parseInt(d["max-age"]))
@@ -81,7 +81,7 @@ angular.module("RoRoMonApp")
           ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen").
                         map(function(d){return (parseFloat(d["illiterate"])+
                                             parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"])+
                                             parseInt(d["min-age"])+
                                             parseInt(d["max-age"]))
@@ -90,7 +90,7 @@ angular.module("RoRoMonApp")
           ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba").
                         map(function(d){return (parseFloat(d["illiterate"])+
                                             parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"])+
                                             parseInt(d["min-age"])+
                                             parseInt(d["max-age"]))
