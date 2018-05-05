@@ -11,18 +11,12 @@ describe('Add Stadistic', function(){
                     browser.driver.sleep(2000);
                     
                     element(by.model('newStadistic.province')).sendKeys('huelva');
-                    console.log("province")
-                    element(by.model('newStadistic.year')).sendKeys(parseInt(2018));
-                     console.log("year") 
-                    element(by.model('newStadistic['+"'public-school'"+']')).sendKeys(parseFloat(76.0));
-                     console.log("public")
-                    element(by.model('newStadistic['+"'private-school'"+']')).sendKeys(parseFloat(89.0));
-                    console.log("private")
-                    element(by.model('newStadistic['+"'charter-school'"+']')).sendKeys(parseFloat(87.0));
-                    console.log("charter")
+                    element(by.model('newStadistic.year')).sendKeys(parseInt(2018)); console.log("year") 
+                    element(by.model('newStadistic['+"'public-school'"+']')).sendKeys(parseFloat(76.0)); console.log("public")
+                    element(by.model('newStadistic['+"'private-school'"+']')).sendKeys(parseFloat(89.0)); console.log("private")
+                    element(by.model('newStadistic['+"'charter-school'"+']')).sendKeys(parseFloat(87.0)); console.log("charter")
                     element(by.buttonText('Add')).click().then(function(){
                         element.all(by.repeater('stadistic in stadistics')).then(function(stadistics){
-                            console.log(stadistics.length)
                              
 
                             browser.takeScreenshot()
@@ -32,6 +26,7 @@ describe('Add Stadistic', function(){
                                     stream.write(new Buffer(png,'base64'));
                                     stream.end();
                     });
+                            console.log("Añadiendo Huelva, 2018")
                             expect(stadistics.length).toEqual(initialStadistics.length+1);
                         });
                        

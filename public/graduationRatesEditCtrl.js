@@ -12,12 +12,12 @@ angular.module("RoRoMonApp")
                 $scope.status = "Status: " + response.status;
                 console.log(Object.keys($scope.updatedStadistic).length)
                 window.alert("OK: estadistica actualizada");
-                $location.path("/graduationRates");
+                $location.path("/graduation-rates");
             }, function() {
                 if ($scope.updatedStadistic["public-school"] == null ||
                     $scope.updatedStadistic["private-school"] == null ||
                     $scope.updatedStadistic["charter-school"] == null) {
-                    $scope.status = "Error 400: debe completar todos los campos"
+                    $scope.status = "Error: debe completar todos los campos"
                 }
             });
         }
