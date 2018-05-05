@@ -47,23 +47,32 @@ angular
 
         $scope.query = function() {
             console.log("from-to" + $scope.query.year1);
-            
-             $http.get(api + "?from=" + $scope.query.year1 + "&to=" + $scope.query.year2 +
-                    "&limit=" + 2 + "&offset=" + 0).then(function(response) {
-                    $scope.medicalAttentionRates = response.data;
-                });
+            if($scope.query.limit !==undefined){
+                limit =$scope.query.limit;
+            }
+
+            $http.get(api + "?from=" + $scope.query.year1 + "&to=" + $scope.query.year2 +
+                "&limit=" + limit + "&offset=" + offset).then(function(response) {
+                $scope.medicalAttentionRates = response.data;
+            });
 
         }
 
-
+        var offset = 0;
+        var limit = 5;
         function getMedicalAttentionRates() {
-            var pag = 0;
+            
             console.log("entro aqui" + $scope.query.year1 + $scope.query.year2);
 
-            if ($scope.query.year1 !== undefined && $scope.query.year2 !== undefined) {
+            if ($scope.query.year1 !== undefined && $scope.query.year2 !== undefined && $scope.query.limit!==undefined) {
 
                 $http.get(api + "?from=" + $scope.query.year1 + "&to=" + $scope.query.year2 +
-                    "&limit=" + 2 + "&offset=" + pag).then(function(response) {
+                    "&limit=" + $scope.query.limit + "&offset=" + offset).then(function(response) {
+                    $scope.medicalAttentionRates = response.data;
+                });
+            }else if($scope.query.year1 !== undefined && $scope.query.year2 !== undefined){
+                $http.get(api + "?from=" + $scope.query.year1 + "&to=" + $scope.query.year2 +
+                    "&limit=" + limit + "&offset=" + offset).then(function(response) {
                     $scope.medicalAttentionRates = response.data;
                 });
             }
@@ -73,11 +82,22 @@ angular
                     $scope.medicalAttentionRates = response.data;
                 });
             }
-
-
         }
+        
+        $scope.nextPagination = function() {
+            console.log("next pagination");
+            offset = offset + 1 ;
+            getMedicalAttentionRates();
+        };
+        
+        $scope.backPagination = function() {
+            console.log("back pagination");
+            offset = offset - 1 ;
+            getMedicalAttentionRates();
+        };
+        
 
-        //getMedicalAttentionRates();
+        getMedicalAttentionRates();
         console.log($scope.medicalAttentionRates);
 
     }]);
