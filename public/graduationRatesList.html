@@ -22,6 +22,7 @@
             <td><button class="button btn-primary" ng-click="addStadistic()">
                 Add
             </button></td>
+            <h8><i>{{status}}</i></h8>
         </tr>
         <tr ng-repeat="stadistic in stadistics">
             <td><a href="/RoRoMonApp.html#!/graduation-rates/stadistic/{{stadistic.province}}/{{stadistic.year}}">{{stadistic.province}}</a></td>
@@ -50,6 +51,6 @@
    
    
 <hr/>
-<h8><i>{{status}}</i></h8>
+
 
 
