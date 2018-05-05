@@ -16,18 +16,22 @@ medicalAttentionRates.register = function(app, db) {
 
 
     app.get(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
+
         var object = {
             "year": parseInt(req.query.year),
             "general-medicine": parseFloat(req.query["general-medicine"]),
             "social-work": parseFloat(req.query["social-work"]),
             "nursing": parseFloat(req.query["nursing"])
         };
+        //busqueda por intervalos
+        var startYear = parseInt(req.query.from);
+        var endYear = parseInt(req.query.to);
         //Variables para la paginación
         var limitAux = parseInt(req.query.limit);
         var offSetAux = parseInt(req.query.offset);
 
         //console.log(Object.keys(req.query).includes("year")); // includes es como contains en java
-
+        //db.find({"year": { $gte: startYear, $lte: endYear }}).skip(offSetAux).limit(limitAux).toArray((err, doc)
         var isFirstVar = true;
 
         var mdbq = {};
@@ -48,8 +52,25 @@ medicalAttentionRates.register = function(app, db) {
                 consoleText = consoleText + text;
             }
         });
-        //paginación
-        if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
+        //mdbq["year"]={ $gte: startYear, $lte: endYear };
+        //paginación + búsqueda por intervalos
+        if (Number.isInteger(limitAux) && Number.isInteger(offSetAux) && Number.isInteger(startYear) && Number.isInteger(endYear)) {
+            var text = "limitAux=" + limitAux + "&offset=" + offSetAux;
+            console.log("?from=" + startYear + "&to=" + endYear+ "&limit="+limitAux+"&offset="+offSetAux);
+            db.find({ "year": { $gte: startYear, $lte: endYear } }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
+                if (err) {
+                    console.error(" Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                res.send(medicalAttentionRates.map((c) => {
+                    delete c._id; //Quitamos el campo id
+                    return c;
+                }));
+
+            });
+        }
+        else if (Number.isInteger(limitAux) && Number.isInteger(offSetAux)) {
             var text = "limitAux=" + limitAux + "&offset=" + offSetAux;
             consoleText = consoleText + text;
             console.log(consoleText);
@@ -67,6 +88,22 @@ medicalAttentionRates.register = function(app, db) {
             });
         }
         else {
+            //no paginacion pero pusqueda con intervalos
+            if(Number.isInteger(startYear) && Number.isInteger(endYear)){
+                console.log("?from=" + startYear + "&to=" + endYear);
+                db.find({ "year": { $gte: startYear, $lte: endYear } }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    res.send(medicalAttentionRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+                
+                });
+            }else{
             db.find(mdbq).toArray((err, medicalAttentionRates) => {
                 console.log(consoleText);
                 if (err) {
@@ -80,7 +117,7 @@ medicalAttentionRates.register = function(app, db) {
                 }));
 
             });
-        }
+        }}
     });
 
 
@@ -303,7 +340,7 @@ medicalAttentionRates.register = function(app, db) {
         var province = req.params.province;
         var year = parseInt(req.params.year);
         var medicalAttentionRate = req.body;
-       // var idAux = "";
+        // var idAux = "";
 
         console.log(req.body);
         console.log(Date() + " - PUT /medical-attention-rates/" + province);
@@ -313,14 +350,7 @@ medicalAttentionRates.register = function(app, db) {
             console.warn(Date() + "Hacking attempt!");
             return;
         }
-        /*console.log("idAux   "+idAux);
-        if(idAux === medicalAttentionRate._id){
-            console.log("Error el id del elemento a modificar es diferente al enviado" + 
-            
-            idAux +"!=" + medicalAttentionRate._id);
-             res.sendStatus(400);
-        }
-        */
+
         else {
             db.update({ "province": medicalAttentionRate.province, "year": medicalAttentionRate.year }, medicalAttentionRate, (err, numUpdated) => {
                 console.log("Updated: " + numUpdated);
