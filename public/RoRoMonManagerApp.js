@@ -38,6 +38,10 @@ angular
                     templateUrl:"medicalAttentionRatesEdit.html",
                     controller: "medicalAttentionRatesEditCtrl"
                 })
+                .when("/medical-attention-rates/analytics",{
+                    templateUrl:"vistasMedicalAttentionRates.html",
+                    controller: "vistasMedicalAttentionRatesCtrl"
+                })
                 ;
                 
     });

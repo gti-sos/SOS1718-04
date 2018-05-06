@@ -1,7 +1,7 @@
 /*global angular*/
 /*global Highcharts*/
 /*global google*/
-/*global Morris*/
+
 
 "use strict"
 angular.module("RoRoMonApp")
