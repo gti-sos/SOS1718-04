@@ -91,9 +91,11 @@ angular.module("RoRoMonApp")
             "Date, First Grade\n" +                // the data series
             "1981, "+response.data.filter(d=>d.year==1981).
                         map(function(d){return (parseFloat(d['first-grade']))
+                                             /response.data.filter(d=>d.year==1981).length
                         })+"\n" +
             "1982, "+response.data.filter(d=>d.year==1982).
                         map(function(d){return (parseFloat(d['first-grade']))
+                                             /response.data.filter(d=>d.year==1982).length
                         })+"\n"
          );
       });
