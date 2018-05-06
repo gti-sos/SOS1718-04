@@ -10,151 +10,66 @@ angular.module("RoRoMonApp")
         var api = "/api/v1/medical-attention-rates";
 
 
-        $http.get("/api/v1/medical-attention-rates").then(function(response) {
-            google.charts.load('current', {
-                'packages': ['geochart'],
-                // Note: you will need to get a mapsApiKey for your project.
-                // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-                'mapsApiKey': 'AIzaSyDAjDUgpV0cP7Qnwd39t0LvahG2UMJPkKo'
-            });
-            google.charts.setOnLoadCallback(drawRegionsMap);
+        $http
+            .get("/api/v1/medical-attention-rates")
+            .then(function(response){
+                
+                
+                google.charts.load('current', {
+            'packages': ['geochart'],
+            // Note: you will need to get a mapsApiKey for your project.
+            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+        });
+        
+        google.charts.setOnLoadCallback(drawMarkersMap);
+        console.log("variables :"+ response.data.filter(d=>d.province=="huelva" && d.year==2016).map(d => {return d.year}));
+        
+        function drawMarkersMap() {
+            var data = google.visualization.arrayToDataTable([
+                ['Province', 'Year', 'Nursing'],
+                ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva" && d.year==2016).map(d => {return d.year})),
+                parseFloat(response.data.filter(d=>d.province=="huelva" && d.year==2016).map(d => {return d.nursing}))],
+                ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla" && d.year==2016).map(d => {return d.year})),
+                parseFloat(response.data.filter(d=>d.province=="sevilla" && d.year==2016).map(d => {return d.nursing}))],
+                ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba" && d.year==2016).map(d => {return d.year})),
+                parseFloat(response.data.filter(d=>d.province=="cordoba" && d.year==2016).map(d => {return d.nursing}))],
+                ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen" && d.year==2016).map(d => {return d.year})),
+                parseFloat(response.data.filter(d=>d.province=="jaen" && d.year==2016).map(d => {return d.nursing}))],
+                ['Almeria', parseInt(response.data.filter(d=>d.province=="almeria" && d.year==2016).map(d => {return d.year})),
+                parseFloat(response.data.filter(d=>d.province=="almeria" && d.year==2016).map(d => {return d.nursing}))],
+                ['Malaga', parseInt(response.data.filter(d=>d.province=="malaga" && d.year==2016).map(d => {return d.year})),
+                parseFloat(response.data.filter(d=>d.province=="malaga" && d.year==2016).map(d => {return d.nursing}))],
+                ['Granada', parseInt(response.data.filter(d=>d.province=="granada" && d.year==2016).map(d => {return d.year})),
+                parseFloat(response.data.filter(d=>d.province=="granada" && d.year==2016).map(d => {return d.nursing}))],
+                ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz" && d.year==2016).map(d => {return d.year})),
+                parseFloat(response.data.filter(d=>d.province=="cadiz" && d.year==2016).map(d => {return d.nursing}))],
+            ]);
 
-            function drawRegionsMap() {
-
-                var data = google.visualization.arrayToDataTable([
-
-                    ['Province', 'PassRate'],
-                    ['Huelva', parseInt(response.data.filter(d => d.province == "huelva").map(function(d) {
-                        return (parseFloat(d["nursing"]) +
-                                parseFloat(d["general-medicine"]) +
-                                parseFloat(d["social-work"])) /
-                            response.data.filter(d => d.province == "huelva").length
-                    }))],
-                    ['Sevilla', parseInt(response.data.filter(d => d.province == "sevilla").map(function(d) {
-                        return (parseFloat(d["nursing"]) +
-                                parseFloat(d["general-medicine"]) +
-                                parseFloat(d["social-work"])) /
-                            response.data.filter(d => d.province == "sevilla").length
-                    }))],
-                    ['Malaga', parseInt(response.data.filter(d => d.province == "malaga").map(function(d) {
-                        return (parseFloat(d["nursing"]) +
-                                parseFloat(d["general-medicine"]) +
-                                parseFloat(d["social-work"])) /
-                            response.data.filter(d => d.province == "malaga").length
-
-                    }))],
-                    ['Granada', parseInt(response.data.filter(d => d.province == "granada").map(function(d) {
-                        return (parseFloat(d["nursing"]) +
-                                parseFloat(d["general-medicine"]) +
-                                parseFloat(d["social-work"])) /
-                            response.data.filter(d => d.province == "granada").length
-                    }))],
-                    ['Almería', parseInt(response.data.filter(d => d.province == "almeria").map(function(d) {
-                        return (parseFloat(d["nursing"]) +
-                                parseFloat(d["general-medicine"]) +
-                                parseFloat(d["social-work"])) /
-                            response.data.filter(d => d.province == "almeria").length
-                    }))],
-                    ['Cadiz', parseInt(response.data.filter(d => d.province == "cadiz").map(function(d) {
-                        return (parseFloat(d["nursing"]) +
-                                parseFloat(d["general-medicine"]) +
-                                parseFloat(d["social-work"])) /
-                            response.data.filter(d => d.province == "cadiz").length
-                    }))],
-                    ['Jaen', parseInt(response.data.filter(d => d.province == "jaen").map(function(d) {
-                        return (parseFloat(d["nursing"]) +
-                                parseFloat(d["general-medicine"]) +
-                                parseFloat(d["social-work"])) /
-                            response.data.filter(d => d.province == "jaen").length
-                    }))],
-                    ['Cordoba', parseInt(response.data.filter(d => d.province == "cordoba").map(function(d) {
-                        return (parseFloat(d["nursing"]) +
-                                parseFloat(d["general-medicine"]) +
-                                parseFloat(d["social-work"])) /
-                            response.data.filter(d => d.province == "cordoba").length
-                    }))],
-                ]);
-
-
-                var options = {
-                    region: 'ES',
-                    colorAxis: { colors: ['#00853f', 'black', '#e31b23'] },
-
-                    displayMode: 'markers',
-                    colorAxis: { colors: ['red', 'yellow', 'green', 'blue'] }
-                };
-
-                var chart = new google.visualization.GeoChart(document.getElementById('medicalAttentionRates1'));
-
-                chart.draw(data, options);
+            var options = {
+                region: 'ES',
+                displayMode: 'markers',
+                colorAxis: { colors: ['green', 'blue'] }
             };
-        });
 
-        /*
-        $http.get("/api/v2/graduation-rates").then(function(response){
-            
-            Highcharts.chart('stadistics1', {
-
-            title: {
-                text: 'My data'
-            },
-        
-        
-            xAxis: {
+            var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        };
                 
-                categories:  response.data.map(function(d){return (parseInt(d.year))})
-               
-            },
-            yAxis: {
-                title: {
-                    text: 'pass rate'
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle'
-            },
-        
-            plotOptions: {
-                series: {
-                    label: {
-                        connectorAllowed: true
-                    }
-                }
-            },
-        
-            series: [{
                 
-                name: 'PRIVATE SCHOOLS',
-                data: response.data.map(function(d){return d["private-school"]})
-            }, {
-                name: 'PUBLIC SCHOOLS',
-                data:  response.data.map(function(d){return d["public-school"]})
-            }, {
-                name: 'CHARTER SCHOOLS',
-                data: response.data.map(function(d){return d["charter-school"]})
-            }],
+                
+                
+                
+                
+                
+                
+                
+                
+            });
             
         
-            responsive: {
-                rules: [{
-                    condition: {
-                        maxWidth: 500
-                    },
-                    chartOptions: {
-                        legend: {
-                            layout: 'horizontal',
-                            align: 'center',
-                            verticalAlign: 'bottom'
-                        }
-                    }
-                }]
-            }
-        
-        });
-    });
-           */
+
+    
 
         $http
             .get("/api/v1/medical-attention-rates")
@@ -172,8 +87,7 @@ angular.module("RoRoMonApp")
                     subtitle: {
                         text: ''
                     },
-                    xAxis: {
-                        categories: ['2000', '2005', '2010', '2015', '2020'],
+                    xAxis: {categories: ['2000', '2005', '2010', '2015', '2020'],
                         tickmarkPlacement: 'on',
                         title: {
                             enabled: false
@@ -217,29 +131,6 @@ angular.module("RoRoMonApp")
 
 
             });
-
-            var chart = uv.chart('Bar',graphdef);
-            var graphdef = {
-                categories: ['uvCharts'],
-                dataSet: {
-                    'uvCharts': [
-                        { name: '2009', value: 67 },
-                        { name: '2010', value: 97 },
-                        { name: '2011', value: 100 },
-                        { name: '2012', value: 170 },
-                        { name: '2013', value: 200 },
-
-
-                    ]
-                }
-            };
-            
-            
-
-
-        
-
-
 
 
     }]);
