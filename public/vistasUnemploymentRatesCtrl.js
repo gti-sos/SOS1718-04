@@ -89,17 +89,17 @@ angular.module("RoRoMonApp")
             
             
             "Date,PassRate\n" +                // the data series
-            "1981, "+parseInt(response.data.filter(d=>d.province=='huelva').
+            "1981, "+parseInt(response.data.filter(d=>d.year==1981).
                         map(function(d){return (parseFloat(d['first-grade'])+
                                             parseFloat(d['second-grade'])+
                                             parseFloat(d['third-degree']))
-                                             /response.data.filter(d=>d.province=='huelva').length
+                                             /response.data.filter(d=>d.year==1981).length
                         }))+"\n" +
-            "1982, "+parseInt(response.data.filter(d=>d.province=='sevilla').
+            "1982, "+parseInt(response.data.filter(d=>d.year==1982).
                         map(function(d){return (parseFloat(d['first-grade'])+
                                             parseFloat(d['second-grade'])+
                                             parseFloat(d['third-degree']))
-                                             /response.data.filter(d=>d.province=='sevilla').length
+                                             /response.data.filter(d=>d.year==1982).length
                         }))+"\n"
          );
       });
