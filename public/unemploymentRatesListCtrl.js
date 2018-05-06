@@ -33,12 +33,93 @@ angular.module("RoRoMonApp")
                  getUnemploymentRates();
             }
       
+             var pag=0;
+             var numero;
+             $scope.getUnemploymentRatesPagination=function(num){
+                 numero=num;
+                  
+               if(num==1){
+                    pag=pag-10;
+                    if(pag<0){
+                            pag=0;
+                            $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
+                            $scope.unemploymentRates = response.data;
+                            console.log("pagination1")
+                             numero=num;
+                             console.log(numero);
+                             getUnemploymentRates();
+                            });
+                           
+                    }else{
+                        $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
+                $scope.unemploymentRates = response.data;
+                  console.log("pagination2")
+                   numero=num;
+                    console.log(numero);
+                     getUnemploymentRates();
+                });
+                    }
+               }else{
+                  
+                pag=pag+10;
+                $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
+                $scope.unemploymentRates = response.data;
+                 console.log("pagination3")
+                  numero=num;
+                   console.log(numero);
+                    getUnemploymentRates();
+               });
+               
+                 
+             }
+            }
+            
+            $scope.fromTo= function(){
+                console.log("from-to" );
+                getUnemploymentRates()
+          
+            }
+            
             function getUnemploymentRates(){
-                $http.get(api).then(function (response){
+                /*$http.get(api).then(function (response){
                     $scope.unemploymentRates = response.data;
                 });
+                */
+               console.log(numero);
+               if(($scope.fromToUnemploymentRate)!=null){
+                    var year1= $scope.fromToUnemploymentRate.year1;
+                    var year2= $scope.fromToUnemploymentRate.year2;
+                   console.log("1")
+                   if($scope.fromToUnemploymentRate.year1===null && $scope.fromToUnemploymentRate.year2===null){
+                       console.log("1.1")
+                        $http.get(api+"?limit="+10+"&offset="+pag).then(function (response){
+                    $scope.stadistics = response.data;
+                    $scope.status= " ";
+                    pag=0;
+                    
+                    });
+                   }else{
+                       console.log("1.2")
+                    
+                    $http.get(api+"?from="+year1+"&to="+year2+
+                            "&limit="+10+"&offset="+pag).then(function (response){
+                    $scope.unemploymentRates = response.data;
+                    $scope.status= "from "+$scope.fromToUnemploymentRate.year1
+                            + " to "+$scope.fromToUnemploymentRate.year2 ;
+                    });
+                   }
+                 $scope.status= "";
+               }else{
+                   if(numero == undefined){
+                        $http.get(api+"?from="+year1+"&to="+year2+
+                            "&limit="+10+"&offset="+pag).then(function (response){
+                    $scope.unemploymentRates = response.data;
+                   
+                });
+                   }
+                  
+               }
             }
-           
             
             getUnemploymentRates();
             
