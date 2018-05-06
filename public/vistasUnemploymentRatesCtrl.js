@@ -88,16 +88,12 @@ angular.module("RoRoMonApp")
             document.getElementById("stadistics3"),  // containing div
             
             
-            "Date, First Grade, Second Grade, Third Degree\n" +                // the data series
+            "Date, First Grade\n" +                // the data series
             "1981, "+response.data.filter(d=>d.year==1981).
-                        map(function(d){return (parseFloat(d['first-grade']),
-                                            parseFloat(d['second-grade']),
-                                            parseFloat(d['third-degree']))
+                        map(function(d){return (parseFloat(d['first-grade']))
                         })+"\n" +
             "1982, "+response.data.filter(d=>d.year==1982).
-                        map(function(d){return (parseFloat(d['first-grade']),
-                                            parseFloat(d['second-grade']),
-                                            parseFloat(d['third-degree']))
+                        map(function(d){return (parseFloat(d['first-grade']))
                         })+"\n"
          );
       });
