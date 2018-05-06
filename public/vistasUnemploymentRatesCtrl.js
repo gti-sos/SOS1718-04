@@ -88,54 +88,18 @@ angular.module("RoRoMonApp")
             document.getElementById("stadistics3"),  // containing div
             
             
-            "Province,PassRate\n" +                // the data series
-            "'Huelva', "+parseInt(response.data.filter(d=>d.province=='huelva').
+            "Date,PassRate\n" +                // the data series
+            "1981, "+parseInt(response.data.filter(d=>d.province=='huelva').
                         map(function(d){return (parseFloat(d['first-grade'])+
                                             parseFloat(d['second-grade'])+
                                             parseFloat(d['third-degree']))
                                              /response.data.filter(d=>d.province=='huelva').length
                         }))+"\n" +
-            "'Sevilla', "+parseInt(response.data.filter(d=>d.province=='sevilla').
+            "1982, "+parseInt(response.data.filter(d=>d.province=='sevilla').
                         map(function(d){return (parseFloat(d['first-grade'])+
                                             parseFloat(d['second-grade'])+
                                             parseFloat(d['third-degree']))
                                              /response.data.filter(d=>d.province=='sevilla').length
-                        }))+"\n" +
-            "'Málaga', "+parseInt(response.data.filter(d=>d.province=='malaga').
-                        map(function(d){return (parseFloat(d['first-grade'])+
-                                            parseFloat(d['second-grade'])+
-                                            parseFloat(d['third-degree']))
-                                             /response.data.filter(d=>d.province=='malaga').length
-                        }))+"\n" +
-            "'Córdoba', "+parseInt(response.data.filter(d=>d.province=='cordoba').
-                        map(function(d){return (parseFloat(d['first-grade'])+
-                                            parseFloat(d['second-grade'])+
-                                            parseFloat(d['third-degree']))
-                                             /response.data.filter(d=>d.province=='cordoba').length
-                        }))+"\n" +
-            "'Cádiz', "+parseInt(response.data.filter(d=>d.province=='cadiz').
-                        map(function(d){return (parseFloat(d['first-grade'])+
-                                            parseFloat(d['second-grade'])+
-                                            parseFloat(d['third-degree']))
-                                             /response.data.filter(d=>d.province=='cadiz').length
-                        }))+"\n" +
-            "'Jaén', "+parseInt(response.data.filter(d=>d.province=='jaen').
-                        map(function(d){return (parseFloat(d['first-grade'])+
-                                            parseFloat(d['second-grade'])+
-                                            parseFloat(d['third-degree']))
-                                             /response.data.filter(d=>d.province=='jaen').length
-                        }))+"\n" +
-            "'Almería', "+parseInt(response.data.filter(d=>d.province=='almeria').
-                        map(function(d){return (parseFloat(d['first-grade'])+
-                                            parseFloat(d['second-grade'])+
-                                            parseFloat(d['third-degree']))
-                                             /response.data.filter(d=>d.province=='almeria').length
-                        }))+"\n" +
-            "'Granada', "+parseInt(response.data.filter(d=>d.province=='granada').
-                        map(function(d){return (parseFloat(d['first-grade'])+
-                                            parseFloat(d['second-grade'])+
-                                            parseFloat(d['third-degree']))
-                                             /response.data.filter(d=>d.province=='granada').length
                         }))+"\n",
             { }                                   // the options
          );
