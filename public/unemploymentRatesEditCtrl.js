@@ -1,6 +1,6 @@
 /* global angular*/
 angular
-    .module("UnemploymentRatesApp")
+    .module("RoRoMonApp")
     .controller("unemploymentRatesEditCtrl", ["$scope", "$http","$routeParams","$location", function($scope, $http, $routeParams,$location) {
         console.log("EditCtrl initialized!");
         var unemploymentRatesURL = "/api/v1/unemployment-rates/"+$routeParams.province+"/"+$routeParams.year;
