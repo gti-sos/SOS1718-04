@@ -10,85 +10,83 @@ angular.module("RoRoMonApp")
             var api = "/api/v1/unemployment-rates";
 
  $http.get("/api/v1/unemployment-rates").then(function(response){
-   google.charts.load('current', {
-        'packages':['geochart'],
-        // Note: you will need to get a mapsApiKey for your project.
-        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-      });
-      google.charts.setOnLoadCallback(drawRegionsMap);
-      function drawRegionsMap() {
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
            
         var data = google.visualization.arrayToDataTable([
            
           ['Illiterate', 'First Grade', 'Second Grade', 'Third Degree'],
           ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
+                        map(function(d){return (parseFloat(d["illiterate"]),
+                                            parseFloat(d["first-grade"]),
+                                            parseFloat(d["second-grade"]),
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="huelva").length
                         }))],
           ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
+                        map(function(d){return (parseFloat(d["illiterate"]),
+                                            parseFloat(d["first-grade"]),
+                                            parseFloat(d["second-grade"]),
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="seville").length
                         }))],
           ['Malaga', parseInt(response.data.filter(d=>d.province=="malaga").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-gradel"])+
+                        map(function(d){return (parseFloat(d["illiterate"]),
+                                            parseFloat(d["first-grade"]),
+                                            parseFloat(d["second-gradel"]),
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="malaga").length
                                             
                         }))],
           ['Granada', parseInt(response.data.filter(d=>d.province=="granada").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
+                        map(function(d){return (parseFloat(d["illiterate"]),
+                                            parseFloat(d["first-grade"]),
+                                            parseFloat(d["second-grade"]),
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="granada").length
                         }))],
           ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
+                        map(function(d){return (parseFloat(d["illiterate"]),
+                                            parseFloat(d["first-grade"]),
+                                            parseFloat(d["second-grade"]),
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="almeria").length
                         }))],
           ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
+                        map(function(d){return (parseFloat(d["illiterate"]),
+                                            parseFloat(d["first-grade"]),
+                                            parseFloat(d["second-grade"]),
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="cadiz").length
                         }))],
           ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
+                        map(function(d){return (parseFloat(d["illiterate"]),
+                                            parseFloat(d["first-grade"]),
+                                            parseFloat(d["second-grade"]),
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="jaen").length
                         }))],
           ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
+                        map(function(d){return (parseFloat(d["illiterate"]),
+                                            parseFloat(d["first-grade"]),
+                                            parseFloat(d["second-grade"]),
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="cordoba").length
                         }))],
         ]);
         
+    var options = {
+      title : 'Unemployment Rates',
+      vAxis: {title: 'Cups'},
+      hAxis: {title: 'Month'},
+      seriesType: 'bars',
+      series: {5: {type: 'line'}}
+    };
 
-        var options = {
-            region: 'ES',
-        };
-
-        var chart = new google.visualization.GeoChart(document.getElementById('stadistics2'));
-
-        chart.draw(data, options);
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
       };
  });
 
