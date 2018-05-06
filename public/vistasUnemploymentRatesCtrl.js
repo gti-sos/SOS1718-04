@@ -90,15 +90,15 @@ angular.module("RoRoMonApp")
             
             "Date, First Grade, Second Grade, Third Degree\n" +                // the data series
             "1981, "+response.data.filter(d=>d.year==1981).
-                        map(function(d){return (parseFloat(d['first-grade']),
-                                            parseFloat(d['second-grade']),
-                                            parseFloat(d['third-degree']))
+                        map(function(d){return (parseInt(d['first-grade']),
+                                            parseInt(d['second-grade']),
+                                            parseInt(d['third-degree']))
                                              /response.data.filter(d=>d.year==1981).length
                         })+"\n" +
             "1982, "+response.data.filter(d=>d.year==1982).
-                        map(function(d){return (parseFloat(d['first-grade']),
-                                            parseFloat(d['second-grade']),
-                                            parseFloat(d['third-degree']))
+                        map(function(d){return (parseInt(d['first-grade']),
+                                            parseInt(d['second-grade']),
+                                            parseInt(d['third-degree']))
                                              /response.data.filter(d=>d.year==1982).length
                         })+"\n"
          );
