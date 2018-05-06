@@ -35,6 +35,16 @@ angular.module("RoRoMonApp")
                             parseInt(response.data.filter(d => d.province == "cordoba" && d.year == 2016).map(d => { return d.year })),
                         ], ['Malaga', parseFloat(response.data.filter(d => d.province == "malaga" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "malaga" && d.year == 2016).map(d => { return d.year })),
+                        ], ['Jaen', parseFloat(response.data.filter(d => d.province == "jaen" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                            parseInt(response.data.filter(d => d.province == "jaen" && d.year == 2016).map(d => { return d.year })),
+                        ], ['Granada', parseFloat(response.data.filter(d => d.province == "granada" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                            parseInt(response.data.filter(d => d.province == "granada" && d.year == 2016).map(d => { return d.year })),
+                        ], ['Almeria', parseFloat(response.data.filter(d => d.province == "almeria" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                            parseInt(response.data.filter(d => d.province == "almeria" && d.year == 2016).map(d => { return d.year })),
+                        ], ['Huelva', parseFloat(response.data.filter(d => d.province == "huelva" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                            parseInt(response.data.filter(d => d.province == "huelva" && d.year == 2016).map(d => { return d.year })),
+                        ], ['Cadiz', parseFloat(response.data.filter(d => d.province == "cadiz" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                            parseInt(response.data.filter(d => d.province == "cadiz" && d.year == 2016).map(d => { return d.year })),
                         ]
                         
                         
