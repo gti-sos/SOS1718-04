@@ -4,7 +4,8 @@ angular
     .controller("medicalAttentionRatesListCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("ListCtrl initialized!");
         var api = "/api/v1/medical-attention-rates";
-
+        var offset = 0;
+        var limit = 10;
 
         $scope.addMedicalAttentionRate = function() {
             $http.post(api, $scope.newMedicalAttentionRate).then(function successCallback(response) {
@@ -58,8 +59,7 @@ angular
 
         }
 
-        var offset = 0;
-        var limit = 10;
+        
         function getMedicalAttentionRates() {
             
             console.log("entro aqui" + $scope.query.year1 + $scope.query.year2);

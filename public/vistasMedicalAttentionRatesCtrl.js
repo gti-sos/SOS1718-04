@@ -27,27 +27,34 @@ angular.module("RoRoMonApp")
 
                 function drawMarkersMap() {
                     var data = google.visualization.arrayToDataTable([
-                        ['Province', 'General Medicine' ,'year'],
-                    
+                        ['Province', 'General Medicine', 'year'],
+
                         ['Seville', parseFloat(response.data.filter(d => d.province == "sevilla" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "sevilla" && d.year == 2016).map(d => { return d.year })),
-                        ],['Cordoba', parseFloat(response.data.filter(d => d.province == "cordoba" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                        ],
+                        ['Cordoba', parseFloat(response.data.filter(d => d.province == "cordoba" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "cordoba" && d.year == 2016).map(d => { return d.year })),
-                        ], ['Malaga', parseFloat(response.data.filter(d => d.province == "malaga" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                        ],
+                        ['Malaga', parseFloat(response.data.filter(d => d.province == "malaga" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "malaga" && d.year == 2016).map(d => { return d.year })),
-                        ], ['Jaen', parseFloat(response.data.filter(d => d.province == "jaen" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                        ],
+                        ['Jaen', parseFloat(response.data.filter(d => d.province == "jaen" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "jaen" && d.year == 2016).map(d => { return d.year })),
-                        ], ['Granada', parseFloat(response.data.filter(d => d.province == "granada" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                        ],
+                        ['Granada', parseFloat(response.data.filter(d => d.province == "granada" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "granada" && d.year == 2016).map(d => { return d.year })),
-                        ], ['Almeria', parseFloat(response.data.filter(d => d.province == "almeria" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                        ],
+                        ['Almeria', parseFloat(response.data.filter(d => d.province == "almeria" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "almeria" && d.year == 2016).map(d => { return d.year })),
-                        ], ['Huelva', parseFloat(response.data.filter(d => d.province == "huelva" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                        ],
+                        ['Huelva', parseFloat(response.data.filter(d => d.province == "huelva" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "huelva" && d.year == 2016).map(d => { return d.year })),
-                        ], ['Cadiz', parseFloat(response.data.filter(d => d.province == "cadiz" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                        ],
+                        ['Cadiz', parseFloat(response.data.filter(d => d.province == "cadiz" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "cadiz" && d.year == 2016).map(d => { return d.year })),
                         ]
-                        
-                        
+
+
 
                     ]);
 
@@ -198,7 +205,7 @@ angular.module("RoRoMonApp")
 
 
             });
-
+        /*
         $http
             .get("/api/v1/medical-attention-rates")
             .then(function(response) {
@@ -274,4 +281,97 @@ angular.module("RoRoMonApp")
                 };
                 var graph2d = new vis.Graph2d(container, dataset, options);
             });
+            */
+
+
+        $http
+            .get("/api/v1/medical-attention-rates")
+            .then(function(response) {
+
+                var container = document.getElementById('visualization');
+                var groups = new vis.DataSet();
+                groups.add({ id: 0, content: "Seville" })
+                groups.add({ id: 1, content: "Cordoba" })
+                groups.add({ id: 2, content: "Cadiz" })
+                groups.add({ id: 3, content: "Huelva" })
+                groups.add({ id: 4, content: "Jaen" })
+                groups.add({ id: 5, content: "Granada" })
+                groups.add({ id: 6, content: "Almeria" })
+                groups.add({ id: 7, content: "Malaga" })
+
+                var items = [
+                    
+                    { x: '2012-06-11', y: response.data.filter(d => d.province === 'sevilla' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 0 },
+                    { x: '2013-06-12', y: response.data.filter(d => d.province === 'sevilla' && d.year ===2013).map(function(d) { return d["social-work"] }), group: 0 },
+                    { x: '2014-06-13', y: response.data.filter(d => d.province === 'sevilla' && d.year ===2014).map(function(d) { return d["social-work"] }), group: 0 },
+                    { x: '2015-06-14', y: response.data.filter(d => d.province === 'sevilla' && d.year ===2015).map(function(d) { return d["social-work"] }), group: 0 },
+                    { x: '2016-06-15', y: response.data.filter(d => d.province === 'sevilla' && d.year ===2016).map(function(d) { return d["social-work"] }), group: 0 },
+                    
+                    { x: '2012-06-11', y: response.data.filter(d => d.province === 'cordoba' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 1 },
+                    { x: '2013-06-12', y: response.data.filter(d => d.province === 'cordoba' && d.year ===2013).map(function(d) { return d["social-work"] }), group: 1 },
+                    { x: '2014-06-13', y: response.data.filter(d => d.province === 'cordoba' && d.year ===2014).map(function(d) { return d["social-work"] }), group: 1 },
+                    { x: '2015-06-14', y: response.data.filter(d => d.province === 'cordoba' && d.year ===2015).map(function(d) { return d["social-work"] }), group: 1 },
+                    { x: '2016-06-15', y: response.data.filter(d => d.province === 'cordoba' && d.year ===2016).map(function(d) { return d["social-work"] }), group: 1 },
+                    
+                    { x: '2012-06-11', y: response.data.filter(d => d.province === 'cadiz' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 2 },
+                    { x: '2013-06-12', y: response.data.filter(d => d.province === 'cadiz' && d.year ===2013).map(function(d) { return d["social-work"] }), group: 2 },
+                    { x: '2014-06-13', y: response.data.filter(d => d.province === 'cadiz' && d.year ===2014).map(function(d) { return d["social-work"] }), group: 2 },
+                    { x: '2015-06-14', y: response.data.filter(d => d.province === 'cadiz' && d.year ===2015).map(function(d) { return d["social-work"] }), group: 2 },
+                    { x: '2016-06-15', y: response.data.filter(d => d.province === 'cadiz' && d.year ===2016).map(function(d) { return d["social-work"] }), group: 2 },
+                    
+                    { x: '2012-06-11', y: response.data.filter(d => d.province === 'huelva' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 3 },
+                    { x: '2013-06-12', y: response.data.filter(d => d.province === 'huelva' && d.year ===2013).map(function(d) { return d["social-work"] }), group: 3 },
+                    { x: '2014-06-13', y: response.data.filter(d => d.province === 'huelva' && d.year ===2014).map(function(d) { return d["social-work"] }), group: 3 },
+                    { x: '2015-06-14', y: response.data.filter(d => d.province === 'huelva' && d.year ===2015).map(function(d) { return d["social-work"] }), group: 3 },
+                    { x: '2016-06-15', y: response.data.filter(d => d.province === 'huelva' && d.year ===2016).map(function(d) { return d["social-work"] }), group: 3 },
+                    
+                    { x: '2012-06-11', y: response.data.filter(d => d.province === 'jaen' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 4 },
+                    { x: '2013-06-12', y: response.data.filter(d => d.province === 'jaen' && d.year ===2013).map(function(d) { return d["social-work"] }), group: 4 },
+                    { x: '2014-06-13', y: response.data.filter(d => d.province === 'jaen' && d.year ===2014).map(function(d) { return d["social-work"] }), group: 4 },
+                    { x: '2015-06-14', y: response.data.filter(d => d.province === 'jaen' && d.year ===2015).map(function(d) { return d["social-work"] }), group: 4 },
+                    { x: '2016-06-15', y: response.data.filter(d => d.province === 'jaen' && d.year ===2016).map(function(d) { return d["social-work"] }), group: 4 },
+                    
+                    { x: '2012-06-11', y: response.data.filter(d => d.province === 'granada' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 5 },
+                    { x: '2013-06-12', y: response.data.filter(d => d.province === 'granada' && d.year ===2013).map(function(d) { return d["social-work"] }), group: 5 },
+                    { x: '2014-06-13', y: response.data.filter(d => d.province === 'granada' && d.year ===2014).map(function(d) { return d["social-work"] }), group: 5 },
+                    { x: '2015-06-14', y: response.data.filter(d => d.province === 'granada' && d.year ===2015).map(function(d) { return d["social-work"] }), group: 5 },
+                    { x: '2016-06-15', y: response.data.filter(d => d.province === 'granada' && d.year ===2016).map(function(d) { return d["social-work"] }), group: 5 },
+                    
+                    { x: '2012-06-11', y: response.data.filter(d => d.province === 'almeria' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 6 },
+                    { x: '2013-06-12', y: response.data.filter(d => d.province === 'almeria' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 6 },
+                    { x: '2014-06-13', y: response.data.filter(d => d.province === 'almeria' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 6 },
+                    { x: '2015-06-14', y: response.data.filter(d => d.province === 'almeria' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 6 },
+                    { x: '2016-06-15', y: response.data.filter(d => d.province === 'almeria' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 6 },
+                    
+                    { x: '2012-06-11', y: response.data.filter(d => d.province === 'malaga' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 7 },
+                    { x: '2013-06-12', y: response.data.filter(d => d.province === 'malaga' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 7 },
+                    { x: '2014-06-13', y: response.data.filter(d => d.province === 'malaga' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 7 },
+                    { x: '2015-06-14', y: response.data.filter(d => d.province === 'malaga' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 7 },
+                    { x: '2016-06-15', y: response.data.filter(d => d.province === 'malaga' && d.year ===2012).map(function(d) { return d["social-work"] }), group: 7 },
+                ];
+
+                var dataset = new vis.DataSet(items);
+                var options = {
+                    style: 'bar',
+                    stack: false,
+                    barChart: { width: 50, align: 'center', sideBySide: true }, // align: left, center, right
+                    drawPoints: false,
+                    dataAxis: {
+                        icons: true
+                    },
+                    orientation: 'top',
+                    start: '2012-06-10',
+                    end: '2016-06-18'
+                };
+                var graph2d = new vis.Graph2d(container, items, groups, options);
+
+                var dropdown = document.getElementById("dropdownID");
+                dropdown.onchange = update;
+
+                function update() {
+                    var options = { stack: dropdown.value === 'stack', barChart: { sideBySide: dropdown.value === 'sideBySide' } };
+                    graph2d.setOptions(options);
+                }
+            });
+
     }]);
