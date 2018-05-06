@@ -100,8 +100,7 @@ angular.module("RoRoMonApp")
                                             parseFloat(d['second-grade'])+
                                             parseFloat(d['third-degree']))
                                              /response.data.filter(d=>d.province=='sevilla').length
-                        }))+"\n",
-            { }                                   // the options
+                        }))+"\n"
          );
       });
 
