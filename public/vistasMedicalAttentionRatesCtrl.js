@@ -1,7 +1,7 @@
 /*global angular*/
 /*global Highcharts*/
 /*global google*/
-/*global Morris*/
+/*global uv*/
 
 "use strict"
 angular.module("RoRoMonApp")
@@ -30,11 +30,11 @@ angular.module("RoRoMonApp")
                                 parseFloat(d["social-work"])) /
                             response.data.filter(d => d.province == "huelva").length
                     }))],
-                    ['Sevilla', parseInt(response.data.filter(d => d.province == "seville").map(function(d) {
+                    ['Sevilla', parseInt(response.data.filter(d => d.province == "sevilla").map(function(d) {
                         return (parseFloat(d["nursing"]) +
                                 parseFloat(d["general-medicine"]) +
                                 parseFloat(d["social-work"])) /
-                            response.data.filter(d => d.province == "seville").length
+                            response.data.filter(d => d.province == "sevilla").length
                     }))],
                     ['Malaga', parseInt(response.data.filter(d => d.province == "malaga").map(function(d) {
                         return (parseFloat(d["nursing"]) +
@@ -84,7 +84,7 @@ angular.module("RoRoMonApp")
                     colorAxis: { colors: ['red', 'yellow', 'green', 'blue'] }
                 };
 
-                var chart = new google.visualization.GeoChart(document.getElementById('stadistics2'));
+                var chart = new google.visualization.GeoChart(document.getElementById('medicalAttentionRates1'));
 
                 chart.draw(data, options);
             };
@@ -155,71 +155,91 @@ angular.module("RoRoMonApp")
         });
     });
            */
-           
+
         $http
             .get("/api/v1/medical-attention-rates")
-            .then(function (response){
-                
-                
-                
+            .then(function(response) {
+
+
+
                 Highcharts.chart('medicalAttentionRates2', {
-            chart: {
-                type: 'area'
-            },
-            title: {
-                text: 'Medical attention rates'
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-                categories: ['2000', '2005', '2010', '2015', '2020'],
-                tickmarkPlacement: 'on',
-                title: {
-                    enabled: false
-                }
-            },
-            yAxis: {
-                title: {
-                    text: 'Billions'
-                
-                }
-            },
-            tooltip: {
-                split: true,
-                valueSuffix: ' millions'
-            },
-            plotOptions: {
-                area: {
-                    stacking: 'normal',
-                    lineColor: '#666666',
-                    lineWidth: 1,
-                    marker: {
-                        lineWidth: 1,
-                        lineColor: '#666666'
-                    }
-                }
-            },
-            
-            series: [{
-                
-                name: 'Nursing',
-                data: response.data.map(function(d){return d["nursing"]})
-            }, {
-                name: 'General Medicine',
-                data:  response.data.map(function(d){return d["general-medicine"]})
-            }, {
-                name: 'Social work',
-                data: response.data.map(function(d){return d["social-work"]})
-            }]
-            
-        });
-                
-                
+                    chart: {
+                        type: 'area'
+                    },
+                    title: {
+                        text: 'Medical attention rates'
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: ['2000', '2005', '2010', '2015', '2020'],
+                        tickmarkPlacement: 'on',
+                        title: {
+                            enabled: false
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Billions'
+
+                        }
+                    },
+                    tooltip: {
+                        split: true,
+                        valueSuffix: ' millions'
+                    },
+                    plotOptions: {
+                        area: {
+                            stacking: 'normal',
+                            lineColor: '#666666',
+                            lineWidth: 1,
+                            marker: {
+                                lineWidth: 1,
+                                lineColor: '#666666'
+                            }
+                        }
+                    },
+
+                    series: [{
+
+                        name: 'Nursing',
+                        data: response.data.map(function(d) { return d["nursing"] })
+                    }, {
+                        name: 'General Medicine',
+                        data: response.data.map(function(d) { return d["general-medicine"] })
+                    }, {
+                        name: 'Social work',
+                        data: response.data.map(function(d) { return d["social-work"] })
+                    }]
+
+                });
+
+
             });
+
+            var chart = uv.chart('Bar',graphdef);
+            var graphdef = {
+                categories: ['uvCharts'],
+                dataSet: {
+                    'uvCharts': [
+                        { name: '2009', value: 67 },
+                        { name: '2010', value: 97 },
+                        { name: '2011', value: 100 },
+                        { name: '2012', value: 170 },
+                        { name: '2013', value: 200 },
+
+
+                    ]
+                }
+            };
+            
+            
 
 
         
+
+
 
 
     }]);
