@@ -85,7 +85,7 @@ angular.module("RoRoMonApp")
       series: {5: {type: 'line'}}
     };
 
-    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    var chart = new google.visualization.ComboChart(document.getElementById('stadistics2'));
     chart.draw(data, options);
       };
  });
