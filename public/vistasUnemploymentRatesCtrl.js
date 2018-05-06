@@ -19,58 +19,50 @@ angular.module("RoRoMonApp")
            
           ['Province', 'PassRate'],
           ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
+                        map(function(d){return (parseFloat(d["first-grade"])+
                                             parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="huelva").length
                         }))],
           ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
+                        map(function(d){return (parseFloat(d["first-grade"])+
                                             parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"]))
-                                             /response.data.filter(d=>d.province=="seville").length
+                                             /response.data.filter(d=>d.province=="sevilla").length
                         }))],
           ['Malaga', parseInt(response.data.filter(d=>d.province=="malaga").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
+                        map(function(d){return (parseFloat(d["first-grade"])+
                                             parseFloat(d["second-gradel"])+
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="malaga").length
                                             
                         }))],
           ['Granada', parseInt(response.data.filter(d=>d.province=="granada").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
+                        map(function(d){return (parseFloat(d["first-grade"])+
                                             parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="granada").length
                         }))],
           ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
+                        map(function(d){return (parseFloat(d["first-grade"])+
                                             parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="almeria").length
                         }))],
           ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
+                        map(function(d){return (parseFloat(d["first-grade"])+
                                             parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="cadiz").length
                         }))],
           ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
+                        map(function(d){return (parseFloat(d["first-grade"])+
                                             parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="jaen").length
                         }))],
           ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba").
-                        map(function(d){return (parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
+                        map(function(d){return (parseFloat(d["first-grade"])+
                                             parseFloat(d["second-grade"])+
                                             parseFloat(d["third-degree"]))
                                              /response.data.filter(d=>d.province=="cordoba").length
