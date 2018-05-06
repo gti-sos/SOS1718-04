@@ -21,7 +21,7 @@ angular.module("RoRoMonApp")
            
         var data = google.visualization.arrayToDataTable([
            
-          ['Province', 'PassRate'],
+          ['Illiterate', 'First Grade', 'Second Grade', 'Third Degree'],
           ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva").
                         map(function(d){return (parseFloat(d["illiterate"])+
                                             parseFloat(d["first-grade"])+
