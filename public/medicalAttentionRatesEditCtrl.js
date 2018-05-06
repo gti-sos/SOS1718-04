@@ -1,6 +1,6 @@
 /* global angular*/
 angular
-    .module("MedicalAttentionRatesApp")
+    .module("RoRoMonApp")
     .controller("medicalAttentionRatesEditCtrl", ["$scope", "$http","$routeParams","$location", function($scope, $http, $routeParams,$location) {
         console.log("EditCtrl initialized!");
         var URL = "/api/v1/medical-attention-rates/"+$routeParams.province+"/"+$routeParams.year;

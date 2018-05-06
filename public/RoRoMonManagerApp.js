@@ -29,6 +29,15 @@ angular
                 .when("/unemployment-rates/analytics",{
                     templateUrl:"vistasUnemploymentRates.html",
                     controller: "vistasUnemploymentRatesCtrl"
-                });
+                })
+                .when("/medical-attention-rates",{
+                    templateUrl:"medicalAttentionRatesList.html",
+                    controller: "medicalAttentionRatesListCtrl"
+                })
+                .when("/medical-attention-rates/:province/:year",{
+                    templateUrl:"medicalAttentionRatesEdit.html",
+                    controller: "medicalAttentionRatesEditCtrl"
+                })
+                ;
                 
     });
