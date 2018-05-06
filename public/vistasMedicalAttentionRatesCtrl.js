@@ -27,28 +27,17 @@ angular.module("RoRoMonApp")
 
                 function drawMarkersMap() {
                     var data = google.visualization.arrayToDataTable([
-                        ['Province', 'General Medicine', 'Year'],
-                        ['Huelva', parseFloat(response.data.filter(d => d.province == "huelva" && d.year == 2016).map(d => { return d['general-medicine'] })),
-                            parseInt(response.data.filter(d => d.province == "huelva" && d.year == 2016).map(d => { return d.year })),
-                        ],
+                        ['Province', 'General Medicine' ,'year'],
+                    
                         ['Seville', parseFloat(response.data.filter(d => d.province == "sevilla" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "sevilla" && d.year == 2016).map(d => { return d.year })),
-                        ],
-                        ['Malaga', parseFloat(response.data.filter(d => d.province == "malaga" && d.year == 2016).map(d => { return d['general-medicine'] })),
-                            parseInt(response.data.filter(d => d.province == "malaga" && d.year == 2016).map(d => { return d.year })),
-                        ],
-                        ['Cadiz', parseFloat(response.data.filter(d => d.province == "cadiz" && d.year == 2016).map(d => { return d['general-medicine'] })),
-                            parseInt(response.data.filter(d => d.province == "cadiz" && d.year == 2016).map(d => { return d.year })),
-                        ],
-                        ['Jaen', parseFloat(response.data.filter(d => d.province == "jaen" && d.year == 2016).map(d => { return d['general-medicine'] })),
-                            parseInt(response.data.filter(d => d.province == "jaen" && d.year == 2016).map(d => { return d.year })),
-                        ],
-                        ['Cordoba', parseFloat(response.data.filter(d => d.province == "cordoba" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                        ],['Cordoba', parseFloat(response.data.filter(d => d.province == "cordoba" && d.year == 2016).map(d => { return d['general-medicine'] })),
                             parseInt(response.data.filter(d => d.province == "cordoba" && d.year == 2016).map(d => { return d.year })),
-                        ],
-                        ['Granada', parseFloat(response.data.filter(d => d.province == "granada" && d.year == 2016).map(d => { return d['general-medicine'] })),
-                            parseInt(response.data.filter(d => d.province == "granada" && d.year == 2016).map(d => { return d.year })),
-                        ],
+                        ], ['Malaga', parseFloat(response.data.filter(d => d.province == "malaga" && d.year == 2016).map(d => { return d['general-medicine'] })),
+                            parseInt(response.data.filter(d => d.province == "malaga" && d.year == 2016).map(d => { return d.year })),
+                        ]
+                        
+                        
 
                     ]);
 
@@ -115,30 +104,84 @@ angular.module("RoRoMonApp")
 
                     series: [{
 
-                        name: 'Nursing Sevilla',
-                        data: response.data.filter(d => d.province === 'sevilla').map(function(d) { return d["nursing"] })
-                    }, {
-                        name: 'General Medicine Sevilla',
-                        data: response.data.filter(d => d.province === 'sevilla').map(function(d) { return d["general-medicine"] })
-                    }, {
-                        name: 'Social work Sevilla',
-                        data: response.data.filter(d => d.province === 'sevilla').map(function(d) { return d["social-work"] })
-                    }, {
-                        name: 'Nursing Cordoba',
-                        data: response.data.filter(d => d.province === 'cordoba').map(function(d) { return d["nursing"] })
-                    },{
-                        name: 'General Medicine Cordoba',
-                        data: response.data.filter(d => d.province === 'cordoba').map(function(d) { return d["general-medicine"] })
-                    }, {
-                        name: 'Social work Cordoba',
-                        data: response.data.filter(d => d.province === 'cordoba').map(function(d) { return d["social-work"] })
-                    }
-                    
-                    
-                    
-                    
-                    
-                    
+                            name: 'Nursing Sevilla',
+                            data: response.data.filter(d => d.province === 'sevilla').map(function(d) { return d["nursing"] })
+                        }, {
+                            name: 'General Medicine Sevilla',
+                            data: response.data.filter(d => d.province === 'sevilla').map(function(d) { return d["general-medicine"] })
+                        }, {
+                            name: 'Social work Sevilla',
+                            data: response.data.filter(d => d.province === 'sevilla').map(function(d) { return d["social-work"] })
+                        }, {
+                            name: 'Nursing Cordoba',
+                            data: response.data.filter(d => d.province === 'cordoba').map(function(d) { return d["nursing"] })
+                        }, {
+                            name: 'General Medicine Cordoba',
+                            data: response.data.filter(d => d.province === 'cordoba').map(function(d) { return d["general-medicine"] })
+                        }, {
+                            name: 'Social work Cordoba',
+                            data: response.data.filter(d => d.province === 'cordoba').map(function(d) { return d["social-work"] })
+                        }, {
+                            name: 'Nursing Malaga',
+                            data: response.data.filter(d => d.province === 'malaga').map(function(d) { return d["nursing"] })
+                        }, {
+                            name: 'General Medicine Malaga',
+                            data: response.data.filter(d => d.province === 'malaga').map(function(d) { return d["general-medicine"] })
+                        }, {
+                            name: 'Social work Malaga',
+                            data: response.data.filter(d => d.province === 'malaga').map(function(d) { return d["social-work"] })
+                        }, {
+                            name: 'Nursing Granada',
+                            data: response.data.filter(d => d.province === 'granada').map(function(d) { return d["nursing"] })
+                        }, {
+                            name: 'General Medicine Granada',
+                            data: response.data.filter(d => d.province === 'granada').map(function(d) { return d["general-medicine"] })
+                        }, {
+                            name: 'Social work Granada',
+                            data: response.data.filter(d => d.province === 'granada').map(function(d) { return d["social-work"] })
+                        }, {
+                            name: 'Nursing Jaen',
+                            data: response.data.filter(d => d.province === 'jaen').map(function(d) { return d["nursing"] })
+                        }, {
+                            name: 'General Medicine Jaen',
+                            data: response.data.filter(d => d.province === 'jaen').map(function(d) { return d["general-medicine"] })
+                        }, {
+                            name: 'Social work Jaen',
+                            data: response.data.filter(d => d.province === 'jaen').map(function(d) { return d["social-work"] })
+                        }, {
+                            name: 'Nursing Huelva',
+                            data: response.data.filter(d => d.province === 'huelva').map(function(d) { return d["nursing"] })
+                        }, {
+                            name: 'General Medicine Huelva',
+                            data: response.data.filter(d => d.province === 'huelva').map(function(d) { return d["general-medicine"] })
+                        }, {
+                            name: 'Social work Huelva',
+                            data: response.data.filter(d => d.province === 'huelva').map(function(d) { return d["social-work"] })
+                        }, {
+                            name: 'Nursing Cadiz',
+                            data: response.data.filter(d => d.province === 'cadiz').map(function(d) { return d["nursing"] })
+                        }, {
+                            name: 'General Medicine Cadiz',
+                            data: response.data.filter(d => d.province === 'cadiz').map(function(d) { return d["general-medicine"] })
+                        }, {
+                            name: 'Social work Cadiz',
+                            data: response.data.filter(d => d.province === 'cadiz').map(function(d) { return d["social-work"] })
+                        }, {
+                            name: 'Nursing Almeria',
+                            data: response.data.filter(d => d.province === 'almeria').map(function(d) { return d["nursing"] })
+                        }, {
+                            name: 'General Medicine Almeria',
+                            data: response.data.filter(d => d.province === 'almeria').map(function(d) { return d["general-medicine"] })
+                        }, {
+                            name: 'Social work Almeria',
+                            data: response.data.filter(d => d.province === 'almeria').map(function(d) { return d["social-work"] })
+                        }
+
+
+
+
+
+
                     ]
 
                 });
