@@ -71,8 +71,8 @@ angular.module("RoRoMonApp")
         
     var options = {
       title : 'Unemployment Rates',
-      vAxis: {title: 'Cups'},
-      hAxis: {title: 'Month'},
+      vAxis: {title: 'Level'},
+      hAxis: {title: 'Province'},
       seriesType: 'bars',
       series: {5: {type: 'line'}}
     };
@@ -82,66 +82,28 @@ angular.module("RoRoMonApp")
       };
  });
 
- /*     
     $http.get("/api/v1/unemployment-rates").then(function(response){
-       
-           new Morris.Line({
-  // ID of the element in which to draw the chart.
-  
-  element: 'stadistics3',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-
-  data:[{year:"1981",value: parseInt(response.data.filter(d=>d.year==1981)
-                                            .map(function(d){ 
-                                            return parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
-                                            parseFloat(d["thid-degree"])
-                                                /response.data.filter(d=>d.year==2014).length
-                                            }
-                                             
-                        ))},
-        {year :"1982",value: parseInt(response.data.filter(d=>d.year==1982)
-                                            .map(function(d){ 
-                                            return parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
-                                            parseFloat(d["thid-degree"])
-                                                /response.data.filter(d=>d.year==2015).length
-                                            }
-                                             
-                        ))},
-        {year:"1983",value: parseInt(response.data.filter(d=>d.year==1983)
-                                            .map(function(d){ 
-                                            return parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
-                                            parseFloat(d["thid-degree"])
-                                                /response.data.filter(d=>d.year==2016).length
-                                            }
-                                             
-                        ))},
-        {year:"1984",value: parseInt(response.data.filter(d=>d.year==1984)
-                                            .map(function(d){ 
-                                            return parseFloat(d["illiterate"])+
-                                            parseFloat(d["first-grade"])+
-                                            parseFloat(d["second-grade"])+
-                                            parseFloat(d["thid-degree"])
-                                                /response.data.filter(d=>d.year==2017).length
-                                            }
-                                             
-                        ))}],
-  // The name of the data record attribute that contains x-values.
-  xkey: 'year',
-  // A list of names of data record attributes that contain y-values.
-  ykeys: ['value'],
-  // Labels for the ykeys -- will be displayed when you hover over the
-  // chart.
-  labels: ['Value']
-});
+        new Dygraph(
+                 
+            document.getElementById("stadistics3"),  // containing div
+            
+            
+            "Date,PassRate\n" +                // the data series
+            "1981, "+parseInt(response.data.filter(d=>d.year==1981).
+                        map(function(d){return (parseFloat(d['first-grade'])+
+                                            parseFloat(d['second-grade'])+
+                                            parseFloat(d['third-degree']))
+                                             /response.data.filter(d=>d.year==1981).length
+                        }))+"\n" +
+            "1982, "+parseInt(response.data.filter(d=>d.year==1982).
+                        map(function(d){return (parseFloat(d['first-grade'])+
+                                            parseFloat(d['second-grade'])+
+                                            parseFloat(d['third-degree']))
+                                             /response.data.filter(d=>d.year==1982).length
+                        }))+"\n"
+         );
       });
-   */     
+
         $http.get("/api/v1/unemployment-rates").then(function(response){
             
             Highcharts.chart('stadistics1', {
