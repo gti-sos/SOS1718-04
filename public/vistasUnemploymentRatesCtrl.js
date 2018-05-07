@@ -21,17 +21,9 @@ angular.module("RoRoMonApp")
            
     var data = google.visualization.arrayToDataTable([
                
-              ['Province', 'PassRate'],
+              ['Province', 'First Date'],
               ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
-                            map(function(d){return (parseFloat(d["first-grade"])+
-                                                parseFloat(d["second-grade"])+
-                                                parseFloat(d["third-degree"]))
-                            }))],
-              ['Malaga', parseInt(response.data.filter(d=>d.province=="malaga").
-                            map(function(d){return (parseFloat(d["first-grade"])+
-                                                parseFloat(d["second-gradel"])+
-                                                parseFloat(d["third-degree"]))
-                                                
+                            map(function(d){return (parseFloat(d["first-grade"]))
                             }))]
             ]);
             
