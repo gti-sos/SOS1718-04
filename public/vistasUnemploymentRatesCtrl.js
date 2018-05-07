@@ -8,7 +8,86 @@ angular.module("RoRoMonApp")
   .controller("vistasUnemploymentRatesCtrl", ["$scope","$http", function($scope,$http) {
             console.log("Vistas Ctrl initialized!");
             var api = "/api/v1/unemployment-rates";
+            
+ $http.get("/api/v2/graduation-rates").then(function(response){
+   google.charts.load('current', {
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+      function drawRegionsMap() {
+           
+ var data = google.visualization.arrayToDataTable([
+           
+          ['Province', 'PassRate'],
+          ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva").
+                        map(function(d){return (parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-grade"])+
+                                            parseFloat(d["third-degree"]))
+                                             /response.data.filter(d=>d.province=="huelva").length
+                        }))],
+          ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
+                        map(function(d){return (parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-grade"])+
+                                            parseFloat(d["third-degree"]))
+                                             /response.data.filter(d=>d.province=="sevilla").length
+                        }))],
+          ['Malaga', parseInt(response.data.filter(d=>d.province=="malaga").
+                        map(function(d){return (parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-gradel"])+
+                                            parseFloat(d["third-degree"]))
+                                             /response.data.filter(d=>d.province=="malaga").length
+                                            
+                        }))],
+          ['Granada', parseInt(response.data.filter(d=>d.province=="granada").
+                        map(function(d){return (parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-grade"])+
+                                            parseFloat(d["third-degree"]))
+                                             /response.data.filter(d=>d.province=="granada").length
+                        }))],
+          ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
+                        map(function(d){return (parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-grade"])+
+                                            parseFloat(d["third-degree"]))
+                                             /response.data.filter(d=>d.province=="almeria").length
+                        }))],
+          ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz").
+                        map(function(d){return (parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-grade"])+
+                                            parseFloat(d["third-degree"]))
+                                             /response.data.filter(d=>d.province=="cadiz").length
+                        }))],
+          ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen").
+                        map(function(d){return (parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-grade"])+
+                                            parseFloat(d["third-degree"]))
+                                             /response.data.filter(d=>d.province=="jaen").length
+                        }))],
+          ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba").
+                        map(function(d){return (parseFloat(d["first-grade"])+
+                                            parseFloat(d["second-grade"])+
+                                            parseFloat(d["third-degree"]))
+                                             /response.data.filter(d=>d.province=="cordoba").length
+                        }))],
+        ]);
+        
 
+        var options = {
+            region: 'ES',
+            colorAxis: {colors: ['#00853f', 'black', '#e31b23']},
+         
+        displayMode: 'markers',
+        colorAxis: {colors: ['red','yellow','green', 'blue']}
+        };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('stadistics2'));
+
+        chart.draw(data, options);
+      };
+ });
+/*
  $http.get("/api/v1/unemployment-rates").then(function(response){
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);
@@ -81,7 +160,7 @@ angular.module("RoRoMonApp")
     chart.draw(data, options);
       };
  });
-
+*/
     $http.get("/api/v1/unemployment-rates").then(function(response){
         new Dygraph(
                  
