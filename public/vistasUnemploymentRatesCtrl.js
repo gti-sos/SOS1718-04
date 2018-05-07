@@ -9,7 +9,7 @@ angular.module("RoRoMonApp")
             console.log("Vistas Ctrl initialized!");
             var api = "/api/v1/unemployment-rates";
             
- $http.get("/api/v2/graduation-rates").then(function(response){
+ $http.get("/api/v1/unemployment-rates").then(function(response){
    google.charts.load('current', {
         'packages':['geochart'],
         // Note: you will need to get a mapsApiKey for your project.
