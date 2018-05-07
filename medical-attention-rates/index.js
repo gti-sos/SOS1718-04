@@ -262,7 +262,6 @@ medicalAttentionRates.register = function(app, db) {
         //comprobamos si el dato que se va a introducir contiene algún error, tamaño y nombre de las propiedades
         //we have to validate the data that we insert in the database, if exist some error we send a error message.
         if (Object.keys(data).length > 5 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year") ||
-            data['nursing']==null||data['general-medicine']==null||data['social-work']||
             !data.hasOwnProperty("general-medicine") || !data.hasOwnProperty("nursing") || !data.hasOwnProperty("social-work")) {
             console.log("Error introducing the properties");
             res.sendStatus(400);
