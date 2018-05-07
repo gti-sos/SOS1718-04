@@ -8,7 +8,40 @@ angular.module("RoRoMonApp")
   .controller("vistasUnemploymentRatesCtrl", ["$scope","$http", function($scope,$http) {
             console.log("Vistas Ctrl initialized!");
             var api = "/api/v1/unemployment-rates";
+            
+ $http.get("/api/v1/unemployment-rates").then(function(response){
+   google.charts.load('current', {
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyB6jyX4JJp_esyzRPmp3qmf8qH_s-BG92E'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+      function drawRegionsMap() {
+           
+    var data = google.visualization.arrayToDataTable([
+               
+              ['Province', 'First Date'],
+              ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
+                            map(function(d){return (parseFloat(d["first-grade"]))
+                            }))]
+            ]);
+            
 
+        var options = {
+            region: 'ES',
+            colorAxis: {colors: ['#00853f', 'black', '#e31b23']},
+         
+        displayMode: 'markers',
+        colorAxis: {colors: ['red','yellow','green', 'blue']}
+        };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('stadistics2'));
+
+        chart.draw(data, options);
+      };
+ });
+/*
  $http.get("/api/v1/unemployment-rates").then(function(response){
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);
@@ -81,7 +114,7 @@ angular.module("RoRoMonApp")
     chart.draw(data, options);
       };
  });
-
+*/
     $http.get("/api/v1/unemployment-rates").then(function(response){
         new Dygraph(
                  

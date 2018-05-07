@@ -21,7 +21,7 @@ angular
                     $scope.updatedUnemploymentRate["third-degree"]==null||
                     $scope.updatedUnemploymentRate["min-age"]==null||
                     $scope.updatedUnemploymentRate["max-age"]==null){
-                    $scope.status="Error 400: debe completar todos los campos"
+                    $scope.status="Error: Debe completar todos los campos"
                     }
             });
         };

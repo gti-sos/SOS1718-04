@@ -6,20 +6,20 @@ angular.module("RoRoMonApp")
              
              $scope.addUnemploymentRate= function(){
                 $http.post(api,$scope.newUnemploymentRate).then(function (response){
-                    $scope.status= "Status: "+ response.status;
+                    $scope.status= "Status: Registro añadido con éxito";
                     getUnemploymentRates();
                 },function(){
                     if($scope.length!=5){
-                    $scope.status="Error 400: No están todos los campos rellenados"
+                    $scope.status="Error: No están todos los campos rellenados"
                     }else{
-                    $scope.status="Error 409: Ya existe la tasa de desempleo especificada"
+                    $scope.status="Error: Ya existe la tasa de desempleo especificada"
                     }
             });
             }
              $scope.deleteUnemploymentRate = function(province, year){
                 console.log("Unemployment rate to be delete :" + province,year);
                 $http.delete(api+"/"+province+"/"+year).then(function (response){
-                    $scope.status= "Status: "+ response.status;
+                    $scope.status= "Status: Registro borrado";
                     getUnemploymentRates();
                 });
                  getUnemploymentRates();
@@ -27,7 +27,7 @@ angular.module("RoRoMonApp")
             $scope.deleteUnemploymentRates = function(){
                 console.log("all unemployment rates will be delete" );
                 $http.delete(api+"/").then(function (response){
-                    $scope.status= "Status: "+ response.status;
+                    $scope.status= "Status: Registros borrados";
                     getUnemploymentRates();
                 });
                  getUnemploymentRates();
