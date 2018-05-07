@@ -14,7 +14,7 @@ angular.module("RoRoMonApp")
         'packages':['geochart'],
         // Note: you will need to get a mapsApiKey for your project.
         // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+        'mapsApiKey': 'AIzaSyB6jyX4JJp_esyzRPmp3qmf8qH_s-BG92E'
       });
       google.charts.setOnLoadCallback(drawRegionsMap);
       function drawRegionsMap() {
@@ -26,50 +26,42 @@ angular.module("RoRoMonApp")
                             map(function(d){return (parseFloat(d["first-grade"])+
                                                 parseFloat(d["second-grade"])+
                                                 parseFloat(d["third-degree"]))
-                                                 /response.data.filter(d=>d.province=="huelva").length
                             }))],
               ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
                             map(function(d){return (parseFloat(d["first-grade"])+
                                                 parseFloat(d["second-grade"])+
                                                 parseFloat(d["third-degree"]))
-                                                 /response.data.filter(d=>d.province=="sevilla").length
                             }))],
               ['Malaga', parseInt(response.data.filter(d=>d.province=="malaga").
                             map(function(d){return (parseFloat(d["first-grade"])+
                                                 parseFloat(d["second-gradel"])+
                                                 parseFloat(d["third-degree"]))
-                                                 /response.data.filter(d=>d.province=="malaga").length
                                                 
                             }))],
               ['Granada', parseInt(response.data.filter(d=>d.province=="granada").
                             map(function(d){return (parseFloat(d["first-grade"])+
                                                 parseFloat(d["second-grade"])+
                                                 parseFloat(d["third-degree"]))
-                                                 /response.data.filter(d=>d.province=="granada").length
                             }))],
               ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
                             map(function(d){return (parseFloat(d["first-grade"])+
                                                 parseFloat(d["second-grade"])+
                                                 parseFloat(d["third-degree"]))
-                                                 /response.data.filter(d=>d.province=="almeria").length
                             }))],
               ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz").
                             map(function(d){return (parseFloat(d["first-grade"])+
                                                 parseFloat(d["second-grade"])+
                                                 parseFloat(d["third-degree"]))
-                                                 /response.data.filter(d=>d.province=="cadiz").length
                             }))],
               ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen").
                             map(function(d){return (parseFloat(d["first-grade"])+
                                                 parseFloat(d["second-grade"])+
                                                 parseFloat(d["third-degree"]))
-                                                 /response.data.filter(d=>d.province=="jaen").length
                             }))],
               ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba").
                             map(function(d){return (parseFloat(d["first-grade"])+
                                                 parseFloat(d["second-grade"])+
                                                 parseFloat(d["third-degree"]))
-                                                 /response.data.filter(d=>d.province=="cordoba").length
                             }))],
             ]);
             
