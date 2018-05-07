@@ -24,6 +24,18 @@ angular.module("RoRoMonApp")
               ['Province', 'First Date'],
               ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
                             map(function(d){return (parseFloat(d["first-grade"]))
+                            }))],
+              ['Málaga', parseInt(response.data.filter(d=>d.province=="malaga").
+                            map(function(d){return (parseFloat(d["first-grade"]))
+                            }))],
+              ['Cádiz', parseInt(response.data.filter(d=>d.province=="cadiz").
+                            map(function(d){return (parseFloat(d["first-grade"]))
+                            }))],
+              ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
+                            map(function(d){return (parseFloat(d["first-grade"]))
+                            }))],
+              ['Córdoba', parseInt(response.data.filter(d=>d.province=="cordoba").
+                            map(function(d){return (parseFloat(d["first-grade"]))
                             }))]
             ]);
             
