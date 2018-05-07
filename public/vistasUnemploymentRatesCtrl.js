@@ -22,11 +22,6 @@ angular.module("RoRoMonApp")
     var data = google.visualization.arrayToDataTable([
                
               ['Province', 'PassRate'],
-              ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva").
-                            map(function(d){return (parseFloat(d["first-grade"])+
-                                                parseFloat(d["second-grade"])+
-                                                parseFloat(d["third-degree"]))
-                            }))],
               ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
                             map(function(d){return (parseFloat(d["first-grade"])+
                                                 parseFloat(d["second-grade"])+
@@ -37,32 +32,7 @@ angular.module("RoRoMonApp")
                                                 parseFloat(d["second-gradel"])+
                                                 parseFloat(d["third-degree"]))
                                                 
-                            }))],
-              ['Granada', parseInt(response.data.filter(d=>d.province=="granada").
-                            map(function(d){return (parseFloat(d["first-grade"])+
-                                                parseFloat(d["second-grade"])+
-                                                parseFloat(d["third-degree"]))
-                            }))],
-              ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
-                            map(function(d){return (parseFloat(d["first-grade"])+
-                                                parseFloat(d["second-grade"])+
-                                                parseFloat(d["third-degree"]))
-                            }))],
-              ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz").
-                            map(function(d){return (parseFloat(d["first-grade"])+
-                                                parseFloat(d["second-grade"])+
-                                                parseFloat(d["third-degree"]))
-                            }))],
-              ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen").
-                            map(function(d){return (parseFloat(d["first-grade"])+
-                                                parseFloat(d["second-grade"])+
-                                                parseFloat(d["third-degree"]))
-                            }))],
-              ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba").
-                            map(function(d){return (parseFloat(d["first-grade"])+
-                                                parseFloat(d["second-grade"])+
-                                                parseFloat(d["third-degree"]))
-                            }))],
+                            }))]
             ]);
             
 

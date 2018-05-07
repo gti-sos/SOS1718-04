@@ -23,6 +23,12 @@ angular.module("RoRoMonApp")
         var data = google.visualization.arrayToDataTable([
            
           ['Province', 'PassRate'],
+          ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva").
+                        map(function(d){return (parseFloat(d["public-school"])+
+                                            parseFloat(d["private-school"])+
+                                            parseFloat(d["charter-school"]))
+                                             /response.data.filter(d=>d.province=="huelva").length
+                        }))],
           ['Sevilla', parseInt(response.data.filter(d=>d.province=="seville").
                         map(function(d){return (parseFloat(d["public-school"])+
                                             parseFloat(d["private-school"])+
@@ -35,7 +41,37 @@ angular.module("RoRoMonApp")
                                             parseFloat(d["charter-school"]))
                                              /response.data.filter(d=>d.province=="malaga").length
                                             
-                        }))]
+                        }))],
+          ['Granada', parseInt(response.data.filter(d=>d.province=="granada").
+                        map(function(d){return (parseFloat(d["public-school"])+
+                                            parseFloat(d["private-school"])+
+                                            parseFloat(d["charter-school"]))
+                                             /response.data.filter(d=>d.province=="granada").length
+                        }))],
+          ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
+                        map(function(d){return (parseFloat(d["public-school"])+
+                                            parseFloat(d["private-school"])+
+                                            parseFloat(d["charter-school"]))
+                                             /response.data.filter(d=>d.province=="almeria").length
+                        }))],
+          ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz").
+                        map(function(d){return (parseFloat(d["public-school"])+
+                                            parseFloat(d["private-school"])+
+                                            parseFloat(d["charter-school"]))
+                                             /response.data.filter(d=>d.province=="cadiz").length
+                        }))],
+          ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen").
+                        map(function(d){return (parseFloat(d["public-school"])+
+                                            parseFloat(d["private-school"])+
+                                            parseFloat(d["charter-school"]))
+                                             /response.data.filter(d=>d.province=="jaen").length
+                        }))],
+          ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba").
+                        map(function(d){return (parseFloat(d["public-school"])+
+                                            parseFloat(d["private-school"])+
+                                            parseFloat(d["charter-school"]))
+                                             /response.data.filter(d=>d.province=="cordoba").length
+                        }))],
         ]);
         
 
