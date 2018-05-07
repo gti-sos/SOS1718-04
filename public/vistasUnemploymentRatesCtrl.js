@@ -19,36 +19,60 @@ angular.module("RoRoMonApp")
       google.charts.setOnLoadCallback(drawRegionsMap);
       function drawRegionsMap() {
            
- var data = google.visualization.arrayToDataTable([
-           
-          ['Province', 'Illiterate'],
-          ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva").
-                        map(function(d){return (parseFloat(d["illiterate"]))
-                        }))],
-          ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
-                        map(function(d){return (parseFloat(d["illiterate"]))
-                        }))],
-          ['Malaga', parseInt(response.data.filter(d=>d.province=="malaga").
-                        map(function(d){return (parseFloat(d["illiterate"]))
-                                            
-                        }))],
-          ['Granada', parseInt(response.data.filter(d=>d.province=="granada").
-                        map(function(d){return (parseFloat(d["illiterate"]))
-                        }))],
-          ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
-                        map(function(d){return (parseFloat(d["illiterate"]))
-                        }))],
-          ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz").
-                        map(function(d){return (parseFloat(d["illiterate"]))
-                        }))],
-          ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen").
-                        map(function(d){return (parseFloat(d["illiterate"]))
-                        }))],
-          ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba").
-                        map(function(d){return (parseFloat(d["illiterate"]))
-                        }))],
-        ]);
-        
+    var data = google.visualization.arrayToDataTable([
+               
+              ['Province', 'PassRate'],
+              ['Huelva', parseInt(response.data.filter(d=>d.province=="huelva").
+                            map(function(d){return (parseFloat(d["first-grade"])+
+                                                parseFloat(d["second-grade"])+
+                                                parseFloat(d["third-degree"]))
+                                                 /response.data.filter(d=>d.province=="huelva").length
+                            }))],
+              ['Sevilla', parseInt(response.data.filter(d=>d.province=="sevilla").
+                            map(function(d){return (parseFloat(d["first-grade"])+
+                                                parseFloat(d["second-grade"])+
+                                                parseFloat(d["third-degree"]))
+                                                 /response.data.filter(d=>d.province=="sevilla").length
+                            }))],
+              ['Malaga', parseInt(response.data.filter(d=>d.province=="malaga").
+                            map(function(d){return (parseFloat(d["first-grade"])+
+                                                parseFloat(d["second-gradel"])+
+                                                parseFloat(d["third-degree"]))
+                                                 /response.data.filter(d=>d.province=="malaga").length
+                                                
+                            }))],
+              ['Granada', parseInt(response.data.filter(d=>d.province=="granada").
+                            map(function(d){return (parseFloat(d["first-grade"])+
+                                                parseFloat(d["second-grade"])+
+                                                parseFloat(d["third-degree"]))
+                                                 /response.data.filter(d=>d.province=="granada").length
+                            }))],
+              ['Almería', parseInt(response.data.filter(d=>d.province=="almeria").
+                            map(function(d){return (parseFloat(d["first-grade"])+
+                                                parseFloat(d["second-grade"])+
+                                                parseFloat(d["third-degree"]))
+                                                 /response.data.filter(d=>d.province=="almeria").length
+                            }))],
+              ['Cadiz', parseInt(response.data.filter(d=>d.province=="cadiz").
+                            map(function(d){return (parseFloat(d["first-grade"])+
+                                                parseFloat(d["second-grade"])+
+                                                parseFloat(d["third-degree"]))
+                                                 /response.data.filter(d=>d.province=="cadiz").length
+                            }))],
+              ['Jaen', parseInt(response.data.filter(d=>d.province=="jaen").
+                            map(function(d){return (parseFloat(d["first-grade"])+
+                                                parseFloat(d["second-grade"])+
+                                                parseFloat(d["third-degree"]))
+                                                 /response.data.filter(d=>d.province=="jaen").length
+                            }))],
+              ['Cordoba', parseInt(response.data.filter(d=>d.province=="cordoba").
+                            map(function(d){return (parseFloat(d["first-grade"])+
+                                                parseFloat(d["second-grade"])+
+                                                parseFloat(d["third-degree"]))
+                                                 /response.data.filter(d=>d.province=="cordoba").length
+                            }))],
+            ]);
+            
 
         var options = {
             region: 'ES',
