@@ -56,7 +56,7 @@ medicalAttentionRates.register = function(app, db) {
         //paginación + búsqueda por intervalos
         if (Number.isInteger(limitAux) && Number.isInteger(offSetAux) && Number.isInteger(startYear) && Number.isInteger(endYear)) {
             var text = "limitAux=" + limitAux + "&offset=" + offSetAux;
-            console.log("?from=" + startYear + "&to=" + endYear+ "&limit="+limitAux+"&offset="+offSetAux);
+            console.log("?from=" + startYear + "&to=" + endYear + "&limit=" + limitAux + "&offset=" + offSetAux);
             db.find({ "year": { $gte: startYear, $lte: endYear } }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
                 if (err) {
                     console.error(" Error accesing DB");
@@ -89,7 +89,7 @@ medicalAttentionRates.register = function(app, db) {
         }
         else {
             //no paginacion pero pusqueda con intervalos
-            if(Number.isInteger(startYear) && Number.isInteger(endYear)){
+            if (Number.isInteger(startYear) && Number.isInteger(endYear)) {
                 console.log("?from=" + startYear + "&to=" + endYear);
                 db.find({ "year": { $gte: startYear, $lte: endYear } }).skip(offSetAux).limit(limitAux).toArray((err, medicalAttentionRates) => {
                     if (err) {
@@ -101,23 +101,25 @@ medicalAttentionRates.register = function(app, db) {
                         delete c._id; //Quitamos el campo id
                         return c;
                     }));
-                
-                });
-            }else{
-            db.find(mdbq).toArray((err, medicalAttentionRates) => {
-                console.log(consoleText);
-                if (err) {
-                    console.error(" Error accesing DB");
-                    res.sendStatus(500);
-                    return;
-                }
-                res.send(medicalAttentionRates.map((c) => {
-                    delete c._id; //Quitamos el campo id
-                    return c;
-                }));
 
-            });
-        }}
+                });
+            }
+            else {
+                db.find(mdbq).toArray((err, medicalAttentionRates) => {
+                    console.log(consoleText);
+                    if (err) {
+                        console.error(" Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    res.send(medicalAttentionRates.map((c) => {
+                        delete c._id; //Quitamos el campo id
+                        return c;
+                    }));
+
+                });
+            }
+        }
     });
 
 
@@ -248,60 +250,75 @@ medicalAttentionRates.register = function(app, db) {
         }
     });
 
-
+    
     //POST a recurso general (HECHO)
     //POST to a general collection
     app.post(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
         console.log(Date() + " - POST /medical-attention-rates");
         var data = req.body;
-        var province = req.body.province;
-        var year = req.body.year;
-        console.log("provincia input : " + province + ", year input : " + year);
-
+        var auxiliar = false;
         
-        //comprobamos si el dato que se va a introducir contiene algún error, tamaño y nombre de las propiedades
-        //we have to validate the data that we insert in the database, if exist some error we send a error message.
-        if (Object.keys(data).length > 5 || !data.hasOwnProperty("province") || !data.hasOwnProperty("year") ||
-            !data.hasOwnProperty("general-medicine") || !data.hasOwnProperty("nursing") || !data.hasOwnProperty("social-work")) {
-            console.log("Error introducing the properties");
+        if (Object.keys(data).length > 5 || data["province"] == "" || data["year"] == null|| data["year"] == "" || 
+            data["nursing"] == null || data["general-medicine"] == null || data["social-work"] == null || !data.hasOwnProperty("province") || !data.hasOwnProperty("year") ||
+            !data.hasOwnProperty("nursing") || !data.hasOwnProperty("general-medicine") || !data.hasOwnProperty("social-work")) {
             res.sendStatus(400);
+            console.error("Error 400");
             return;
         }
-        db.find({ "province": province, "year": year }).toArray((err, medicalAttentionRates) => {
+        db.find({ "province": data["province"], "year": data["year"] }).toArray((err, medicalAttentionRates) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
             }
-            //en caso de que no haya errores , insertamos el dato a la base de datos
-            //if there is not any error, the data will be inserted in the database
-
-            db.insertOne(data, (err, numUpdated) => {
-                    console.log("Insert: " + numUpdated);
-                });
-                res.sendStatus(201);
-            
-
-
-        /*
-            else if (medicalAttentionRates.length == 0) { //esta condicion es si ya esta creado un objeto con esos datos
-                db.insertOne(data, (err, numUpdated) => {
-                    console.log("Insert: " + numUpdated);
-                });
-                res.sendStatus(201);
-            }
-            else {
-                console.log("Error the object was created before.");
+            //en caso de que ya exista uno
+            if (medicalAttentionRates.length > 0) {
+                auxiliar = true;
                 res.sendStatus(409);
+                console.error(" Error 409");
+                return;
             }
-            */
-            
-            
+            //Cuando no hay ningún dato con esas propiedades año/provincia se introduce el dato
+            if (medicalAttentionRates.length == 0) {
+                db.insertOne(data, (err, numUpdated) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    console.log("Insert: " + numUpdated);
+                    res.sendStatus(201);
+                    console.error(" 201");
+                });
+            }
         });
-        
-
 
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
