@@ -206,22 +206,6 @@ console.log("---END PROBAR LA API CON CURL---");
     
     
     
-
-var request = require('request');
-
-// Parameters
-// You can use a shorthand for multiple API endpoints: /api|/other_api
-var apiServerHost = 'https://sos1718-01.herokuapp.com';
-
-app.use("/proxyTIS", function(req, res) {
-  var url = apiServerHost + req.url;
-  console.log('piped: '+req.baseUrl + req.url);
-  req.pipe(request(url)).pipe(res);
-});
-    
-    
-    
-    
     
 
    app.post(BASE_API_PATH + "/graduation-rates", (req, res) => {

@@ -1,6 +1,5 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var cors =require("cors");
 var MongoClient = require("mongodb").MongoClient;
 var path = require("path");
 //comentario
@@ -26,7 +25,7 @@ var app = express();
 
 
 app.use(bodyParser.json());
-app.use(cors());
+
 
 app.use("/", express.static(path.join(__dirname + "/public")));
 
