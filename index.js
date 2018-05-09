@@ -2,12 +2,16 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var MongoClient = require("mongodb").MongoClient;
 var path = require("path");
+var cors =require("cors");
+var request = require('request');
+
 //comentario
 //Importamos nuestras APIs:
 var unemploymentRates = require("./unemployment-rates");
 var graduationRates = require("./graduation-rates");
 var medicalAttentionRates = require("./medical-attention-rates");
 
+var apiServerHost = 'https://sos1718-01.herokuapp.com';
 
 var port = (process.env.PORT || 1607);
 var port1 = 1608;
@@ -22,6 +26,7 @@ var mdbURLMedicalAttentionRates = "mongodb://carmontap:sos1718@ds129939.mlab.com
 
 
 var app = express();
+app.use(cors());
 
 
 app.use(bodyParser.json());
@@ -173,6 +178,17 @@ var initialMedicalAttentionRates = [{
         "social-work": 1.9,
     },
 ];
+
+//PROXYS----------
+app.use("/proxyTIS", function(req, res) {
+  var url = apiServerHost + req.url;
+  console.log('piped: '+req.baseUrl + req.url);
+  req.pipe(request(url)).pipe(res);
+});
+
+//PROXYS----------
+
+
 
 MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, mlabs) => {
 
