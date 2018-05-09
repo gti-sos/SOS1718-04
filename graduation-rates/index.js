@@ -3,6 +3,8 @@ var graduationRates = {};
 var BASE_API_PATH = "/api/v2";
 var BASE_API_PATH1 = "/api/v1";
 
+//var cors =require("cors");
+//var request = require('request');
 
     module.exports = graduationRates;
     graduationRates.register = function(app, db) {
