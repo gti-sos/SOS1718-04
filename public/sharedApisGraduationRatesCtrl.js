@@ -62,7 +62,7 @@ angular.module("RoRoMonApp")
         
         
         
-         $http.get(api1).then(function(response1){
+         $http.get(api2).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
               Highcharts.chart('sharedStadistics2', {
     chart: {
