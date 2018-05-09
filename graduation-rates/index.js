@@ -206,7 +206,7 @@ console.log("---END PROBAR LA API CON CURL---");
     
     
     
-var express = require('express');  
+
 var request = require('request');
 
 // Parameters
