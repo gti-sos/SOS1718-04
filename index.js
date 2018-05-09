@@ -2,8 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var MongoClient = require("mongodb").MongoClient;
 var path = require("path");
-var cors =require("cors");
-var request = require('request');
+//var cors =require("cors");
+//var request = require('request');
 
 //comentario
 //Importamos nuestras APIs:
@@ -26,7 +26,7 @@ var mdbURLMedicalAttentionRates = "mongodb://carmontap:sos1718@ds129939.mlab.com
 
 
 var app = express();
-app.use(cors());
+//app.use(cors());
 
 
 app.use(bodyParser.json());
@@ -180,11 +180,14 @@ var initialMedicalAttentionRates = [{
 ];
 
 //PROXYS----------
+
+
 app.use("/proxyTIS", function(req, res) {
   var url = apiServerHost + req.url;
   console.log('piped: '+req.baseUrl + req.url);
   req.pipe(request(url)).pipe(res);
 });
+
 
 //PROXYS----------
 
