@@ -5,7 +5,6 @@ var BASE_API_PATH1 = "/api/v1";
 
 var request = require("request");
 var apiServerHost = "https://sos1718-01.herokuapp.com";
-
 var cors =require("cors");
 
     module.exports = graduationRates;
@@ -210,11 +209,12 @@ console.log("---END PROBAR LA API CON CURL---");
         }
     });
     
-    app.use("/proxyTIS", function(req, res) {
+/*app.use("/proxyTIS", function(req, res) {
   var url = apiServerHost + req.url;
   console.log('piped: '+req.baseUrl + req.url);
   req.pipe(request(url)).pipe(res);
 });
+*/
     
     
 
