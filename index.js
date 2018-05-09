@@ -23,13 +23,23 @@ var mdbURLMedicalAttentionRates = "mongodb://carmontap:sos1718@ds129939.mlab.com
 // var dbFileName = __dirname+"/unemployment-rates.db";
 
 var app = express();
-
-
-
 app.use(bodyParser.json());
 
 
 app.use("/", express.static(path.join(__dirname + "/public")));
+
+
+var request = require('request');
+var cors =require("cors");
+var apiServerHost = "https://sos1718-01.herokuapp.com";
+
+    app.use(cors());
+    
+    app.use("/proxyTIS", function(req, res) {
+     var url = apiServerHost + req.url;
+     console.log('piped: '+req.baseUrl + req.url);
+     req.pipe(request(url)).pipe(res);
+      });
 
 
 var initialUnemploymentRates = [{

@@ -3,24 +3,13 @@ var graduationRates = {};
 var BASE_API_PATH = "/api/v2";
 var BASE_API_PATH1 = "/api/v1";
 
-var request = require('request');
-var cors =require("cors");
-
-var apiServerHost = "https://sos1718-01.herokuapp.com";
-
 
 
 
     module.exports = graduationRates;
     graduationRates.register = function(app, db) {
     console.log("Registering routes for graduation-rates API...");
-    app.use(cors());
     
-    app.use("/proxyTIS", function(req, res) {
-     var url = apiServerHost + req.url;
-     console.log('piped: '+req.baseUrl + req.url);
-     req.pipe(request(url)).pipe(res);
-      });
 
     
     
