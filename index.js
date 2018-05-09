@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var MongoClient = require("mongodb").MongoClient;
 var path = require("path");
 //var request = require("request");
-//var cors =require("cors");
+var cors =require("cors");
 
 
 //comentario
@@ -27,7 +27,7 @@ var mdbURLMedicalAttentionRates = "mongodb://carmontap:sos1718@ds129939.mlab.com
 
 
 var app = express();
-//app.use(cors());
+app.use(cors());
 
 
 app.use(bodyParser.json());
