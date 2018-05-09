@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var MongoClient = require("mongodb").MongoClient;
 var path = require("path");
-//var request = require("request");
+var request = require("request");
 var cors =require("cors");
 
 
@@ -182,13 +182,13 @@ var initialMedicalAttentionRates = [{
 
 //PROXYS----------
 
-/*
+
 app.use("/proxyTIS", function(req, res) {
   var url = apiServerHost + req.url;
   console.log('piped: '+req.baseUrl + req.url);
   req.pipe(request(url)).pipe(res);
 });
-*/
+
 
 
 //PROXYS----------
