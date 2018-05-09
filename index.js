@@ -2,7 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var MongoClient = require("mongodb").MongoClient;
 var path = require("path");
-
+var request = require("request");
+var cors =require("cors");
 
 //comentario
 //Importamos nuestras APIs:
@@ -24,22 +25,23 @@ var mdbURLMedicalAttentionRates = "mongodb://carmontap:sos1718@ds129939.mlab.com
 
 var app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 
 app.use("/", express.static(path.join(__dirname + "/public")));
 
 
-var request = require('request');
-var cors =require("cors");
+
+
 var apiServerHost = "https://sos1718-01.herokuapp.com";
 
-    app.use(cors());
+    
     
     app.use("/proxyTIS", function(req, res) {
-     var url = apiServerHost + req.url;
-     console.log('piped: '+req.baseUrl + req.url);
-     req.pipe(request(url)).pipe(res);
-      });
+    var url = apiServerHost + req.url;
+    console.log('piped: '+req.baseUrl + req.url);
+    req.pipe(request(url)).pipe(res);
+    });
 
 
 var initialUnemploymentRates = [{
