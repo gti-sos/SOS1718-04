@@ -3,8 +3,8 @@ var graduationRates = {};
 var BASE_API_PATH = "/api/v2";
 var BASE_API_PATH1 = "/api/v1";
 
-var request = require("request");
-var apiServerHost = "https://sos1718-01.herokuapp.com";
+//var request = require("request");
+//var apiServerHost = "https://sos1718-01.herokuapp.com";
 var cors =require("cors");
 
     module.exports = graduationRates;
