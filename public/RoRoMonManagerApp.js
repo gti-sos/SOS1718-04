@@ -18,6 +18,10 @@ angular
                     templateUrl:"vistasGraduationRates.html",
                     controller: "vistasGraduationRatesCtrl"
                 })
+                .when("/graduation-rates/sharedAnalytics",{
+                    templateUrl:"sharedApisGraduationRates.html",
+                    controller: "sharedApisGraduationRatesCtrl"
+                })
                 .when("/unemployment-rates",{
                     templateUrl:"unemploymentRatesList.html",
                     controller: "unemploymentRatesListCtrl"
