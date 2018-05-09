@@ -22,14 +22,15 @@ var mdbURLGraduationRates = "mongodb://rgfandres:dcDBsosBA@ds251435.mlab.com:514
 var mdbURLMedicalAttentionRates = "mongodb://carmontap:sos1718@ds129939.mlab.com:29939/carmontap-medical-attention-rates";
 // var dbFileName = __dirname+"/unemployment-rates.db";
 
-
 var app = express();
+
 
 
 app.use(bodyParser.json());
 
 
 app.use("/", express.static(path.join(__dirname + "/public")));
+
 
 var initialUnemploymentRates = [{
         "province": "sevilla",

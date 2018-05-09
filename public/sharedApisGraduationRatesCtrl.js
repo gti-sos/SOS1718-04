@@ -8,7 +8,7 @@ angular.module("RoRoMonApp")
             console.log("List Ctrl initialized!");
             var apiPropia = "/api/v2/graduation-rates"
             var api1 = "proxyTIS/api/v1/transferincomes-stats";
-            var api2 = "https://sos1718-01.herokuapp.com/api/v1/transferincomes-stats"
+            var api2 = "https://sos1718-05.herokuapp.com/api/v1/country-stats"
             
             
             $http.get(api1).then(function(response1){
@@ -73,7 +73,7 @@ angular.module("RoRoMonApp")
     },
     
     xAxis: {
-        categories: response2.data.map(function(d){return (parseInt(d.year))}),
+        categories: response1.data.map(function(d){return (parseInt(d.year))}),
         title: {
             text: null
         }
@@ -114,8 +114,8 @@ angular.module("RoRoMonApp")
         name: 'PublicS',
         data: response2.data.map(function(d){return (parseInt(d["public-school"]))})
     },{
-        name: 'timaxexp',
-        data: response1.data.map(function(d){return (parseInt(d.timaxexp))})
+        name: 'rank',
+        data: response1.data.map(function(d){return (parseInt(d.rank))})
     }]
 });
         });
