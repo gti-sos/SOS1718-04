@@ -1,56 +1,51 @@
 <h1>Stadistics List</h1>
+<div class="panel panel-secondary table-dark" style="width:50%">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Province</th>
+                <th>Year</th>
+                <th>Public school</th>
+                <th>Private school</th>
+                <th>Charter school</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-<table class = "table">
-    <thead>
-        <tr>
-            <th>Province</th>
-            <th>Year</th>
-            <th>Public school</th>
-            <th>Private school</th>
-            <th>Charter school</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    
-    <tbody>
-        <tr>
-            <td><input class="form-control" ng-model="newStadistic.province"/></td>
-            <td><input type="number" class="form-control" ng-model="newStadistic.year"/></td>
-            <td><input type="number" class="form-control" ng-model="newStadistic['public-school']"/></td>
-            <td><input type="number" class="form-control" ng-model="newStadistic['private-school']"/></td>
-            <td><input type="number" class="form-control" ng-model="newStadistic['charter-school']"/></td>
-            <td><button class="button btn-primary" ng-click="addStadistic()">
+        <tbody>
+            <tr>
+                <td><input class="form-control" ng-model="newStadistic.province" /></td>
+                <td><input type="number" class="form-control" ng-model="newStadistic.year" /></td>
+                <td><input type="number" class="form-control" ng-model="newStadistic['public-school']" /></td>
+                <td><input type="number" class="form-control" ng-model="newStadistic['private-school']" /></td>
+                <td><input type="number" class="form-control" ng-model="newStadistic['charter-school']" /></td>
+                <td><button class="button btn-primary" ng-click="addStadistic()">
                 Add
             </button></td>
-            <h8><i>{{status}}</i></h8>
-        </tr>
-        <tr ng-repeat="stadistic in stadistics">
-            <td><a href="/RoRoMonApp.html#!/graduation-rates/stadistic/{{stadistic.province}}/{{stadistic.year}}">{{stadistic.province}}</a></td>
-            <td>{{stadistic.year}}</td>
-            <td>{{stadistic["public-school"]}}</td>
-            <td>{{stadistic["private-school"]}}</td>
-            <td>{{stadistic["charter-school"]}}</td>
-            <td><button class="button btn-danger" ng-click="deleteStadistic(stadistic.province, stadistic.year)">Delete</button></td>
-        </tr>
-        <tr>
-            <td><button class="button btn-danger" ng-click="deleteStadistics()">Delete All</button></td>
-        </tr>
-        <td><input class="button" type="number" placeholder = from class="form-control" ng-model="fromToStadistic.year1"/></td>
-        <td><input class="button" type="number" placeholder = to class="form-control" ng-model="fromToStadistic.year2"/></td>  
-        <td><button class="button btn-primary" ng-click="fromTo()">Submit</button></td>
-    </tbody>
-</table>
+                <h8><i>{{status}}</i></h8>
+            </tr>
+            <tr ng-repeat="stadistic in stadistics">
+                <td><a href="/RoRoMonApp.html#!/graduation-rates/stadistic/{{stadistic.province}}/{{stadistic.year}}">{{stadistic.province}}</a></td>
+                <td>{{stadistic.year}}</td>
+                <td>{{stadistic["public-school"]}}</td>
+                <td>{{stadistic["private-school"]}}</td>
+                <td>{{stadistic["charter-school"]}}</td>
+                <td><button class="button btn-danger" ng-click="deleteStadistic(stadistic.province, stadistic.year)">Delete</button></td>
+            </tr>
+            <tr>
+                <td><button class="button btn-danger" ng-click="deleteStadistics()">Delete All</button></td>
+            </tr>
+            <td><input class="button" type="number" placeholder=f rom class="form-control" ng-model="fromToStadistic.year1" /></td>
+            <td><input class="button" type="number" placeholder=t o class="form-control" ng-model="fromToStadistic.year2" /></td>
+            <td><button class="button btn-primary" ng-click="fromTo()">Submit</button></td>
+        </tbody>
+    </table>
     <!--<span ng-repeat="num in pag track by $index"> 
         <td><a href="/GraduationRatesApp.html#!">{{num}}</a></li>*/
     </span>-->
     <span><button class="button" ng-click="getStadisticsPagination(1)"><<</button></span>
     <span><button class="button" ng-click="getStadisticsPagination(2)">>></button></span>
-   
+
     <div><a href="/RoRoMonApp.html#!/graduation-rates/analytics/">Analytics graphs</a></div>
 
-   
-   
-<hr/>
-
-
-
+</div>

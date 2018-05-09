@@ -1,11 +1,13 @@
-<h1>Medical Attention Rates</h1>
-<table class=" table table-hover table-condensed table-bordered">
+<h1>
+    Medical Attention Rates</h1>
+
+<table class=" table table-hover table-condensed table-bordered table-light">
     <thead>
         <tr>
             <th>Province</th>
             <th>Year</th>
-            <th>Nursing</th>
             <th>General Medicine</th>
+            <th>Nursing</th>
             <th>Social Work</th>
             <th>Actions</th>
         </tr>
@@ -17,30 +19,31 @@
             <td><input class="form-control" type=number ng-model="newMedicalAttentionRate['general-medicine']" /></td>
             <td><input class="form-control" type=number ng-model="newMedicalAttentionRate['nursing']" /></td>
             <td><input class="form-control" type=number ng-model="newMedicalAttentionRate['social-work']" /></td>
-            <td><button class="button btn-primary btn-block" ng-click="addMedicalAttentionRate()">
+            <td><button class="button btn-primary btn-block" ng-click="addMedicalAttentionRate()" style = "border-radius: .25rem";>
                 Add
             </button></td>
         </tr>
         <tr ng-repeat="medicalAttentionRate in medicalAttentionRates">
-            <td><a href="/RoRoMonApp.html#!/medicalAttentionRate/{{medicalAttentionRate.province}}/{{medicalAttentionRate.year}}">{{medicalAttentionRate.province}}</td>
+            <td><a href="/RoRoMonApp.html#!/medical-attention-rates/{{medicalAttentionRate.province}}/{{medicalAttentionRate.year}}">{{medicalAttentionRate.province}}</td>
             <td>{{medicalAttentionRate.year}}</td>
             <td>{{medicalAttentionRate["general-medicine"]}}</td>
             <td>{{medicalAttentionRate["nursing"]}}</td>
             <td>{{medicalAttentionRate["social-work"]}}</td>
-            <td><button class="button btn-danger" ng-click="deleteMedicalAttentionRate(medicalAttentionRate.province,medicalAttentionRate.year)">
+            <td><button class="button btn-danger" ng-click="deleteMedicalAttentionRate(medicalAttentionRate.province,medicalAttentionRate.year)" style = "border-radius: .25rem";>
                 Delete
             </button></td>
             </tr>
-            <td><input class="button" type="number" placeholder = from class="form-control" ng-model="query.year1"/></td>
-            <td><input class="button" type="number" placeholder = to class="form-control" ng-model="query.year2"/></td> 
-            <td><input class="button" type="number" placeholder = "datos por pagina" class="form-control" ng-model="query.limit"/></td>
-            <td><button class="button btn-primary" ng-click="query()">Submit</button></td>
+            <td><input type="number" placeholder = from class="form-control" ng-model="query.year1" /></td>
+            <td><input type="number" placeholder = to class="form-control" ng-model="query.year2"/></td> 
+            <td><input  type="number" placeholder = "datos por pagina" class="form-control" ng-model="query.limit"/></td>
+            <td><button class="button btn-primary text-center"    style = "border-radius: .25rem"; ng-click="query()">Submit</button></td>
+            
         </tbody>
     </table>    
-    
+    <div></div>
     <span><button class="button" ng-click="backPagination()"><<</button></span>
     <span><button class="button" ng-click="nextPagination()">>></button></span>
     <div class="col text-center">
        <button class="btn btn-danger" ng-click="deleteAllMedicalAttentionRate()"> Delete All</button>
-    </div> 
-    
+       <button class="btn btn-primary" ng-click="showAll()"> Show All</button>
+    </div>
