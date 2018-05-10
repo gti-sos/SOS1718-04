@@ -8,7 +8,7 @@ angular.module("RoRoMonApp")
     .controller("sharedApisMedicalAttentionRatesCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("Vistas Ctrl initialized!");
         var api1 = "/api/v1/medical-attention-rates";
-        var proxy = "proxyCAC/api/v1/crimes-an";
+        var proxy = "proxyCAC/api/v2/crimes-an";
 
         $http
             .get(proxy)
