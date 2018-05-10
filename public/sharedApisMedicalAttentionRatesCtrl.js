@@ -7,121 +7,102 @@
 angular.module("RoRoMonApp")
     .controller("sharedApisMedicalAttentionRatesCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("Vistas Ctrl initialized!");
-        var api1 = "/api/v1/medical-attention-rates";
+        var ownApi = "/api/v1/medical-attention-rates";
+        var externalApi = "";
         var proxy = "proxyCAC/api/v2/crimes-an";
 
         $http
             .get(proxy)
             .then(function(proxyResponse) {
                 $http
-                    .get("/api/v1/medical-attention-rates")
-                    .then(function(response) {
+                    .get(ownApi)
+                    .then(function(response1) {
+
+
+
+                        //console.log("crimenes los datos;" + proxyResponse.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2011).sort((a, b) => a.year - b.year).map(function(d) { return d["onecrime"] }));
+
+                        Highcharts.chart('sharedStadistics1', {
+                            chart: {
+                                zoomType: 'xy'
+                            },
+                            title: {
+                                text: 'Crimes vs Social Work Rates (In Seville)'
+                            },
+                            xAxis: [{
+                                categories: ['2012', '2013', '2014', '2015', '2016', '2017', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                            }],
+                            yAxis: [{ // Primary yAxis
+                                labels: {
+                                    format: '{value} Crimes',
+                                    style: {
+                                        color: Highcharts.getOptions().colors[1]
+                                    }
+                                },
+                                title: {
+                                    text: 'crimes',
+                                    style: {
+                                        color: Highcharts.getOptions().colors[1]
+                                    }
+                                }
+                            }, { // Secondary yAxis
+                                title: {
+                                    text: '',
+                                    style: {
+                                        color: Highcharts.getOptions().colors[0]
+                                    }
+                                },
+                                labels: {
+                                    format: '{value} patiens for professional',
+                                    style: {
+                                        color: Highcharts.getOptions().colors[0]
+                                    }
+                                },
+                                opposite: true
+                            }],
+
+                            tooltip: {
+                                shared: true
+                            },
+
+                            series: [{
+                                name: 'Crimes',
+                                type: 'column',
+                                yAxis: 1,
+                                data: proxyResponse.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2011).sort((a, b) => a.year - b.year).map(function(d) { return d["onecrime"] }),
+                                tooltip: {
+                                    pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f} crimes</b> '
+                                }
+                            }, {
+                                name: 'Social Work Rate',
+                                type: 'spline',
+                                data: response1.data.filter(d => d.province === 'sevilla').sort((a, b) => a.year - b.year).map(function(d) { return d["social-work"] }),
+                                tooltip: {
+                                    pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f} patients </b> '
+                                }
+
+                            }]
+                        });
+
+
 
                     });
 
+            });
 
-                Highcharts.chart('sharedStadistics1', {
-                    chart: {
-                        zoomType: 'xy'
-                    },
-                    title: {
-                        text: 'Temperature vs Rainfall'
-                    },
-                    xAxis: [{
-                        categories: ['2012', '2013', '2014', '2015', '2016', '2017', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                    }],
-                    yAxis: [{ // Primary yAxis
-                        labels: {
-                            format: '{value} °C',
-                            style: {
-                                color: Highcharts.getOptions().colors[1]
-                            }
-                        },
-                        title: {
-                            text: 'Crimenes',
-                            style: {
-                                color: Highcharts.getOptions().colors[1]
-                            }
-                        }
-                    }, { // Secondary yAxis
-                        title: {
-                            text: '',
-                            style: {
-                                color: Highcharts.getOptions().colors[0]
-                            }
-                        },
-                        labels: {
-                            format: '{value} patien for professional',
-                            style: {
-                                color: Highcharts.getOptions().colors[0]
-                            }
-                        },
-                        opposite: true
-                    }],
 
-                    tooltip: {
-                        shared: true
-                    },
+        $http
+            .get(externalApi)
+            .then(function(auxResponse) {
+                $http
+                    .get(ownApi)
+                    .then(function(response) {
 
-                    series: [{
-                        name: 'Rainfall',
-                        type: 'column',
-                        yAxis: 1,
-                        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-                        tooltip: {
-                            pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f} mm</b> '
-                        }
-                    }, {
-                        name: 'Rainfall error',
-                        type: 'errorbar',
-                        yAxis: 1,
-                        data: [
-                            [48, 51],
-                            [68, 73],
-                            [92, 110],
-                            [128, 136],
-                            [140, 150],
-                            [171, 179],
-                            [135, 143],
-                            [142, 149],
-                            [204, 220],
-                            [189, 199],
-                            [95, 110],
-                            [52, 56]
-                        ],
-                        tooltip: {
-                            pointFormat: '(error range: {point.low}-{point.high} mm)<br/>'
-                        }
-                    }, {
-                        name: 'Temperature',
-                        type: 'spline',
-                        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
-                        tooltip: {
-                            pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f}°C</b> '
-                        }
-                    }, {
-                        name: 'Temperature error',
-                        type: 'errorbar',
-                        data: [
-                            [6, 8],
-                            [5.9, 7.6],
-                            [9.4, 10.4],
-                            [14.1, 15.9],
-                            [18.0, 20.1],
-                            [21.0, 24.0],
-                            [23.2, 25.3],
-                            [26.1, 27.8],
-                            [23.2, 23.9],
-                            [18.0, 21.1],
-                            [12.9, 14.0],
-                            [7.6, 10.0]
-                        ],
-                        tooltip: {
-                            pointFormat: '(error range: {point.low}-{point.high}°C)<br/>'
-                        }
-                    }]
-                });
 
+
+
+
+                    });
             });
 
 
