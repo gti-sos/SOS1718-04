@@ -49,12 +49,27 @@ angular.module("RoRoMonApp")
     },
     series: [{
         name: 'PublicS',
-       
         data: response2.data.map(function(d){return (parseInt(d["public-school"]))})
+
+    },{name: 'PrivateS',
+        data: response2.data.map(function(d){return (parseInt(d["private-school"]))})
+
+    },{name: 'CharterS',
+        data: response2.data.map(function(d){return (parseInt(d["charter-school"]))})
 
     }, {
         name: 'timaxexp',
-        data: response1.data.map(function(d){return (parseInt(d.timaxexp))})
+        data: response1.data.map(function(d){return (parseFloat(d.timaxexp))})
+        
+    },{
+        name: 'tilessexp',
+        data: response1.data.map(function(d){return (parseFloat(d.tilessexp))})
+
+    },{
+        name: 'tispa',
+        data: response1.data.map(function(d){return (parseInt(d.tispa))})
+        
+       
     }]
 });
 });
