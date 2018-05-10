@@ -46,6 +46,10 @@ angular
                     templateUrl:"vistasMedicalAttentionRates.html",
                     controller: "vistasMedicalAttentionRatesCtrl"
                 })
+                .when("/medical-attention-rates/sharedAnalytics",{
+                    templateUrl:"sharedApisMedicalAttentionRates.html",
+                    controller: "sharedApisMedicalAttentionRatesCtrl"
+                })
                 ;
                 
     });
