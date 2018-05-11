@@ -83,7 +83,7 @@ angular.module("RoRoMonApp")
 
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
-                    Highcharts.chart('container', {
+                    Highcharts.chart('sharedStadistics1', {
                         chart: {
                             type: 'spline',
                             inverted: true
