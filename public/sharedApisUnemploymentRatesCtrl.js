@@ -83,7 +83,6 @@ angular.module("RoRoMonApp")
 
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
-                    /*
                     Highcharts.chart('sharedStadistics1', {
                         chart: {
                             type: 'spline',
@@ -160,91 +159,6 @@ angular.module("RoRoMonApp")
                                    
                                 }]
                     });
-                    */
-                    
-Highcharts.chart('sharedStadistics1', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'World\'s largest cities per 2017'
-    },
-    subtitle: {
-        text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
-    },
-    xAxis: {
-        type: 'category',
-        labels: {
-            rotation: -45,
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Population (millions)'
-        }
-    },
-    legend: {
-        enabled: false
-    },
-    /*
-    series: [{
-                                    name: 'Illiterate',
-                                    data: [response2.data.map(function(d){return parseFloat(d["illiterate"])})]
-                            
-                                },{name: 'First grade',
-                                    data: [response2.data.map(function(d){return parseFloat(d["first-grade"])})]
-                            
-                                },{name: 'Second grade',
-                                    data: [response2.data.map(function(d){return parseFloat(d["second-grade"])})]
-                                    
-                                }, {
-                                    name: 'Third degree',
-                                    data: [response2.data.map(function(d){return parseFloat(d["third-degree"])})]
-                                    
-                                },{
-                                    name: 'Pop Illiterate',
-                                    data: [response1.data.map(function(d){return parseFloat(d["popilliterate"])})]
-                            
-                                },{
-                                    name: 'Pop High Education',
-                                    data: [response1.data.map(function(d){return parseFloat(d["pophigheducation"])})]
-                                    
-                                   
-                                },{
-                                    name: 'Pop In University',
-                                    data: [response1.data.map(function(d){return parseFloat(d["popinuniversity"])})]
-                                    
-                                   
-                                }]*/
-    series: [{
-        name: 'Population',
-        data: [
-            ['Illiterate', response2.data.map(function(d){return parseFloat(d["illiterate"])})],
-            ['First grade', response2.data.map(function(d){return parseFloat(d["first-grade"])})],
-            ['Second grade', response2.data.map(function(d){return parseFloat(d["second-grade"])})],
-            ['Third degree', response2.data.map(function(d){return parseFloat(d["third-degree"])})],
-            ['Pop Illiterate', response1.data.map(function(d){return parseFloat(d["popilliterate"])})],
-            ['Pop High Education', response1.data.map(function(d){return parseFloat(d["pophigheducation"])})],
-            ['Pop In University', response1.data.map(function(d){return parseFloat(d["popinuniversity"])})]
-        ],
-        dataLabels: {
-            enabled: true,
-            rotation: -90,
-            color: '#FFFFFF',
-            align: 'right',
-            y: 10, // 10 pixels down from the top
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    }]
-});
                 });
             });
             
