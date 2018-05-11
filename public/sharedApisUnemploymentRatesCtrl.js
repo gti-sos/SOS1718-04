@@ -94,8 +94,7 @@ Highcharts.chart('sharedStadistics1', {
         text: 'Source: WorldClimate.com'
     },
     xAxis: [{
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        categories: response2.data.map(function(d){return (parseInt(d.year))}),
         crosshair: true
     }],
     yAxis: [{ // Primary yAxis
@@ -154,6 +153,49 @@ Highcharts.chart('sharedStadistics1', {
         
         // $http.get(api2).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
+                    
+Highcharts.chart('sharedStadistics2', {
+    title: {
+        text: 'Combination chart'
+    },
+    xAxis: {
+        categories: response2.data.map(function(d){return (parseInt(d.year))}),
+    },
+    labels: {
+        items: [{
+            html: 'Total fruit consumption',
+            style: {
+                left: '50px',
+                top: '18px',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+            }
+        }]
+    },
+    series: [{
+        type: 'column',
+        name: 'Illiterate',
+        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
+    }, {
+        type: 'column',
+        name: 'John',
+        data: [2, 3, 5, 7, 6]
+    }, {
+        type: 'column',
+        name: 'Joe',
+        data: [4, 3, 3, 9, 0]
+    }, {
+        type: 'spline',
+        name: 'illiterate-aux',
+        data: response2.data.map(function(d){return parseFloat(d["illiterate"])}),
+        marker: {
+            lineWidth: 2,
+            lineColor: Highcharts.getOptions().colors[3],
+            fillColor: 'white'
+        }
+    }, ]
+});
+
+                    /*
               Highcharts.chart('sharedStadistics2', {
     chart: {
         type: 'bar'
@@ -208,7 +250,7 @@ Highcharts.chart('sharedStadistics1', {
         data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
 
     }
-*/
+
     series: [{
         name: 'Illiterate',
         data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
@@ -217,6 +259,7 @@ Highcharts.chart('sharedStadistics1', {
          data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
      }]
  });
+ */
          });
          //});
            
