@@ -100,26 +100,24 @@ Highcharts.chart('sharedStadistics1', {
     }],
     yAxis: [{ // Primary yAxis
         labels: {
-            format: '{value}°C',
             style: {
                 color: Highcharts.getOptions().colors[1]
             }
         },
         title: {
-            text: 'Temperature',
+            text: 'Value',
             style: {
                 color: Highcharts.getOptions().colors[1]
             }
         }
     }, { // Secondary yAxis
         title: {
-            text: 'Rainfall',
+            text: 'Value',
             style: {
                 color: Highcharts.getOptions().colors[0]
             }
         },
         labels: {
-            format: '{value} mm',
             style: {
                 color: Highcharts.getOptions().colors[0]
             }
