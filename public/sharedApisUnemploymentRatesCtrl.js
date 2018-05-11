@@ -9,7 +9,7 @@ angular.module("RoRoMonApp")
             var apiPropia = "/api/v1/unemployment-rates"
             var api1 = "proxySA/api/v2/students-an";
             var api2 = "";
-
+/*
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
               Highcharts.chart('sharedStadistics1', {
@@ -79,89 +79,80 @@ angular.module("RoRoMonApp")
 });
         });
 
-/*        
-
+*/
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
-                    Highcharts.chart('sharedStadistics1', {
-                        chart: {
-                            type: 'spline',
-                            inverted: true
-                        },
-                        title: {
-                            text: 'Atmosphere Temperature by Altitude'
-                        },
-                        subtitle: {
-                            text: 'According to the Standard Atmosphere Model'
-                        },
-                        xAxis: {
-                            reversed: false,
-                            title: {
-                                enabled: true,
-                                text: 'Altitude'
-                            },
-                            labels: {
-                                format: '{value} mm'
-                            },
-                            maxPadding: 0.05,
-                            showLastLabel: true
-                        },
-                        yAxis: {
-                            title: {
-                                text: 'Temperature'
-                            },
-                            labels: {
-                                format: '{value}°'
-                            },
-                            lineWidth: 2
-                        },
-                        legend: {
-                            enabled: false
-                        },
-                        tooltip: {
-                            headerFormat: '<b>{series.name}</b><br/>',
-                            pointFormat: '{point.x} km: {point.y}°C'
-                        },
-                        plotOptions: {
-                            spline: {
-                                marker: {
-                                    enable: false
-                                }
-                            }
-                        },
-                        series: [{
-                                    name: 'Illiterate',
-                                    data: [response2.data.map(function(d){return parseFloat(d["illiterate"])})]
-                            
-                                },{name: 'First grade',
-                                    data: [response2.data.map(function(d){return parseFloat(d["first-grade"])})]
-                            
-                                },{name: 'Second grade',
-                                    data: [response2.data.map(function(d){return parseFloat(d["second-grade"])})]
-                                    
-                                }, {
-                                    name: 'Third degree',
-                                    data: [response2.data.map(function(d){return parseFloat(d["third-degree"])})]
-                                    
-                                },{
-                                    name: 'Pop Illiterate',
-                                    data: [response1.data.map(function(d){return parseFloat(d["popilliterate"])})]
-                            
-                                },{
-                                    name: 'Pop High Education',
-                                    data: [response1.data.map(function(d){return parseFloat(d["pophigheducation"])})]
-                                    
-                                   
-                                },{
-                                    name: 'Pop In University',
-                                    data: [response1.data.map(function(d){return parseFloat(d["popinuniversity"])})]
-                                    
-                                   
-                                }]
-                    });
+                    
+Highcharts.chart('sharedStadistics1', {
+    chart: {
+        zoomType: 'xy'
+    },
+    title: {
+        text: 'Average Monthly Temperature and Rainfall in Tokyo'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: [{
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        crosshair: true
+    }],
+    yAxis: [{ // Primary yAxis
+        labels: {
+            format: '{value}°C',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        title: {
+            text: 'Temperature',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        }
+    }, { // Secondary yAxis
+        title: {
+            text: 'Rainfall',
+            style: {
+                color: Highcharts.getOptions().colors[0]
+            }
+        },
+        labels: {
+            format: '{value} mm',
+            style: {
+                color: Highcharts.getOptions().colors[0]
+            }
+        },
+        opposite: true
+    }],
+    tooltip: {
+        shared: true
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        x: 120,
+        verticalAlign: 'top',
+        y: 100,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+    },
+    series: [{
+        name: 'Illiterate',
+        type: 'column',
+        yAxis: 1,
+        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
+
+    },{
+        name: 'Pop Illiterate',
+        type: 'spline',
+        data: response1.data.map(function(d){return parseFloat(d["popilliterate"])})
+
+    }]
+});
                 });
             });
-  */          
 /*        
          $http.get(api2).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
