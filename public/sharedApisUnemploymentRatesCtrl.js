@@ -8,7 +8,7 @@ angular.module("RoRoMonApp")
             console.log("List Ctrl initialized!");
             var apiPropia = "/api/v1/unemployment-rates"
             var api1 = "proxySA/api/v2/students-an";
-            var api2 = "";
+            var api2 = "http://sos1718-02.herokuapp.com/api/v2/employments/";
 /*
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
@@ -151,8 +151,8 @@ Highcharts.chart('sharedStadistics1', {
 });
                 });
             });
-/*        
-         $http.get(api2).then(function(response1){
+        
+        // $http.get(api2).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
               Highcharts.chart('sharedStadistics2', {
     chart: {
@@ -163,7 +163,7 @@ Highcharts.chart('sharedStadistics1', {
     },
     
     xAxis: {
-        categories: response1.data.map(function(d){return (parseInt(d.year))}),
+        categories: response2.data.map(function(d){return (parseInt(d.year))}),
         title: {
             text: null
         }
@@ -200,15 +200,24 @@ Highcharts.chart('sharedStadistics1', {
     credits: {
         enabled: false
     },
+/*
+    {
+        name: 'Illiterate',
+        type: 'column',
+        yAxis: 1,
+        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
+
+    }
+*/
     series: [{
-        name: 'PublicS',
-        data: response2.data.map(function(d){return (parseInt(d["public-school"]))})
+        name: 'Illiterate',
+        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
     },{
-        name: 'rank',
-         data: response1.data.map(function(d){return (parseInt(d.rank))})
+        name: 'Illiterate',
+         data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
      }]
  });
          });
-         });
- */          
+         //});
+           
  }]);
