@@ -10,7 +10,6 @@ angular.module("RoRoMonApp")
             var api1 = "proxySA/api/v2/students-an";
             var api2 = "";
             
-/*            
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
               Highcharts.chart('sharedStadistics1', {
@@ -48,26 +47,31 @@ angular.module("RoRoMonApp")
         }
     },
     series: [{
-        name: 'PublicS',
-        data: response2.data.map(function(d){return (parseInt(d["public-school"]))})
+        name: 'Illiterate',
+        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
 
-    },{name: 'PrivateS',
-        data: response2.data.map(function(d){return (parseInt(d["private-school"]))})
+    },{name: 'First grade',
+        data: response2.data.map(function(d){return parseFloat(d["first-grade"])})
 
-    },{name: 'CharterS',
-        data: response2.data.map(function(d){return (parseInt(d["charter-school"]))})
-
+    },{name: 'Second grade',
+        data: response2.data.map(function(d){return parseFloat(d["second-grade"])})
+        
     }, {
-        name: 'timaxexp',
-        data: response1.data.map(function(d){return (parseFloat(d.timaxexp))})
+        name: 'Third degree',
+        data: response2.data.map(function(d){return parseFloat(d["third-degree"])})
         
     },{
-        name: 'tilessexp',
-        data: response1.data.map(function(d){return (parseFloat(d.tilessexp))})
+        name: 'Pop Illiterate',
+        data: response1.data.map(function(d){return parseFloat(d["popilliterate"])})
 
     },{
-        name: 'tispa',
-        data: response1.data.map(function(d){return (parseInt(d.tispa))})
+        name: 'Pop High Education',
+        data: response1.data.map(function(d){return parseFloat(d["pophigheducation"])})
+        
+       
+    },{
+        name: 'Pop In University',
+        data: response1.data.map(function(d){return parseFloat(d["popinuniversity"])})
         
        
     }]
@@ -75,7 +79,7 @@ angular.module("RoRoMonApp")
 });
         });
         
-*/
+/*
 
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
@@ -145,6 +149,7 @@ angular.module("RoRoMonApp")
                     });
                 });
             });
+*/
 /*        
          $http.get(api2).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
