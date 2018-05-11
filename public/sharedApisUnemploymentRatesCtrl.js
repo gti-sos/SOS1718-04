@@ -9,7 +9,7 @@ angular.module("RoRoMonApp")
             var apiPropia = "/api/v1/unemployment-rates"
             var api1 = "proxySA/api/v2/students-an";
             var api2 = "";
-            
+  /*          
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
               Highcharts.chart('sharedStadistics1', {
@@ -78,72 +78,90 @@ angular.module("RoRoMonApp")
 });
 });
         });
+        */
         
-/*
 
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
                     Highcharts.chart('container', {
                         chart: {
-                            type: 'column'
+                            type: 'spline',
+                            inverted: true
                         },
                         title: {
-                            text: 'World\'s largest cities per 2017'
+                            text: 'Atmosphere Temperature by Altitude'
                         },
                         subtitle: {
-                            text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
+                            text: 'According to the Standard Atmosphere Model'
                         },
                         xAxis: {
-                            type: 'category',
+                            reversed: false,
+                            title: {
+                                enabled: true,
+                                text: 'Altitude'
+                            },
                             labels: {
-                                rotation: -45,
-                                style: {
-                                    fontSize: '13px',
-                                    fontFamily: 'Verdana, sans-serif'
-                                }
-                            }
+                                format: '{value} km'
+                            },
+                            maxPadding: 0.05,
+                            showLastLabel: true
                         },
                         yAxis: {
-                            min: 0,
                             title: {
-                                text: 'Population (millions)'
-                            }
+                                text: 'Temperature'
+                            },
+                            labels: {
+                                format: '{value}°'
+                            },
+                            lineWidth: 2
                         },
                         legend: {
                             enabled: false
                         },
                         tooltip: {
-                            pointFormat: 'Population in 2017: <b>millions</b>'
+                            headerFormat: '<b>{series.name}</b><br/>',
+                            pointFormat: '{point.x} km: {point.y}°C'
                         },
-
-                        series: [{
-                            name: 'Datas',
-                            data: [
-                                ['Illiterate', response2.data.map(function(d){return parseFloat(d["illiterate"])})],
-                                ['First grade', response2.data.map(function(d){return parseFloat(d["first-grade"])})],
-                                ['Second grade', response2.data.map(function(d){return parseFloat(d["second-grade"])})],
-                                ['Third degree', response2.data.map(function(d){return parseFloat(d["third-degree"])})],
-                                ['Pop Illiterate', response1.data.map(function(d){return parseFloat(d["popilliterate"])})],
-                                ['Pop High Education', response1.data.map(function(d){return parseFloat(d["pophigheducation"])})],
-                                ['Pop In University', response1.data.map(function(d){return parseFloat(d["popinuniversity"])})],
-                            ],
-                            dataLabels: {
-                                enabled: true,
-                                rotation: -90,
-                                color: '#FFFFFF',
-                                align: 'right',
-                                format: '{point.y:.1f}', // one decimal
-                                y: 10, // 10 pixels down from the top
-                                style: {
-                                    fontSize: '13px',
-                                    fontFamily: 'Verdana, sans-serif'
+                        plotOptions: {
+                            spline: {
+                                marker: {
+                                    enable: false
                                 }
                             }
-                        }]
+                        },
+                        series: [{
+                                    name: 'Illiterate',
+                                    data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
+                            
+                                },{name: 'First grade',
+                                    data: response2.data.map(function(d){return parseFloat(d["first-grade"])})
+                            
+                                },{name: 'Second grade',
+                                    data: response2.data.map(function(d){return parseFloat(d["second-grade"])})
+                                    
+                                }, {
+                                    name: 'Third degree',
+                                    data: response2.data.map(function(d){return parseFloat(d["third-degree"])})
+                                    
+                                },{
+                                    name: 'Pop Illiterate',
+                                    data: response1.data.map(function(d){return parseFloat(d["popilliterate"])})
+                            
+                                },{
+                                    name: 'Pop High Education',
+                                    data: response1.data.map(function(d){return parseFloat(d["pophigheducation"])})
+                                    
+                                   
+                                },{
+                                    name: 'Pop In University',
+                                    data: response1.data.map(function(d){return parseFloat(d["popinuniversity"])})
+                                    
+                                   
+                                }]
                     });
                 });
             });
-*/
+            
 /*        
          $http.get(api2).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
