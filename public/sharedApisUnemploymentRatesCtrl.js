@@ -101,7 +101,7 @@ angular.module("RoRoMonApp")
                                 text: 'Altitude'
                             },
                             labels: {
-                                format: '{value} km'
+                                format: '{value} mm'
                             },
                             maxPadding: 0.05,
                             showLastLabel: true
