@@ -191,9 +191,6 @@ Highcharts.chart('sharedStadistics1', {
     legend: {
         enabled: false
     },
-    tooltip: {
-        pointFormat: 'Population in 2017: <b>{point.y:.1f} millions</b>'
-    },
     /*
     series: [{
                                     name: 'Illiterate',
@@ -240,7 +237,6 @@ Highcharts.chart('sharedStadistics1', {
             rotation: -90,
             color: '#FFFFFF',
             align: 'right',
-            format: '{point.y:.1f}', // one decimal
             y: 10, // 10 pixels down from the top
             style: {
                 fontSize: '13px',
