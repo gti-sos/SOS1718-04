@@ -34,6 +34,7 @@ app.use("/", express.static(path.join(__dirname + "/public")));
 
 
 var apiServerHost = "https://sos1718-01.herokuapp.com";
+var apiServerHostCrirompov = "https://sos1718-08.herokuapp.com";
 
     
     //Proxy andrés
@@ -49,7 +50,14 @@ var apiServerHost = "https://sos1718-01.herokuapp.com";
     console.log('piped: '+req.baseUrl + req.url);
     req.pipe(request(url)).pipe(res);
     });
-    
+
+    //Proxy Cristian
+    app.use("/proxySA", function(req, res) {
+    var url = apiServerHostCrirompov + req.url;
+    console.log('piped: '+req.baseUrl + req.url);
+    req.pipe(request(url)).pipe(res);
+    });
+        
 
 var initialUnemploymentRates = [{
         "province": "sevilla",
