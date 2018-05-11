@@ -131,30 +131,30 @@ angular.module("RoRoMonApp")
                         },
                         series: [{
                                     name: 'Illiterate',
-                                    data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
+                                    data: [response2.data.map(function(d){return parseFloat(d["illiterate"])})]
                             
                                 },{name: 'First grade',
-                                    data: response2.data.map(function(d){return parseFloat(d["first-grade"])})
+                                    data: [response2.data.map(function(d){return parseFloat(d["first-grade"])})]
                             
                                 },{name: 'Second grade',
-                                    data: response2.data.map(function(d){return parseFloat(d["second-grade"])})
+                                    data: [response2.data.map(function(d){return parseFloat(d["second-grade"])})]
                                     
                                 }, {
                                     name: 'Third degree',
-                                    data: response2.data.map(function(d){return parseFloat(d["third-degree"])})
+                                    data: [response2.data.map(function(d){return parseFloat(d["third-degree"])})]
                                     
                                 },{
                                     name: 'Pop Illiterate',
-                                    data: response1.data.map(function(d){return parseFloat(d["popilliterate"])})
+                                    data: [response1.data.map(function(d){return parseFloat(d["popilliterate"])})]
                             
                                 },{
                                     name: 'Pop High Education',
-                                    data: response1.data.map(function(d){return parseFloat(d["pophigheducation"])})
+                                    data: [response1.data.map(function(d){return parseFloat(d["pophigheducation"])})]
                                     
                                    
                                 },{
                                     name: 'Pop In University',
-                                    data: response1.data.map(function(d){return parseFloat(d["popinuniversity"])})
+                                    data: [response1.data.map(function(d){return parseFloat(d["popinuniversity"])})]
                                     
                                    
                                 }]
