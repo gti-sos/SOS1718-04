@@ -9,7 +9,7 @@ angular.module("RoRoMonApp")
             var apiPropia = "/api/v1/unemployment-rates"
             var api1 = "proxySA/api/v2/students-an";
             var api2 = "";
-  /*          
+
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
               Highcharts.chart('sharedStadistics1', {
@@ -78,8 +78,8 @@ angular.module("RoRoMonApp")
 });
 });
         });
-        */
-        
+
+/*        
 
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
@@ -161,7 +161,7 @@ angular.module("RoRoMonApp")
                     });
                 });
             });
-            
+  */          
 /*        
          $http.get(api2).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
