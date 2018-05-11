@@ -115,13 +115,7 @@ angular.module("RoRoMonApp")
                         tooltip: {
                             pointFormat: 'Population in 2017: <b>millions</b>'
                         },
-                        /*
-                        
-                        {name: 'PrivateS',
-        data: response2.data.map(function(d){return (parseInt(d["private-school"]))})
 
-    }
-    */
                         series: [{
                             name: 'Datas',
                             data: [
