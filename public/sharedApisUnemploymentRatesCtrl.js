@@ -106,7 +106,7 @@ Highcharts.chart('sharedStadistics2', {
     series: [{
         type: 'column',
         name: 'Illiterate',
-        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
+        data: response2.data.map(function(d){dato2 = parseFloat(d["illiterate"]); return dato2})
     }, {
         type: 'column',
         name: 'totalcontributingfamilyworker',
@@ -114,7 +114,7 @@ Highcharts.chart('sharedStadistics2', {
     }, {
         type: 'spline',
         name: 'illiterate-aux',
-        data: response2.data.map(function(d){dato2 = parseFloat(d["illiterate"]); return dato2}),
+        data: dato1 + dato2,
         marker: {
             lineWidth: 2,
             lineColor: Highcharts.getOptions().colors[3],
