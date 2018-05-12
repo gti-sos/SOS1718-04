@@ -8,7 +8,7 @@ angular.module("RoRoMonApp")
             console.log("List Ctrl initialized!");
             var apiPropia = "/api/v1/unemployment-rates"
             var api1 = "proxySA/api/v2/students-an";
-            var api2 = "http://sos1718-02.herokuapp.com/api/v2/employments/";
+            var api2 = "https://sos1718-02.herokuapp.com/api/v2/employments/";
 /*
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
@@ -178,7 +178,7 @@ Highcharts.chart('sharedStadistics2', {
     }, {
         type: 'column',
         name: 'totalcontributingfamilyworker',
-        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
+        data: response1.data.map(function(d){return parseFloat(d["totalcontributingfamilyworker"])})
     }, {
         type: 'spline',
         name: 'illiterate-aux',
