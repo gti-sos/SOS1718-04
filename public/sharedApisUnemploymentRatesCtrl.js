@@ -102,19 +102,28 @@ Highcharts.chart('sharedStadistics2', {
                 color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
             }
         }]
-    },//totalcontributingfamilyworker
+    },//totalself
     series: [{
         type: 'column',
         name: 'Illiterate',
-        data: response2.data.map(function(d){dato2 = parseFloat(d["illiterate"]); return dato2})
+        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
     }, {
         type: 'column',
         name: 'totalcontributingfamilyworker',
-        data: response1.data.map(function(d){dato1 = parseFloat(d["totalcontributingfamilyworker"]); return dato1;})
+        data: response1.data.map(function(d){return parseFloat(d["totalcontributingfamilyworker"])})
     }, {
         type: 'spline',
-        name: 'illiterate-aux',
-        data: dato1 + dato2,
+        name: 'Total Self',
+        data: response1.data.map(function(d){return parseFloat(d["totalself"])}),
+        marker: {
+            lineWidth: 2,
+            lineColor: Highcharts.getOptions().colors[3],
+            fillColor: 'white'
+        }
+    }, {
+        type: 'spline',
+        name: 'First Grade',
+        data: response2.data.map(function(d){return parseFloat(d["first-grade"])}),
         marker: {
             lineWidth: 2,
             lineColor: Highcharts.getOptions().colors[3],
