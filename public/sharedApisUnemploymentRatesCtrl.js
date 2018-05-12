@@ -151,7 +151,7 @@ Highcharts.chart('sharedStadistics1', {
                 });
             });
         
-        // $http.get(api2).then(function(response1){
+        $http.get(api2).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
                     
 Highcharts.chart('sharedStadistics2', {
@@ -170,19 +170,15 @@ Highcharts.chart('sharedStadistics2', {
                 color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
             }
         }]
-    },
+    },//totalcontributingfamilyworker
     series: [{
         type: 'column',
         name: 'Illiterate',
         data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
     }, {
         type: 'column',
-        name: 'John',
-        data: [2, 3, 5, 7, 6]
-    }, {
-        type: 'column',
-        name: 'Joe',
-        data: [4, 3, 3, 9, 0]
+        name: 'totalcontributingfamilyworker',
+        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
     }, {
         type: 'spline',
         name: 'illiterate-aux',
@@ -261,6 +257,6 @@ Highcharts.chart('sharedStadistics2', {
  });
  */
          });
-         //});
+        });
            
  }]);
