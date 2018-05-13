@@ -8,7 +8,7 @@ angular.module("RoRoMonApp")
     .controller("sharedApisMedicalAttentionRatesCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("Vistas Ctrl initialized!");
         var ownApi = "/api/v1/medical-attention-rates";
-        var externalApi = "https://sos1718-12.herokuapp.com/api/v2/rape-stats";
+        var externalApi = "https://sos1718-05.herokuapp.com/api/v1/best-stats/";
         var proxy = "proxyCAC/api/v2/crimes-an";
 
         $http
@@ -97,83 +97,70 @@ angular.module("RoRoMonApp")
                 $http
                     .get(ownApi)
                     .then(function(response) {
+                        
+                        
+
                         Highcharts.chart('sharedStadistics2', {
                             chart: {
-                                type: 'column'
+                                type: 'column',
+                                options3d: {
+                                    enabled: true,
+                                    alpha: 15,
+                                    beta: 15,
+                                    viewDistance: 25,
+                                    depth: 40
+                                }
                             },
+
                             title: {
-                                text: 'Efficiency Optimization by Branch'
+                                text: 'Medical Attention rates and the most selling song in the year in Seville (Spain)'
                             },
+
                             xAxis: {
-                                categories: [
-                                    'Seattle HQ',
-                                    'San Francisco',
-                                    'Tokyo'
-                                ]
+                                categories: [auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2013).map(function(d) { return d["song"] })[0], auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2014).map(function(d) { return d["song"] })[0],auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2015).map(function(d) { return d["song"] })[0], auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2016).map(function(d) { return d["song"] })[0]],
+                                labels: {
+                                    skew3d: true,
+                                    style: {
+                                        fontSize: '16px'
+                                    }
+                                }
                             },
-                            yAxis: [{
+
+                            yAxis: {
+                                allowDecimals: false,
                                 min: 0,
                                 title: {
-                                    text: 'Employees'
+                                    text: 'Patients per proffesional',
+                                    skew3d: true
                                 }
-                            }, {
-                                title: {
-                                    text: 'Profit (millions)'
-                                },
-                                opposite: true
-                            }],
-                            legend: {
-                                shadow: false
                             },
+
                             tooltip: {
-                                shared: true
+                                headerFormat: '<b>{point.key}</b><br>',
+                                pointFormat: '<span style="color:{series.color}">●</span> {series.name}: {point.y} / {point.stackTotal}'
                             },
+
                             plotOptions: {
                                 column: {
-                                    grouping: false,
-                                    shadow: false,
-                                    borderWidth: 0
+                                    stacking: 'normal',
+                                    depth: 40
                                 }
                             },
+
                             series: [{
-                                name: 'Employees',
-                                color: 'rgba(165,170,217,1)',
-                                data: [150, 73, 20],
-                                pointPadding: 0.3,
-                                pointPlacement: -0.2
+                                name: 'General Medicine',
+                                data: response.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2012).sort((a, b) => a.year - b.year).map(function(d) { return d["general-medicine"] }),
+                                
                             }, {
-                                name: 'Employees Optimized',
-                                color: 'rgba(126,86,134,.9)',
-                                data: [140, 90, 40],
-                                pointPadding: 0.4,
-                                pointPlacement: -0.2
+                                name: 'Nursing',
+                                data: response.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2012).sort((a, b) => a.year - b.year).map(function(d) { return d["nursing"] }),
+                                
                             }, {
-                                name: 'Profit',
-                                color: 'rgba(248,161,63,1)',
-                                data: [183.6, 178.8, 198.5],
-                                tooltip: {
-                                    valuePrefix: '$',
-                                    valueSuffix: ' M'
-                                },
-                                pointPadding: 0.3,
-                                pointPlacement: 0.2,
-                                yAxis: 1
-                            }, {
-                                name: 'Profit Optimized',
-                                color: 'rgba(186,60,61,.9)',
-                                data: [203.6, 198.8, 208.5],
-                                tooltip: {
-                                    valuePrefix: '$',
-                                    valueSuffix: ' M'
-                                },
-                                pointPadding: 0.4,
-                                pointPlacement: 0.2,
-                                yAxis: 1
+                                name: 'Social Work',
+                                data: response.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2012).sort((a, b) => a.year - b.year).map(function(d) { return d["social-work"] }),
+                               
                             }]
                         });
-
-
-
 
                     });
             });
