@@ -1,5 +1,7 @@
 var fs= require("fs")
 var path = require("path")
+var config = require("./config")
+
 describe('Data is Loaded', function(){
     it('should show some conctacs',function(){
         browser

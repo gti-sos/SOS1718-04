@@ -1,5 +1,8 @@
 var fs= require("fs")
 var path = require("path")
+var config = require("./config")
+
+
 describe('Add Stadistic', function(){
     it('should add a new stadistic',function(){
         browser
