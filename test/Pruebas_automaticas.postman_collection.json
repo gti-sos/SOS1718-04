@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "a184f8cd-049f-4d7f-bdc8-5159f6829fef",
+		"name": "Pruebas automaticas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get contacts =10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4a3da731-de65-4cd9-9655-368c61915c42",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"",
+							"",
+							"",
+							"pm.test(\"should be equal 10\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(10);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates"
+			},
+			"response": []
+		},
+		{
+			"name": "get contacts =20",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9b0f2bcd-548c-4949-a604-7f008f8cf41e",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"",
+							"",
+							"",
+							"pm.test(\"should be equal 10\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(20);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates"
+			},
+			"response": []
+		}
+	]
+}
