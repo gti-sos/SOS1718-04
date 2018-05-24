@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "a184f8cd-049f-4d7f-bdc8-5159f6829fef",
-		"name": "Pruebas automaticas",
+		"name": "Testing graduationRates Backend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
@@ -18,9 +18,9 @@
 							"",
 							"",
 							"",
-							"pm.test(\"should be equal 8\", function () {",
+							"pm.test(\"should be equal 9\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.length).to.eql(8);",
+							"    pm.expect(jsonData.length).to.eql(9);",
 							"});"
 						]
 					}
