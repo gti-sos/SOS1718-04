@@ -5,6 +5,7 @@ angular
             $routeProvider
                 .when("/analytics",{
                     templateUrl:"analytics.html",
+                    controller: "analyticsCtrl"
                 })
                 .when("/graduation-rates",{
                     templateUrl:"graduationRatesList.html",
@@ -18,7 +19,7 @@ angular
                     templateUrl:"vistasGraduationRates.html",
                     controller: "vistasGraduationRatesCtrl"
                 })
-                .when("/graduation-rates/sharedAnalytics",{
+                .when("/graduation-rates/integrations",{
                     templateUrl:"sharedApisGraduationRates.html",
                     controller: "sharedApisGraduationRatesCtrl"
                 })
