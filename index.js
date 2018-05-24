@@ -5,6 +5,8 @@ var path = require("path");
 var request = require("request");
 var cors =require("cors");
 
+
+
 //comentario
 //Importamos nuestras APIs:
 var unemploymentRates = require("./unemployment-rates");
@@ -33,18 +35,44 @@ app.use("/", express.static(path.join(__dirname + "/public")));
 
 
 
-var apiServerHost = "https://sos1718-01.herokuapp.com";
+
 var apiServerHostCrirompov = "https://sos1718-08.herokuapp.com";
+
+var apiServerPOET ="http://poetrydb.org"
+var apiServerHost = "https://sos1718-01.herokuapp.com";
+var apiServerINE ="https://servicios.ine.es"
 
 
 
     
     //Proxy andrés
+    
+    app.use("/proxyPOET", function(req, res) {
+    var url = apiServerPOET  + req.url;
+    console.log('piped: '+req.baseUrl + req.url);
+    req.pipe(request(url)).pipe(res);
+    //no hacia falta puesto que http://poetrydb.org utiliza cors, 
+    //pro habia problema por ser una pagina http y no https
+    });
     app.use("/proxyTIS", function(req, res) {
     var url = apiServerHost + req.url;
     console.log('piped: '+req.baseUrl + req.url);
     req.pipe(request(url)).pipe(res);
     });
+    
+    app.use("/proxyINE", function(req, res) {
+    var url = apiServerINE  + req.url;
+    console.log('piped: '+req.baseUrl + req.url);
+    req.pipe(request(url)).pipe(res);
+    });
+    
+    /**/
+    
+    
+    
+   
+    
+    
     
     
     //proxy carlos

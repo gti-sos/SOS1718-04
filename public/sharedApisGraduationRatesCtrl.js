@@ -4,7 +4,6 @@
 
 
 
-var unirest= require ("unirest")
 
 "use strict"
 angular.module("RoRoMonApp")
@@ -14,7 +13,13 @@ angular.module("RoRoMonApp")
             var apiPropia = "/api/v2/graduation-rates"
             var api1 = "proxyTIS/api/v1/transferincomes-stats";
             var api2 = "https://sos1718-05.herokuapp.com/api/v1/country-stats"
-            var api3 = "https://restcountries-v1.p.mashape.com/alpha/es"
+            var api3 = "proxyINE/wstempus/js/ES/DATOS_SERIE/IPC206449?nult=45"
+            var api4 = "proxyPOET/author"
+            
+           
+            
+            
+            
 
             
             
@@ -169,7 +174,11 @@ angular.module("RoRoMonApp")
         
         
         $http.get(apiPropia).then(function(response2){
-        
+           
+            $http.get(api4+"/Alexander Pope").then(function(response1){
+                $http.get(api4+"/Shakespeare").then(function(response3){
+            console.log(response1.data)
+
                 anychart.onDocumentReady(function () {
     // create pie chart with passed data
     var chart = anychart.pie([
@@ -180,11 +189,18 @@ angular.module("RoRoMonApp")
         return previous + current;})/response2.data.filter(d=>d["private-school"]).length],
         ['Charter S',response2.data.map(function(d){return (parseFloat(d["charter-school"] ))}).reduce(function (previous, current) {
         return previous + current;})/response2.data.filter(d=>d["charter-school"]).length],
+        ['Media de lineas en los poemas de Pope',
+        response1.data.map(function(d){return (parseFloat(d.linecount))}).reduce(function (previous, current) {
+        return previous + current;})/response1.data.length],
+        ['Media de lineas en los poemas de Shakespeare',
+        response3.data.map(function(d){return (parseFloat(d.linecount))}).reduce(function (previous, current) {
+        return previous + current;})/response1.data.length],
+        
         
     ]);
 
     // set chart title text settings
-    chart.title('Media de aprobados dependiendo del tipo de colegio')
+    chart.title('Media de aprobados dependiendo del tipo de colegio y media de lineas escritas por poetas')
             //set chart radius
             .radius('43%')
             // create empty area in pie chart
@@ -195,18 +211,17 @@ angular.module("RoRoMonApp")
     // initiate chart drawing
     chart.draw();
 });
-                
+});
+});
+            
         });
         
         
         
          $http.get(apiPropia).then(function(response2){
              
-             unirest.get("https://restcountries-v1.p.mashape.com/alpha/es")
-        .header("X-Mashape-Key", "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk")
-        .header("Accept", "application/json")
-        .end(function (result) {
-          console.log(result.status, result.headers, result.body);
+             $http.get(api3).then(function(response1){
+        
              
         
       google.charts.load('current', {'packages':['corechart']});
@@ -214,28 +229,47 @@ angular.module("RoRoMonApp")
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-         ['year', 'media'],
-         [2014, parseInt(response2.data.filter(d=>d.year==2014)
+         ['Year', 'media'],
+         [ 2014,parseInt(response1.data.Data.filter(d=>d.Anyo==2014)
+                    .map(function(d){return (parseFloat(d.Valor))}).reduce(function (previous, current) {
+                    return previous + current;})*100/response1.data.Data.filter(d=>d.Anyo==2014).length)], 
+         [ 2014,parseInt(response2.data.filter(d=>d.year==2014)
                     .map(function(d){return (parseFloat(d["private-school"]+d["public-school"]+d["charter-school"] ))}).reduce(function (previous, current) {
                     return previous + current;})/response2.data.filter(d=>d["private-school"]).length)], 
-        [ 2015, parseInt(response2.data.filter(d=>d.year==2015)
+    
+        [ 2015,parseInt(response1.data.Data.filter(d=>d.Anyo==2015)
+                    .map(function(d){return (parseFloat(d.Valor))}).reduce(function (previous, current) {
+                    return previous + current;})*100/response1.data.Data.filter(d=>d.Anyo==2015).length)], 
+         [ 2015,parseInt(response2.data.filter(d=>d.year==2015)
                     .map(function(d){return (parseFloat(d["private-school"]+d["public-school"]+d["charter-school"] ))}).reduce(function (previous, current) {
                     return previous + current;})/response2.data.filter(d=>d["private-school"]).length)], 
-        [ 2016, parseInt(response2.data.filter(d=>d.year==2016)
+                    
+                    
+        [ 2016,parseInt(response1.data.Data.filter(d=>d.Anyo==2016)
+                    .map(function(d){return (parseFloat(d.Valor))}).reduce(function (previous, current) {
+                    return previous + current;})*100/response1.data.Data.filter(d=>d.Anyo==2016).length)], 
+         [ 2016,parseInt(response2.data.filter(d=>d.year==2016)
                     .map(function(d){return (parseFloat(d["private-school"]+d["public-school"]+d["charter-school"] ))}).reduce(function (previous, current) {
-                    return previous + current;})/response2.data.filter(d=>d["private-school"]).length)],
-        [ 2017, parseInt(response2.data.filter(d=>d.year==2017)
+                    return previous + current;})/response2.data.filter(d=>d["private-school"]).length)], 
+        
+        [ 2017,parseInt(response1.data.Data.filter(d=>d.Anyo==2017)
+                    .map(function(d){return (parseFloat(d.Valor))}).reduce(function (previous, current) {
+                    return previous + current;})*100/response1.data.Data.filter(d=>d.Anyo==2017).length)], 
+         [ 2017,parseInt(response2.data.filter(d=>d.year==2017)
                     .map(function(d){return (parseFloat(d["private-school"]+d["public-school"]+d["charter-school"] ))}).reduce(function (previous, current) {
-                    return previous + current;})/response2.data.filter(d=>d["private-school"]).length)]
-            
+                    return previous + current;})/response2.data.filter(d=>d["private-school"]).length)], 
+    
+    
+        
         ]);
 
         var options = {
           title: 'year vs. media',
-          vAxis: {title: 'media', minValue: 0, 
-                                maxValue: 100},
-          hAxis: {title: 'year', minValue: response2.data.map(function(d){return Math.min(parseInt(d.year ))})
-                                 , maxValue: response2.data.map(function(d){return Math.max(parseInt(d.year ))})},
+          vAxis: {title: 'mediaGraduation', minValue: 0, 
+                                            maxValue: 100},
+                                
+          hAxis: {title: 'year', minValue: 2014
+                                 ,maxValue: 2017},
           legend: 'none'
         };
 
