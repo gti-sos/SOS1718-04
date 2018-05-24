@@ -6,6 +6,7 @@ var BASE_API_PATH1 = "/api/v1";
 
 
 
+
     module.exports = graduationRates;
     graduationRates.register = function(app, db) {
     console.log("Registering routes for graduation-rates API...");

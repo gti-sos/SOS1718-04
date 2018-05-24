@@ -1,17 +1,24 @@
 /*global angular*/
 /*global Highcharts*/
 /*global google*/
-/*global Morris*/
+
+
+
+
+
 "use strict"
 angular.module("RoRoMonApp")
-  .controller("sharedApisGraduationRatesCtrl", ["$scope","$http", function($scope,$http) {
+  .controller("sharedApisGraduationRatesCtrl", ["$scope","$http" ,function($scope,$http) {
+     
             console.log("List Ctrl initialized!");
             var apiPropia = "/api/v2/graduation-rates"
             var api1 = "proxyTIS/api/v1/transferincomes-stats";
             var api2 = "https://sos1718-05.herokuapp.com/api/v1/country-stats"
+            var api3 = "https://restcountries-v1.p.mashape.com/alpha/es"
+
             
             
-            
+                        
             
             
              //======================================================================
@@ -194,6 +201,13 @@ angular.module("RoRoMonApp")
         
         
          $http.get(apiPropia).then(function(response2){
+             
+             unirest.get("https://restcountries-v1.p.mashape.com/alpha/es")
+        .header("X-Mashape-Key", "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk")
+        .header("Accept", "application/json")
+        .end(function (result) {
+          console.log(result.status, result.headers, result.body);
+             
         
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
@@ -230,6 +244,8 @@ angular.module("RoRoMonApp")
         chart.draw(data, options);
       }
    
+         
+         });
          });
            
 }]);

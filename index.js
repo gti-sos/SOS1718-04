@@ -36,6 +36,8 @@ app.use("/", express.static(path.join(__dirname + "/public")));
 var apiServerHost = "https://sos1718-01.herokuapp.com";
 var apiServerHostCrirompov = "https://sos1718-08.herokuapp.com";
 
+
+
     
     //Proxy andrés
     app.use("/proxyTIS", function(req, res) {
@@ -43,6 +45,7 @@ var apiServerHostCrirompov = "https://sos1718-08.herokuapp.com";
     console.log('piped: '+req.baseUrl + req.url);
     req.pipe(request(url)).pipe(res);
     });
+    
     
     //proxy carlos
     app.use("/proxyCAC", function(req, res) {
