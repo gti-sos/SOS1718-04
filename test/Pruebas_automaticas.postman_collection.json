@@ -6,21 +6,21 @@
 	},
 	"item": [
 		{
-			"name": "get contacts =10",
+			"name": "get stats =8",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "4a3da731-de65-4cd9-9655-368c61915c42",
+						"id": "cd1587d3-4f26-4c46-b981-5474080b0cd2",
 						"type": "text/javascript",
 						"exec": [
 							"",
 							"",
 							"",
 							"",
-							"pm.test(\"should be equal 10\", function () {",
+							"pm.test(\"should be equal 8\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.length).to.eql(10);",
+							"    pm.expect(jsonData.length).to.eql(8);",
 							"});"
 						]
 					}
@@ -35,12 +35,12 @@
 			"response": []
 		},
 		{
-			"name": "get contacts =20",
+			"name": "get stats =20",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "9b0f2bcd-548c-4949-a604-7f008f8cf41e",
+						"id": "b6733670-e9c7-4219-9859-5aca912661ea",
 						"type": "text/javascript",
 						"exec": [
 							"",
@@ -60,6 +60,412 @@
 				"header": [],
 				"body": {},
 				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates"
+			},
+			"response": []
+		},
+		{
+			"name": "pagination",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "97f32e46-71f7-4f28-b0fa-7240ea8658ab",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"seville\",\n        \"year\": 2017,\n        \"public-school\": 80.7,\n        \"private-school\": 98.2,\n        \"charter-school\": 89.5\n    }"
+				},
+				"url": {
+					"raw": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates?limit=3&offset=0",
+					"protocol": "https",
+					"host": [
+						"sos1718-04",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"graduation-rates"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				},
+				"description": "Get recurso base con paginacion y limite 3"
+			},
+			"response": []
+		},
+		{
+			"name": "pagination +year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fec0737d-43f7-4ec0-9a39-f8b023ea19b2",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"jaen\",\n        \"year\": 2015,\n        \"public-school\": 80.7,\n        \"private-school\": 95.2,\n        \"charter-school\": 89.5\n    }"
+				},
+				"url": {
+					"raw": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates?year=2016&limit=1&offset=0",
+					"protocol": "https",
+					"host": [
+						"sos1718-04",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"graduation-rates"
+					],
+					"query": [
+						{
+							"key": "year",
+							"value": "2016"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post stat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "59b3c558-fae0-4aae-b2c8-fb12dc5eddd2",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"huelva\",\n        \"year\": 2019,\n        \"public-school\": 76,\n        \"private-school\": 89,\n        \"charter-school\": 87\n    }"
+				},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates"
+			},
+			"response": []
+		},
+		{
+			"name": "post stat rep",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b14202ab-f3a8-4aa5-b81f-04458f34ea64",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {",
+							"    pm.response.to.have.status(409);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"huelva\",\n        \"year\": 2019,\n        \"public-school\": 76,\n        \"private-school\": 89,\n        \"charter-school\": 87\n    }"
+				},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates"
+			},
+			"response": []
+		},
+		{
+			"name": "post stat fail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0befdacb-3198-4b86-97df-9993a52151f7",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"huelva\",\n        \"year\": 2019,\n        \"public-school\": 76,\n        \"private-school\": 89,\n        \"charter-school\": 87\n    }"
+				},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates/huelva"
+			},
+			"response": []
+		},
+		{
+			"name": "put stat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afabcc95-770f-4971-bfc4-59511393ec72",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"huelva\",\n        \"year\": 2019,\n        \"public-school\": 79,\n        \"private-school\": 89,\n        \"charter-school\": 87\n    }"
+				},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates/huelva/2019"
+			},
+			"response": []
+		},
+		{
+			"name": "put stat fail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0fe3232e-4be5-48b7-a403-786e1fb595c1",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"seville\",\n        \"year\": 2019,\n        \"public-school\": 79,\n        \"private-school\": 89,\n        \"charter-school\": 87\n    }"
+				},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates/huelva/2019"
+			},
+			"response": []
+		},
+		{
+			"name": "put stat fail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b9da2f6b-a4fa-4c8c-afd1-52a8d717b646",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"seville\",\n        \"year\": 2019,\n        \"public-school\": 79,\n        \"private-school\": 89,\n        \"charter-school\": 87\n    }"
+				},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates/"
+			},
+			"response": []
+		},
+		{
+			"name": "delete stat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9efee3ca-fdb0-425e-afa6-ea212087003f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"huelva\",\n        \"year\": 2019,\n        \"public-school\": 76,\n        \"private-school\": 89,\n        \"charter-school\": 87\n    }"
+				},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates/huelva/2019"
+			},
+			"response": []
+		},
+		{
+			"name": "delete all",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9efee3ca-fdb0-425e-afa6-ea212087003f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"huelva\",\n        \"year\": 2019,\n        \"public-school\": 76,\n        \"private-school\": 89,\n        \"charter-school\": 87\n    }"
+				},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates/"
+			},
+			"response": []
+		},
+		{
+			"name": "loadInitial",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9745da07-b78e-4735-aad9-77b952fee036",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"huelva\",\n        \"year\": 2015,\n        \"public-school\": 80.7,\n        \"private-school\": 95.2,\n        \"charter-school\": 89.5\n    }"
+				},
+				"url": "https://sos1718-04.herokuapp.com/api/v2/graduation-rates/loadInitialData",
+				"description": "loadInitial recurso base"
 			},
 			"response": []
 		}
