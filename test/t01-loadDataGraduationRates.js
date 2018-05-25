@@ -8,6 +8,8 @@ describe('Data is Loaded', function(){
             .get('https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/graduation-rates')
             .then(function(){
                 browser.driver.sleep(2000);
+                 browser.driver.sleep(2000);
+                  browser.driver.sleep(2000);
                
                 
                 element

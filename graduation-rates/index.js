@@ -2,8 +2,7 @@
 var graduationRates = {};
 var BASE_API_PATH = "/api/v2";
 var BASE_API_PATH1 = "/api/v1";
-
-
+var unirest = require("unirest");
 
 
 
@@ -11,9 +10,9 @@ var BASE_API_PATH1 = "/api/v1";
     graduationRates.register = function(app, db) {
     console.log("Registering routes for graduation-rates API...");
     
-
     
     
+   
     
  app.get(BASE_API_PATH + "/graduation-rates/docs", (req, res) => {
         console.log(Date() + " - GET /graduation-rates/docs");

@@ -4,7 +4,6 @@
 
 
 
-
 "use strict"
 angular.module("RoRoMonApp")
   .controller("sharedApisGraduationRatesCtrl", ["$scope","$http" ,function($scope,$http) {
@@ -15,24 +14,87 @@ angular.module("RoRoMonApp")
             var api2 = "https://sos1718-05.herokuapp.com/api/v1/country-stats"
             var api3 = "proxyINE/wstempus/js/ES/DATOS_SERIE/IPC206449?nult=45"
             var api4 = "proxyPOET/author"
-            
-           
-            
-            
-            
 
-            
-            
+        //======================================================================
+        //====================================================================== 
+        //=============================DE SOS===================================
+        //======================================================================
+        //======================================================================
+           
+           var mashapePaisEs = {
+            method: 'GET',
+            url: "https://restcountries-v1.p.mashape.com/alpha/es",
+            headers: {
+                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "Accept": "application/json"
+            }};
+            var mashapePaisRu = {
+            method: 'GET',
+            url: "https://restcountries-v1.p.mashape.com/alpha/ru",
+            headers: {
+                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "Accept": "application/json"
+            }};
+         
+         
+         
+          $http.get(apiPropia).then(function(response1){
+           $http(mashapePaisEs)
+                .then(function(response2){
+                    $http(mashapePaisRu)
+                     .then(function(response3){
+                    console.log(response2.data[0])
+                   
+                        anychart.onDocumentReady(function () {
+                        // prepare data for the chart
+                        var data = [
+                            {name: 'Media de la poblacion española por provincias', value: response2.data.population/50},
+                            {name: 'Media de la poblacion rusa por estados', value: response2.data.population/83},
+
+                            {name: 'Media de aprobados en Private S por cada millon de habitantes', value: parseInt(response1.data
+                            .map(function(d){return (parseFloat(d["private-school"]*10000))}).reduce(function (previous, current) {
+                            return (previous + current);})/response1.data.length)},
+                            
+                            {name: 'Media de aprobados en Public S por cada millon de habitantes', value: parseInt(response1.data
+                            .map(function(d){return (parseFloat(d["public-school"]*10000))}).reduce(function (previous, current) {
+                            return (previous + current);})/response1.data.length)}
+                            
                         
-            
-            
-             //======================================================================
-          //====================================================================== 
-          //==================================DE SOS====================================
-           //======================================================================
-            //======================================================================
-            
-            
+                        
+                        ];
+                    
+                        // create funnel chart
+                        var chart = anychart.pyramid(data);
+                    
+                        // set chart margin
+                        chart.margin(10, '20%', 10, '20%');
+                    
+                        // set chart legend settings
+                        chart.legend()
+                                .enabled(true)
+                                .position('outside-right')
+                                .itemsLayout('vertical')
+                                .align('top');
+                    
+                        // set chart title
+                        // set chart base width settings
+                        chart.baseWidth('70%');
+                    
+                        // set chart labels settings
+                        chart.labels()
+                                .position('outside-right')
+                                .format('{%Value}');
+                    
+                        // set container id for the chart
+                        chart.container('sharedStadistics5');
+                    
+                        // initiate chart drawing
+                        chart.draw();
+                    });
+                    
+                }) 
+          });
+        });
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
               Highcharts.chart('sharedStadistics1', {
@@ -42,7 +104,6 @@ angular.module("RoRoMonApp")
     title: {
         text: 'Mixed Stats1'
     },
-    
     xAxis: {
         categories: response2.data.map(function(d){return (parseInt(d.year))})
     },
@@ -91,12 +152,12 @@ angular.module("RoRoMonApp")
         name: 'tispa',
         data: response1.data.map(function(d){return (parseInt(d.tispa))})
         
-       
-    }]
-});
-});
+           
+                }]
+            });
         });
-        
+    });
+                    
         
         //======================================================================
          //======================================================================
@@ -174,7 +235,6 @@ angular.module("RoRoMonApp")
         
         
         $http.get(apiPropia).then(function(response2){
-           
             $http.get(api4+"/Alexander Pope").then(function(response1){
                 $http.get(api4+"/Shakespeare").then(function(response3){
             console.log(response1.data)
@@ -202,27 +262,24 @@ angular.module("RoRoMonApp")
     // set chart title text settings
     chart.title('Media de aprobados dependiendo del tipo de colegio y media de lineas escritas por poetas')
             //set chart radius
-            .radius('43%')
+    .radius('43%')
             // create empty area in pie chart
-            .innerRadius('30%');
+    .innerRadius('30%');
 
     // set container id for the chart
     chart.container("sharedStadistics3");
     // initiate chart drawing
     chart.draw();
-});
-});
-});
-            
+                });
+            });
         });
+            
+    });
         
         
         
          $http.get(apiPropia).then(function(response2){
-             
              $http.get(api3).then(function(response1){
-        
-             
         
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
