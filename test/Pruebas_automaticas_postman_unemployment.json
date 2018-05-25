@@ -1,0 +1,642 @@
+{
+	"info": {
+		"name": "SOS1718-04-ENTREGABLE-1",
+		"_postman_id": "d336a847-70db-4a3d-b1cb-9bc456d3c948",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "37e8c680-3c8d-4000-a7ef-6b989bcac6a9",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test del get al recurso general\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length >= 5);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 1981,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "79d27e3b-7f5f-4c0f-ac4b-c5876eae2d4a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test POST al recurso general\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"madrid\",\n    \"year\": 2000,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ce0920cf-762c-4b9f-983f-8f7ef702fee2",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test GET al recurso general después del primer POST\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length > 6);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 1981,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ba1a915-7b78-41eb-9edf-9292aa98b619",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test intento de PUT al recurso general\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 1981,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9390250-17bd-4836-b75d-ca654d2eaed0",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test DELETE al recurso general\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 1981,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/loadInitialData Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "106b9efa-275d-470b-995a-952da4887918",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test GET a loadInitialData para iniciar datos\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 2014,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/loadInitialData",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "99858803-3b80-402e-870f-1b0cb35c4f96",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test GET al recurso general tras hacer el load inicial\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(5);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 1981,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c55b19ec-1f0d-4aab-bafb-945cb9c3ef9c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test GET a un recurso concreto sevilla en este caso\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length >= 1);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 1981,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dbbd9c93-01ca-474a-bb4d-c1105e61d692",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test DELETE a un recurso concreto\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 1981,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/madrid/2000",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e8efc8d8-f0c8-4efd-8a0f-8e03d598dfae",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test POST a un recurso concreto\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 1981,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ff66d5fa-a3c6-40dd-8b73-149d4dc3978d",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test PUT aun recurso concreto\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"madrid\",\n    \"year\": 2000,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/madrid/2000",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7407528f-b1ec-4db5-84a1-a61ce87220b0",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Hay al menos 1 registro de Sevilla\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length >= 1);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 2014,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/loadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "106b9efa-275d-470b-995a-952da4887918",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test GET a loadInitialData para iniciar datos\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 2014,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/loadInitialData",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/madrid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "006d1add-5fd5-4354-8758-6ce96e7930e5",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Se intenta acceder a un recurso inexistente\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"sevilla\",\n        \"year\": 1981,\n        \"first-grade\": 5.1,\n        \"second-grade\": 24.9,\n        \"third-degree\": 0.1,\n        \"min-age\": 16,\n        \"max-age\": 19\n    }"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/madrid",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a1754ac5-9989-4c51-851a-536311459885",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"El JSON recibido no tiene el formato correcto\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"sevilla\",\n        \"year\": 1981,\n        \"first-grade\": 5.1,\n        \"second-grade\": 24.9,\n        \"third-degree\": 0.1,\n        \"min-age\": 16,\n        \"max-age\": 19\n    }"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla/1981",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "79d27e3b-7f5f-4c0f-ac4b-c5876eae2d4a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test POST al recurso general\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"madrid\",\n    \"year\": 2000,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/madrid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a8630c69-374b-445b-88dc-3a0d121ac57a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"POST a un recurso que ya existe\", function () {",
+							"    pm.response.to.have.status(409);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 1981,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c12f2ed0-0ab7-4b49-987c-e1069c31153a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"PUT a un recurso con los id diferentes\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"madrid\",\n        \"year\": 1981,\n        \"illiterate\": 3.7,\n        \"first-grade\": 5.1,\n        \"second-grade\": 24.9,\n        \"third-degree\": 0.1,\n        \"min-age\": 16,\n        \"max-age\": 19\n    }"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/sevilla/1981",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/madrid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dbbd9c93-01ca-474a-bb4d-c1105e61d692",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Test DELETE a un recurso concreto\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"madrid\",\n    \"year\": 2000,\n    \"illiterate\": 3.7,\n    \"first-grade\": 5.1,\n    \"second-grade\": 24.9,\n    \"third-degree\": 0.1,\n    \"min-age\": 16,\n    \"max-age\": 19\n}"
+				},
+				"url": "http://sos1718-04.herokuapp.com/api/v1/unemployment-rates/madrid/2000",
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
