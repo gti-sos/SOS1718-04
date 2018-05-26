@@ -55,12 +55,96 @@ angular.module("RoRoMonApp")
                 "Accept": "application/json"
             }};
             
+            var mashapeNumberFacts1997 = {
+            method: 'GET',
+            url: "https://numbersapi.p.mashape.com/1997/year?fragment=true&json=true",
+            headers: {
+                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "Accept": "application/json"
+            }};
+            
+            var mashapeNumberFacts1942 = {
+            method: 'GET',
+            url: "https://numbersapi.p.mashape.com/1997/year?fragment=true&json=true",
+            headers: {
+                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "Accept": "application/json"
+            }};
+            var mashapeNumberFacts2016 = {
+            method: 'GET',
+            url: "https://numbersapi.p.mashape.com/2016/year?fragment=true&json=true",
+            headers: {
+                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "Accept": "application/json"
+            }};
+            
+            var mashapeNumberFacts2017 = {
+            method: 'GET',
+            url: "https://numbersapi.p.mashape.com/2017/year?fragment=true&json=true",
+            headers: {
+                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "Accept": "application/json"
+            }};
             
             
+            var mashapeHearthStoneGame = {
+            method: 'GET',
+            url: "https://omgvamp-hearthstone-v1.p.mashape.com/cards",
+            headers: {
+                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "Accept": "application/json"
+            }};
             
-        
-                
-
+            
+            $http(mashapeHearthStoneGame).then(function(response){
+                console.log(response.data.Basic)
+            $scope.cards = response.data.Basic
+            
+            });
+            
+             $http.get(apiPropia).then(function(response){
+                 $http(mashapeNumberFacts1942).then(function(response2){
+                     $http(mashapeNumberFacts2016).then(function(response3){
+                         $http(mashapeNumberFacts2017).then(function(response4){
+                    new Morris.Area({
+                          // ID of the element in which to draw the chart.
+  
+                          element: 'sharedStadistics7',
+                          // Chart data records -- each entry in this array corresponds to a point on
+                          // the chart.
+                          
+   
+                          data:[{year:"1942",a: parseInt(response2.data.text.length),b:0},
+                                {year:"2016",a: parseInt(response3.data.text.length),
+                                             b: parseInt(response.data.filter(d=>d.year==2016)
+                                                    .map(function(d){ 
+                                                    return parseFloat(d["public-school"])+
+                                                    parseFloat(d["private-school"])+
+                                                    parseFloat(d["charter-school"])
+                                                        /response.data.filter(d=>d.year==2016).length
+                                            }))},
+                                             {year:"2017",a: parseInt(response4.data.text.length),
+                                             b: parseInt(response.data.filter(d=>d.year==2017)
+                                                    .map(function(d){ 
+                                                    return parseFloat(d["public-school"])+
+                                                    parseFloat(d["private-school"])+
+                                                    parseFloat(d["charter-school"])
+                                                        /response.data.filter(d=>d.year==2017).length
+                                            }))}],
+                                            
+                              // The name of the data record attribute that contains x-values.
+                              xkey: 'year',
+                              // A list of names of data record attributes that contain y-values.
+                              ykeys: ['a','b'],
+                              // Labels for the ykeys -- will be displayed when you hover over the
+                              // chart.
+                              labels: ['series a', 'series b']
+                            });
+             });
+             });
+                 });
+             });
+            
 
          
          //======================================================================
