@@ -6,7 +6,7 @@
 
 //GRAFICAS ANTIGUAS: line chart, bar chart.
 
-//GRAFICAS NUEVAS EN D03: doughnut chart,pie chart, pyramid diagram,scatter plot.
+//GRAFICAS NUEVAS EN D03: doughnut chart, pie chart,pyramid diagram,scatter plot, area chart.
 
 
 "use strict"
