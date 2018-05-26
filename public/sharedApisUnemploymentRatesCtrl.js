@@ -161,7 +161,7 @@ Highcharts.chart('sharedStadistics2', {
             anychart.onDocumentReady(function() {
               var data = [{
                   x: 'Eminem',
-                  value: response2.data.map(function(d){return parseInt(d["nb_album"])})
+                  value: response2.data["nb_album"]
                 },
                 {
                   x: 'Sevilla',
