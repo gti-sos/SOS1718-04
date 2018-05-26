@@ -1,7 +1,12 @@
 /*global angular*/
 /*global Highcharts*/
 /*global google*/
+/*global CanvasJS*/
 
+
+//GRAFICAS ANTIGUAS: line chart, bar chart.
+
+//GRAFICAS NUEVAS EN D03: doughnut chart,pie chart, pyramid diagram,scatter plot.
 
 
 "use strict"
@@ -9,18 +14,16 @@ angular.module("RoRoMonApp")
   .controller("sharedApisGraduationRatesCtrl", ["$scope","$http" ,function($scope,$http) {
      
             console.log("List Ctrl initialized!");
+            
             var apiPropia = "/api/v2/graduation-rates"
+            //=================SOS====================
             var api1 = "proxyTIS/api/v1/transferincomes-stats";
             var api2 = "https://sos1718-05.herokuapp.com/api/v1/country-stats"
+            
+            //=================EXTERNAS====================
             var api3 = "proxyINE/wstempus/js/ES/DATOS_SERIE/IPC206449?nult=45"
             var api4 = "proxyPOET/author"
-
-        //======================================================================
-        //====================================================================== 
-        //=============================DE SOS===================================
-        //======================================================================
-        //======================================================================
-           
+            
            var mashapePaisEs = {
             method: 'GET',
             url: "https://restcountries-v1.p.mashape.com/alpha/es",
@@ -35,16 +38,40 @@ angular.module("RoRoMonApp")
                 "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
                 "Accept": "application/json"
             }};
+            
+            var mashapeUrbanLean = {
+            method: 'GET',
+            url: "https://mashape-community-urban-dictionary.p.mashape.com/define?term=lean",
+            headers: {
+                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "Accept": "application/json"
+            }};
+            
+             var mashapeUrbanProzac = {
+            method: 'GET',
+            url: "https://mashape-community-urban-dictionary.p.mashape.com/define?term=prozac",
+            headers: {
+                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "Accept": "application/json"
+            }};
+            
+            
+            
+            
+        
+                
+
+
          
-         
+         //======================================================================
+         //ANYCHARTS
+         //======================================================================
          
           $http.get(apiPropia).then(function(response1){
            $http(mashapePaisEs)
                 .then(function(response2){
                     $http(mashapePaisRu)
                      .then(function(response3){
-                    console.log(response2.data[0])
-                   
                         anychart.onDocumentReady(function () {
                         // prepare data for the chart
                         var data = [
@@ -58,9 +85,7 @@ angular.module("RoRoMonApp")
                             {name: 'Media de aprobados en Public S por cada millon de habitantes', value: parseInt(response1.data
                             .map(function(d){return (parseFloat(d["public-school"]*10000))}).reduce(function (previous, current) {
                             return (previous + current);})/response1.data.length)}
-                            
-                        
-                        
+                     
                         ];
                     
                         // create funnel chart
@@ -86,7 +111,7 @@ angular.module("RoRoMonApp")
                                 .format('{%Value}');
                     
                         // set container id for the chart
-                        chart.container('sharedStadistics5');
+                        chart.container('sharedStadistics1');
                     
                         // initiate chart drawing
                         chart.draw();
@@ -95,14 +120,59 @@ angular.module("RoRoMonApp")
                 }) 
           });
         });
+        
+        $http.get(apiPropia).then(function(response2){
+            $http.get(api4+"/Alexander Pope").then(function(response1){
+                $http.get(api4+"/Shakespeare").then(function(response3){
+
+                anychart.onDocumentReady(function () {
+    // create pie chart with passed data
+    var chart = anychart.pie([
+        
+        ['Public S',response2.data.map(function(d){return (parseFloat(d["public-school"] ))}).reduce(function (previous, current) {
+        return previous + current;})/response2.data.filter(d=>d["public-school"]).length],
+        ['Private S',response2.data.map(function(d){return (parseFloat(d["private-school"] ))}).reduce(function (previous, current) {
+        return previous + current;})/response2.data.filter(d=>d["private-school"]).length],
+        ['Charter S',response2.data.map(function(d){return (parseFloat(d["charter-school"] ))}).reduce(function (previous, current) {
+        return previous + current;})/response2.data.filter(d=>d["charter-school"]).length],
+        ['Media de lineas en los poemas de Pope',
+        response1.data.map(function(d){return (parseFloat(d.linecount))}).reduce(function (previous, current) {
+        return previous + current;})/response1.data.length],
+        ['Media de lineas en los poemas de Shakespeare',
+        response3.data.map(function(d){return (parseFloat(d.linecount))}).reduce(function (previous, current) {
+        return previous + current;})/response1.data.length],
+        
+        
+    ]);
+
+    // set chart title text settings
+    chart.title('Media de aprobados dependiendo del tipo de colegio y media de lineas escritas por poetas')
+            //set chart radius
+    .radius('43%')
+            // create empty area in pie chart
+    .innerRadius('30%');
+
+    // set container id for the chart
+    chart.container("sharedStadistics2");
+    // initiate chart drawing
+    chart.draw();
+                });
+            });
+        });
+            
+    });
+    
+    //======================================================================
+    //HIGHCHARTS
+    //======================================================================
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
-              Highcharts.chart('sharedStadistics1', {
+              Highcharts.chart('sharedStadistics3', {
     chart: {
         type: 'spline'
     },
     title: {
-        text: 'Mixed Stats1'
+        text: 'Shaerd Stadistics1'
     },
     xAxis: {
         categories: response2.data.map(function(d){return (parseInt(d.year))})
@@ -159,14 +229,12 @@ angular.module("RoRoMonApp")
     });
                     
         
-        //======================================================================
-         //======================================================================
         
         
         
          $http.get(api2).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
-              Highcharts.chart('sharedStadistics2', {
+              Highcharts.chart('sharedStadistics4', {
     chart: {
         type: 'bar'
     },
@@ -222,60 +290,11 @@ angular.module("RoRoMonApp")
 });
         });
         });
+   
         
-        
-        
-        
-        
-         //======================================================================
-          //====================================================================== 
-          //==================================EXTERNAS====================================
-           //======================================================================
-            //======================================================================
-        
-        
-        $http.get(apiPropia).then(function(response2){
-            $http.get(api4+"/Alexander Pope").then(function(response1){
-                $http.get(api4+"/Shakespeare").then(function(response3){
-            console.log(response1.data)
-
-                anychart.onDocumentReady(function () {
-    // create pie chart with passed data
-    var chart = anychart.pie([
-        
-        ['Public S',response2.data.map(function(d){return (parseFloat(d["public-school"] ))}).reduce(function (previous, current) {
-        return previous + current;})/response2.data.filter(d=>d["public-school"]).length],
-        ['Private S',response2.data.map(function(d){return (parseFloat(d["private-school"] ))}).reduce(function (previous, current) {
-        return previous + current;})/response2.data.filter(d=>d["private-school"]).length],
-        ['Charter S',response2.data.map(function(d){return (parseFloat(d["charter-school"] ))}).reduce(function (previous, current) {
-        return previous + current;})/response2.data.filter(d=>d["charter-school"]).length],
-        ['Media de lineas en los poemas de Pope',
-        response1.data.map(function(d){return (parseFloat(d.linecount))}).reduce(function (previous, current) {
-        return previous + current;})/response1.data.length],
-        ['Media de lineas en los poemas de Shakespeare',
-        response3.data.map(function(d){return (parseFloat(d.linecount))}).reduce(function (previous, current) {
-        return previous + current;})/response1.data.length],
-        
-        
-    ]);
-
-    // set chart title text settings
-    chart.title('Media de aprobados dependiendo del tipo de colegio y media de lineas escritas por poetas')
-            //set chart radius
-    .radius('43%')
-            // create empty area in pie chart
-    .innerRadius('30%');
-
-    // set container id for the chart
-    chart.container("sharedStadistics3");
-    // initiate chart drawing
-    chart.draw();
-                });
-            });
-        });
-            
-    });
-        
+        //======================================================================
+        //=========================Google================================
+        //======================================================================
         
         
          $http.get(apiPropia).then(function(response2){
@@ -315,9 +334,6 @@ angular.module("RoRoMonApp")
          [ 2017,parseInt(response2.data.filter(d=>d.year==2017)
                     .map(function(d){return (parseFloat(d["private-school"]+d["public-school"]+d["charter-school"] ))}).reduce(function (previous, current) {
                     return previous + current;})/response2.data.filter(d=>d["private-school"]).length)], 
-    
-    
-        
         ]);
 
         var options = {
@@ -330,7 +346,7 @@ angular.module("RoRoMonApp")
           legend: 'none'
         };
 
-        var chart = new google.visualization.ScatterChart(document.getElementById('sharedStadistics4'));
+        var chart = new google.visualization.ScatterChart(document.getElementById('sharedStadistics5'));
 
         chart.draw(data, options);
       }
@@ -338,5 +354,32 @@ angular.module("RoRoMonApp")
          
          });
          });
+          $http.get(apiPropia).then(function(response1){
+             $http(mashapeUrbanLean).then(function(response2){
+                 $http(mashapeUrbanProzac).then(function(response3){
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Word', 'Definitions'],
+          ['Lean',  response2.data.list.length],
+          ['Prozac',   response3.data.list.length],
+          ['Huelva',  response1.data.filter(d=>d.province=="huelva").length],
+          ['Sevilla', response1.data.filter(d=>d.province=="seville").length],
+        ]);
+
+        var options = {
+          title: 'Definiciones para una palabra'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('sharedStadistics6'));
+
+        chart.draw(data, options);
+      }
+             });
+         });
+    });
            
 }]);
