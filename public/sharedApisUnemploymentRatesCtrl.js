@@ -19,7 +19,7 @@ angular.module("RoRoMonApp")
             
             var mashapeDeezerEminem = {
                 method: 'GET',
-                url: "https://deezerdevs-deezer.p.mashape.com/search?q=eminem",
+                url: "https://deezerdevs-deezer.p.mashape.com/artist/eminem",
                 headers: {
                     "X-Mashape-Key": "N7bg9PaaAimshjzm9hlUU98PgkPEp1934AZjsnKWYN62SRGMor", 
                     "Accept": "application/json"
@@ -160,7 +160,7 @@ Highcharts.chart('sharedStadistics2', {
             anychart.onDocumentReady(function() {
               var data = [{
                   x: 'Eminem',
-                  value: response2.data.length//map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})
+                  value: response2.data.length //map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})
                 },
                 {
                   x: 'Sevilla',
