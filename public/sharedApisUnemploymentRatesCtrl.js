@@ -160,7 +160,7 @@ Highcharts.chart('sharedStadistics2', {
             anychart.onDocumentReady(function() {
               var data = [{
                   x: 'Eminem',
-                  value: response2.data.length //map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})
+                  value: 10 //response2.data.length //map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})
                 },
                 {
                   x: 'Sevilla',
