@@ -156,7 +156,7 @@ Highcharts.chart('sharedStadistics2', {
 
 //========================== APIS SOS
         $http.get(apiPropia).then(function(response1){
-                $http.get(mashapeDeezerEminem).then(function(response2){
+                $http(mashapeDeezerEminem).then(function(response2){
             anychart.onDocumentReady(function() {
               var data = [{
                   x: 'Eminem',
