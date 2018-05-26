@@ -35,7 +35,7 @@ angular
                     templateUrl:"vistasUnemploymentRates.html",
                     controller: "vistasUnemploymentRatesCtrl"
                 })
-                .when("/unemployment-rates/sharedAnalytics",{
+                .when("/unemployment-rates/integrations",{
                     templateUrl:"sharedApisUnemploymentRates.html",
                     controller: "sharedApisUnemploymentRatesCtrl"
                 })
