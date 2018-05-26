@@ -160,7 +160,7 @@ Highcharts.chart('sharedStadistics2', {
             anychart.onDocumentReady(function() {
               var data = [{
                   x: 'Eminem',
-                  value: response2.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})
+                  value: response2.data.length//map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})
                 },
                 {
                   x: 'Sevilla',
@@ -203,7 +203,7 @@ Highcharts.chart('sharedStadistics2', {
                 .axis(chart.yAxis());
             
               // set container id for the chart
-              chart.container('container');
+              chart.container('sharedStadistics3');
               // initiate chart drawing
               chart.draw();
             });
