@@ -23,7 +23,7 @@ describe('Data is Loaded', function(){
                         stream.write(new Buffer(png,'base64'));
                         stream.end();
                     })
-                console.log("Cargando todos los datos");
+                console.log("Cargando todos los datos GRADUATION RATES");
                 expect(stadistics.length).toBeGreaterThan(0);
                     
                 });

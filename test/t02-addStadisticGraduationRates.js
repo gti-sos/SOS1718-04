@@ -29,7 +29,7 @@ describe('Add Stadistic', function(){
                                     stream.write(new Buffer(png,'base64'));
                                     stream.end();
                     });
-                            console.log("Añadiendo Huelva, 2018")
+                            console.log("Añadiendo Huelva, 2018 a GRADUATION RATES")
                             expect(stadistics.length).toEqual(initialStadistics.length+1);
                         });
                        
