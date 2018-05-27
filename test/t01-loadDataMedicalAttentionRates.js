@@ -12,6 +12,7 @@ describe('Data is Loaded', function(){
                 browser.driver.sleep(2000);
                 browser.driver.sleep(2000);
                 
+            
                 element
                 .all(by.repeater("medicalAttentionRate in medicalAttentionRates"))
                 .then(function(medicalAttentionRates){
