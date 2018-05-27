@@ -3,7 +3,7 @@ var path = require("path")
 var config = require("./config")
 
 describe('Data is Loaded', function(){
-    it('should show some conctacs',function(){
+    it('should show some stats',function(){
         browser
             .get('https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/graduation-rates')
             .then(function(){
