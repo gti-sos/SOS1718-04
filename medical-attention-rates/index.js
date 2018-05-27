@@ -226,6 +226,11 @@ medicalAttentionRates.register = function(app, db) {
                     res.sendStatus(500);
                     return;
                 }
+                if (medicalAttentionRates.length==0) {
+                    console.error(" No existe el recurso");
+                    res.sendStatus(404);
+                    return;
+                }
                 res.send(medicalAttentionRates.map((c) => {
                     delete c._id; //Quitamos el campo id
                     return c;
@@ -239,6 +244,11 @@ medicalAttentionRates.register = function(app, db) {
                 if (err) {
                     console.error(" Error accesing DB");
                     res.sendStatus(500);
+                    return;
+                }
+                if (medicalAttentionRates.length==0) {
+                    console.error(" No existe el recurso");
+                    res.sendStatus(404);
                     return;
                 }
                 res.send(medicalAttentionRates.map((c) => {

@@ -4,7 +4,7 @@ var config = require('./config');
 
 describe('API should work', function(){
     newman.run({
-        collection: require(path.join(process.cwd(),"test","collection.postman_collection.json")),
+        collection: require(path.join(process.cwd(),"test","/so1718-04-pruebas-Automaticas.postman_collection.json")),
         reporters: "cli"
         }, function(err){
             if(err)

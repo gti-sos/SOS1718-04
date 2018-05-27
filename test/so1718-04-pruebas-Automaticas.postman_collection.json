@@ -1,0 +1,457 @@
+{
+	"variables": [],
+	"info": {
+		"name": "so1718-04-pruebas-Automaticas",
+		"_postman_id": "5110df2f-dfb4-53c0-2264-30590927e0b8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET - Recurso Base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"El número de datos es 0\"] = jsonData.length >0;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE- Recurso Base (200)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/sevilla/2013",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Recurso Base (201)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"sevilla\",\n        \"year\": 2013,\n        \"general-medicine\": 31.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Recurso Provincia (Sevilla)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"El número de datos con provincia sevilla es 2,el de loadInitial y el añadido en el POST anterior\"] = jsonData.length ==2;",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/sevilla",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n        \"province\": \"sevilla\",\n        \"year\": 2013,\n        \"general-medicine\": 31.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Recurso Concreto(Sevilla-2016)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"El objeto obtenido NO es un Array\"] = jsonData instanceof Array ==false;",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/sevilla/2016",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n        \"province\": \"sevilla\",\n        \"year\": 2013,\n        \"general-medicine\": 31.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - provincia url != provincia(400)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 400\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/sevilla/2016",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n        \"province\": \"barcelona\",\n        \"year\": 2016,\n        \"general-medicine\": 31.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Recurso Concreto(321 valor cambiado)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/sevilla/2016",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"sevilla\",\n        \"year\": 2016,\n        \"general-medicine\": 321.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Recurso Concreto(comprobar cambio anterior)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"El valor de general-medicine debe ser 321.02\"] = jsonData[\"general-medicine\"]== 321.02;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/sevilla/2016",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n        \"province\": \"sevilla\",\n        \"year\": 2016,\n        \"general-medicine\": 331.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Recurso Concreto(21 valor cambiado)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/sevilla/2016",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"sevilla\",\n        \"year\": 2016,\n        \"general-medicine\": 21.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Recurso Base(405,Method Not Allowed)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 405\"] = responseCode.code === 405;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"sevilla\",\n        \"year\": 2016,\n        \"general-medicine\": 321.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Recurso Concreto(error 405 Method Not Allowed)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 405\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/sevilla",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n        \"province\": \"sevilla\",\n        \"year\": 2016,\n        \"general-medicine\": 331.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Recurso General,objeto ya existente.(error 409)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 409,conflicto,dato ya existente\"] = responseCode.code === 409;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n        \"province\": \"sevilla\",\n        \"year\": 2016,\n        \"general-medicine\": 331.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET -  Recurso que no existe(error 404)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/albacete",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n        \"pronce\": \"sevilla\",\n        \"year\": 2016,\n        \"general-medicine\": 331.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": "Test de error 404, no encontrado, usamos provincia madrid la cual no está en la Base de datos"
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Recurso concreto,BAD REQUEST year!=yearl(error 400)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 400,conflicto,dato ya existente\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n        \"province\": \"sevilla\",\n        \"yearl\": 2016,\n        \"general-medicine\": 331.02,\n        \"nursing\": 19.7,\n        \"social-work\": 5.07\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
