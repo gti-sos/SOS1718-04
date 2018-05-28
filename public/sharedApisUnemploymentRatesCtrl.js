@@ -221,7 +221,6 @@ Highcharts.chart('sharedStadistics2', {
         
     $http.get(apiPropia).then(function(response1){
         $http(mashapeInsult).then(function(response2){
-            console.log("response2.data: "+response2.data);
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
     
