@@ -112,13 +112,12 @@ var chart = new Highcharts.Chart({
     },
     series: [{
         name: 'Illiterate',
-        type: 'column',
-        yAxis: 1,
+        colorByPoint: true,
         data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
 
     },{
         name: 'Pop Illiterate',
-        type: 'spline',
+        colorByPoint: true,
         data: response1.data.map(function(d){return parseFloat(d["popilliterate"])})
 
     }]
