@@ -26,6 +26,15 @@ angular.module("RoRoMonApp")
                 }
             };
             
+            var mashapeInsult = {
+                method: 'GET',
+                url: "https://lakerolmaker-insult-generator-v1.p.mashape.com/?mode=random",
+                headers: {
+                    "X-Mashape-Key": "N7bg9PaaAimshjzm9hlUU98PgkPEp1934AZjsnKWYN62SRGMor", 
+                    "Accept": "application/json"
+                }
+            };
+            
 
 //========================== APIS SOS
 
@@ -154,7 +163,7 @@ Highcharts.chart('sharedStadistics2', {
         });
            
 
-//========================== APIS SOS
+//========================== APIS externa SOS
         $http.get(apiPropia).then(function(response1){
                 $http(mashapeDeezerEminem).then(function(response2){
             anychart.onDocumentReady(function() {
@@ -209,6 +218,34 @@ Highcharts.chart('sharedStadistics2', {
             });
          });
         });
+        
+    $http.get(apiPropia).then(function(response1){
+        $http(mashapeDeezerEminem).then(function(response2){
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+    
+          function drawChart() {
+    
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day'],
+              ['Work',     11],
+              ['Eat',      2],
+              ['Commute',  2],
+              ['Watch TV', 2],
+              ['Sleep',    7]
+            ]);
+    
+            var options = {
+              title: 'My Daily Activities'
+            };
+    
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    
+            chart.draw(data, options);
+          }
 
+        });
+    });
  }]);
+ 
  
