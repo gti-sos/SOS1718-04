@@ -163,8 +163,10 @@ anychart.onDocumentReady(function () {
       
     // create data
     var data = [
-      ["Illiterate", response2.data.map(function(d){return parseFloat(d["illiterate"])})],
-      ["Pop Illiterate", response1.data.map(function(d){return parseFloat(d["popilliterate"])})]
+      ["Illiterate", response2.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) {
+                            return (previous + current);})],
+      ["Pop Illiterate", response1.data.map(function(d){return parseFloat(d["popilliterate"])}).reduce(function (previous, current) {
+                            return (previous + current);})]
     ];
 
     var chart = anychart.funnel(data);
@@ -175,6 +177,22 @@ anychart.onDocumentReady(function () {
     // initiate drawing the chart
     chart.draw();
 });
+//**
+/*
+anychart.onDocumentReady(function () {
+  
+  var chart = anychart.pyramid([
+    {name: "Illiterate", value: response2.data.map(function(d){return parseFloat(d["illiterate"])}).reduce},
+    {name: "Pop Illiterate", value: response1.data.map(function(d){return parseFloat(d["popilliterate"])})},
+    {name: "Detective", value: 148662},
+    {name: "Classics", value: 78662},
+    {name: "Textbooks", value: 90000}
+  ]);
+
+  // draw chart
+  chart.container("container");
+  chart.draw();
+});*/
 
 
                     ////////**********
