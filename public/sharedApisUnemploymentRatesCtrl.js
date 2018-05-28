@@ -40,7 +40,7 @@ angular.module("RoRoMonApp")
 
             $http.get(api1).then(function(response1){
                 $http.get(apiPropia).then(function(response2){
-                    
+/*                    
                     // Give the points a 3D feel by adding a radial gradient
 Highcharts.setOptions({
     colors: $.map(Highcharts.getOptions().colors, function (color) {
@@ -158,7 +158,29 @@ var chart = new Highcharts.Chart({
     H.addEvent(chart.container, 'mousedown', dragStart);
     H.addEvent(chart.container, 'touchstart', dragStart);
 }(Highcharts));
+*/
+     google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawSeriesChart);
 
+    function drawSeriesChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Name', 'Value'],
+        ['Illiterate', response2.data.map(function(d){return parseFloat(d["illiterate"])})],
+        ['Pop Illiterate', response1.data.map(function(d){return parseFloat(d["popilliterate"])})]
+      ]);
+    
+      var options = {
+        title: 'Relación entre Illiterate' +
+               'Y Pop Illiterate',
+        hAxis: {title: 'Value'},
+        vAxis: {title: 'Year'},
+        bubble: {textStyle: {fontSize: 11}}
+      };
+
+      var chart = new google.visualization.BubbleChart(document.getElementById('sharedStadistics1'));
+      chart.draw(data, options);
+    }
 
                     ////////**********
 /*
