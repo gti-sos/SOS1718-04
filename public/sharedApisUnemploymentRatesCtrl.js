@@ -220,7 +220,8 @@ Highcharts.chart('sharedStadistics2', {
         });
         
     $http.get(apiPropia).then(function(response1){
-        $http(mashapeDeezerEminem).then(function(response2){
+        $http(mashapeInsult).then(function(response2){
+            console.log("response2.data: "+response2.data);
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
     
@@ -228,15 +229,12 @@ Highcharts.chart('sharedStadistics2', {
     
             var data = google.visualization.arrayToDataTable([
               ['Task', 'Hours per Day'],
-              ['Work',     11],
-              ['Eat',      2],
-              ['Commute',  2],
-              ['Watch TV', 2],
-              ['Sleep',    7]
+              ['First grade',     response1.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})],
+              ['Insultos',      10]
             ]);
     
             var options = {
-              title: 'My Daily Activities'
+              title: 'Cantidad first grade Sevilla Vs Longitud de los insultos'
             };
     
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
