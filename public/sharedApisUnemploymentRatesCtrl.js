@@ -113,12 +113,12 @@ var chart = new Highcharts.Chart({
     series: [{
         name: 'Illiterate',
         colorByPoint: true,
-        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
+        data: [response2.data.map(function(d){return parseFloat(d["illiterate"])})]
 
     },{
         name: 'Pop Illiterate',
         colorByPoint: true,
-        data: response1.data.map(function(d){return parseFloat(d["popilliterate"])})
+        data: [response1.data.map(function(d){return parseFloat(d["popilliterate"])})]
 
     }]
 });
