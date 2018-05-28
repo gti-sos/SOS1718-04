@@ -158,48 +158,24 @@ var chart = new Highcharts.Chart({
     H.addEvent(chart.container, 'mousedown', dragStart);
     H.addEvent(chart.container, 'touchstart', dragStart);
 }(Highcharts));
-*//*
-     google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawSeriesChart);
+*/
+anychart.onDocumentReady(function () {
+      
+    // create data
+    var data = [
+      ["Illiterate", response2.data.map(function(d){return parseFloat(d["illiterate"])})],
+      ["Pop Illiterate", response1.data.map(function(d){return parseFloat(d["popilliterate"])})]
+    ];
 
-    function drawSeriesChart() {
+    var chart = anychart.funnel(data);
 
-      var data = google.visualization.arrayToDataTable([
-        ['Name', 'Value', 'ex'],
-        ['Illiterate', response2.data.map(function(d){return parseFloat(d["illiterate"])}), 1],
-        ['Pop Illiterate', 10, 1]
-      ]);
-    
-      var options = {
-        title: 'Relación entre Illiterate' +
-               'Y Pop Illiterate',
-        hAxis: {title: 'Value'},
-        vAxis: {title: 'Year'},
-        bubble: {textStyle: {fontSize: 11}}
-      };
+    // set the container id
+    chart.container("sharedStadistics1");
 
-      var chart = new google.visualization.BubbleChart(document.getElementById('sharedStadistics1'));
-      chart.draw(data, options);
-    }*/
-    ///**
-    google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+    // initiate drawing the chart
+    chart.draw();
+});
 
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Illiterate', response2.data.map(function(d){return parseFloat(d["illiterate"])})],
-      ['Pop Illiterate', response1.data.map(function(d){return parseFloat(d["popilliterate"])})]
-      // Treat first row as data as well.
-    ], true);
-
-    var options = {
-      legend:'none'
-    };
-
-    var chart = new google.visualization.CandlestickChart(document.getElementById('sharedStadistics1'));
-
-    chart.draw(data, options);
-  }
 
                     ////////**********
 /*
