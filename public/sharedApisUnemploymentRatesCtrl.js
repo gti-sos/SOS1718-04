@@ -158,7 +158,7 @@ var chart = new Highcharts.Chart({
     H.addEvent(chart.container, 'mousedown', dragStart);
     H.addEvent(chart.container, 'touchstart', dragStart);
 }(Highcharts));
-*/
+*//*
      google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawSeriesChart);
 
@@ -180,7 +180,26 @@ var chart = new Highcharts.Chart({
 
       var chart = new google.visualization.BubbleChart(document.getElementById('sharedStadistics1'));
       chart.draw(data, options);
-    }
+    }*/
+    ///**
+    google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Illiterate', response2.data.map(function(d){return parseFloat(d["illiterate"])})],
+      ['Pop Illiterate', response1.data.map(function(d){return parseFloat(d["popilliterate"])})]
+      // Treat first row as data as well.
+    ], true);
+
+    var options = {
+      legend:'none'
+    };
+
+    var chart = new google.visualization.CandlestickChart(document.getElementById('sharedStadistics1'));
+
+    chart.draw(data, options);
+  }
 
                     ////////**********
 /*
