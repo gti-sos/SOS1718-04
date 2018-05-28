@@ -165,9 +165,9 @@ var chart = new Highcharts.Chart({
     function drawSeriesChart() {
 
       var data = google.visualization.arrayToDataTable([
-        ['Name', 'Value'],
-        ['Illiterate', response2.data.map(function(d){return parseFloat(d["illiterate"])})],
-        ['Pop Illiterate', response1.data.map(function(d){return parseFloat(d["popilliterate"])})]
+        ['Name', 'Value', 'ex'],
+        ['Illiterate', response2.data.map(function(d){return parseFloat(d["illiterate"])}), 1],
+        ['Pop Illiterate', response1.data.map(function(d){return parseFloat(d["popilliterate"])}), 1]
       ]);
     
       var options = {
