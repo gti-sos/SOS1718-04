@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var MongoClient = require("mongodb").MongoClient;
 var path = require("path");
 var request = require("request");
-var cors =require("cors");
+var cors = require("cors");
 
 
 
@@ -38,58 +38,58 @@ app.use("/", express.static(path.join(__dirname + "/public")));
 
 var apiServerHostCrirompov = "https://sos1718-08.herokuapp.com";
 
-var apiServerPOET ="http://poetrydb.org"
+var apiServerPOET = "http://poetrydb.org"
 var apiServerHost = "https://sos1718-01.herokuapp.com";
-var apiServerINE ="https://servicios.ine.es"
+var apiServerINE = "https://servicios.ine.es"
 
 
 
-    
-    //Proxy andrés
-    
-    app.use("/proxyPOET", function(req, res) {
-    var url = apiServerPOET  + req.url;
-    console.log('piped: '+req.baseUrl + req.url);
+
+//Proxy andrés
+
+app.use("/proxyPOET", function(req, res) {
+    var url = apiServerPOET + req.url;
+    console.log('piped: ' + req.baseUrl + req.url);
     req.pipe(request(url)).pipe(res);
     //no hacia falta puesto que http://poetrydb.org utiliza cors, 
     //pro habia problema por ser una pagina http y no https
-    });
-    app.use("/proxyTIS", function(req, res) {
+});
+app.use("/proxyTIS", function(req, res) {
     var url = apiServerHost + req.url;
-    console.log('piped: '+req.baseUrl + req.url);
+    console.log('piped: ' + req.baseUrl + req.url);
     req.pipe(request(url)).pipe(res);
-    });
-    
-    app.use("/proxyINE", function(req, res) {
-    var url = apiServerINE  + req.url;
-    console.log('piped: '+req.baseUrl + req.url);
-    req.pipe(request(url)).pipe(res);
-    });
-    
-    /**/
-    
-    
-    
-   
-    
-    
-    
-    
-    //proxy carlos
-    app.use("/proxyCAC", function(req, res) {
-    var url = "http://sos1718-08.herokuapp.com" + req.url;
-    console.log('piped: '+req.baseUrl + req.url);
-    req.pipe(request(url)).pipe(res);
-    });
-    
+});
 
-    //Proxy Cristian
-    app.use("/proxySA", function(req, res) {
-    var url = apiServerHostCrirompov + req.url;
-    console.log('piped: '+req.baseUrl + req.url);
+app.use("/proxyINE", function(req, res) {
+    var url = apiServerINE + req.url;
+    console.log('piped: ' + req.baseUrl + req.url);
     req.pipe(request(url)).pipe(res);
-    });
-        
+});
+
+/**/
+
+
+
+
+
+
+
+
+//proxy carlos
+app.use("/proxyCAC", function(req, res) {
+    var url = "http://sos1718-08.herokuapp.com" + req.url;
+    console.log('piped: ' + req.baseUrl + req.url);
+    req.pipe(request(url)).pipe(res);
+});
+
+
+//Proxy Cristian
+app.use("/proxySA", function(req, res) {
+    var url = apiServerHostCrirompov + req.url;
+    console.log('piped: ' + req.baseUrl + req.url);
+    req.pipe(request(url)).pipe(res);
+});
+
 
 var initialUnemploymentRates = [{
         "province": "sevilla",
@@ -149,7 +149,7 @@ var initialGraduationRates = [{
         "public-school": 60.8,
         "private-school": 92.7,
         "charter-school": 78.0
-    },{
+    }, {
         "province": "huelva",
         "year": 2015,
         "public-school": 79.4,
@@ -183,7 +183,7 @@ var initialGraduationRates = [{
         "public-school": 83.8,
         "private-school": 92.7,
         "charter-school": 91.0
-    },{
+    }, {
         "province": "jaen",
         "year": 2017,
         "public-school": 70.8,
@@ -212,157 +212,157 @@ MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, 
     var db = database.collection("medicalAttentionRates"); //nombre de la colección en mongodb
 
 
-var initialMedicalAttentionRates = [{
-        "province": "sevilla",
-        "year": 2016,
-        "general-medicine": 35.23,
-        "nursing": 19.7,
-        "social-work": 5.07,
-    },
-    {
-        "province": "malaga",
-        "year": 2016,
-        "general-medicine": 34.2,
-        "nursing": 1.2,
-        "social-work": 2.1,
-    },
-    {
-        "province": "granada",
-        "year": 2016,
-        "general-medicine": 3.4,
-        "nursing": 2.3,
-        "social-work": 2.8,
-    },
-    {
-        "province": "cordoba",
-        "year": 2016,
-        "general-medicine": 1.2,
-        "nursing": 1.7,
-        "social-work": 3.9,
-    },
-    {
-        "province": "jaen",
-        "year": 2016,
-        "general-medicine": 2.6,
-        "nursing": 2.8,
-        "social-work": 1.9,
-    },
-    {
-        "province": "cadiz",
-        "year": 2016,
-        "general-medicine": 36.5,
-        "nursing": 20.34,
-        "social-work": 5.73,
-    },
-    {
-        "province": "almeria",
-        "year": 2016,
-        "general-medicine": 32.20,
-        "nursing": 21.13,
-        "social-work": 11.53,
-    },
-    {
-        "province": "huelva",
-        "year": 2016,
-        "general-medicine": 32.32,
-        "nursing": 18.14,
-        "social-work": 6.45,
-    }
-];
+    var initialMedicalAttentionRates = [{
+            "province": "sevilla",
+            "year": 2016,
+            "general-medicine": 35.23,
+            "nursing": 19.7,
+            "social-work": 5.07,
+        },
+        {
+            "province": "malaga",
+            "year": 2016,
+            "general-medicine": 34.2,
+            "nursing": 1.2,
+            "social-work": 2.1,
+        },
+        {
+            "province": "granada",
+            "year": 2016,
+            "general-medicine": 3.4,
+            "nursing": 2.3,
+            "social-work": 2.8,
+        },
+        {
+            "province": "cordoba",
+            "year": 2016,
+            "general-medicine": 1.2,
+            "nursing": 1.7,
+            "social-work": 3.9,
+        },
+        {
+            "province": "jaen",
+            "year": 2016,
+            "general-medicine": 2.6,
+            "nursing": 2.8,
+            "social-work": 1.9,
+        },
+        {
+            "province": "cadiz",
+            "year": 2016,
+            "general-medicine": 36.5,
+            "nursing": 20.34,
+            "social-work": 5.73,
+        },
+        {
+            "province": "almeria",
+            "year": 2016,
+            "general-medicine": 32.20,
+            "nursing": 21.13,
+            "social-work": 11.53,
+        },
+        {
+            "province": "huelva",
+            "year": 2016,
+            "general-medicine": 32.32,
+            "nursing": 18.14,
+            "social-work": 6.45,
+        }
+    ];
 
-MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, mlabs) => {
-
-    if (err) {
-        console.error("Error accesing DB(carmontap)" + err);
-        process.exit(1);
-    }
-    console.log("Connected to DB(carmontap)");
-
-    var database = mlabs.db("carmontap-medical-attention-rates");
-    var db = database.collection("medicalAttentionRates"); //nombre de la colección en mongodb
-
-
-    //Métodos loadInitialData:
-    app.get(BASE_API_PATH + "/medical-attention-rates/loadInitialData", (req, res) => {
-        console.log(Date() + " - GET /medical-attention-rates/loadInitialData");
-        db.find({}).toArray((errs, medicalAttentionRates) => {
-            if (errs) {
-                console.error("Error accesing to datas: " + errs);
-            }
-            if (medicalAttentionRates.length == 0) {
-                console.log(Date() + " - GET /medical-attention-rates/loadInitialData - Empty DB");
-                var initialMedicalAttentionRates = [{
-                        "province": "sevilla",
-                        "year": 2016,
-                        "general-medicine": 35.23,
-                        "nursing": 19.7,
-                        "social-work": 5.07,
-                    },
-                    {
-                        "province": "malaga",
-                        "year": 2016,
-                        "general-medicine": 34.2,
-                        "nursing": 1.2,
-                        "social-work": 2.1,
-                    },
-                    {
-                        "province": "granada",
-                        "year": 2016,
-                        "general-medicine": 3.4,
-                        "nursing": 2.3,
-                        "social-work": 2.8,
-                    },
-                    {
-                        "province": "cordoba",
-                        "year": 2016,
-                        "general-medicine": 1.2,
-                        "nursing": 1.7,
-                        "social-work": 3.9,
-                    },
-                    {
-                        "province": "jaen",
-                        "year": 2016,
-                        "general-medicine": 2.6,
-                        "nursing": 2.8,
-                        "social-work": 1.9,
-                    },
-                ];
-                db.insert(initialMedicalAttentionRates);
-                console.log(Date() + " - GET /medical-attention-rates/loadInitialData - Created " + medicalAttentionRates.length + " medical attention rates");
-            }
-            else {
-                console.log(Date() + " - GET /medical-attention-rates/loadInitialData - DB has " + medicalAttentionRates.length + " medical attention rates");
-            }
-        });
-        res.sendStatus(200);
-    });
-
-
-
-    db.find({}).toArray((err, medicalAttentionRates) => { //Esto devuelve el query como un array de objetos
+    MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, mlabs) => {
 
         if (err) {
-            console.error("Error accesing DB(carmontap)");
+            console.error("Error accesing DB(carmontap)" + err);
             process.exit(1);
         }
-        if (medicalAttentionRates.length == 0) {
-            console.log("Empty DB");
-            db.insert(initialMedicalAttentionRates);
-        }
-        else {
-            console.log("DB has " + medicalAttentionRates.length + " medical Attention According To Type Rates (carmontap)");
-        }
+        console.log("Connected to DB(carmontap)");
+
+        var database = mlabs.db("carmontap-medical-attention-rates");
+        var db = database.collection("medicalAttentionRates"); //nombre de la colección en mongodb
+
+
+        //Métodos loadInitialData:
+        app.get(BASE_API_PATH + "/medical-attention-rates/loadInitialData", (req, res) => {
+            console.log(Date() + " - GET /medical-attention-rates/loadInitialData");
+            db.find({}).toArray((errs, medicalAttentionRates) => {
+                if (errs) {
+                    console.error("Error accesing to datas: " + errs);
+                }
+                if (medicalAttentionRates.length == 0) {
+                    console.log(Date() + " - GET /medical-attention-rates/loadInitialData - Empty DB");
+                    var initialMedicalAttentionRates = [{
+                            "province": "sevilla",
+                            "year": 2016,
+                            "general-medicine": 35.23,
+                            "nursing": 19.7,
+                            "social-work": 5.07,
+                        },
+                        {
+                            "province": "malaga",
+                            "year": 2016,
+                            "general-medicine": 34.2,
+                            "nursing": 1.2,
+                            "social-work": 2.1,
+                        },
+                        {
+                            "province": "granada",
+                            "year": 2016,
+                            "general-medicine": 3.4,
+                            "nursing": 2.3,
+                            "social-work": 2.8,
+                        },
+                        {
+                            "province": "cordoba",
+                            "year": 2016,
+                            "general-medicine": 1.2,
+                            "nursing": 1.7,
+                            "social-work": 3.9,
+                        },
+                        {
+                            "province": "jaen",
+                            "year": 2016,
+                            "general-medicine": 2.6,
+                            "nursing": 2.8,
+                            "social-work": 1.9,
+                        },
+                    ];
+                    db.insert(initialMedicalAttentionRates);
+                    console.log(Date() + " - GET /medical-attention-rates/loadInitialData - Created " + medicalAttentionRates.length + " medical attention rates");
+                }
+                else {
+                    console.log(Date() + " - GET /medical-attention-rates/loadInitialData - DB has " + medicalAttentionRates.length + " medical attention rates");
+                }
+            });
+            res.sendStatus(200);
+        });
+
+
+
+        db.find({}).toArray((err, medicalAttentionRates) => { //Esto devuelve el query como un array de objetos
+
+            if (err) {
+                console.error("Error accesing DB(carmontap)");
+                process.exit(1);
+            }
+            if (medicalAttentionRates.length == 0) {
+                console.log("Empty DB");
+                db.insert(initialMedicalAttentionRates);
+            }
+            else {
+                console.log("DB has " + medicalAttentionRates.length + " medical Attention According To Type Rates (carmontap)");
+            }
+        });
+
+        medicalAttentionRates.register(app, db);
+
+        app.listen(port, () => {
+            console.log("Server ready on port " + port + "!");
+        }).on("error", (e) => {
+            console.log("Server NOT READY:" + e);
+        });
+
     });
-
-    medicalAttentionRates.register(app, db);
-
-    app.listen(port, () => {
-        console.log("Server ready on port " + port + "!");
-    }).on("error", (e) => {
-        console.log("Server NOT READY:" + e);
-    });
-
-});
 
     //Métodos loadInitialData:
     app.get(BASE_API_PATH + "/medical-attention-rates/loadInitialData", (req, res) => {
@@ -408,6 +408,27 @@ MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, 
                         "nursing": 2.8,
                         "social-work": 1.9,
                     },
+                    {
+                        "province": "cadiz",
+                        "year": 2016,
+                        "general-medicine": 36.5,
+                        "nursing": 20.34,
+                        "social-work": 5.73,
+                    },
+                    {
+                        "province": "almeria",
+                        "year": 2016,
+                        "general-medicine": 32.20,
+                        "nursing": 21.13,
+                        "social-work": 11.53,
+                    },
+                    {
+                        "province": "huelva",
+                        "year": 2016,
+                        "general-medicine": 32.32,
+                        "nursing": 18.14,
+                        "social-work": 6.45,
+                    }
                 ];
                 db.insert(initialMedicalAttentionRates);
                 console.log(Date() + " - GET /medical-attention-rates/loadInitialData - Created " + medicalAttentionRates.length + " medical attention rates");
@@ -588,59 +609,59 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
             if (graduationRatesAux.length == 0) {
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Empty DB");
                 var initialGraduationRates = [{
-        "province": "almeria",
-        "year": 2014,
-        "public-school": 60.8,
-        "private-school": 92.7,
-        "charter-school": 78.0
-    },{
-        "province": "huelva",
-        "year": 2015,
-        "public-school": 79.4,
-        "private-school": 100.0,
-        "charter-school": 83.9
-    },
-    {
-        "province": "seville",
-        "year": 2015,
-        "public-school": 80.9,
-        "private-school": 98.2,
-        "charter-school": 89.5
-    },
-    {
-        "province": "cadiz",
-        "year": 2016,
-        "public-school": 78.1,
-        "private-school": 96.4,
-        "charter-school": 87.7
-    },
-    {
-        "province": "malaga",
-        "year": 2016,
-        "public-school": 83.77,
-        "private-school": 92.74,
-        "charter-school": 91.04
-    },
-    {
-        "province": "granada",
-        "year": 2016,
-        "public-school": 83.8,
-        "private-school": 92.7,
-        "charter-school": 91.0
-    },{
-        "province": "jaen",
-        "year": 2017,
-        "public-school": 70.8,
-        "private-school": 88.7,
-        "charter-school": 81.0
-    },
-    {
-        "province": "cordoba",
-        "year": 2017,
-        "public-school": 71.8,
-        "private-school": 90.7,
-        "charter-school": 83.0
-    }
+                        "province": "almeria",
+                        "year": 2014,
+                        "public-school": 60.8,
+                        "private-school": 92.7,
+                        "charter-school": 78.0
+                    }, {
+                        "province": "huelva",
+                        "year": 2015,
+                        "public-school": 79.4,
+                        "private-school": 100.0,
+                        "charter-school": 83.9
+                    },
+                    {
+                        "province": "seville",
+                        "year": 2015,
+                        "public-school": 80.9,
+                        "private-school": 98.2,
+                        "charter-school": 89.5
+                    },
+                    {
+                        "province": "cadiz",
+                        "year": 2016,
+                        "public-school": 78.1,
+                        "private-school": 96.4,
+                        "charter-school": 87.7
+                    },
+                    {
+                        "province": "malaga",
+                        "year": 2016,
+                        "public-school": 83.77,
+                        "private-school": 92.74,
+                        "charter-school": 91.04
+                    },
+                    {
+                        "province": "granada",
+                        "year": 2016,
+                        "public-school": 83.8,
+                        "private-school": 92.7,
+                        "charter-school": 91.0
+                    }, {
+                        "province": "jaen",
+                        "year": 2017,
+                        "public-school": 70.8,
+                        "private-school": 88.7,
+                        "charter-school": 81.0
+                    },
+                    {
+                        "province": "cordoba",
+                        "year": 2017,
+                        "public-school": 71.8,
+                        "private-school": 90.7,
+                        "charter-school": 83.0
+                    }
                 ];
                 dbGraduation.insert(initialGraduationRates);
                 console.log(Date() + " - GET /graduation-rates/loadInitialData - Created " + graduationRatesAux.length + " graduation rates");
