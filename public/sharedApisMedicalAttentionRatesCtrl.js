@@ -11,6 +11,23 @@ angular.module("RoRoMonApp")
         var externalApi = "https://sos1718-05.herokuapp.com/api/v1/best-stats/";
         var proxy = "proxyCAC/api/v2/crimes-an";
 
+
+
+
+        //=================EXTERNAS====================
+        var api3 = "";
+        var api4 = "";
+
+        var mashapeUrban = {
+            method: 'GET',
+            url: "https://mashape-community-urban-dictionary.p.mashape.com/define?term=wat",
+            headers: {
+                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
+                "Accept": "application/json"
+            }
+        };
+
+
         $http
             .get(proxy)
             .then(function(proxyResponse) {
@@ -97,8 +114,8 @@ angular.module("RoRoMonApp")
                 $http
                     .get(ownApi)
                     .then(function(response) {
-                        
-                        
+
+
 
                         Highcharts.chart('sharedStadistics2', {
                             chart: {
@@ -117,7 +134,7 @@ angular.module("RoRoMonApp")
                             },
 
                             xAxis: {
-                                categories: [auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2013).map(function(d) { return d["song"] })[0], auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2014).map(function(d) { return d["song"] })[0],auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2015).map(function(d) { return d["song"] })[0], auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2016).map(function(d) { return d["song"] })[0]],
+                                categories: [auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2013).map(function(d) { return d["song"] })[0], auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2014).map(function(d) { return d["song"] })[0], auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2015).map(function(d) { return d["song"] })[0], auxResponse.data.filter(d => d.country === 'Spain' && d.year === 2016).map(function(d) { return d["song"] })[0]],
                                 labels: {
                                     skew3d: true,
                                     style: {
@@ -150,20 +167,43 @@ angular.module("RoRoMonApp")
                             series: [{
                                 name: 'General Medicine',
                                 data: response.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2012).sort((a, b) => a.year - b.year).map(function(d) { return d["general-medicine"] }),
-                                
+
                             }, {
                                 name: 'Nursing',
                                 data: response.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2012).sort((a, b) => a.year - b.year).map(function(d) { return d["nursing"] }),
-                                
+
                             }, {
                                 name: 'Social Work',
                                 data: response.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2012).sort((a, b) => a.year - b.year).map(function(d) { return d["social-work"] }),
-                               
+
                             }]
                         });
 
                     });
             });
+            
+            
+            //External API
+            $http
+            .get(mashapeUrban)
+            .then(function(proxyResponse) {
+                $http
+                    .get(ownApi)
+                    .then(function(response1) {
+
+                        console.log(proxyResponse.data);
+
+                        //console.log("crimenes los datos;" + proxyResponse.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2011).sort((a, b) => a.year - b.year).map(function(d) { return d["onecrime"] }));
+
+                       
+
+
+                    });
+
+            });
+
+            
+            
 
 
     }]);
