@@ -271,70 +271,15 @@ angular.module("RoRoMonApp")
                                                                             .then(function(response9) {
 
 
-
-
-                                                                                /*
-                                                                                console.log('ejemplo1'+response1.data.filter(d => d.province === 'sevilla' && d.year===2016 ).map(function(d) { return d["general-medicine"] })[0]);
-                                                                                console.log('ejemplo2'+response1.data.filter(d => d.province === 'sevilla' && d.year===2016 )['general-medicine']);
-                                                                                
-                                                                                console.log(response2.data.length);
-                                                                                console.log(response2.data.Results[0]);
-                                                                                console.log(response2.data.Results[0]['c']);
-
                                                                                 Highcharts.chart('sharedStadistics3', {
                                                                                     chart: {
                                                                                         type: 'line'
                                                                                     },
                                                                                     title: {
-                                                                                        text: 'Latitude and general medicine for province (2015)'
+                                                                                        text: 'Latitude and general medicine in andalucia in 2016'
                                                                                     },
                                                                                     subtitle: {
                                                                                         text: ''
-                                                                                    },
-                                                                                    xAxis: {
-                                                                                        categories: ['Sevilla', 'Córdoba', 'Malaga', 'Almería', 'Jaén', 'Huelva', 'Cádiz', 'Granada']
-                                                                                    },
-                                                                                    yAxis: {
-                                                                                        title: {
-                                                                                            text: 'Latitude '
-                                                                                        }
-                                                                                    },
-                                                                                    plotOptions: {
-                                                                                        line: {
-                                                                                            dataLabels: {
-                                                                                                enabled: true
-                                                                                            },
-                                                                                            enableMouseTracking: false
-                                                                                        }
-                                                                                    },
-
-                                                                                    series: [{
-                                                                                        name: 'General Medicine',
-                                                                                        data: [response1.data.filter(d => d.province === 'sevilla' && d.year===2016 ).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'jaen' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'almeria' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'granada' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'huelva' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0]
-                                                                                        ]
-                                                                                    }]
-                                                                                });
-                                                                            */
-
-
-
-                                                                                //console.log('dato'+response2.data.Results[0]['lat']);
-                                                                                Highcharts.chart('sharedStadistics3', {
-                                                                                    chart: {
-                                                                                        type: 'line'
-                                                                                    },
-                                                                                    title: {
-                                                                                        text: 'Monthly Average Temperature'
-                                                                                    },
-                                                                                    subtitle: {
-                                                                                        text: 'Source: WorldClimate.com'
                                                                                     },
                                                                                     xAxis: {
                                                                                         categories: ['sevilla', 'cordoba', 'jaen', 'granada', 'huelva', 'almeria', 'cadiz', 'malaga']
