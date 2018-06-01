@@ -183,25 +183,21 @@ angular.module("RoRoMonApp")
             
             
             //External API
-            $http(mashapeUrban)
-            .then(function(proxyResponse) {
-                $http
-                    .get(ownApi)
-                    .then(function(response1) {
 
-                        console.log("Ejemplo 1:"+proxyResponse.data[0]);
-                        console.log("Ejemeplo 2:"+proxyResponse.data);
-                        console.log("Ejemplo 3:"+proxyResponse.data['city']);
+                             $http
+            .get(ownApi)
+            .then(function(response1) {
+                $http(mashapeUrban)
+                    .then(function(response2) {
+                        
+                        console.log(response2.data);
+                        console.log(response2.data['city']);
+                        
 
-
-                       
 
 
                     });
-
             });
-
-            
             
 
 
