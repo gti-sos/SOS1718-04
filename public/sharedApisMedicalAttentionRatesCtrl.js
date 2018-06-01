@@ -15,7 +15,7 @@ angular.module("RoRoMonApp")
 
 
         //=================EXTERNAS====================
-        
+
 
         var mashapeUrban = {
             method: 'GET',
@@ -25,15 +25,72 @@ angular.module("RoRoMonApp")
                 "Accept": "application/json"
             }
         };
-        
-        var mashapeUrbanLean = {
+
+        var mashapeLocation2 = {
             method: 'GET',
             url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=Sevilla",
             headers: {
-                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2", 
+                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
                 "Accept": "application/json"
-            }};
-            
+            }
+        };
+        var mashapeLocation3 = {
+            method: 'GET',
+            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=Cordoba",
+            headers: {
+                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
+                "Accept": "application/json"
+            }
+        };
+        var mashapeLocation4 = {
+            method: 'GET',
+            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=Jaen",
+            headers: {
+                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
+                "Accept": "application/json"
+            }
+        };
+        var mashapeLocation5 = {
+            method: 'GET',
+            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=Granada",
+            headers: {
+                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
+                "Accept": "application/json"
+            }
+        };
+        var mashapeLocation6 = {
+            method: 'GET',
+            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=Huelva",
+            headers: {
+                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
+                "Accept": "application/json"
+            }
+        };
+        var mashapeLocation7 = {
+            method: 'GET',
+            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=Almeria",
+            headers: {
+                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
+                "Accept": "application/json"
+            }
+        };
+        var mashapeLocation8 = {
+            method: 'GET',
+            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=Cadiz",
+            headers: {
+                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
+                "Accept": "application/json"
+            }
+        };
+        var mashapeLocation9 = {
+            method: 'GET',
+            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=Malaga",
+            headers: {
+                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
+                "Accept": "application/json"
+            }
+        };
+
 
 
         $http
@@ -189,25 +246,95 @@ angular.module("RoRoMonApp")
 
                     });
             });
-            
-            
-            //External API
 
-                             $http
+
+        //External API
+
+        $http
             .get(ownApi)
             .then(function(response1) {
-                $http(mashapeUrbanLean)
+                $http(mashapeLocation2)
                     .then(function(response2) {
-                        
-                        console.log(response2.data.length);
-                        console.log(response2.data.Results[0]);
-                        console.log(response2.data.Results[0]['c']);
-                        
-                        
+                        $http(mashapeLocation3)
+                            .then(function(response3) {
+                                $http(mashapeLocation4)
+                                    .then(function(response4) {
+                                        $http(mashapeLocation5)
+                                            .then(function(response5) {
+                                                $http(mashapeLocation6)
+                                                    .then(function(response6) {
+                                                        $http(mashapeLocation7)
+                                                            .then(function(response7) {
+                                                                $http(mashapeLocation8)
+                                                                    .then(function(response8) {
+                                                                        $http(mashapeLocation9)
+                                                                            .then(function(response9) {
 
+
+
+
+
+                                                                                console.log(response1.data.filter(d => d.province === 'sevilla' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0]);
+                                                                                console.log(response2.data.length);
+                                                                                console.log(response2.data.Results[0]);
+                                                                                console.log(response2.data.Results[0]['c']);
+
+                                                                                Highcharts.chart('sharedStadistics3', {
+                                                                                    chart: {
+                                                                                        type: 'line'
+                                                                                    },
+                                                                                    title: {
+                                                                                        text: 'Latitude and general medicine for province (2015)'
+                                                                                    },
+                                                                                    subtitle: {
+                                                                                        text: ''
+                                                                                    },
+                                                                                    xAxis: {
+                                                                                        categories: ['Sevilla', 'Córdoba', 'Malaga', 'Almería', 'Jaén', 'Huelva', 'Cádiz', 'Granada']
+                                                                                    },
+                                                                                    yAxis: {
+                                                                                        title: {
+                                                                                            text: 'Latitude '
+                                                                                        }
+                                                                                    },
+                                                                                    plotOptions: {
+                                                                                        line: {
+                                                                                            dataLabels: {
+                                                                                                enabled: true
+                                                                                            },
+                                                                                            enableMouseTracking: false
+                                                                                        }
+                                                                                    },
+
+                                                                                    series: [{
+                                                                                        name: 'General Medicine',
+                                                                                        data: [response1.data.filter(d => d.province === 'sevilla' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'cordoba' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'malaga' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'jaen' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'almeria' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'cadiz' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'granada' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'huelva' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0]
+                                                                                        ]
+                                                                                    }, {
+                                                                                        name: 'Latitude',
+                                                                                        data: [response2.data.Results[0]['lat'], response3.data.Results[0]['lat'],response4.data.Results[0]['lat'],response5.data.Results[0]['lat'],
+                                                                                        response6.data.Results[0]['lat'],response7.data.Results[0]['lat'],response8.data.Results[0]['lat'],response9.data.Results[0]['lat']]
+                                                                                    }]
+                                                                                });
+
+                                                                            });
+                                                                    });
+                                                            });
+                                                    });
+                                            });
+                                    });
+
+                            });
                     });
             });
-            
+
 
 
     }]);
