@@ -28,11 +28,12 @@ angular.module("RoRoMonApp")
         
         var mashapeUrbanLean = {
             method: 'GET',
-            url: "https://mashape-community-urban-dictionary.p.mashape.com/define?term=lean",
+            url: "https://montanaflynn-gender-guesser.p.mashape.com/?name=Aaron",
             headers: {
-                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2", 
                 "Accept": "application/json"
             }};
+            
 
 
         $http
@@ -199,6 +200,7 @@ angular.module("RoRoMonApp")
                     .then(function(response2) {
                         
                         console.log(response2.data.list.length);
+                        console.log(response2.data['description']);
                         
 
                     });
