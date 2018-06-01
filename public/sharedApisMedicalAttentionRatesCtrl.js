@@ -28,7 +28,7 @@ angular.module("RoRoMonApp")
         
         var mashapeUrbanLean = {
             method: 'GET',
-            url: "https://montanaflynn-gender-guesser.p.mashape.com/?name=Aaron",
+            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=Sevilla",
             headers: {
                 "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2", 
                 "Accept": "application/json"
@@ -200,7 +200,7 @@ angular.module("RoRoMonApp")
                     .then(function(response2) {
                         
                         console.log(response2.data.list.length);
-                        console.log(response2.data['description']);
+                        console.log(response2.data.results[0]['c']);
                         
 
                     });
