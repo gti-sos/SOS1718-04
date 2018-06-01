@@ -309,17 +309,6 @@ angular.module("RoRoMonApp")
                                                                                     },
 
                                                                                     series: [{
-                                                                                        name: 'General Medicine',
-                                                                                        data: [response1.data.filter(d => d.province === 'sevilla' && d.year===2016 ).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'jaen' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'almeria' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'granada' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'huelva' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0]
-                                                                                        ]
-                                                                                    }, {
                                                                                         name: 'Latitude',
                                                                                         data: [response2.data.Results[0]['lat'], response3.data.Results[5]['lat'],response4.data.Results[5]['lat'],response5.data.Results[0]['lat'],
                                                                                         response6.data.Results[0]['lat'],response7.data.Results[1]['lat'],response8.data.Results[0]['lat'],response9.data.Results[10]['lat']]
