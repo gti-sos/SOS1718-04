@@ -199,8 +199,10 @@ angular.module("RoRoMonApp")
                 $http(mashapeUrbanLean)
                     .then(function(response2) {
                         
-                        console.log(response2.data.list.length);
-                        console.log(response2.data.results[0]['c']);
+                        console.log(response2.data.length);
+                        console.log(response2.data.Results[0]);
+                        console.log(response2.data.Results[0]['c']);
+                        
                         
 
                     });
