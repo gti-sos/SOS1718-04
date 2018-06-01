@@ -199,6 +199,19 @@ var initialGraduationRates = [{
     }
 ];
 
+
+MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, mlabs) => {
+
+    if (err) {
+        console.error("Error accesing DB(carmontap)" + err);
+        process.exit(1);
+    }
+    console.log("Connected to DB(carmontap)");
+
+    var database = mlabs.db("carmontap-medical-attention-rates");
+    var db = database.collection("medicalAttentionRates"); //nombre de la colección en mongodb
+
+
 var initialMedicalAttentionRates = [{
         "province": "sevilla",
         "year": 2016,
@@ -249,60 +262,12 @@ var initialMedicalAttentionRates = [{
         "social-work": 11.53,
     },
     {
-        "province": "jaen",
+        "province": "huelva",
         "year": 2016,
-        "general-medicine": 2.6,
-        "nursing": 2.8,
-        "social-work": 1.9,
-    },
-];
-MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, mlabs) => {
-
-    if (err) {
-        console.error("Error accesing DB(carmontap)" + err);
-        process.exit(1);
+        "general-medicine": 32.32,
+        "nursing": 18.14,
+        "social-work": 6.45,
     }
-    console.log("Connected to DB(carmontap)");
-
-    var database = mlabs.db("carmontap-medical-attention-rates");
-    var db = database.collection("medicalAttentionRates"); //nombre de la colección en mongodb
-
-
-var initialMedicalAttentionRates = [{
-        "province": "sevilla",
-        "year": 2016,
-        "general-medicine": 35.23,
-        "nursing": 19.7,
-        "social-work": 5.07,
-    },
-    {
-        "province": "malaga",
-        "year": 2016,
-        "general-medicine": 34.2,
-        "nursing": 1.2,
-        "social-work": 2.1,
-    },
-    {
-        "province": "granada",
-        "year": 2016,
-        "general-medicine": 3.4,
-        "nursing": 2.3,
-        "social-work": 2.8,
-    },
-    {
-        "province": "cordoba",
-        "year": 2016,
-        "general-medicine": 1.2,
-        "nursing": 1.7,
-        "social-work": 3.9,
-    },
-    {
-        "province": "jaen",
-        "year": 2016,
-        "general-medicine": 2.6,
-        "nursing": 2.8,
-        "social-work": 1.9,
-    },
 ];
 
 MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, mlabs) => {
