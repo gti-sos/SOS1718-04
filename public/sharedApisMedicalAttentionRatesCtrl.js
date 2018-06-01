@@ -325,7 +325,7 @@ angular.module("RoRoMonApp")
 
 
 
-
+                                                                                console.log('dato'+response2.data.Results[0]['lat']);
                                                                                 Highcharts.chart('sharedStadistics3', {
                                                                                     chart: {
                                                                                         type: 'line'
@@ -357,7 +357,7 @@ angular.module("RoRoMonApp")
                                                                                         data: [response1.data.filter(d => d.province === 'sevilla' && d.year===2016 ).map(function(d) { return d["general-medicine"] })[0], 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
                                                                                     }, {
                                                                                         name: 'Latitude',
-                                                                                        data: [(response2.data.Results[0]['lat']), 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                                                                                        data: [(response2.data.Results[0]['lat']),parseFloat(response2.data.Results[0]['lat']), 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
                                                                                     }]
                                                                                 });
                                                                             });
