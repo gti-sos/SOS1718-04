@@ -81,6 +81,7 @@ var apiServerINE ="https://servicios.ine.es"
     console.log('piped: '+req.baseUrl + req.url);
     req.pipe(request(url)).pipe(res);
     });
+    
 
     //Proxy Cristian
     app.use("/proxySA", function(req, res) {

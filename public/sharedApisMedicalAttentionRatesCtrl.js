@@ -25,6 +25,14 @@ angular.module("RoRoMonApp")
                 "Accept": "application/json"
             }
         };
+        
+        var mashapeUrbanLean = {
+            method: 'GET',
+            url: "https://mashape-community-urban-dictionary.p.mashape.com/define?term=lean",
+            headers: {
+                "X-Mashape-Key": "AcgEvL97rJmshaCOKvsl1gQsAywip1HIPLejsnt0pcuMEW5zzk", 
+                "Accept": "application/json"
+            }};
 
 
         $http
@@ -190,11 +198,8 @@ angular.module("RoRoMonApp")
                 $http(mashapeUrban)
                     .then(function(response2) {
                         
-                        console.log(response2.data);
-                        console.log(response2.data['city']);
+                        console.log(response2.data.list.length);
                         
-
-
 
                     });
             });
