@@ -189,7 +189,9 @@ angular.module("RoRoMonApp")
                     .get(ownApi)
                     .then(function(response1) {
 
-                        console.log(proxyResponse.data['ll']);
+                        console.log("Ejemplo 1:"+proxyResponse.data);
+                        console.log("Ejemeplo 2:"+proxyResponse.data[0]);
+                        console.log("Ejemplo 3:"+proxyResponse.data.filter(d => d.type === 'city'));
 
 
                        
