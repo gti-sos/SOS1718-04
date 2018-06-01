@@ -316,7 +316,7 @@ angular.module("RoRoMonApp")
                                                                                             response1.data.filter(d => d.province === 'almeria' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
                                                                                             response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
                                                                                             response1.data.filter(d => d.province === 'granada' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                                                                            response1.data.filter(d => d.province === 'huelva' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0]
+                                                                                            response1.data.filter(d => d.province === 'huelva' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
                                                                                             response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0]
                                                                                         ]
                                                                                     }, {
