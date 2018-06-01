@@ -20,7 +20,7 @@ angular.module("RoRoMonApp")
 
         var mashapeUrban = {
             method: 'GET',
-            url: "https://mashape-community-urban-dictionary.p.mashape.com/define?term=wat",
+            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=madrid",
             headers: {
                 "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
                 "Accept": "application/json"
@@ -191,7 +191,7 @@ angular.module("RoRoMonApp")
                     .get(ownApi)
                     .then(function(response1) {
 
-                        console.log(proxyResponse.data);
+                        console.log(proxyResponse.data['ll']);
 
                         //console.log("crimenes los datos;" + proxyResponse.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2011).sort((a, b) => a.year - b.year).map(function(d) { return d["onecrime"] }));
 
