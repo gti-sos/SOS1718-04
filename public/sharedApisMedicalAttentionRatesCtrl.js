@@ -19,7 +19,7 @@ angular.module("RoRoMonApp")
 
         var mashapeUrban = {
             method: 'GET',
-            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=madrid",
+            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=New+York",
             headers: {
                 "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
                 "Accept": "application/json"
