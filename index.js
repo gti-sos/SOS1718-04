@@ -234,6 +234,27 @@ var initialMedicalAttentionRates = [{
         "nursing": 2.8,
         "social-work": 1.9,
     },
+    {
+        "province": "cadiz",
+        "year": 2016,
+        "general-medicine": 36.5,
+        "nursing": 20.34,
+        "social-work": 5.73,
+    },
+    {
+        "province": "almeria",
+        "year": 2016,
+        "general-medicine": 32.20,
+        "nursing": 21.13,
+        "social-work": 11.53,
+    },
+    {
+        "province": "jaen",
+        "year": 2016,
+        "general-medicine": 2.6,
+        "nursing": 2.8,
+        "social-work": 1.9,
+    },
 ];
 MongoClient.connect(mdbURLMedicalAttentionRates, { native_parser: true }, (err, mlabs) => {
 
