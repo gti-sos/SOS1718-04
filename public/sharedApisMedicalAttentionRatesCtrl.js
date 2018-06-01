@@ -275,7 +275,8 @@ angular.module("RoRoMonApp")
 
 
                                                                                 console.log('ejemplo1'+response1.data.filter(d => d.province === 'sevilla' && d.year===2014 ).map(function(d) { return d["general-medicine"] })[0]);
-                                                                                console.log('ejemplo2'+response1.data.filter(d => d.province === 'sevilla' && d.year===2014 ).map(function(d) { return d["general-medicine"] }));
+                                                                                console.log('ejemplo2'+response1.data.filter(d => d.province === 'sevilla' && d.year===2014 )['general-medicine']);
+                                                                                
                                                                                 console.log(response2.data.length);
                                                                                 console.log(response2.data.Results[0]);
                                                                                 console.log(response2.data.Results[0]['c']);
