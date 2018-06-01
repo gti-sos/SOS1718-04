@@ -274,7 +274,7 @@ angular.module("RoRoMonApp")
 
 
 
-                                                                                console.log(response1.data.filter(d => d.province === 'sevilla' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0]);
+                                                                                console.log(response1.data.filter(d => d.province === 'sevilla' && d.year < 2016 && d.year > 2014).sort((a, b) => a.year - b.year).map(function(d) { return d["general-medicine"] })[0]);
                                                                                 console.log(response2.data.length);
                                                                                 console.log(response2.data.Results[0]);
                                                                                 console.log(response2.data.Results[0]['c']);
@@ -308,7 +308,7 @@ angular.module("RoRoMonApp")
 
                                                                                     series: [{
                                                                                         name: 'General Medicine',
-                                                                                        data: [response1.data.filter(d => d.province === 'sevilla' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
+                                                                                        data: [response1.data.filter(d => d.province === 'sevilla' && d.year < 2016 && d.year > 2014).sort((a, b) => a.year - b.year).map(function(d) { return d["general-medicine"] })[0],
                                                                                             response1.data.filter(d => d.province === 'cordoba' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
                                                                                             response1.data.filter(d => d.province === 'malaga' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
                                                                                             response1.data.filter(d => d.province === 'jaen' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
