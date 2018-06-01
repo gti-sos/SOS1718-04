@@ -19,7 +19,7 @@ angular.module("RoRoMonApp")
 
         var mashapeUrban = {
             method: 'GET',
-            url: "https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location=New+York",
+            url: "https://locationcontext-zip-info-v1.p.mashape.com/zip-info?zip=95054",
             headers: {
                 "X-Mashape-Key": "CAlif50NmDmshfDYwiuiDMLhT9g3p1R5j7djsnqhrxYqNPabg2",
                 "Accept": "application/json"
@@ -189,9 +189,9 @@ angular.module("RoRoMonApp")
                     .get(ownApi)
                     .then(function(response1) {
 
-                        console.log("Ejemplo 1:"+proxyResponse.data[0][0]);
-                        console.log("Ejemeplo 2:"+proxyResponse.data[0][0]['type']);
-                        console.log("Ejemplo 3:"+proxyResponse.data.filter(d => d.type === 'city'));
+                        console.log("Ejemplo 1:"+proxyResponse.data[0]);
+                        console.log("Ejemeplo 2:"+proxyResponse.data);
+                        console.log("Ejemplo 3:"+proxyResponse.data['city']);
 
 
                        
