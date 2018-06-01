@@ -15,8 +15,7 @@ angular.module("RoRoMonApp")
 
 
         //=================EXTERNAS====================
-        var api3 = "";
-        var api4 = "";
+        
 
         var mashapeUrban = {
             method: 'GET',
@@ -184,8 +183,7 @@ angular.module("RoRoMonApp")
             
             
             //External API
-            $http
-            .get(mashapeUrban)
+            $http(mashapeUrban)
             .then(function(proxyResponse) {
                 $http
                     .get(ownApi)
@@ -193,7 +191,6 @@ angular.module("RoRoMonApp")
 
                         console.log(proxyResponse.data['ll']);
 
-                        //console.log("crimenes los datos;" + proxyResponse.data.filter(d => d.province === 'sevilla' && d.year < 2017 && d.year > 2011).sort((a, b) => a.year - b.year).map(function(d) { return d["onecrime"] }));
 
                        
 
