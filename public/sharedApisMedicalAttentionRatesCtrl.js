@@ -195,7 +195,7 @@ angular.module("RoRoMonApp")
                              $http
             .get(ownApi)
             .then(function(response1) {
-                $http(mashapeUrban)
+                $http(mashapeUrbanLean)
                     .then(function(response2) {
                         
                         console.log(response2.data.list.length);
