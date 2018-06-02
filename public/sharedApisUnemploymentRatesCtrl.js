@@ -67,79 +67,7 @@ anychart.onDocumentReady(function () {
     // initiate drawing the chart
     chart.draw();
 });
-//**
-
-
-
-                    ////////**********
-/*
-Highcharts.chart('sharedStadistics1', {
-    chart: {
-        zoomType: 'xy'
-    },
-    title: {
-        text: 'Average Monthly Temperature and Rainfall in Tokyo'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
-    },
-    xAxis: [{
-        categories: response2.data.map(function(d){return (parseInt(d.year))}),
-        crosshair: true
-    }],
-    yAxis: [{ // Primary yAxis
-        labels: {
-            style: {
-                color: Highcharts.getOptions().colors[1]
-            }
-        },
-        title: {
-            text: 'Value',
-            style: {
-                color: Highcharts.getOptions().colors[1]
-            }
-        }
-    }, { // Secondary yAxis
-        title: {
-            text: 'Value',
-            style: {
-                color: Highcharts.getOptions().colors[0]
-            }
-        },
-        labels: {
-            style: {
-                color: Highcharts.getOptions().colors[0]
-            }
-        },
-        opposite: true
-    }],
-    tooltip: {
-        shared: true
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'left',
-        x: 120,
-        verticalAlign: 'top',
-        y: 100,
-        floating: true,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-    },
-    series: [{
-        name: 'Illiterate',
-        type: 'column',
-        yAxis: 1,
-        data: response2.data.map(function(d){return parseFloat(d["illiterate"])})
-
-    },{
-        name: 'Pop Illiterate',
-        type: 'spline',
-        data: response1.data.map(function(d){return parseFloat(d["popilliterate"])})
-
-    }]
 });
-*/
-                });
             });
         
         $http.get(api2).then(function(response1){
