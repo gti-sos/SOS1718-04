@@ -284,7 +284,7 @@ anychart.onDocumentReady(function () {
   
   var chart = anychart.pyramid([
     {name: "Illiterate", value: response1.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})},
-    {name: "Bitcoin/EUR", value: response2.data.map(function(d){return parseFloat(d["value"])})/100}
+    {name: "Bitcoin/EUR", value: response2.data["value"]/100}
   ]);
 
   // draw chart
