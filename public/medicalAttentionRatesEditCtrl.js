@@ -36,7 +36,7 @@ angular
                 $scope.status = "Status: " + response.status;
                 //console.log(Object.keys($scope.updatedMedicalAttentionRate).length)
                 window.alert("OK: estadistica actualizada");
-                $location.path("/");
+                $location.path("/medical-attention-rates");
             }, function() {
                 if ($scope.updatedMedicalAttentionRate["nursing"] == null ||
                     $scope.updatedMedicalAttentionRate["social-work"] == null ||
