@@ -382,21 +382,32 @@ angular.module("RoRoMonApp")
                                 data: [
                                     [response2.data['hits'][0]['fields']['nf_calories'], response2.data['hits'][1]['fields']['nf_calories'],
                                     response2.data['hits'][2]['fields']['nf_calories'], response2.data['hits'][3]['fields']['nf_calories'], response2.data['hits'][4]['fields']['nf_calories']],
-                                    [response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                    
+                                     [response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                     response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
                                     response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
                                     response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
                                     
-                                   [response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                        
+                                    [response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                     response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
                                     response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
                                     response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
                                     
-                                    [response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                     [response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                     response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
                                     response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
                                     response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
                                     
                                     [response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                     response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
                                     response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
                                     response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
+                                   
                                 ],
                                 tooltip: {
                                     headerFormat: '<em>Experiment No {point.key}</em><br/>'
