@@ -54,7 +54,7 @@ angular
                     templateUrl:"vistasMedicalAttentionRates.html",
                     controller: "vistasMedicalAttentionRatesCtrl"
                 })
-                .when("/medical-attention-rates/sharedAnalytics",{
+                .when("/medical-attention-rates/integrations",{
                     templateUrl:"sharedApisMedicalAttentionRates.html",
                     controller: "sharedApisMedicalAttentionRatesCtrl"
                 })
