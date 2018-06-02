@@ -336,126 +336,92 @@ angular.module("RoRoMonApp")
                 $http
                     .get(ownApi)
                     .then(function(response1) {
-                    console.log(response2.data['hits'][0]['fields']['nf_calories']);
+                        console.log(response2.data['hits'][0]['fields']['nf_calories']);
 
-                        var myConfig = {
-                            "type": "bar3d",
-                            "background-color": "#fff",
-                            "3d-aspect": {
-                                "true3d": 0,
-                                "y-angle": 10,
-                                "depth": 30
-                            },
-                            "title": {
-                                "text": "Product Sales Comparison",
-                                "height": "40px",
-                                "font-weight": "normal",
-                                "text-color": "#ffffff"
-                            },
-                            "legend": {
-                                "layout": "float",
-                                "background-color": "none",
-                                "border-color": "none",
-                                "item": {
-                                    "font-color": "#333"
-                                },
-                                "x": "37%",
-                                "y": "10%",
-                                "width": "90%",
-                                "shadow": 0
-                            },
-                            "plotarea": {
-                                "margin": "95px 35px 50px 70px",
-                                "background-color": "#fff",
-                                "alpha": 0.3
-                            },
-                            "scale-y": {
-                                "background-color": "#fff",
-                                "border-width": "1px",
-                                "border-color": "#333",
-                                "alpha": 0.5,
-                                "format": "$%v",
-                                "guide": {
-                                    "line-style": "solid",
-                                    "line-color": "#333",
-                                    "alpha": 0.2
-                                },
-                                "tick": {
-                                    "line-color": "#333",
-                                    "alpha": 0.2
-                                },
-                                "item": {
-                                    "font-color": "#333",
-                                    "padding-right": "6px"
-                                }
-                            },
-                            "scale-x": {
-                                "background-color": "#fff",
-                                "border-width": "1px",
-                                "border-color": "#333",
-                                "alpha": 0.5,
-                                "values": ["January", "February", "March", "April", "May", "June"],
-                                "guide": {
-                                    "visible": false
-                                },
-                                "tick": {
-                                    "line-color": "#333",
-                                    "alpha": 0.2
-                                },
-                                "item": {
-                                    "font-size": "11px",
-                                    "font-color": "#333"
-                                }
-                            },
-                            "series": [{
-                                    "values": [22650, 18750, 29050, 28745, 31500, 31625],
-                                    "text": "Product 1",
-                                    "background-color": "#03A9F4 #4FC3F7",
-                                    "border-color": "#03A9F4",
-                                    "legend-marker": {
-                                        "border-color": "#03A9F4"
-                                    },
-                                    "tooltip": {
-                                        "background-color": "#03A9F4",
-                                        "text": "$%v",
-                                        "font-size": "12px",
-                                        "padding": "6 12",
-                                        "border-color": "none",
-                                        "shadow": 0,
-                                        "border-radius": 5
-                                    }
-                                },
-                                {
-                                    "values": [24200, 12750, 24250, 11500, 22550, 24250],
-                                    "text": "Product 2",
-                                    "background-color": "#673AB7 #9575CD",
-                                    "border-color": "#673AB7",
-                                    "legend-marker": {
-                                        "border-color": "#673AB7"
-                                    },
-                                    "tooltip": {
-                                        "background-color": "#673AB7",
-                                        "text": "$%v",
-                                        "font-size": "12px",
-                                        "padding": "6 12",
-                                        "border-color": "none",
-                                        "shadow": 0,
-                                        "border-radius": 5
-                                    }
-                                }
-                            ]
-                        };
+                        Highcharts.chart('container', {
 
-                        zingchart.render({
-                            id: 'sharedStadistics4',
-                            data: myConfig,
-                            height: 500,
-                            width: 725,
-                            defaults: {
-                                'font-family': 'sans-serif'
-                            }
+                            chart: {
+                                type: 'boxplot'
+                            },
+
+                            title: {
+                                text: 'Calories & 2016 medical attention rates'
+                            },
+
+                            legend: {
+                                enabled: false
+                            },
+
+                            xAxis: {
+                                categories: ['Calories', 'sevilla', 'cordoba', 'malaga', 'cadiz'],
+                                title: {
+                                    text: ''
+                                }
+                            },
+
+                            yAxis: {
+                                title: {
+                                    text: 'Observations'
+                                },
+                                plotLines: [{
+                                    value: 932,
+                                    color: 'red',
+                                    width: 1,
+                                    label: {
+                                        text: 'Theoretical mean: 932',
+                                        align: 'center',
+                                        style: {
+                                            color: 'gray'
+                                        }
+                                    }
+                                }]
+                            },
+
+                            series: [{
+                                name: 'Observations',
+                                data: [
+                                    [response2.data['hits'][0]['fields']['nf_calories'], response2.data['hits'][1]['fields']['nf_calories'],
+                                    response2.data['hits'][2]['fields']['nf_calories'], response2.data['hits'][3]['fields']['nf_calories'], response2.data['hits'][4]['fields']['nf_calories']],
+                                    [response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
+                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
+                                    
+                                   [response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
+                                    response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
+                                    
+                                    [response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
+                                    response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
+                                    
+                                    [response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
+                                    response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
+                                ],
+                                tooltip: {
+                                    headerFormat: '<em>Experiment No {point.key}</em><br/>'
+                                }
+                            }, {
+                                name: 'Outlier',
+                                color: Highcharts.getOptions().colors[0],
+                                type: 'scatter',
+                                data: [ // x, y positions where 0 is the first category
+                                    [0, 644],
+                                    [4, 718],
+                                    [4, 951],
+                                    [4, 969]
+                                ],
+                                marker: {
+                                    fillColor: 'white',
+                                    lineWidth: 1,
+                                    lineColor: Highcharts.getOptions().colors[0]
+                                },
+                                tooltip: {
+                                    pointFormat: 'Observation: {point.y}'
+                                }
+                            }]
+
                         });
-
 
 
 
