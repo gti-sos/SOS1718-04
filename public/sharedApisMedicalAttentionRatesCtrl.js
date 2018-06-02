@@ -447,7 +447,7 @@ angular.module("RoRoMonApp")
                         };
 
                         zingchart.render({
-                            id: 'myChart',
+                            id: 'sharedStadistics4',
                             data: myConfig,
                             height: 500,
                             width: 725,
