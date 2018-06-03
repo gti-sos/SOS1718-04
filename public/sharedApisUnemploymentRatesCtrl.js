@@ -179,7 +179,7 @@ Highcharts.chart('sharedStadistics2', {
             });
          });
         });
-        
+      /*  
     $http.get(apiPropia).then(function(response1){
         $http(mashapeInsult).then(function(response2){
             google.charts.load('current', {'packages':['corechart']});
@@ -202,6 +202,33 @@ Highcharts.chart('sharedStadistics2', {
             chart.draw(data, options);
           }
 
+        });
+    });
+    */
+     $http.get(apiPropia).then(function(response1){
+        $http(mashapeInsult).then(function(response2){
+          google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawSeriesChart);
+
+    function drawSeriesChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['First grade',     response1.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})],
+        ['Insultos',      response2.data.length]
+      ]);
+
+      var options = {
+        title: 'Cantidad first grade Sevilla Vs Longitud de los insultos ',
+        hAxis: {title: 'Life Expectancy'},
+        vAxis: {title: 'Fertility Rate'},
+        bubble: {textStyle: {fontSize: 11}}
+      };
+
+      var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+      chart.draw(data, options);
+    }
+    
         });
     });
     
