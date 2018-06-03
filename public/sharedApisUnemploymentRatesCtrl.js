@@ -214,8 +214,8 @@ Highcharts.chart('sharedStadistics2', {
 
       var data = google.visualization.arrayToDataTable([
         ['Task', 'Hours per Day', 'number'],
-        ['First grade',     response1.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);}), "1"],
-        ['Insultos',      response2.data.length, "1"]
+        ['First grade',     response1.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);}), 1],
+        ['Insultos',      response2.data.length, 1]
       ]);
 
       var options = {
