@@ -381,33 +381,38 @@ angular.module("RoRoMonApp")
                                 name: 'Observations',
                                 data: [
                                     [response2.data['hits'][0]['fields']['nf_calories'], response2.data['hits'][1]['fields']['nf_calories'],
-                                    response2.data['hits'][2]['fields']['nf_calories'], response2.data['hits'][3]['fields']['nf_calories'], response2.data['hits'][4]['fields']['nf_calories']],
-                                    
-                                     [response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                     response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
-                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
-                                    
-                        
+                                        response2.data['hits'][2]['fields']['nf_calories'], response2.data['hits'][3]['fields']['nf_calories'], response2.data['hits'][4]['fields']['nf_calories']
+                                    ],
+
+                                    [response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                        response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                        response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                        response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
+                                        response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["nursing"] })[0]
+                                    ],
+
+
                                     [response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                     response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                    response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                    response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
-                                    response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
-                                    
-                                     [response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                     response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                    response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                    response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
-                                    response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
-                                    
+                                        response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                        response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                        response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
+                                        response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["nursing"] })[0]
+                                    ],
+
+                                    [response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                        response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                        response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                        response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
+                                        response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["nursing"] })[0]
+                                    ],
+
                                     [response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                     response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                    response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
-                                    response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
-                                    response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["nursing"] })[0]],
-                                   
+                                        response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                        response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                        response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["social-work"] })[0],
+                                        response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["nursing"] })[0]
+                                    ],
+
                                 ],
                                 tooltip: {
                                     headerFormat: '<em>Experiment No {point.key}</em><br/>'
@@ -436,6 +441,62 @@ angular.module("RoRoMonApp")
 
 
 
+                    });
+            });
+
+        $http
+            .get(ownApi)
+            .then(function(response1) {
+                $http(mashapeLocation2)
+                    .then(function(response2) {
+                        $http(mashapeLocation3)
+                            .then(function(response3) {
+                                $http(mashapeLocation4)
+                                    .then(function(response4) {
+                                        $http(mashapeLocation5)
+                                            .then(function(response5) {
+                                                $http(mashapeLocation6)
+                                                    .then(function(response6) {
+                                                        $http(mashapeLocation7)
+                                                            .then(function(response7) {
+                                                                $http(mashapeLocation8)
+                                                                    .then(function(response8) {
+                                                                        $http(mashapeLocation9)
+                                                                            .then(function(response9) {
+
+
+                                                                                function drawChart() {
+                                                                                    var data = new google.visualization.DataTable();
+                                                                                    data.addColumn('string', 'Province');
+                                                                                    data.addColumn('string', 'Latitude');
+                                                                                    data.addColumn('string', 'ToolTip');
+
+                                                                                    // For each orgchart box, provide the name, manager, and tooltip to show.
+                                                                                    data.addRows([
+                                                                                        [{ v: String(response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["province"] })[0]), f: 'sevilla<div style="color:red; font-style:italic">Capital</div>' },
+                                                                                            '', 'Capital'
+                                                                                        ],
+                                                                                        [{ v: String(response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["province"] })[0]), f: 'Jim<div style="color:red; font-style:italic">provincia</div>' },
+                                                                                                'sevilla', 'VP'
+                                                                                        ],
+                                                                                        [String(response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["province"] })[0]), 'malaga', ''],
+                                                                                        ['Bob', 'sevilla', 'Bob Sponge'],
+                                                                                        ['Carol', 'sevilla', '']
+                                                                                    ]);
+
+                                                                                    // Create the chart.
+                                                                                    var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+                                                                                    // Draw the chart, setting the allowHtml option to true for the tooltips.
+                                                                                    chart.draw(data, { allowHtml: true });
+                                                                                }
+                                                                            });
+                                                                    });
+                                                            });
+                                                    });
+                                            });
+                                    });
+
+                            });
                     });
             });
 
