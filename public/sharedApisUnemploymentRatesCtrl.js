@@ -225,7 +225,7 @@ Highcharts.chart('sharedStadistics2', {
         bubble: {textStyle: {fontSize: 11}}
       };
 
-      var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+      var chart = new google.visualization.BubbleChart(document.getElementById('sharedStadistics4'));
       chart.draw(data, options);
     }
     
