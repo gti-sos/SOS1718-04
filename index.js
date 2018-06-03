@@ -30,11 +30,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-app.use("/", express.static(path.join(__dirname + "/public")));
-
-
-
-
+app.use("/", express.static(path.join(__dirname + "/public"))); //sirve, si accedemos al resurso "/" todos los archivos contenidos en "/public"
 
 var apiServerHostCrirompov = "https://sos1718-08.herokuapp.com";
 
@@ -673,7 +669,7 @@ MongoClient.connect(mdbURLGraduationRates, { native_parser: true }, (err, mlabs)
         res.sendStatus(200);
     });
 
-    graduationRates.register(app, dbGraduation);
+    graduationRates.register(app, dbGraduation); // para exportar las rutas a otro js
     app.listen(port1, () => {
         console.log("Server ready on port " + port1 + "!");
     }).on("error", (e) => {
