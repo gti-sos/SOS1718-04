@@ -235,10 +235,51 @@ Highcharts.chart('sharedStadistics2', {
     //Illetare vs Bitcoin Prices EUR / 100
     $http.get(apiPropia).then(function(response1){
         $http(mashapeBitcoinEUR).then(function(response2){
+            anychart.onDocumentReady(function() {
+  // create polar chart
+                  var chart = anychart.polar();
+                
+                  var columnSeries = chart.column([{
+                      x: 'Illiterate',
+                      value: response1.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})
+                    },
+                    {
+                      x: 'Bitcoin/EUR',
+                      value: response2.data["value"]/100
+                    }
+                  ]);
+                
+                  // set series name
+                  columnSeries.name('Nevada');
+                
+                  // set title settings
+                  chart.title()
+                    .enabled(true)
+                    .text('Illerate Vs Bitcoin')
+                    .padding({
+                      bottom: 20
+                    });
+                
+                  // disable y-axis
+                  chart.yAxis(false);
+                
+                  // set value prefix for tooltip
+                  chart.tooltip().valuePrefix('$');
+                
+                  // set x-scale
+                  chart.xScale('ordinal');
+                
+                  // set chart container id
+                  chart.container('container-polar-area-bitcoin-illiterate');
+                
+                  // initiate chart drawing
+                  chart.draw();
+                });
+            /*
 anychart.onDocumentReady(function () {
   
   var chart = anychart.pyramid([
-    {name: "Illiterate", value: response1.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})},
+    {name: "Illiterate", value: },
     {name: "Bitcoin/EUR", value: response2.data["value"]/100}
   ]);
 
@@ -247,6 +288,7 @@ anychart.onDocumentReady(function () {
   chart.draw();
 });
 
+        */
         });
     });
  }]);
