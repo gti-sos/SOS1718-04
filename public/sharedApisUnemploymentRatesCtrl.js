@@ -213,7 +213,7 @@ Highcharts.chart('sharedStadistics2', {
     function drawSeriesChart() {
 
       var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day', 'number'],
+        ['Clave', 'Value', 'number'],
         ['First grade',     response1.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);}), 1],
         ['Insultos',      response2.data.length, 1]
       ]);
@@ -221,7 +221,7 @@ Highcharts.chart('sharedStadistics2', {
       var options = {
         title: 'Cantidad first grade Sevilla Vs Longitud de los insultos ',
         hAxis: {title: 'Life Expectancy'},
-        vAxis: {title: 'Fertility Rate'},
+        vAxis: {title: 'Longitud'},
         bubble: {textStyle: {fontSize: 11}}
       };
 
