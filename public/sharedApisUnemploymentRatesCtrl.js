@@ -213,9 +213,9 @@ Highcharts.chart('sharedStadistics2', {
     function drawSeriesChart() {
 
       var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['First grade',     response1.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);})],
-        ['Insultos',      response2.data.length]
+        ['Task', 'Hours per Day', 'number'],
+        ['First grade',     response1.data.map(function(d){return parseFloat(d["illiterate"])}).reduce(function (previous, current) { return (previous + current);}), "1"],
+        ['Insultos',      response2.data.length, "1"]
       ]);
 
       var options = {
