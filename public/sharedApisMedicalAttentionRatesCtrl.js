@@ -513,19 +513,17 @@ angular.module("RoRoMonApp")
                     .then(function(response1) {
                         var speedCanvas = document.getElementById("speedChart");
 
+                        var speedCanvas = document.getElementById("speedChart");
+
                         Chart.defaults.global.defaultFontFamily = "Lato";
                         Chart.defaults.global.defaultFontSize = 18;
 
-                        function hoursEarlier(hours) {
-                            return moment().subtract(hours, 'h').toDate();
-                        };
-
                         var speedData = {
-                            labels: [hoursEarlier(10), hoursEarlier(9.4), hoursEarlier(8), hoursEarlier(7), hoursEarlier(6), hoursEarlier(5), hoursEarlier(4)],
+                            labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
                             datasets: [{
                                 label: "Car Speed",
                                 data: [0, 59, 75, 20, 20, 55, 40],
-                                lineTension: 0.25,
+                                lineTension: 0,
                                 fill: false,
                                 borderColor: 'orange',
                                 backgroundColor: 'transparent',
@@ -539,7 +537,6 @@ angular.module("RoRoMonApp")
                                 pointStyle: 'rectRounded'
                             }]
                         };
-
                         var chartOptions = {
                             legend: {
                                 display: true,
@@ -551,15 +548,14 @@ angular.module("RoRoMonApp")
                             },
                             scales: {
                                 xAxes: [{
-                                    type: "time",
-                                    time: {
-                                        unit: 'hour',
-                                        unitStepSize: 0.5,
-                                        round: 'hour',
-                                        tooltipFormat: "h:mm:ss a",
-                                        displayFormats: {
-                                            hour: 'MMM D, h:mm A'
-                                        }
+                                    gridLines: {
+                                        display: false,
+                                        color: "black"
+                                    },
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Time in Seconds",
+                                        fontColor: "red"
                                     }
                                 }],
                                 yAxes: [{
@@ -581,10 +577,6 @@ angular.module("RoRoMonApp")
                             data: speedData,
                             options: chartOptions
                         });
-
-
-
-
 
 
                     });
