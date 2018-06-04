@@ -511,7 +511,7 @@ angular.module("RoRoMonApp")
                 $http
                     .get(ownApi)
                     .then(function(response1) {
-                        var speedCanvas = document.getElementById("speedChart");
+
 
                         var speedCanvas = document.getElementById("speedChart");
 
@@ -519,23 +519,54 @@ angular.module("RoRoMonApp")
                         Chart.defaults.global.defaultFontSize = 18;
 
                         var speedData = {
-                            labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
+                            labels: ["2012", "2013", "2014", "2015", "2016", "2017", "2018"],
                             datasets: [{
-                                label: "Car Speed",
-                                data: [0, 59, 75, 20, 20, 55, 40],
-                                lineTension: 0,
-                                fill: false,
-                                borderColor: 'orange',
-                                backgroundColor: 'transparent',
-                                pointBorderColor: 'orange',
-                                pointBackgroundColor: 'rgba(255,150,0,0.5)',
-                                borderDash: [5, 5],
-                                pointRadius: 5,
-                                pointHoverRadius: 10,
-                                pointHitRadius: 30,
-                                pointBorderWidth: 2,
-                                pointStyle: 'rectRounded'
-                            }]
+                                    label: "General medicine",
+                                    data: [response1.data.filter(d => d.province === 'sevilla' && d.year === 2012).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2013).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2014).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
+                                    31,
+                                    32],
+                                    lineTension: 0,
+                                    fill: false,
+                                    borderColor: 'orange',
+                                    backgroundColor: 'transparent',
+                                    pointBorderColor: 'orange',
+                                    pointBackgroundColor: 'rgba(255,150,0,0.5)',
+                                    borderDash: [5, 5],
+                                    pointRadius: 5,
+                                    pointHoverRadius: 10,
+                                    pointHitRadius: 30,
+                                    pointBorderWidth: 2,
+                                    pointStyle: 'rectRounded'
+                                },
+                                
+
+                                {
+                                    label: "General medicine",
+                                    data: [response2.data['hits'][0]['fields']['nf_calories'],
+                                     response2.data['hits'][1]['fields']['nf_calories'],
+                                     response2.data['hits'][2]['fields']['nf_calories'],
+                                    response2.data['hits'][3]['fields']['nf_calories'],
+                                     response2.data['hits'][4]['fields']['nf_calories'],
+                                    20,
+                                    21],
+                                    lineTension: 0,
+                                    fill: false,
+                                    borderColor: 'red',
+                                    backgroundColor: 'transparent',
+                                    pointBorderColor: 'black',
+                                    pointBackgroundColor: 'rgba(230,150,0,0.5)',
+                                    borderDash: [5, 5],
+                                    pointRadius: 5,
+                                    pointHoverRadius: 10,
+                                    pointHitRadius: 30,
+                                    pointBorderWidth: 2,
+                                    pointStyle: 'rectRounded'
+                                }
+                            ]
                         };
                         var chartOptions = {
                             legend: {
