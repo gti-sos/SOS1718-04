@@ -32,6 +32,8 @@ app.use(cors());
 
 app.use("/", express.static(path.join(__dirname + "/public"))); //sirve, si accedemos al resurso "/" todos los archivos contenidos en "/public"
 
+app.use("/#!/about", express.static(path.join(__dirname + "/public/about.html"))); //sirve, si accedemos al resurso "/" todos los archivos contenidos en "/public"
+
 var apiServerHostCrirompov = "https://sos1718-08.herokuapp.com";
 
 var apiServerPOET = "http://poetrydb.org"
