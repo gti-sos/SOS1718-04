@@ -464,6 +464,8 @@ angular.module("RoRoMonApp")
                                                                         $http(mashapeLocation9)
                                                                             .then(function(response9) {
 
+                                                                                google.charts.load('current', { packages: ["orgchart"] });
+                                                                                google.charts.setOnLoadCallback(drawChart);
 
                                                                                 function drawChart() {
                                                                                     var data = new google.visualization.DataTable();
@@ -477,7 +479,7 @@ angular.module("RoRoMonApp")
                                                                                             '', 'Capital'
                                                                                         ],
                                                                                         [{ v: String(response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["province"] })[0]), f: 'Jim<div style="color:red; font-style:italic">provincia</div>' },
-                                                                                                'sevilla', 'VP'
+                                                                                            'sevilla', 'VP'
                                                                                         ],
                                                                                         [String(response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["province"] })[0]), 'malaga', ''],
                                                                                         ['Bob', 'sevilla', 'Bob Sponge'],
