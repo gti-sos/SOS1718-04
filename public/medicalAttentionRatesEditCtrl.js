@@ -8,28 +8,7 @@ angular
         $http.get(URL).then(function (response){
             $scope.updatedMedicalAttentionRate = response.data;
         });
-        /*
-        $scope.updateMedicalAttentionRate = function (){
-            $http.put(URL,$scope.updatedMedicalAttentionRate).then(function (response){
-                $scope.status = "Status: " + response.status;
-                $location.path("/");
-            });
-        };
-        */
-        /*
-        $scope.updateMedicalAttentionRate = function() {
-            $http.put(URL,$scope.updatedMedicalAttentionRate).then(function successCallback(response){
-                $scope.status = "Status : " + response.status + "Dato añadido correctamente";
-                $location.path("/");
-            }, function errorCallback(response) {
-                console.log(response.status);
-                if(response.status ===400){
-                    $scope.status = "Status : " + response.status + "fallo al introducir datos";
-                    window.alert("El dato no se ha introducido correctamente." +$scope.updatedMedicalAttentionRate );
-                }
-            });
-        };
-        */
+        
         
         $scope.updateMedicalAttentionRate = function() {
             $http.put(URL, $scope.updatedMedicalAttentionRate).then(function(response) {

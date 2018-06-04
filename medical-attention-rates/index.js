@@ -263,6 +263,8 @@ medicalAttentionRates.register = function(app, db) {
     
     //POST a recurso general (HECHO)
     //POST to a general collection
+    console.log("SERIES")
+console.log("A")
     app.post(BASE_API_PATH + "/medical-attention-rates", (req, res) => {
         console.log(Date() + " - POST /medical-attention-rates");
         var data = req.body;
@@ -275,8 +277,11 @@ medicalAttentionRates.register = function(app, db) {
             console.error("Error 400");
             return;
         }
+console.log("B")
         db.find({ "province": data["province"], "year": data["year"] }).toArray((err, medicalAttentionRates) => {
-            if (err) {
+
+console.log("C")
+        if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
@@ -290,21 +295,27 @@ medicalAttentionRates.register = function(app, db) {
             }
             //Cuando no hay ningún dato con esas propiedades año/provincia se introduce el dato
             if (medicalAttentionRates.length == 0) {
+console.log("D")
                 db.insertOne(data, (err, numUpdated) => {
+console.log("E")
                     if (err) {
                         console.error("Error accesing DB");
                         res.sendStatus(500);
                         return;
+console.log("f")
                     }
+console.log("G")
                     console.log("Insert: " + numUpdated);
                     res.sendStatus(201);
                     console.error(" 201");
                 });
+console.log("H")
             }
+console.log("I")
         });
-
+console.log("J")
     });
-
+console.log("k")
 
 
 

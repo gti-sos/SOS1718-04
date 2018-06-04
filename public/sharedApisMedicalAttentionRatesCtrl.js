@@ -505,13 +505,14 @@ angular.module("RoRoMonApp")
                             });
                     });
             });
-
+console.log('A')//a 
         $http(mashapeNutritionix)
             .then(function(response2) {
+console.log('B')//B
                 $http
                     .get(ownApi)
                     .then(function(response1) {
-
+console.log('C')//C
 
                         var speedCanvas = document.getElementById("speedChart");
 
@@ -523,7 +524,11 @@ angular.module("RoRoMonApp")
                             datasets: [{
                                     label: "General medicine",
                                     data: [response1.data.filter(d => d.province === 'sevilla' && d.year === 2012).map(function(d) { return d["general-medicine"] })[0],
-                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2013).map(function(d) { return d["general-medicine"] })[0],
+                                    response1.data.filter(d => d.province === 'sevilla' && d.year === 2013).map(function(d) { 
+console.log('X')//X                                        
+                                        
+                                        
+                                        return d["general-medicine"] })[0],
                                     response1.data.filter(d => d.province === 'sevilla' && d.year === 2014).map(function(d) { return d["general-medicine"] })[0],
                                     response1.data.filter(d => d.province === 'sevilla' && d.year === 2015).map(function(d) { return d["general-medicine"] })[0],
                                     response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["general-medicine"] })[0],
@@ -602,17 +607,18 @@ angular.module("RoRoMonApp")
                                 }]
                             }
                         };
-
+console.log('D')//D
                         var lineChart = new Chart(speedCanvas, {
                             type: 'line',
                             data: speedData,
                             options: chartOptions
                         });
-
+console.log('E')//E
 
                     });
+console.log('f')//F
             });
-
+console.log('G')//G
 
 
 
