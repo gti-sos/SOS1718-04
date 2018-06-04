@@ -585,7 +585,7 @@ angular.module("RoRoMonApp")
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Time in Seconds",
+                                        labelString: "Time in years",
                                         fontColor: "red"
                                     }
                                 }],
@@ -596,7 +596,7 @@ angular.module("RoRoMonApp")
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Speed in Miles per Hour",
+                                        labelString: "Calorias per food and patiens",
                                         fontColor: "green"
                                     }
                                 }]
