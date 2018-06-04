@@ -3,7 +3,7 @@
 /*global google*/
 /*global vis*/
 /*global Chart*/
-/*global ctx*/
+/*global canvas*/
 "use strict"
 angular.module("RoRoMonApp")
     .controller("sharedApisMedicalAttentionRatesCtrl", ["$scope", "$http", function($scope, $http) {
@@ -462,23 +462,25 @@ angular.module("RoRoMonApp")
                                                                     .then(function(response8) {
                                                                         $http(mashapeLocation9)
                                                                             .then(function(response9) {
+                                                                                var marksCanvas = document.getElementById("marksChart");
 
-                                                                                var myChart = new Chart(ctx, {
+                                                                                var marksData = {
+                                                                                    labels: ["English", "Maths", "Physics", "Chemistry", "Biology", "History"],
+                                                                                    datasets: [{
+                                                                                        label: "Student A",
+                                                                                        backgroundColor: "rgba(200,0,0,0.2)",
+                                                                                        data: [65, 75, 70, 80, 60, 80]
+                                                                                    }, {
+                                                                                        label: "Student B",
+                                                                                        backgroundColor: "rgba(0,0,200,0.2)",
+                                                                                        data: [54, 65, 60, 70, 70, 75]
+                                                                                    }]
+                                                                                };
+
+                                                                                var radarChart = new Chart(marksCanvas, {
                                                                                     type: 'radar',
-                                                                                    data: {
-                                                                                        labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
-                                                                                        datasets: [{
-                                                                                            data: [20, 10, 4, 2]
-                                                                                        }]
-                                                                                    },
-                                                                                    options: {
-                                                                                        scale: {
-                                                                                            // Hides the scale
-                                                                                            display: false
-                                                                                        }
-                                                                                    }
+                                                                                    data: marksData
                                                                                 });
-
 
 
                                                                             });
