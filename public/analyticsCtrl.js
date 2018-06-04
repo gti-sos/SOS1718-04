@@ -1,7 +1,7 @@
 /*global angular*/
 /*global Highcharts*/
 "use strict"
-angular.module("RoRoMonApp")
+angular.module("ManagerApp")
   .controller("analyticsCtrl", ["$scope","$http", function($scope,$http) {
             console.log("Analytics Ctrl initialized!");
             

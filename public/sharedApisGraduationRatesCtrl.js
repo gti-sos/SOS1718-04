@@ -10,7 +10,7 @@
 
 
 "use strict"
-angular.module("RoRoMonApp")
+angular.module("ManagerApp")
     .controller("sharedApisGraduationRatesCtrl", ["$scope", "$http", function($scope, $http) {
 
         console.log("List Ctrl initialized!");

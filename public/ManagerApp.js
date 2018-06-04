@@ -1,9 +1,12 @@
 /*global angular*/
 angular
-    .module("RoRoMonApp", ["ngRoute"])
+    .module("ManagerApp", ["ngRoute"])
     .config(function($routeProvider) {
         $routeProvider
-            
+            .when("/", {
+                templateUrl: "oldindex.html",
+                
+            })
             .when("/analytics", {
                 templateUrl: "analytics.html",
                 controller: "analyticsCtrl"

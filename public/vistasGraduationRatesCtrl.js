@@ -4,7 +4,7 @@
 
 
 "use strict"
-angular.module("RoRoMonApp")
+angular.module("ManagerApp")
   .controller("vistasGraduationRatesCtrl", ["$scope","$http", function($scope,$http) {
             console.log("Vistas Ctrl initialized!");
             var api = "/api/v2/graduation-rates";

@@ -3,7 +3,7 @@
 /*global google*/
 /*global Morris*/
 "use strict"
-angular.module("RoRoMonApp")
+angular.module("ManagerApp")
   .controller("sharedApisUnemploymentRatesCtrl", ["$scope","$http", function($scope,$http) {
             console.log("List Ctrl initialized!");
             

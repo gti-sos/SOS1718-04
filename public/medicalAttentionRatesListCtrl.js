@@ -1,6 +1,6 @@
 /* global angular*/
 angular
-    .module("RoRoMonApp")
+    .module("ManagerApp")
     .controller("medicalAttentionRatesListCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("ListCtrl initialized!");
         var api = "/api/v1/medical-attention-rates";

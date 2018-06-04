@@ -1,5 +1,5 @@
 /*global angular*/
-angular.module("RoRoMonApp")
+angular.module("ManagerApp")
     .controller("graduationRatesEditCtrl", ["$scope", "$http", "$routeParams", "$location", function($scope, $http, $routeParams, $location) {
         console.log("Edit Ctrl initialized!");
         var stadisticUrl = "/api/v2/graduation-rates/" + $routeParams.province + "/" + $routeParams.year;

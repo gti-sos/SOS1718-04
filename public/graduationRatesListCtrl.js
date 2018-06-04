@@ -3,7 +3,7 @@
 /*global google*/
 /*global Morris*/
 "use strict"
-angular.module("RoRoMonApp")
+angular.module("ManagerApp")
   .controller("graduationRatesListCtrl", ["$scope","$http", function($scope,$http) {
             console.log("List Ctrl initialized!");
             var api = "/api/v2/graduation-rates";

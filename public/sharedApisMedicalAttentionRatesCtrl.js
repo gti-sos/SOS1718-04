@@ -5,7 +5,7 @@
 /*global Chart*/
 /*global canvas*/
 "use strict"
-angular.module("RoRoMonApp")
+angular.module("ManagerApp")
     .controller("sharedApisMedicalAttentionRatesCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("Vistas Ctrl initialized!");
         var ownApi = "/api/v1/medical-attention-rates";

@@ -1,70 +1,105 @@
-<html>
-    <head>
-        <title>
-            Datos del grupo 04 (SOS1718)
-        </title>
-    </head>
-    <body>
-        <h1>Team</h1>
-            <p><a href="https://github.com/crirompov" >Cristian Romero Povea</a> </p>
-            <p><a href="https://github.com/carmontap" >Carlos Jesús Montero Tapia</a></p>
-            <p><a href="https://github.com/rgfandres" >Andrés Rodríguez Gómez</a></p>
-        <h1>Project description:</h1><a> The project connects health care data, study level data and unemployment data.</a>
-        <h1>Repository:<a href="https://github.com/gti-sos/SOS1718-04" >SOS1718-04</a></h1>
-        <h1>URL:<a href="https://sos1718-04.herokuapp.com">TBD</a></h1>
-        <ul>APIs:
-            <li>
-                <a href="https://sos1718-04.herokuapp.com/api/v1/unemployment-rates/docs">https://sos1718-04.herokuapp.com/api/v1/unemployment-rates/docs</a> (Developed by Cristian Romero Povea)
-            </li>
-            <li>
-                <a href="https://sos1718-04.herokuapp.com/api/v1/graduation-rates/docs">https://sos1718-04.herokuapp.com/api/v1/graduation-rates/docs</a> (Developed by Andrés Rodríguez Gómez)
-            </li>
-            <li>
-                <a href="https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/docs">https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/docs</a> (Developed by Carlos Jesús Montero Tapia)
-            </li>
-        </ul>
-        <ul>Back-end:
-            <li>
-                <a href="https://sos1718-04.herokuapp.com/api/v1/unemployment-rates/">https://sos1718-04.herokuapp.com/api/v1/unemployment-rates/</a> (Developed by Cristian Romero Povea)
-            </li>
-            <li>
-                <a href="https://sos1718-04.herokuapp.com/api/v1/graduation-rates/">https://sos1718-04.herokuapp.com/api/v1/graduation-rates/</a> (Developed by Andrés Rodríguez Gómez)
-            </li>
-            <li>
-                <a href="https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/">https://sos1718-04.herokuapp.com/api/v1/medical-attention-rates/</a> (Developed by Carlos Jesús Montero Tapia)
-            </li>
-        </ul>
-        <ul>Front-end's:
-            <li>
-                <a href="https://sos1718-04.herokuapp.com/GraduationRatesApp.html#!/">https://sos1718-04.herokuapp.com/GraduationRatesApp.html#!/</a> (Developed by Andrés Rodríguez Gómez)
-            </li>
-             <li>
-                <a href="https://sos1718-04.herokuapp.com/medicalAttentionRatesApp.html#!/">https://sos1718-04.herokuapp.com/medicalAttentionRatesApp.html#!/</a> (Developed by Carlos Jesús Montero Tapia)
-            </li>
-             <li>
-                <a href="https://sos1718-04.herokuapp.com/unemploymentRatesApp.html#!/">https://sos1718-04.herokuapp.com/unemploymentRatesApp.html#!/</a> (Developed by Cristian Romero Povea)
-            </li>
-        </ul>
-         <ul>Front-end comun:
-            <li>
-                <a href="https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/graduation-rates/">https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/graduation-rates</a> (Developed by Andrés Rodríguez Gómez)
-            </li>
-             <li>
-                <a href="https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/medical-attention-rates/">https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/medical-attention-rates/</a> (Developed by Carlos Jesús Montero Tapia)
-            </li>
-             <li>
-                <a href="https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/unemployment-rates/">https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/unemployment-rates/</a> (Developed by Cristian Romero Povea)
-            </li>
-        </ul>
-        <ul>Vistas:
-            <li>
-                <a href="https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/analytics/">https://sos1718-04.herokuapp.com/RoRoMonApp.html#!/analytics</a> 
-            </li>
-        </ul>
-        <ul>Videos:
-            <li>
-                <a href="https://sos1718-04.herokuapp.com/about.html">about</a> 
-            </li>
-        </ul>
-    </body>
+<html ng-app="ManagerApp">
+
+<head>
+    <title>RoRoMon Manager</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <!-- -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" type="text/css" />
+
+    <script src="/bower_components/vis/dist/vis.js"></script>
+    <link href="/bower_components/vis/dist/vis.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+
+    <!--Google-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+    <!-- Anychart -->
+    <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-exports.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-pyramid-funnel.min.js"></script>
+    <!-- Librería grafos de Cristian -->
+    <!-- Anycharts: -->
+    <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-mekko.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.2.1/css/anychart-ui.min.css" />
+    <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.2.1/fonts/css/anychart-font.min.css" />
+    <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-polar.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.2.1/css/anychart-ui.min.css" />
+    <!-- Google -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+    <script src="ManagerApp.js">
+    </script>
+    <script src="graduationRatesListCtrl.js">
+    </script>
+    <script src="graduationRatesEditCtrl.js">
+    </script>
+    <script src="vistasGraduationRatesCtrl.js">
+    </script>
+    <script src="sharedApisGraduationRatesCtrl.js">
+    </script>
+
+
+
+    <script src="medicalAttentionRatesListCtrl.js">
+    </script>
+    <script src="medicalAttentionRatesEditCtrl.js">
+    </script>
+    <script src="vistasMedicalAttentionRatesCtrl.js">
+    </script>
+    <script src=" sharedApisMedicalAttentionRatesCtrl.js">
+    </script>
+
+
+    <script src="unemploymentRatesListCtrl.js">
+    </script>
+    <script src="unemploymentRatesEditCtrl.js">
+    </script>
+    <script src="vistasUnemploymentRatesCtrl.js">
+    </script>
+    <script src=" sharedApisUnemploymentRatesCtrl.js">
+    </script>
+
+
+    <script src="analyticsCtrl.js">
+    </script>
+
+
+
+</head>
+
+<body>
+
+    <div ng-view>
+    </div>
+</body>
+
 </html>

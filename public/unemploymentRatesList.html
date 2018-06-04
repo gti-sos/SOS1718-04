@@ -29,7 +29,7 @@
             </button></td>
         </tr>
         <tr ng-repeat="unemploymentRate in unemploymentRates">
-            <td><a href="/RoRoMonApp.html#!/unemployment-rates/{{unemploymentRate.province}}/{{unemploymentRate.year}}">{{unemploymentRate.province}}</a></td>
+            <td><a href="/#!/unemployment-rates/{{unemploymentRate.province}}/{{unemploymentRate.year}}">{{unemploymentRate.province}}</a></td>
             <td>{{unemploymentRate.year}}</td>
             <td>{{unemploymentRate["illiterate"]}}</td>
             <td>{{unemploymentRate["first-grade"]}}</td>
@@ -52,12 +52,12 @@
     <span><button class="button" ng-click="getUnemploymentRatesPagination(1)"><<</button></span>
     <span><button class="button" ng-click="getUnemploymentRatesPagination(2)">>></button></span>
    
-    <div><a href="/RoRoMonApp.html#!/unemployment-rates/analytics/">Analytics graphs</a></div>
+    <div><a href="/!/unemployment-rates/analytics/">Analytics graphs</a></div>
 
 <hr/>
 <h8><i>{{status}}</i></h8>
 
 <hr/>
 
-    <div><a href="/RoRoMonApp.html#!/unemployment-rates/analytics/">Analytics graphs</a></div>
-    <div><a href="/RoRoMonApp.html#!/unemployment-rates/integrations/">Integrations</a></div>
+    <div><a href="/#!/unemployment-rates/analytics/">Analytics graphs</a></div>
+    <div><a href="/#!/unemployment-rates/integrations/">Integrations</a></div>

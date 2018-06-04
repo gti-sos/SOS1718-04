@@ -4,7 +4,7 @@
 /*global vis*/
 
 "use strict"
-angular.module("RoRoMonApp")
+angular.module("ManagerApp")
     .controller("vistasMedicalAttentionRatesCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("Vistas Ctrl initialized!");
         var api = "/api/v1/medical-attention-rates";
