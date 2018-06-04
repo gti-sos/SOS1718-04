@@ -465,15 +465,25 @@ angular.module("RoRoMonApp")
                                                                                 var marksCanvas = document.getElementById("marksChart");
 
                                                                                 var marksData = {
-                                                                                    labels: ["English", "Maths", "Physics", "Chemistry", "Biology", "History"],
+                                                                                    labels: ["Sevilla", "Malaga", "Cordoba", "Granada", "Cadiz", "Almeria"],
                                                                                     datasets: [{
-                                                                                        label: "Student A",
+                                                                                        label: "Latitud",
                                                                                         backgroundColor: "rgba(200,0,0,0.2)",
-                                                                                        data: [65, 75, 70, 80, 60, 80]
+                                                                                        data: [parseFloat(response2.data.Results[0]['lat']),
+                                                                                         parseFloat(response9.data.Results[10]['lat']),
+                                                                                        parseFloat(response3.data.Results[5]['lat']),
+                                                                                        parseFloat(response5.data.Results[0]['lat']),
+                                                                                        parseFloat(response8.data.Results[0]['lat']),
+                                                                                         parseFloat(response7.data.Results[1]['lat'])]
                                                                                     }, {
-                                                                                        label: "Student B",
+                                                                                        label: "nursing",
                                                                                         backgroundColor: "rgba(0,0,200,0.2)",
-                                                                                        data: [54, 65, 60, 70, 70, 75]
+                                                                                        data: [response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
+                                                                                        response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
+                                                                                        response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
+                                                                                        response1.data.filter(d => d.province === 'granaga' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
+                                                                                        response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
+                                                                                        response1.data.filter(d => d.province === 'almeria' && d.year === 2016).map(function(d) { return d["nursing"] })[0]]
                                                                                     }]
                                                                                 };
 
