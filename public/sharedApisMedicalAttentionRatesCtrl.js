@@ -485,7 +485,7 @@ angular.module("RoRoMonApp")
                                                                                     ]);
 
                                                                                     // Create the chart.
-                                                                                    var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+                                                                                    var chart = new google.visualization.OrgChart(document.getElementById('sharedStadistics5'));
                                                                                     // Draw the chart, setting the allowHtml option to true for the tooltips.
                                                                                     chart.draw(data, { allowHtml: true });
                                                                                 }
