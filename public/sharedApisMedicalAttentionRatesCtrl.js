@@ -337,7 +337,7 @@ angular.module("RoRoMonApp")
                     .then(function(response1) {
                         console.log(response2.data['hits'][0]['fields']['nf_calories']);
 
-                        Highcharts.chart('container', {
+                        Highcharts.chart('sharedStadistics4', {
 
                             chart: {
                                 type: 'boxplot'
@@ -470,20 +470,22 @@ angular.module("RoRoMonApp")
                                                                                         label: "Latitud",
                                                                                         backgroundColor: "rgba(200,0,0,0.2)",
                                                                                         data: [parseFloat(response2.data.Results[0]['lat']),
-                                                                                         parseFloat(response9.data.Results[10]['lat']),
-                                                                                        parseFloat(response3.data.Results[5]['lat']),
-                                                                                        parseFloat(response5.data.Results[0]['lat']),
-                                                                                        parseFloat(response8.data.Results[0]['lat']),
-                                                                                         parseFloat(response7.data.Results[1]['lat'])]
+                                                                                            parseFloat(response9.data.Results[10]['lat']),
+                                                                                            parseFloat(response3.data.Results[5]['lat']),
+                                                                                            parseFloat(response5.data.Results[0]['lat']),
+                                                                                            parseFloat(response8.data.Results[0]['lat']),
+                                                                                            parseFloat(response7.data.Results[1]['lat'])
+                                                                                        ]
                                                                                     }, {
                                                                                         label: "nursing",
                                                                                         backgroundColor: "rgba(0,0,200,0.2)",
                                                                                         data: [response1.data.filter(d => d.province === 'sevilla' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
-                                                                                        response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
-                                                                                        response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
-                                                                                        response1.data.filter(d => d.province === 'granaga' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
-                                                                                        response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
-                                                                                        response1.data.filter(d => d.province === 'almeria' && d.year === 2016).map(function(d) { return d["nursing"] })[0]]
+                                                                                            response1.data.filter(d => d.province === 'malaga' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'cordoba' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'granaga' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'cadiz' && d.year === 2016).map(function(d) { return d["nursing"] })[0],
+                                                                                            response1.data.filter(d => d.province === 'almeria' && d.year === 2016).map(function(d) { return d["nursing"] })[0]
+                                                                                        ]
                                                                                     }]
                                                                                 };
 
@@ -501,6 +503,90 @@ angular.module("RoRoMonApp")
                                     });
 
                             });
+                    });
+            });
+
+        $http(mashapeNutritionix)
+            .then(function(response2) {
+                $http
+                    .get(ownApi)
+                    .then(function(response1) {
+                        var speedCanvas = document.getElementById("speedChart");
+
+                        Chart.defaults.global.defaultFontFamily = "Lato";
+                        Chart.defaults.global.defaultFontSize = 18;
+
+                        function hoursEarlier(hours) {
+                            return moment().subtract(hours, 'h').toDate();
+                        };
+
+                        var speedData = {
+                            labels: [hoursEarlier(10), hoursEarlier(9.4), hoursEarlier(8), hoursEarlier(7), hoursEarlier(6), hoursEarlier(5), hoursEarlier(4)],
+                            datasets: [{
+                                label: "Car Speed",
+                                data: [0, 59, 75, 20, 20, 55, 40],
+                                lineTension: 0.25,
+                                fill: false,
+                                borderColor: 'orange',
+                                backgroundColor: 'transparent',
+                                pointBorderColor: 'orange',
+                                pointBackgroundColor: 'rgba(255,150,0,0.5)',
+                                borderDash: [5, 5],
+                                pointRadius: 5,
+                                pointHoverRadius: 10,
+                                pointHitRadius: 30,
+                                pointBorderWidth: 2,
+                                pointStyle: 'rectRounded'
+                            }]
+                        };
+
+                        var chartOptions = {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    boxWidth: 80,
+                                    fontColor: 'black'
+                                }
+                            },
+                            scales: {
+                                xAxes: [{
+                                    type: "time",
+                                    time: {
+                                        unit: 'hour',
+                                        unitStepSize: 0.5,
+                                        round: 'hour',
+                                        tooltipFormat: "h:mm:ss a",
+                                        displayFormats: {
+                                            hour: 'MMM D, h:mm A'
+                                        }
+                                    }
+                                }],
+                                yAxes: [{
+                                    gridLines: {
+                                        color: "black",
+                                        borderDash: [2, 5],
+                                    },
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Speed in Miles per Hour",
+                                        fontColor: "green"
+                                    }
+                                }]
+                            }
+                        };
+
+                        var lineChart = new Chart(speedCanvas, {
+                            type: 'line',
+                            data: speedData,
+                            options: chartOptions
+                        });
+
+
+
+
+
+
                     });
             });
 
