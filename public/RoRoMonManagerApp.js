@@ -3,13 +3,12 @@ angular
     .module("RoRoMonApp", ["ngRoute"])
     .config(function($routeProvider) {
         $routeProvider
-            .when("/about", {
-                templateUrl: "about.html"
-            })
+            
             .when("/analytics", {
                 templateUrl: "analytics.html",
                 controller: "analyticsCtrl"
             })
+            
             .when("/graduation-rates", {
                 templateUrl: "graduationRatesList.html",
                 controller: "graduationRatesListCtrl"
@@ -57,6 +56,9 @@ angular
             .when("/medical-attention-rates/integrations", {
                 templateUrl: "sharedApisMedicalAttentionRates.html",
                 controller: "sharedApisMedicalAttentionRatesCtrl"
+                
+            }).when("/about", {
+                templateUrl: "about.html"
             });
 
     });
